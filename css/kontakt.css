@@ -1,0 +1,400 @@
+/* ================================================
+   KONTAKT PAGE — Daniel Kroh
+   ================================================ */
+
+/* ---- HEADER ---- */
+.about-header {
+  mix-blend-mode: normal;
+  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+}
+
+.nav-active {
+  color: var(--cyan) !important;
+}
+
+/* ---- HERO ---- */
+.kontakt-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 10rem 5vw 4rem;
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.kontakt-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -15%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.kontakt-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.03) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.kontakt-hero-inner {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+
+.kontakt-hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.kontakt-hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  max-width: 500px;
+}
+
+/* ---- CONTACT SECTION ---- */
+.kontakt-section {
+  padding: 6rem 5vw 8rem;
+  background: var(--bg-dark);
+  position: relative;
+}
+
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 6vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ---- LEFT: INFO ---- */
+.kontakt-info-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 3rem;
+}
+
+.kontakt-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.kontakt-channel {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-navy);
+  border: 1px solid rgba(0, 212, 255, 0.06);
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.kontakt-channel:hover {
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.kontakt-channel-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 50%;
+  color: var(--cyan);
+}
+
+.kontakt-channel-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.kontakt-channel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.kontakt-channel-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.kontakt-channel-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* Availability */
+.kontakt-availability {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 230, 118, 0.04);
+  border: 1px solid rgba(0, 230, 118, 0.12);
+  border-radius: 4px;
+}
+
+.availability-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(0, 230, 118, 0.5); }
+  50% { opacity: 0.6; box-shadow: 0 0 16px rgba(0, 230, 118, 0.3); }
+}
+
+.kontakt-availability span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--green);
+}
+
+/* ---- RIGHT: FORM ---- */
+.kontakt-form-wrap {
+  position: relative;
+}
+
+.kontakt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-optional {
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--slate);
+}
+
+.form-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--white);
+  background: var(--bg-navy);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  padding: 1rem 1.25rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.form-input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+}
+
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%238892a8' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.25rem center;
+  padding-right: 3rem;
+}
+
+.form-select option {
+  background: var(--bg-navy);
+  color: var(--white);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Submit Button */
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 56px;
+  font-size: 0.95rem;
+}
+
+.form-submit-icon {
+  transition: transform 0.3s ease;
+}
+
+.form-submit:hover .form-submit-icon {
+  transform: translate(4px, -4px);
+}
+
+/* Success State */
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
+}
+
+.form-success.is-visible {
+  display: flex;
+}
+
+.form-success-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.form-success-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.form-success-heading {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.form-success-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  max-width: 360px;
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 1024px) {
+  .kontakt-grid {
+    gap: 4vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .kontakt-hero {
+    padding: 7rem 5vw 3rem;
+    min-height: auto;
+  }
+
+  .kontakt-section {
+    padding: 3rem 5vw 5rem;
+  }
+
+  .kontakt-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .kontakt-info-heading {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    margin-bottom: 2rem;
+  }
+
+  .kontakt-channel {
+    padding: 1rem 1.25rem;
+  }
+
+  a.kontakt-channel:hover {
+    transform: none;
+  }
+
+  .form-input {
+    font-size: 16px; /* prevents iOS zoom */
+    padding: 0.9rem 1rem;
+    min-height: 48px;
+  }
+
+  .form-submit {
+    min-height: 52px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .kontakt-hero-heading {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .kontakt-channel-value {
+    font-size: 0.95rem;
+  }
+
+  .kontakt-channel-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .kontakt-channel-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
