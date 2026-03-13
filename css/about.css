@@ -472,6 +472,22 @@
   color: var(--text-muted);
 }
 
+/* ---- TABLET ---- */
+@media (max-width: 1024px) {
+  .about-hero-grid {
+    gap: 4vw;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .portrait-frame {
+    width: clamp(220px, 28vw, 340px);
+  }
+}
+
 /* ---- MOBILE ---- */
 @media (max-width: 768px) {
   .about-hero {
@@ -481,7 +497,7 @@
 
   .about-hero-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .about-hero-portrait {
@@ -489,7 +505,7 @@
   }
 
   .portrait-frame {
-    width: 200px;
+    width: clamp(180px, 50vw, 280px);
   }
 
   .about-hero .scroll-indicator {
@@ -499,6 +515,14 @@
   .skills-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .skill-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .skill-card:hover {
+    transform: none !important;
   }
 
   .timeline-line {
@@ -519,27 +543,66 @@
 
   .workspace-image-wrap {
     height: 60vh;
+    min-height: 350px;
   }
 
   .workspace-caption {
     bottom: 2rem;
+    left: 4vw;
+    right: 4vw;
+  }
+
+  .workspace-caption .about-heading {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
   }
 
   .about-section {
-    padding: 5rem 5vw;
+    padding: 4rem 5vw;
   }
 
   .about-cta {
-    padding: 6rem 5vw;
+    padding: 5rem 5vw;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .nav-links {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
   .about-hero-heading {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
   }
 
   .about-heading {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .about-hero-role {
+    font-size: 0.85rem;
+  }
+
+  .workspace-image-wrap {
+    height: 50vh;
+    min-height: 280px;
+  }
+
+  .skill-tags span {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .timeline-title {
+    font-size: 1.1rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
   }
 }

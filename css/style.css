@@ -34,6 +34,8 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,6 +43,12 @@ body {
   color: var(--text-light);
   font-family: var(--font-body);
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ---- LOADER ---- */
@@ -449,8 +457,94 @@ body {
   box-shadow: 0 8px 30px rgba(245, 166, 35, 0.3);
 }
 
+/* ---- HAMBURGER MENU ---- */
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  z-index: 201;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.nav-burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---- MOBILE NAV OVERLAY ---- */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 14, 26, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mobile-nav-links a {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.nav-active {
+  color: var(--cyan);
+}
+
 /* ---- MOBILE ---- */
 @media (max-width: 768px) {
+  .nav-burger {
+    display: flex;
+  }
+
   #scroll-container {
     height: 550vh;
   }
@@ -493,6 +587,61 @@ body {
 
   .marquee-text {
     font-size: 8vw;
+  }
+
+  .site-header {
+    padding: 1rem 4vw;
+  }
+
+  .cta-button {
+    padding: 1.1rem 2rem;
+    font-size: 0.85rem;
+    min-height: 48px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* ---- EXTRA SMALL ---- */
+@media (max-width: 480px) {
+  .hero-heading {
+    font-size: clamp(2.8rem, 14vw, 4rem);
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+  }
+
+  .section-heading {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+  }
+
+  .scroll-indicator {
+    bottom: 1.5rem;
+  }
+}
+
+/* ---- SAFE AREA (notched devices) ---- */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .site-header {
+    padding-left: max(4vw, env(safe-area-inset-left));
+    padding-right: max(4vw, env(safe-area-inset-right));
+  }
+
+  .site-footer,
+  .about-footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
   }
 }
 
@@ -760,15 +909,26 @@ body {
   color: var(--text-muted);
 }
 
+/* ---- TABLET (static sections) ---- */
+@media (max-width: 1024px) {
+  .static-section {
+    padding: 6rem 5vw;
+  }
+
+  .static-grid {
+    gap: 3vw;
+  }
+}
+
 /* ---- STATIC SECTIONS MOBILE ---- */
 @media (max-width: 768px) {
   .static-section {
-    padding: 5rem 5vw;
+    padding: 4rem 5vw;
   }
 
   .static-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 
   .static-grid--img-left .static-image {
@@ -781,6 +941,10 @@ body {
 
   .static-text {
     max-width: 100%;
+  }
+
+  .static-heading {
+    font-size: clamp(2rem, 7vw, 2.8rem);
   }
 
   .location-highlights {
@@ -797,10 +961,39 @@ body {
     gap: 1.5rem;
   }
 
+  .static-link {
+    padding: 0.5rem 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
   .site-footer .footer-inner {
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .static-section {
+    padding: 3rem 5vw;
+  }
+
+  .static-heading {
+    font-size: 1.8rem;
+  }
+
+  .location-highlights {
+    gap: 0.75rem;
+  }
+
+  .loc-value {
+    font-size: 1.1rem;
+  }
+
+  .trust-metric-value {
+    font-size: 1.2rem;
   }
 }
 
