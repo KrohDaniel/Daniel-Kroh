@@ -1,0 +1,545 @@
+/* ================================================
+   ABOUT PAGE — Daniel Kroh
+   ================================================ */
+
+/* ---- HEADER OVERRIDE ---- */
+.about-header {
+  mix-blend-mode: normal;
+  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+}
+
+.nav-active {
+  color: var(--cyan) !important;
+}
+
+/* ---- ABOUT HERO ---- */
+.about-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem 5vw 4rem;
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.about-hero-text {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.about-hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.about-hero-heading .line {
+  display: block;
+}
+
+.about-hero-heading .accent {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-hero-role {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2rem;
+}
+
+.about-hero-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--amber));
+  margin-bottom: 2rem;
+}
+
+.about-hero-intro {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.15vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--silver);
+  max-width: 480px;
+}
+
+/* Portrait */
+.about-hero-portrait {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.portrait-frame {
+  position: relative;
+  width: clamp(280px, 22vw, 400px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.6s ease;
+}
+
+.portrait-frame:hover img {
+  filter: grayscale(30%) contrast(1.05);
+}
+
+.portrait-border {
+  position: absolute;
+  inset: -8px;
+  border: 1px solid var(--cyan);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.portrait-frame:hover .portrait-border {
+  opacity: 0.6;
+}
+
+/* Scroll indicator on about page */
+.about-hero .scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 5vw;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0;
+}
+
+/* ---- ABOUT SECTIONS (shared) ---- */
+.about-section {
+  padding: 8rem 5vw;
+  position: relative;
+}
+
+.about-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 3rem;
+}
+
+.heading-accent {
+  background: linear-gradient(135deg, var(--cyan), var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-body {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--silver);
+  max-width: 560px;
+  margin-bottom: 1.5rem;
+}
+
+.about-body:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- PHILOSOPHY ---- */
+.about-philosophy {
+  background: var(--bg-navy);
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.align-offset-left {
+  max-width: 600px;
+}
+
+/* ---- WORKSPACE IMAGE ---- */
+.about-workspace {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.workspace-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+.workspace-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%) contrast(1.1);
+  transform: scale(1.05);
+  transition: transform 0.8s ease;
+}
+
+.workspace-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 14, 26, 0.85) 0%,
+    rgba(10, 14, 26, 0.4) 50%,
+    rgba(10, 14, 26, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+.workspace-caption {
+  position: absolute;
+  bottom: 5rem;
+  left: 5vw;
+  max-width: 500px;
+  z-index: 2;
+}
+
+.workspace-caption .about-heading {
+  margin-bottom: 1.5rem;
+}
+
+.workspace-caption .about-body {
+  color: var(--text-light);
+}
+
+/* ---- SKILLS GRID ---- */
+.about-skills {
+  background: var(--bg-dark);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.skill-card {
+  padding: 2.5rem 2rem;
+  background: var(--bg-navy);
+  border: 1px solid rgba(0, 212, 255, 0.06);
+  transition: border-color 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.skill-card:hover {
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateY(-4px);
+}
+
+.skill-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1.5rem;
+  color: var(--cyan);
+}
+
+.skill-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.skill-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tags span {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.7rem;
+  background: rgba(0, 212, 255, 0.08);
+  color: var(--cyan);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+}
+
+/* ---- TIMELINE ---- */
+.about-timeline {
+  background: var(--bg-navy);
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--cyan), var(--amber), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item[data-side="left"] {
+  justify-content: flex-start;
+  padding-right: calc(50% + 2rem);
+  text-align: right;
+}
+
+.timeline-item[data-side="right"] {
+  justify-content: flex-end;
+  padding-left: calc(50% + 2rem);
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 2px solid var(--cyan);
+  transform: translateX(-50%);
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--cyan);
+}
+
+.timeline-year {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ---- CTA ---- */
+.about-cta {
+  background: var(--bg-dark);
+  text-align: center;
+  padding: 10rem 5vw;
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.about-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-cta-heading {
+  text-align: center;
+}
+
+.about-cta-body {
+  text-align: center;
+  max-width: 480px;
+}
+
+/* ---- FOOTER ---- */
+.about-footer {
+  padding: 2rem 5vw;
+  border-top: 1px solid rgba(0, 212, 255, 0.06);
+  background: var(--bg-dark);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.1em;
+}
+
+.footer-copy {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+  .about-hero {
+    padding-top: 6rem;
+    min-height: auto;
+  }
+
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-hero-portrait {
+    order: -1;
+  }
+
+  .portrait-frame {
+    width: 200px;
+  }
+
+  .about-hero .scroll-indicator {
+    display: none;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .timeline-line {
+    left: 1rem;
+  }
+
+  .timeline-item[data-side="left"],
+  .timeline-item[data-side="right"] {
+    padding-left: 3rem;
+    padding-right: 0;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .timeline-dot {
+    left: 1rem;
+  }
+
+  .workspace-image-wrap {
+    height: 60vh;
+  }
+
+  .workspace-caption {
+    bottom: 2rem;
+  }
+
+  .about-section {
+    padding: 5rem 5vw;
+  }
+
+  .about-cta {
+    padding: 6rem 5vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-heading {
+    font-size: 3.5rem;
+  }
+
+  .about-heading {
+    font-size: 2.2rem;
+  }
+}

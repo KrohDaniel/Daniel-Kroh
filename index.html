@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Kroh — Data & AI Solutions</title>
+  <meta name="description" content="Daniel Kroh – Professional digital interface design, data analytics & AI solutions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-brand">DANIEL KROH</div>
+    <div class="loader-track">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <nav>
+      <a href="#" class="nav-logo">DK</a>
+      <div class="nav-links">
+        <a href="about.html">Über mich</a>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="#contact">Kontakt</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Standalone -->
+  <section class="hero-standalone" id="hero">
+    <div class="hero-content">
+      <span class="section-label">001 / Willkommen</span>
+      <h1 class="hero-heading">
+        <span>Data.</span>
+        <span>Analytics.</span>
+        <span>AI.</span>
+      </h1>
+      <p class="hero-tagline">Datengetriebene Lösungen für Ihr Unternehmen</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scrollen</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Canvas -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- Dark Overlay -->
+  <div id="dark-overlay"></div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap" id="marquee-1" data-scroll-speed="-20" data-enter="15" data-leave="45">
+    <div class="marquee-text">DATA DRIVEN SOLUTIONS — ANALYTICS — AI POWERED —&nbsp;</div>
+  </div>
+
+  <div class="marquee-wrap" id="marquee-2" data-scroll-speed="15" data-enter="55" data-leave="85">
+    <div class="marquee-text">TRUST — PERFORMANCE — INNOVATION — SEO —&nbsp;</div>
+  </div>
+
+  <!-- Scroll Container -->
+  <div id="scroll-container">
+
+    <!-- Section: About -->
+    <section class="scroll-section section-content align-left"
+             data-enter="18" data-leave="32" data-animation="slide-left">
+      <div class="section-inner">
+        <span class="section-label">002 / Über mich</span>
+        <h2 class="section-heading">Digitale Exzellenz<br>durch Daten</h2>
+        <p class="section-body">Ich transformiere komplexe Datenlandschaften in klare, handlungsrelevante Insights. Mit modernsten Analysetools und KI-Methoden schaffe ich messbare Ergebnisse.</p>
+      </div>
+    </section>
+
+    <!-- Section: Cloud & Data -->
+    <section class="scroll-section section-content align-right"
+             data-enter="30" data-leave="44" data-animation="slide-right">
+      <div class="section-inner">
+        <span class="section-label">003 / Cloud & Data</span>
+        <h2 class="section-heading">Cloud-native<br>Datenarchitektur</h2>
+        <p class="section-body">Skalierbare Datenpipelines, Cloud-Infrastruktur und intelligente Automatisierung — für Unternehmen, die Daten als strategischen Vorteil nutzen wollen.</p>
+      </div>
+    </section>
+
+    <!-- Section: AI Solutions -->
+    <section class="scroll-section section-content align-left"
+             data-enter="42" data-leave="56" data-animation="fade-up">
+      <div class="section-inner">
+        <span class="section-label">004 / AI Solutions</span>
+        <h2 class="section-heading">Künstliche Intelligenz<br>im Einsatz</h2>
+        <p class="section-body">Von Machine Learning bis Generative AI — ich implementiere KI-Lösungen, die echten Geschäftswert schaffen. Keine Buzzwords, nur Resultate.</p>
+      </div>
+    </section>
+
+    <!-- Section: Stats -->
+    <section class="scroll-section section-stats"
+             data-enter="56" data-leave="72" data-animation="stagger-up">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-number" data-value="150" data-decimals="0">0</span>
+          <span class="stat-suffix">+</span>
+          <span class="stat-label">Projekte realisiert</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="98" data-decimals="0">0</span>
+          <span class="stat-suffix">%</span>
+          <span class="stat-label">Kundenzufriedenheit</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="12" data-decimals="0">0</span>
+          <span class="stat-suffix">+</span>
+          <span class="stat-label">Jahre Erfahrung</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="3.5" data-decimals="1">0</span>
+          <span class="stat-suffix">x</span>
+          <span class="stat-label">ROI Durchschnitt</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Trust & SEO -->
+    <section class="scroll-section section-content align-right"
+             data-enter="70" data-leave="84" data-animation="scale-up">
+      <div class="section-inner">
+        <span class="section-label">005 / Vertrauen</span>
+        <h2 class="section-heading">Vertrauen durch<br>Transparenz</h2>
+        <p class="section-body">Datengestützte SEO-Strategien, transparente Reportings und nachvollziehbare Ergebnisse. Ihr Erfolg ist messbar — immer.</p>
+      </div>
+    </section>
+
+    <!-- Section: CTA -->
+    <section class="scroll-section section-cta align-left"
+             data-enter="82" data-leave="100" data-animation="clip-reveal" data-persist="true">
+      <div class="section-inner">
+        <span class="section-label">006 / Kontakt</span>
+        <h2 class="section-heading">Bereit für den<br>nächsten Schritt?</h2>
+        <p class="section-body">Lassen Sie uns gemeinsam Ihre Daten zum Sprechen bringen.</p>
+        <a href="mailto:kontakt@danielkroh.de" class="cta-button">Projekt starten</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============================================
+       STATIC SECTIONS (below scroll animation)
+       ============================================ -->
+
+  <!-- Section 1: Leistungen -->
+  <section class="static-section" id="services">
+    <div class="static-grid static-grid--img-right">
+      <div class="static-text" data-static-anim="slide-left">
+        <span class="section-label">Leistungen</span>
+        <h2 class="static-heading">Cloud & Data<br><span class="heading-accent">Engineering</span></h2>
+        <p class="static-body">Von der Datenstrategie bis zur produktiven Cloud-Lösung — ich konzipiere und implementiere maßgeschneiderte Datenarchitekturen, die Ihr Unternehmen zukunftssicher machen.</p>
+        <ul class="static-list">
+          <li>
+            <span class="list-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 10 8 14 16 6"/></svg>
+            </span>
+            Datenanalyse & Business Intelligence
+          </li>
+          <li>
+            <span class="list-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 10 8 14 16 6"/></svg>
+            </span>
+            Cloud-Migration & Infrastruktur
+          </li>
+          <li>
+            <span class="list-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 10 8 14 16 6"/></svg>
+            </span>
+            KI-Integration & Automatisierung
+          </li>
+          <li>
+            <span class="list-icon">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 10 8 14 16 6"/></svg>
+            </span>
+            ETL-Pipelines & Echtzeit-Datenströme
+          </li>
+        </ul>
+        <a href="about.html" class="static-link">Mehr erfahren &rarr;</a>
+      </div>
+      <div class="static-image" data-static-anim="slide-right">
+        <div class="static-image-wrap">
+          <img src="public/ai_data_cloud.png" alt="Cloud & Data Engineering — Holografische Datenvisualisierung" loading="lazy" />
+          <div class="static-image-glow static-image-glow--cyan"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Standort -->
+  <section class="static-section static-section--alt" id="location">
+    <div class="static-grid static-grid--img-left">
+      <div class="static-image" data-static-anim="slide-left">
+        <div class="static-image-wrap">
+          <img src="public/ai_location_picture.png" alt="Standort Paderborn — Digitale Stadtlandschaft mit Standortmarker" loading="lazy" />
+          <div class="static-image-glow static-image-glow--amber"></div>
+        </div>
+      </div>
+      <div class="static-text" data-static-anim="slide-right">
+        <span class="section-label">Standort</span>
+        <h2 class="static-heading">Verwurzelt in<br><span class="heading-accent">Paderborn & OWL</span></h2>
+        <p class="static-body">Mitten in Ostwestfalen-Lippe — einer der innovativsten Wirtschaftsregionen Deutschlands. Hier verbinde ich lokale Nähe mit globaler Technologie-Expertise.</p>
+        <div class="location-highlights">
+          <div class="loc-item">
+            <span class="loc-value">OWL</span>
+            <span class="loc-label">Wirtschaftsregion</span>
+          </div>
+          <div class="loc-divider"></div>
+          <div class="loc-item">
+            <span class="loc-value">vor Ort</span>
+            <span class="loc-label">Persönliche Beratung</span>
+          </div>
+          <div class="loc-divider"></div>
+          <div class="loc-item">
+            <span class="loc-value">Remote</span>
+            <span class="loc-label">Deutschlandweit</span>
+          </div>
+        </div>
+        <p class="static-body static-body--small">Ob direkt in Paderborn, in der Region OWL oder remote — ich bin dort, wo Sie mich brauchen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Referenzen & Trust -->
+  <section class="static-section" id="trust">
+    <div class="static-grid static-grid--img-right">
+      <div class="static-text" data-static-anim="slide-left">
+        <span class="section-label">Referenzen & Vertrauen</span>
+        <h2 class="static-heading">AI-Driven<br><span class="heading-accent">SEO Performance</span></h2>
+        <p class="static-body">Suchmaschinenoptimierung, die auf Daten basiert — nicht auf Bauchgefühl. Durch den Einsatz von KI-gestützten Analysen erziele ich messbare Rankings und nachhaltiges Wachstum.</p>
+        <div class="trust-metrics">
+          <div class="trust-metric" data-static-anim="counter" data-target="97" data-suffix="%">
+            <span class="trust-metric-value">0%</span>
+            <span class="trust-metric-label">Core Web Vitals bestanden</span>
+          </div>
+          <div class="trust-metric" data-static-anim="counter" data-target="3" data-suffix="x">
+            <span class="trust-metric-value">0x</span>
+            <span class="trust-metric-label">Organischer Traffic-Anstieg</span>
+          </div>
+          <div class="trust-metric" data-static-anim="counter" data-target="Top" data-suffix=" 10">
+            <span class="trust-metric-value">Top 10</span>
+            <span class="trust-metric-label">Keyword-Rankings</span>
+          </div>
+        </div>
+        <p class="static-body static-body--small">Verifizierte Performance-Daten. Transparente Reportings. Keine leeren Versprechen.</p>
+        <a href="mailto:kontakt@danielkroh.de" class="cta-button" id="contact">Jetzt Projekt starten</a>
+      </div>
+      <div class="static-image" data-static-anim="slide-right">
+        <div class="static-image-wrap">
+          <img src="public/ai_trust_seo.png" alt="SEO Performance Dashboard — Verifizierte Core Web Vitals und Rankings" loading="lazy" />
+          <div class="static-image-glow static-image-glow--gold"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">Daniel Kroh</span>
+      <span class="footer-copy">&copy; 2026 — Data & AI Solutions</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
