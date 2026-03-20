@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="public/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="public/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="public/favicon/favicon.ico">
+  <link rel="manifest" href="public/favicon/site.webmanifest">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/leistungen.css">
 </head>
@@ -16,7 +21,7 @@
   <!-- Fixed Header -->
   <header class="site-header about-header">
     <nav>
-      <a href="index.html" class="nav-logo">DK</a>
+      <a href="index.html" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo" class="nav-logo-img"></a>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">Über mich</a>
@@ -47,7 +52,7 @@
         Webdesign. SEO.<br>
         <span class="heading-accent">K.I. Automatisierung.</span>
       </h1>
-      <p class="lp-hero-sub">Komplettlösungen für Ihren digitalen Erfolg — von der ersten Idee bis zur messbaren Conversion.</p>
+      <p class="lp-hero-sub">Von der ersten Idee bis zur fertigen Lösung — alles aus einer Hand, persönlich betreut.</p>
     </div>
   </section>
 
@@ -69,7 +74,7 @@
             </svg>
           </div>
           <h3 class="service-title">Webdesign & Development</h3>
-          <p class="service-desc">High-Performance Websites und Onlineshops, die nicht nur exzellent aussehen, sondern auch verkaufen. Responsives Design, blitzschnelle Ladezeiten und conversion-optimierte Strukturen.</p>
+          <p class="service-desc">Individuelle Websites, die nicht nur gut aussehen, sondern auch gefunden werden. Responsives Design, schnelle Ladezeiten und sauberer Code — keine Templates.</p>
           <ul class="service-features">
             <li>Individuelles UI/UX Design</li>
             <li>Next.js & React Entwicklung</li>
@@ -89,7 +94,7 @@
             </svg>
           </div>
           <h3 class="service-title">SEO & Local Search</h3>
-          <p class="service-desc">Dominieren Sie die Suchergebnisse in Paderborn und OWL. Datengetriebene Optimierung für langfristige Sichtbarkeit — lokal und überregional.</p>
+          <p class="service-desc">Bessere Sichtbarkeit in Paderborn und OWL. Strukturierte Optimierung für langfristige Rankings — lokal und überregional.</p>
           <ul class="service-features">
             <li>Technisches SEO Audit</li>
             <li>Local SEO & Google Business</li>
@@ -110,12 +115,12 @@
             </svg>
           </div>
           <h3 class="service-title">K.I. Automatisierung</h3>
-          <p class="service-desc">Intelligente Chatbots, automatisierte Workflows und KI-gestützte Analysen. Sparen Sie Zeit und Ressourcen durch modernste Technologie.</p>
+          <p class="service-desc">Intelligente Chatbots, automatisierte Workflows und eigene SaaS-Lösungen. Sparen Sie Zeit und Kosten durch gezielten KI-Einsatz.</p>
           <ul class="service-features">
             <li>Chatbot-Integration (GPT/Claude)</li>
             <li>Automatisierte Kundenkommunikation</li>
-            <li>KI-gestützte Datenanalyse</li>
-            <li>Workflow-Automatisierung</li>
+            <li>Automatisierte Reportings & Auswertungen</li>
+            <li>Workflow-Automatisierung (n8n)</li>
             <li>API-Integrationen & Schnittstellen</li>
           </ul>
         </div>
@@ -126,42 +131,97 @@
   <!-- ======== VALUE PROPOSITION ======== -->
   <section class="lp-section lp-section--alt">
     <div class="lp-container lp-value-block">
-      <div class="lp-value-badge">Faire Preise, messbare Performance</div>
+      <div class="lp-value-badge">Faire Preise, messbare Ergebnisse</div>
       <h2 class="lp-heading lp-heading--center">
-        Ihre Website als lebendes<br>
-        <span class="heading-accent">digitales Werkzeug.</span>
+        Zwei Wege zu Ihrer<br>
+        <span class="heading-accent">neuen Website.</span>
       </h2>
       <div class="lp-value-card">
-        <h3 class="lp-value-title">Warum monatliche Betreuung statt Einmalzahlung?</h3>
-        <p class="lp-value-body">Ihre Webseite ist kein statisches Plakat, das man einmal aufhängt und vergisst. Das Internet, Sicherheitsstandards und Google-Algorithmen verändern sich täglich. Mit unseren monatlichen Paketen garantieren wir Ihnen dauerhafte Sicherheit, modernste Software-Updates und ein stetig wachsendes lokales SEO-Ranking in Paderborn. <strong>Wir wachsen gemeinsam.</strong></p>
+        <h3 class="lp-value-title">Einmalzahlung oder monatliche Betreuung — Sie entscheiden.</h3>
+        <p class="lp-value-body">Sie möchten einmalig eine professionelle Website und danach selbstständig weitermachen? Oder lieber eine kontinuierliche Betreuung mit SEO, Updates und Support? Beides ist möglich. <strong>Wählen Sie das Modell, das zu Ihrem Unternehmen passt.</strong></p>
       </div>
     </div>
   </section>
 
-  <!-- ======== PRICING ======== -->
+  <!-- ======== PRICING: EINMALIG ======== -->
   <section class="lp-section" id="preise">
     <div class="lp-container">
-      <span class="section-label">002 / Pakete</span>
-      <h2 class="lp-heading">Transparente<br><span class="heading-accent">Preise</span></h2>
+      <span class="section-label">002 / Website-Pakete</span>
+      <h2 class="lp-heading">Website zum<br><span class="heading-accent">Festpreis</span></h2>
+      <p class="pricing-intro">Einmalige Entwicklung — der Code gehört Ihnen. Optional mit monatlicher Wartung &amp; SEO-Betreuung.</p>
 
       <div class="pricing-grid">
 
-        <!-- Starter -->
+        <!-- Starter Einmalig -->
         <div class="pricing-card" data-anim="stagger">
           <div class="pricing-header">
             <span class="pricing-tier">Starter</span>
-            <h3 class="pricing-name">Digitaler Einstieg</h3>
-            <p class="pricing-desc">Perfekt für Einzelunternehmer und kleine Betriebe, die eine professionelle Online-Präsenz aufbauen möchten.</p>
+            <h3 class="pricing-name">Landing Page</h3>
+            <p class="pricing-desc">Eine aussagekräftige Seite für Ihr Unternehmen — ideal als digitale Visitenkarte oder für eine gezielte Kampagne.</p>
           </div>
           <div class="pricing-price">
-            <span class="pricing-amount">149</span>
+            <span class="pricing-amount">999</span>
             <span class="pricing-currency">€</span>
-            <span class="pricing-period">/ Monat</span>
+            <span class="pricing-period">einmalig</span>
           </div>
           <ul class="pricing-features">
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Modernes One-Page Design
+              One-Page Design (Responsive)
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Individuelles UI/UX Design
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Core Web Vitals optimiert
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Kontaktformular
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Basis SEO-Setup
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Impressum & Datenschutz
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Code-Übergabe nach Fertigstellung
+            </li>
+            <li class="excluded">
+              <span class="pf-icon pf-x"></span>
+              Laufende Betreuung
+            </li>
+          </ul>
+          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Projekt anfragen</a>
+        </div>
+
+        <!-- Business Einmalig — Highlighted -->
+        <div class="pricing-card pricing-card--featured" data-anim="stagger">
+          <div class="pricing-badge">Beliebteste Wahl</div>
+          <div class="pricing-header">
+            <span class="pricing-tier">Business</span>
+            <h3 class="pricing-name">Unternehmens-Website</h3>
+            <p class="pricing-desc">Mehrere Seiten, professionelles Design und ein solides SEO-Fundament — alles, was ein wachsendes Unternehmen braucht.</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">1.499</span>
+            <span class="pricing-currency">€</span>
+            <span class="pricing-period">einmalig</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Bis zu 5 Seiten
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Premium UI/UX Design
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
@@ -169,39 +229,189 @@
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              SSL-Zertifikat & Hosting
+              Local SEO & Google Business Setup
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Google Business Einrichtung
+              Schema Markup & Structured Data
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Basis SEO-Optimierung
+              Google Analytics & Search Console
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Sicherheits-Updates
+              CMS-Integration nach Wunsch
             </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              K.I. Chatbot
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              Monatlicher SEO-Report
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Code-Übergabe nach Fertigstellung
             </li>
           </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Paket anfragen</a>
+          <a href="kontakt.html" class="pricing-cta">Projekt anfragen</a>
         </div>
 
-        <!-- Professional — Highlighted -->
-        <div class="pricing-card pricing-card--featured" data-anim="stagger">
-          <div class="pricing-badge">Beliebteste Wahl</div>
+        <!-- Premium Einmalig -->
+        <div class="pricing-card" data-anim="stagger">
           <div class="pricing-header">
-            <span class="pricing-tier">Professional</span>
-            <h3 class="pricing-name">Regionale Sichtbarkeit</h3>
-            <p class="pricing-desc">Für wachsende Unternehmen, die in Paderborn und OWL gefunden werden wollen — mit aktivem SEO und Performance-Tracking.</p>
+            <span class="pricing-tier">Premium</span>
+            <h3 class="pricing-name">Digitales Komplettpaket</h3>
+            <p class="pricing-desc">Umfangreiche Website mit K.I.-Integration, Automatisierung und allem, was Ihr Unternehmen digital nach vorne bringt.</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">2.799</span>
+            <span class="pricing-currency">€</span>
+            <span class="pricing-period">einmalig</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Bis zu 10 Seiten
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Alles aus Business
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              K.I. Chatbot Integration
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Workflow-Automatisierung (n8n)
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              API-Anbindungen & Schnittstellen
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Performance-Optimierung
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              2 Korrekturschleifen inklusive
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Code-Übergabe nach Fertigstellung
+            </li>
+          </ul>
+          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Projekt anfragen</a>
+        </div>
+
+      </div>
+
+      <p class="pricing-note">Alle Festpreise zzgl. Domain- und Hosting-Kosten (ab ca. 5€/Monat). Individuelle Projekte auf Anfrage.</p>
+    </div>
+  </section>
+
+  <!-- ======== PRICING: MONATLICH ======== -->
+  <section class="lp-section lp-section--alt" id="betreuung">
+    <div class="lp-container">
+      <span class="section-label">003 / Wartung & SEO</span>
+      <h2 class="lp-heading">Monatliche<br><span class="heading-accent">Betreuung</span></h2>
+      <p class="pricing-intro">Optional zu jedem Website-Paket — oder für bestehende Websites. Hosting, Updates, SEO und Support aus einer Hand.</p>
+
+      <div class="pricing-grid">
+
+        <!-- Basis Betreuung -->
+        <div class="pricing-card" data-anim="stagger">
+          <div class="pricing-header">
+            <span class="pricing-tier">Basis</span>
+            <h3 class="pricing-name">Wartung & Sicherheit</h3>
+            <p class="pricing-desc">Ihre Website bleibt sicher, schnell und online — ohne dass Sie sich darum kümmern müssen.</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">99</span>
+            <span class="pricing-currency">€</span>
+            <span class="pricing-period">/ Monat</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Hosting & SSL inklusive
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Sicherheits- & Software-Updates
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Uptime-Monitoring
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Kleine Textänderungen (bis 1h/Monat)
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              E-Mail Support
+            </li>
+            <li class="excluded">
+              <span class="pf-icon pf-x"></span>
+              SEO-Optimierung
+            </li>
+            <li class="excluded">
+              <span class="pf-icon pf-x"></span>
+              Monatlicher Report
+            </li>
+          </ul>
+          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Betreuung anfragen</a>
+        </div>
+
+        <!-- SEO Betreuung — Highlighted -->
+        <div class="pricing-card pricing-card--featured" data-anim="stagger">
+          <div class="pricing-badge">Empfohlen</div>
+          <div class="pricing-header">
+            <span class="pricing-tier">Wachstum</span>
+            <h3 class="pricing-name">SEO & Sichtbarkeit</h3>
+            <p class="pricing-desc">Aktive SEO-Betreuung, damit Sie in Paderborn und OWL langfristig gefunden werden.</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-amount">199</span>
+            <span class="pricing-currency">€</span>
+            <span class="pricing-period">/ Monat</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Alles aus Basis
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Local SEO Optimierung
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Google Business Pflege
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Monatlicher SEO-Report
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Content-Änderungen (bis 2h/Monat)
+            </li>
+            <li class="included">
+              <span class="pf-icon pf-check"></span>
+              Google Analytics & Search Console
+            </li>
+            <li class="excluded">
+              <span class="pf-icon pf-x"></span>
+              K.I. Chatbot Betreuung
+            </li>
+          </ul>
+          <a href="kontakt.html" class="pricing-cta">Betreuung anfragen</a>
+        </div>
+
+        <!-- Komplett Betreuung -->
+        <div class="pricing-card" data-anim="stagger">
+          <div class="pricing-header">
+            <span class="pricing-tier">Komplett</span>
+            <h3 class="pricing-name">Rundum-Betreuung</h3>
+            <p class="pricing-desc">Ihr digitaler Partner — SEO, K.I.-Chatbot-Pflege, Priority-Support und strategische Beratung.</p>
           </div>
           <div class="pricing-price">
             <span class="pricing-amount">349</span>
@@ -211,68 +421,15 @@
           <ul class="pricing-features">
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Multi-Page Website (bis 8 Seiten)
+              Alles aus Wachstum
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Premium UI/UX Design
+              K.I. Chatbot Pflege & Updates
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Hosting, SSL & CDN
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Local SEO Strategie
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Schema Markup & Structured Data
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Monatlicher SEO-Report
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Google Analytics & Search Console
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              K.I. Chatbot Integration
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta">Paket anfragen</a>
-        </div>
-
-        <!-- Dominanz -->
-        <div class="pricing-card" data-anim="stagger">
-          <div class="pricing-header">
-            <span class="pricing-tier">Dominanz</span>
-            <h3 class="pricing-name">Regionale Dominanz</h3>
-            <p class="pricing-desc">Das Komplettpaket für Unternehmen, die ihre Konkurrenz hinter sich lassen wollen — mit K.I., aktivem SEO und Priority-Support.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">699</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">/ Monat</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Alles aus Professional
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Unbegrenzte Seiten
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              K.I. Chatbot Integration
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Workflow-Automatisierung
+              Workflow-Überwachung
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
@@ -280,30 +437,30 @@
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              A/B-Testing & Conversion-Optimierung
+              Content-Änderungen (bis 4h/Monat)
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
-              Dedizierter Ansprechpartner
+              Persönlicher Ansprechpartner
             </li>
             <li class="included">
               <span class="pf-icon pf-check"></span>
               Quartals-Strategiegespräch
             </li>
           </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Paket anfragen</a>
+          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Betreuung anfragen</a>
         </div>
 
       </div>
 
-      <p class="pricing-note">Alle Pakete mit 12 Monaten initialer Laufzeit, danach monatlich kündbar. Individuelle Pakete auf Anfrage.</p>
+      <p class="pricing-note">Betreuungspakete mit 6 Monaten Mindestlaufzeit, danach monatlich kündbar. Kombinierbar mit jedem Website-Paket.</p>
     </div>
   </section>
 
   <!-- ======== FAQ ======== -->
   <section class="lp-section lp-section--alt" id="faq">
     <div class="lp-container">
-      <span class="section-label">003 / FAQ</span>
+      <span class="section-label">004 / FAQ</span>
       <h2 class="lp-heading">Häufige Fragen<br><span class="heading-accent">zum Pricing</span></h2>
 
       <div class="faq-list">
@@ -316,7 +473,7 @@
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Um nachhaltige Ergebnisse im SEO und eine kontinuierliche Betreuung zu gewährleisten, haben unsere Pakete eine initiale Laufzeit von 12 Monaten. Danach sind sie monatlich kündbar. Echtes Wachstum braucht Zeit und kontinuierliche Optimierung.</p>
+            <p>Die monatlichen Betreuungspakete haben eine Mindestlaufzeit von 6 Monaten, danach sind sie monatlich kündbar. Das gibt beiden Seiten genug Zeit, echte Ergebnisse zu erzielen. Die Website-Festpreise haben keine Laufzeit — Sie zahlen einmal und der Code gehört Ihnen.</p>
           </div>
         </details>
 
@@ -340,7 +497,7 @@
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Bei unseren monatlichen Service-Paketen mieten Sie im Grunde die Nutzung der hochmodernen Plattform inkl. Wartung und Hosting. Nach einer Laufzeit von 24 Monaten bieten wir auf Wunsch einen Buy-Out des Codes an. Die von Ihnen bereitgestellten Inhalte (Texte, Bilder) gehören selbstverständlich immer Ihnen.</p>
+            <p>Ja. Bei den Festpreis-Paketen erhalten Sie den vollständigen Quellcode nach Fertigstellung und Bezahlung. Texte, Bilder und Inhalte gehören selbstverständlich immer Ihnen. Sie können die Website dann selbst hosten oder die Wartung optional an mich abgeben.</p>
           </div>
         </details>
 
@@ -363,13 +520,13 @@
   <!-- ======== CTA ======== -->
   <section class="lp-section lp-cta-section">
     <div class="lp-container lp-cta-inner">
-      <span class="section-label">004 / Loslegen</span>
+      <span class="section-label">005 / Loslegen</span>
       <h2 class="lp-heading lp-heading--center">
         Bereit für Ihren<br>
         <span class="heading-accent">digitalen Vorsprung?</span>
       </h2>
       <p class="lp-cta-body">Lassen Sie uns in einem unverbindlichen Gespräch herausfinden, welches Paket am besten zu Ihrem Unternehmen passt.</p>
-      <a href="kontakt.html" class="cta-button">Kostenloses Erstgespräch</a>
+      <a href="termin.html" class="cta-button">Kostenloses Erstgespräch buchen</a>
     </div>
   </section>
 

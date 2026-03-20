@@ -5,12 +5,12 @@
 const CONFIG = {
   // Persönliche Daten
   name: "Daniel Kroh",
-  company: "Data & AI Solutions",
+  company: "Daniel Kroh — Digitale Lösungen",
 
   // Anschrift
-  street: "Musterstraße 1",       // TODO: echte Adresse eintragen
-  zip: "33100",                    // TODO: echte PLZ eintragen
-  city: "Paderborn",
+  street: "Mersmannstraße 15",
+  zip: "33175",
+  city: "Bad Lippspringe",
 
   // Kontaktdaten
   email: "info@kroh-daniel.de",
@@ -18,7 +18,7 @@ const CONFIG = {
   phoneDisplay: "0176 410 45 997",
 
   // Rechtliches / Impressum
-  vatId: "DE XXXXXXXXX",           // TODO: Umsatzsteuer-ID eintragen
+  vatId: "Noch nicht vorhanden",           // TODO: Umsatzsteuer-ID eintragen
 
   // Social Media
   instagram: "https://www.instagram.com/daniel_kroh_/",
