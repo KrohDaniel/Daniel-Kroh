@@ -83,7 +83,7 @@
 
   // ---- SECTION HEADINGS ----
   function initSectionHeadings() {
-    document.querySelectorAll(".lp-section").forEach((section) => {
+    document.querySelectorAll(".lp-section:not(.lp-cta-section)").forEach((section) => {
       const headingEls = section.querySelectorAll(
         ".section-label, .lp-heading"
       );
@@ -98,7 +98,7 @@
           scrollTrigger: {
             trigger: section,
             start: "top 78%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
       }
@@ -159,8 +159,8 @@
       ease: "power3.out",
       scrollTrigger: {
         trigger: cta,
-        start: "top 78%",
-        toggleActions: "play none none reverse",
+        start: "top 85%",
+        toggleActions: "play none none none",
       },
     });
   }

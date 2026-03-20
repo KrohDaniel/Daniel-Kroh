@@ -6,7 +6,7 @@
   "use strict";
 
   const FRAME_COUNT = 248;
-  const FRAME_SPEED = 2.0;
+  const FRAME_SPEED = 2.8;
   const IMAGE_SCALE = 0.85;
 
   const canvas = document.getElementById("canvas");
@@ -370,8 +370,8 @@
 
   // ---- DARK OVERLAY ----
   function initDarkOverlay() {
-    const enter = 0.54;
-    const leave = 0.73;
+    const enter = 0.44;
+    const leave = 0.65;
     const fadeRange = 0.04;
 
     ScrollTrigger.create({
