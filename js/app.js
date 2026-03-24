@@ -268,6 +268,7 @@
     }
 
     let wasVisible = false;
+    const fadeRange = 0.03; // 3% scroll range for fade in/out
 
     ScrollTrigger.create({
       trigger: scrollContainer,
@@ -291,6 +292,17 @@
             tl.reverse();
             wasVisible = false;
           }
+        }
+
+        // Smooth opacity fade at edges
+        if (wasVisible || inRange) {
+          let opacity = 1;
+          if (p < enter + fadeRange) {
+            opacity = Math.max(0, (p - enter) / fadeRange);
+          } else if (p > leave - fadeRange && !persist) {
+            opacity = Math.max(0, (leave - p) / fadeRange);
+          }
+          section.style.opacity = opacity;
         }
       },
     });
