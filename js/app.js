@@ -7,7 +7,7 @@
 
   const FRAME_COUNT = 248;
   const FRAME_SPEED = 2.8;
-  const IMAGE_SCALE = 0.85;
+  const IMAGE_SCALE = 1.0;
 
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
