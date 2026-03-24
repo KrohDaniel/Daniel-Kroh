@@ -160,6 +160,7 @@
   function animateHero() {
     const words = heroSection.querySelectorAll(".hero-heading span");
     const tagline = heroSection.querySelector(".hero-tagline");
+    const heroCta = heroSection.querySelector(".hero-cta");
     const label = heroSection.querySelector(".section-label");
     const indicator = heroSection.querySelector(".scroll-indicator");
 
@@ -173,7 +174,8 @@
       delay: 0.5,
     });
     gsap.to(tagline, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 1.1 });
-    gsap.to(indicator, { opacity: 1, duration: 0.6, delay: 1.6 });
+    if (heroCta) gsap.to(heroCta, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 1.4 });
+    gsap.to(indicator, { opacity: 1, duration: 0.6, delay: 1.8 });
   }
 
   // ---- CIRCLE-WIPE HERO REVEAL ----
@@ -396,39 +398,65 @@
 
   // ---- STATIC SECTION ANIMATIONS ----
   function initStaticSections() {
-    // Slide-left elements
+    const isMobile = window.innerWidth <= 768;
+    const offset = isMobile ? 30 : 50;
+    const stagger = isMobile ? 0.08 : 0.12;
+    const duration = isMobile ? 0.7 : 0.9;
+
+    // Slide-left elements (text blocks)
     document.querySelectorAll('[data-static-anim="slide-left"]').forEach((el) => {
       const children = el.querySelectorAll(
         ".section-label, .static-heading, .static-body, .static-list, .static-link, .cta-button, .location-highlights, .trust-metrics"
       );
 
       gsap.from(children, {
-        x: -60,
+        y: offset,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
+        stagger: stagger,
+        duration: duration,
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top 88%",
+          toggleActions: "play none none none",
         },
       });
     });
 
-    // Slide-right elements (images)
+    // Slide-right elements (images + text blocks on right)
     document.querySelectorAll('[data-static-anim="slide-right"]').forEach((el) => {
-      gsap.from(el, {
-        x: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      const children = el.querySelectorAll(
+        ".section-label, .static-heading, .static-body, .static-list, .static-link, .cta-button, .location-highlights, .trust-metrics"
+      );
+
+      // If it contains text children, animate them individually
+      if (children.length > 0) {
+        gsap.from(children, {
+          y: offset,
+          opacity: 0,
+          stagger: stagger,
+          duration: duration,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      } else {
+        // Image container — simple fade up
+        gsap.from(el, {
+          y: offset,
+          opacity: 0,
+          duration: duration,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
     });
 
     // Trust metric counters
@@ -442,12 +470,12 @@
       const obj = { val: 0 };
       gsap.to(obj, {
         val: target,
-        duration: 2,
+        duration: 1.5,
         ease: "power1.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
+          start: "top 90%",
+          toggleActions: "play none none none",
         },
         onUpdate: () => {
           valueEl.textContent = Math.round(obj.val) + suffix;

@@ -117,6 +117,9 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2vw;
 }
 
 .nav-logo {
@@ -213,6 +216,12 @@ img {
   max-width: 500px;
   opacity: 0;
   transform: translateY(30px);
+}
+
+.hero-cta {
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .scroll-indicator {
@@ -457,6 +466,39 @@ img {
   background: linear-gradient(135deg, var(--amber), var(--gold));
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(245, 166, 35, 0.3);
+}
+
+/* ---- HOME CTA ---- */
+.home-cta {
+  position: relative;
+  z-index: 20;
+  padding: 6rem 5vw;
+  background: var(--bg-navy);
+  text-align: center;
+  border-top: 1px solid rgba(0, 212, 255, 0.06);
+}
+
+.home-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.home-cta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.home-cta-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  margin-bottom: 2rem;
 }
 
 /* ---- HAMBURGER MENU ---- */
@@ -1060,6 +1102,14 @@ a.footer-contact-row:hover {
 
 /* ---- STATIC SECTIONS MOBILE ---- */
 @media (max-width: 768px) {
+  .home-cta {
+    padding: 4rem 5vw;
+  }
+
+  .home-cta-heading {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
   .static-section {
     padding: 4rem 5vw;
   }

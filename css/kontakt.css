@@ -379,6 +379,43 @@ a.kontakt-channel:hover {
   }
 }
 
+/* ---- CTA: TERMIN BUCHEN ---- */
+.kontakt-cta {
+  padding: 5rem 5vw;
+  background: var(--bg-navy);
+  text-align: center;
+  border-top: 1px solid rgba(0, 212, 255, 0.06);
+}
+
+.kontakt-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.kontakt-cta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.kontakt-cta-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--silver);
+  margin-bottom: 2rem;
+}
+
+.cta-button--small {
+  font-size: 0.85rem;
+  padding: 0.8rem 2rem;
+  min-height: auto;
+}
+
 @media (max-width: 480px) {
   .kontakt-hero-heading {
     font-size: clamp(2.2rem, 10vw, 3rem);

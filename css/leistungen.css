@@ -582,7 +582,13 @@
   color: var(--silver);
   max-width: 480px;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.lp-cta-inner .cta-button {
+  margin-top: 0;
+  padding: 1.1rem 3rem;
+  font-size: 0.95rem;
 }
 
 /* ================================================
