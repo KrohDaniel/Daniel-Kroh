@@ -471,6 +471,18 @@
   box-shadow: none;
 }
 
+.pricing-intro {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 600px;
+  margin: -0.5rem auto 2.5rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
 .pricing-note {
   font-family: var(--font-body);
   font-size: 0.8rem;
