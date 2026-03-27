@@ -108,7 +108,7 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 }
 
@@ -140,6 +140,7 @@
 .service-icon--cyan { color: var(--cyan); }
 .service-icon--amber { color: var(--amber); }
 .service-icon--gold { color: var(--gold); }
+.service-icon--white { color: var(--white); }
 
 .service-title {
   font-family: var(--font-display);

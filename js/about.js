@@ -55,18 +55,21 @@
         ".section-label, .about-heading, .about-body, .cta-button"
       );
 
-      gsap.from(children, {
-        y: 50,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      gsap.fromTo(children,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 100%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     });
   }
 

@@ -268,6 +268,82 @@ a.kontakt-channel:hover {
   min-height: 140px;
 }
 
+/* Checklist */
+.form-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: var(--bg-navy);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.form-checklist-group-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-top: 0.75rem;
+}
+
+.form-checklist-group-label:first-child {
+  margin-top: 0;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--silver);
+  padding: 0.5rem 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.form-check:hover {
+  color: var(--white);
+}
+
+.form-check input[type="checkbox"] {
+  display: none;
+}
+
+.form-check-mark {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(0, 212, 255, 0.25);
+  border-radius: 3px;
+  position: relative;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.form-check input:checked + .form-check-mark {
+  border-color: var(--cyan);
+  background: rgba(0, 212, 255, 0.15);
+}
+
+.form-check input:checked + .form-check-mark::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--cyan);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.form-check input:checked ~ * {
+  color: var(--white);
+}
+
 /* Submit Button */
 .form-submit {
   display: inline-flex;

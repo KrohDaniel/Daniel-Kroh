@@ -182,7 +182,7 @@ img {
 
 .hero-heading {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.03em;
@@ -356,6 +356,27 @@ img {
   text-transform: uppercase;
   color: var(--cyan);
   margin-bottom: 1.5rem;
+}
+
+a.section-label--link {
+  display: block;
+  text-decoration: none;
+  color: var(--cyan);
+  transition: opacity 0.3s ease;
+}
+
+a.section-label--link:hover {
+  opacity: 0.7;
+}
+
+a.about-portrait {
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+a.about-portrait:hover {
+  transform: scale(1.05);
 }
 
 .section-heading {
@@ -637,6 +658,46 @@ a.referenz-card:hover .referenz-link {
   gap: 0.7rem;
 }
 
+.referenz-banner {
+  margin-top: 3rem;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(245, 166, 35, 0.08));
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.referenz-banner-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--silver);
+  max-width: 600px;
+}
+
+.referenz-banner .cta-button--small {
+  flex-shrink: 0;
+  padding: 0.8rem 2rem;
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .referenz-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .referenz-banner-text {
+    font-size: 0.88rem;
+  }
+}
+
 .referenz-quote {
   font-family: var(--font-body);
   font-size: 0.88rem;
@@ -845,7 +906,7 @@ a.referenz-card:hover .referenz-link {
   }
 
   .hero-heading {
-    font-size: clamp(2rem, 9vw, 3rem);
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
   }
 
   .hero-tagline {

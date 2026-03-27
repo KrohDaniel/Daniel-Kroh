@@ -111,6 +111,14 @@
   width: clamp(280px, 22vw, 400px);
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.25), 0 0 60px rgba(0, 212, 255, 0.1);
+  transition: box-shadow 0.4s ease;
+}
+
+.portrait-frame:hover {
+  box-shadow: 0 0 40px rgba(0, 212, 255, 0.4), 0 0 80px rgba(0, 212, 255, 0.15);
 }
 
 .portrait-frame img {
@@ -129,6 +137,7 @@
 .portrait-border {
   position: absolute;
   inset: -8px;
+  border-radius: 50%;
   border: 1px solid var(--cyan);
   opacity: 0.3;
   pointer-events: none;
