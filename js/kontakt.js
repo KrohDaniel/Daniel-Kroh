@@ -54,16 +54,69 @@
     });
   });
 
-  // ---- SUCCESS STATE (URL param) ----
+  // ---- FORM SUBMISSION ----
+  const form = document.getElementById("kontakt-form");
+  const successEl = document.getElementById("form-success");
+
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // Honeypot check
+      const honey = form.querySelector('[name="_honey"]');
+      if (honey && honey.value) return;
+
+      const submitBtn = form.querySelector(".form-submit");
+      const submitText = form.querySelector(".form-submit-text");
+      const originalText = submitText ? submitText.textContent : "";
+
+      // Loading state
+      submitBtn.disabled = true;
+      if (submitText) submitText.textContent = "Wird gesendet...";
+
+      // Collect checked interests
+      const checked = Array.from(form.querySelectorAll('input[name="interesse"]:checked'));
+      const interesse = checked.map(function (cb) { return cb.value; });
+
+      const payload = {
+        name: form.querySelector("#name").value,
+        email: form.querySelector("#email").value,
+        phone: form.querySelector("#phone").value,
+        interesse: interesse,
+        message: form.querySelector("#message").value,
+      };
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          form.style.display = "none";
+          if (successEl) successEl.classList.add("is-visible");
+        } else {
+          const data = await res.json().catch(function () { return {}; });
+          alert(data.error || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+          submitBtn.disabled = false;
+          if (submitText) submitText.textContent = originalText;
+        }
+      } catch (err) {
+        alert("Verbindungsfehler. Bitte versuchen Sie es erneut oder schreiben Sie direkt an info@kroh-daniel.de");
+        submitBtn.disabled = false;
+        if (submitText) submitText.textContent = originalText;
+      }
+    });
+  }
+
+  // ---- SUCCESS STATE (URL param fallback) ----
   var params = new URLSearchParams(window.location.search);
   if (params.get("success") === "true") {
-    var form = document.getElementById("kontakt-form");
-    var success = document.getElementById("form-success");
-    if (form && success) {
+    if (form && successEl) {
       form.style.display = "none";
-      success.classList.add("is-visible");
+      successEl.classList.add("is-visible");
     }
-    // Clean URL
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 })();
