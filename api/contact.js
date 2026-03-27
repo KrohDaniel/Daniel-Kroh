@@ -33,21 +33,62 @@ module.exports = async function handler(req, res) {
     },
   });
 
+  // Format interesse as styled list items
+  const interesseTags = Array.isArray(interesse)
+    ? interesse.map((i) => `<span style="display:inline-block;background:#0a0e1a;color:#5de0c0;padding:6px 14px;border-radius:20px;font-size:13px;margin:3px 4px 3px 0;">${i}</span>`).join("")
+    : `<span style="display:inline-block;background:#f0f0f0;color:#666;padding:6px 14px;border-radius:20px;font-size:13px;">Keine Angabe</span>`;
+
   // Email to you (notification)
   const mailToMe = {
     from: `"Website Kontaktformular" <${process.env.SMTP_USER}>`,
     to: process.env.CONTACT_EMAIL || "info@kroh-daniel.de",
     replyTo: email,
-    subject: `Neue Anfrage von ${name} — danielkroh.de`,
+    subject: `Neue Anfrage von ${name} — kroh-daniel.de`,
     html: `
-      <h2>Neue Kontaktanfrage</h2>
-      <table style="border-collapse:collapse;font-family:sans-serif;">
-        <tr><td style="padding:8px;font-weight:bold;">Name:</td><td style="padding:8px;">${name}</td></tr>
-        <tr><td style="padding:8px;font-weight:bold;">E-Mail:</td><td style="padding:8px;"><a href="mailto:${email}">${email}</a></td></tr>
-        <tr><td style="padding:8px;font-weight:bold;">Telefon:</td><td style="padding:8px;">${phone || "—"}</td></tr>
-        <tr><td style="padding:8px;font-weight:bold;">Interesse an:</td><td style="padding:8px;">${interesseList}</td></tr>
-        <tr><td style="padding:8px;font-weight:bold;vertical-align:top;">Nachricht:</td><td style="padding:8px;">${message.replace(/\n/g, "<br>")}</td></tr>
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f4f4f7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <!-- Header -->
+        <tr><td style="background:#0a0e1a;padding:32px 40px;">
+          <h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:600;">Neue Kontaktanfrage</h1>
+          <p style="margin:8px 0 0;color:#5de0c0;font-size:14px;">kroh-daniel.de/kontakt</p>
+        </td></tr>
+        <!-- Body -->
+        <tr><td style="padding:32px 40px;">
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;width:110px;">Name</td>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#1a1a2e;font-size:15px;font-weight:600;">${name}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;">E-Mail</td>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#1a1a2e;font-size:15px;"><a href="mailto:${email}" style="color:#2563eb;text-decoration:none;">${email}</a></td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;">Telefon</td>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#1a1a2e;font-size:15px;">${phone || "—"}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Interesse</td>
+              <td style="padding:12px 0;border-bottom:1px solid #f0f0f3;">${interesseTags}</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0;color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;vertical-align:top;">Nachricht</td>
+              <td style="padding:12px 0;color:#1a1a2e;font-size:15px;line-height:1.6;">${message.replace(/\n/g, "<br>")}</td>
+            </tr>
+          </table>
+        </td></tr>
+        <!-- Footer -->
+        <tr><td style="background:#f8f8fa;padding:20px 40px;text-align:center;">
+          <p style="margin:0;color:#999;font-size:12px;">Direkt antworten — Reply-To ist auf ${email} gesetzt.</p>
+        </td></tr>
       </table>
+    </td></tr>
+  </table>
+</body></html>
     `,
   };
 
@@ -57,16 +98,52 @@ module.exports = async function handler(req, res) {
     to: email,
     subject: "Ihre Anfrage bei Daniel Kroh — Eingangsbestätigung",
     html: `
-      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a2e;">
-        <h2 style="color:#0a0a1a;">Vielen Dank für Ihre Anfrage, ${name}!</h2>
-        <p>Ich habe Ihre Nachricht erhalten und melde mich innerhalb von 24 Stunden bei Ihnen.</p>
-        <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;">
-        <p style="font-size:14px;color:#666;"><strong>Ihre Angaben:</strong></p>
-        <p style="font-size:14px;color:#666;">Interesse an: ${interesseList}</p>
-        <p style="font-size:14px;color:#666;">Nachricht: ${message}</p>
-        <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;">
-        <p style="font-size:13px;color:#999;">Daniel Kroh — Webdesign, SEO & K.I. Automatisierung<br>info@kroh-daniel.de | 0176 410 45 997</p>
-      </div>
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f4f4f7;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <!-- Header -->
+        <tr><td style="background:#0a0e1a;padding:40px;text-align:center;">
+          <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:600;letter-spacing:-0.3px;">Daniel Kroh</h1>
+          <p style="margin:6px 0 0;color:#5de0c0;font-size:13px;letter-spacing:1px;text-transform:uppercase;">Webdesign &middot; SEO &middot; K.I. Automatisierung</p>
+        </td></tr>
+        <!-- Body -->
+        <tr><td style="padding:40px;">
+          <h2 style="margin:0 0 8px;color:#0a0e1a;font-size:20px;font-weight:600;">Vielen Dank, ${name}!</h2>
+          <p style="margin:0 0 28px;color:#555;font-size:15px;line-height:1.7;">Ich habe Ihre Anfrage erhalten und melde mich innerhalb von <strong>24 Stunden</strong> bei Ihnen.</p>
+
+          <!-- Interesse Tags -->
+          <div style="background:#f8f8fa;border-radius:8px;padding:20px 24px;margin-bottom:24px;">
+            <p style="margin:0 0 10px;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Interesse an</p>
+            ${interesseTags}
+          </div>
+
+          <!-- Nachricht -->
+          <div style="background:#f8f8fa;border-radius:8px;padding:20px 24px;">
+            <p style="margin:0 0 10px;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;">Ihre Nachricht</p>
+            <p style="margin:0;color:#1a1a2e;font-size:14px;line-height:1.7;">${message.replace(/\n/g, "<br>")}</p>
+          </div>
+        </td></tr>
+        <!-- CTA -->
+        <tr><td style="padding:0 40px 36px;" align="center">
+          <a href="https://kroh-daniel.de" style="display:inline-block;background:#0a0e1a;color:#5de0c0;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">Website besuchen</a>
+        </td></tr>
+        <!-- Footer -->
+        <tr><td style="background:#0a0e1a;padding:28px 40px;text-align:center;">
+          <p style="margin:0 0 4px;color:#ffffff;font-size:14px;font-weight:500;">Daniel Kroh</p>
+          <p style="margin:0;color:#888;font-size:13px;">
+            <a href="mailto:info@kroh-daniel.de" style="color:#5de0c0;text-decoration:none;">info@kroh-daniel.de</a> &nbsp;&middot;&nbsp; 0176 410 45 997
+          </p>
+          <p style="margin:12px 0 0;color:#555;font-size:12px;">
+            <a href="https://kroh-daniel.de" style="color:#666;text-decoration:none;">kroh-daniel.de</a>
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>
     `,
   };
 

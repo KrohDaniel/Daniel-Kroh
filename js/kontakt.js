@@ -54,10 +54,33 @@
     });
   });
 
-  // ---- FORM SUBMISSION ----
+  // ---- SUCCESS OVERLAY ----
   const form = document.getElementById("kontakt-form");
-  const successEl = document.getElementById("form-success");
+  const overlay = document.getElementById("success-overlay");
+  const closeBtn = document.getElementById("success-close");
+  const closeBtnAlt = document.getElementById("success-close-btn");
 
+  function showSuccessOverlay() {
+    if (overlay) {
+      overlay.classList.add("is-visible");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function hideSuccessOverlay() {
+    if (overlay) {
+      overlay.classList.remove("is-visible");
+      document.body.style.overflow = "";
+    }
+  }
+
+  if (closeBtn) closeBtn.addEventListener("click", hideSuccessOverlay);
+  if (closeBtnAlt) closeBtnAlt.addEventListener("click", hideSuccessOverlay);
+  if (overlay) {
+    overlay.querySelector(".success-overlay-backdrop").addEventListener("click", hideSuccessOverlay);
+  }
+
+  // ---- FORM SUBMISSION ----
   if (form) {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -94,8 +117,10 @@
         });
 
         if (res.ok) {
-          form.style.display = "none";
-          if (successEl) successEl.classList.add("is-visible");
+          form.reset();
+          submitBtn.disabled = false;
+          if (submitText) submitText.textContent = originalText;
+          showSuccessOverlay();
         } else {
           const data = await res.json().catch(function () { return {}; });
           alert(data.error || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
@@ -108,15 +133,5 @@
         if (submitText) submitText.textContent = originalText;
       }
     });
-  }
-
-  // ---- SUCCESS STATE (URL param fallback) ----
-  var params = new URLSearchParams(window.location.search);
-  if (params.get("success") === "true") {
-    if (form && successEl) {
-      form.style.display = "none";
-      successEl.classList.add("is-visible");
-    }
-    window.history.replaceState({}, document.title, window.location.pathname);
   }
 })();

@@ -177,19 +177,8 @@
           </button>
         </form>
 
-        <!-- Success Message -->
-        <div class="form-success" id="form-success">
-          <div class="form-success-icon">
-            <svg viewBox="0 0 48 48" fill="none" stroke="var(--cyan)" stroke-width="2">
-              <circle cx="24" cy="24" r="20"/>
-              <polyline points="16 24 22 30 34 18"/>
-            </svg>
-          </div>
-          <h3 class="form-success-heading">Nachricht gesendet!</h3>
-          <p class="form-success-text">Vielen Dank für Ihre Anfrage. Ich melde mich innerhalb von 24 Stunden bei Ihnen.</p>
-          <a href="index.html" class="cta-button cta-button--small">Zurück zur Startseite</a>
-        </div>
       </div>
+
 
     </div>
   </section>
@@ -249,6 +238,37 @@
       </div>
     </div>
   </footer>
+
+  <!-- Success Overlay -->
+  <div class="success-overlay" id="success-overlay">
+    <div class="success-overlay-backdrop"></div>
+    <div class="success-modal">
+      <button class="success-close" id="success-close" aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="success-modal-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="36" stroke="url(#grad)" stroke-width="2.5"/>
+          <polyline points="26 40 36 50 54 32" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="success-check-path"/>
+          <defs>
+            <linearGradient id="grad" x1="0" y1="0" x2="80" y2="80">
+              <stop offset="0%" stop-color="#5de0c0"/>
+              <stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="success-modal-heading">Nachricht gesendet!</h2>
+      <p class="success-modal-text">Vielen Dank für Ihre Anfrage. Ich melde mich innerhalb von <strong>24 Stunden</strong> bei Ihnen.</p>
+      <p class="success-modal-subtext">Eine Bestätigungsmail ist auf dem Weg zu Ihnen.</p>
+      <div class="success-modal-actions">
+        <a href="index.html" class="success-btn success-btn--primary">Zur Startseite</a>
+        <button class="success-btn success-btn--secondary" id="success-close-btn">Schließen</button>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
