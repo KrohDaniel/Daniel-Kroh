@@ -6,7 +6,7 @@
   "use strict";
 
   const FRAME_COUNT = 248;
-  const FRAME_SPEED = 1.1;
+  const FRAME_SPEED = 1.0;
   const IMAGE_SCALE = 1.0;
 
   const canvas = document.getElementById("canvas");

@@ -5,7 +5,7 @@
 /* ---- HEADER ---- */
 .about-header {
   mix-blend-mode: normal;
-  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+  background: var(--bg-dark);
 }
 
 .nav-active {
@@ -608,8 +608,20 @@
 }
 
 @media (max-width: 480px) {
+  .termin-hero {
+    padding: 5rem 5vw 2.5rem;
+  }
+
   .termin-hero-heading {
-    font-size: clamp(2.2rem, 10vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+  .termin-hero-sub {
+    font-size: 0.9rem;
+  }
+
+  .termin-section {
+    padding: 2.5rem 4vw 3.5rem;
   }
 
   .timeslot-grid {
@@ -621,7 +633,13 @@
   }
 
   .cal-day {
-    height: 38px;
-    font-size: 0.8rem;
+    height: 36px;
+    font-size: 0.75rem;
+  }
+
+  .calendar-wrap,
+  .timeslot-wrap,
+  .termin-form-wrap {
+    padding: 1rem;
   }
 }

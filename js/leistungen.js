@@ -151,24 +151,28 @@
       ".section-label, .lp-heading, .lp-cta-body, .cta-button"
     );
 
-    gsap.from(children, {
-      y: 40,
-      opacity: 0,
-      stagger: 0.12,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: cta,
-        start: "top 85%",
-        toggleActions: "play none none none",
-      },
-    });
+    gsap.fromTo(children,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: cta,
+          start: "top 100%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
   }
 
   // ---- PRICING COUNTER ANIMATION ----
   function initPricingCounters() {
     document.querySelectorAll(".pricing-amount").forEach((el) => {
-      const target = parseInt(el.textContent);
+      const raw = el.textContent.replace(/\./g, "");
+      const target = parseInt(raw);
       if (isNaN(target)) return;
 
       const obj = { val: 0 };
@@ -182,7 +186,8 @@
           toggleActions: "play none none reverse",
         },
         onUpdate: () => {
-          el.textContent = Math.round(obj.val);
+          const v = Math.round(obj.val);
+          el.textContent = v >= 1000 ? v.toLocaleString("de-DE") : v;
         },
       });
     });

@@ -5,7 +5,7 @@
 /* ---- HEADER OVERRIDE ---- */
 .about-header {
   mix-blend-mode: normal;
-  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+  background: var(--bg-dark);
 }
 
 .nav-active {
@@ -576,21 +576,45 @@
 }
 
 @media (max-width: 480px) {
+  .about-hero {
+    padding-top: 5rem;
+  }
+
   .about-hero-heading {
-    font-size: clamp(2.5rem, 12vw, 3.5rem);
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .about-heading {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .about-hero-role {
     font-size: 0.85rem;
   }
 
+  .about-hero-body {
+    font-size: 0.9rem;
+  }
+
+  .portrait-frame {
+    width: clamp(140px, 40vw, 220px);
+  }
+
   .workspace-image-wrap {
-    height: 50vh;
-    min-height: 280px;
+    height: 45vh;
+    min-height: 250px;
+  }
+
+  .skill-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .skill-title {
+    font-size: 1rem;
+  }
+
+  .skill-desc {
+    font-size: 0.85rem;
   }
 
   .skill-tags span {
@@ -598,11 +622,28 @@
     padding: 0.25rem 0.55rem;
   }
 
+  .timeline-item[data-side="left"],
+  .timeline-item[data-side="right"] {
+    padding-left: 2.5rem;
+  }
+
   .timeline-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .timeline-desc {
     font-size: 0.85rem;
+  }
+
+  .timeline-date {
+    font-size: 0.7rem;
+  }
+
+  .about-section {
+    padding: 3rem 5vw;
+  }
+
+  .about-cta {
+    padding: 3.5rem 5vw;
   }
 }

@@ -5,7 +5,7 @@
 /* ---- HEADER ---- */
 .about-header {
   mix-blend-mode: normal;
-  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+  background: var(--bg-dark);
 }
 
 .nav-active {
@@ -682,27 +682,93 @@
 
 @media (max-width: 480px) {
   .lp-hero {
-    padding: 6rem 5vw 3rem;
+    padding: 5rem 5vw 2.5rem;
   }
 
   .lp-hero-heading {
-    font-size: clamp(2rem, 9vw, 3rem);
+    font-size: clamp(1.8rem, 9vw, 2.8rem);
+  }
+
+  .lp-hero-sub {
+    font-size: 0.9rem;
   }
 
   .lp-heading {
-    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .lp-section {
+    padding: 3rem 5vw;
+  }
+
+  .pricing-intro {
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
   }
 
   .pricing-amount {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .pricing-currency {
-    font-size: 1.1rem;
+    font-size: 1rem;
+  }
+
+  .pricing-period {
+    font-size: 0.75rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .pricing-name {
+    font-size: 1.2rem;
+  }
+
+  .pricing-desc {
+    font-size: 0.85rem;
+  }
+
+  .pricing-features li {
+    font-size: 0.85rem;
+  }
+
+  .pricing-cta {
+    font-size: 0.8rem;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .pricing-note {
+    font-size: 0.75rem;
   }
 
   .service-card {
-    padding: 2rem 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+  }
+
+  .service-features li {
+    font-size: 0.85rem;
+  }
+
+  .lp-value-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .lp-value-title {
+    font-size: 1.1rem;
+  }
+
+  .lp-value-body {
+    font-size: 0.88rem;
   }
 
   .faq-question {
@@ -715,6 +781,14 @@
   }
 
   .faq-answer p {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
+  }
+
+  .lp-cta-section {
+    padding: 3.5rem 5vw;
+  }
+
+  .lp-cta-body {
+    font-size: 0.9rem;
   }
 }

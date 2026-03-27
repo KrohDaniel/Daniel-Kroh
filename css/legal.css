@@ -4,7 +4,7 @@
 
 .about-header {
   mix-blend-mode: normal;
-  background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+  background: var(--bg-dark);
 }
 
 .legal-page {
