@@ -22,19 +22,9 @@
   <script defer src="DEINE_UMAMI_URL/script.js" data-website-id="DEINE_WEBSITE_ID"></script>
   <!-- Google Search Console — Verifizierungscode hier eintragen -->
   <!-- <meta name="google-site-verification" content="DEIN_VERIFIZIERUNGSCODE" /> -->
-  <link rel="stylesheet" href="css/cookie-banner.css">
 </head>
 
 <body>
-
-  <!-- Loader -->
-  <div id="loader">
-    <div class="loader-brand">DANIEL KROH</div>
-    <div class="loader-track">
-      <div id="loader-bar"></div>
-    </div>
-    <div id="loader-percent">0%</div>
-  </div>
 
   <!-- Fixed Header -->
   <header class="site-header">
@@ -61,10 +51,10 @@
     </nav>
   </div>
 
-  <!-- Hero Standalone -->
+  <!-- Hero -->
   <section class="hero-standalone" id="hero">
     <div class="hero-content">
-      <span class="section-label">001 / Willkommen</span>
+      <span class="section-label hero-label">Willkommen</span>
       <h1 class="hero-heading">
         <span>Ist der digitale</span>
         <span>Zug für Ihr</span>
@@ -74,122 +64,29 @@
       <p class="hero-tagline">Webdesign, SEO & KI-Automatisierung — ich bringe Unternehmen in OWL digital nach vorne.</p>
       <a href="kontakt.html" class="cta-button hero-cta">Kostenlose Erstberatung sichern</a>
     </div>
-    <div class="scroll-indicator">
-      <span>Scrollen</span>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M5 12l7 7 7-7" />
-      </svg>
-    </div>
   </section>
 
-  <!-- Canvas -->
-  <div class="canvas-wrap" id="canvas-wrap">
-    <canvas id="canvas"></canvas>
-  </div>
-
-  <!-- Dark Overlay -->
-  <div id="dark-overlay"></div>
-
-  <!-- Marquee -->
-  <div class="marquee-wrap" id="marquee-1" data-scroll-speed="-20" data-enter="10" data-leave="40">
-    <div class="marquee-text">WEBDESIGN — SEO — K.I. AUTOMATISIERUNG — DIGITALE LÖSUNGEN —&nbsp;</div>
-  </div>
-
-  <div class="marquee-wrap" id="marquee-2" data-scroll-speed="15" data-enter="45" data-leave="75">
-    <div class="marquee-text">PADERBORN — BAD LIPPSPRINGE — BIELEFELD — DETMOLD — GÜTERSLOH — OWL —&nbsp;</div>
-  </div>
-
-  <!-- Scroll Container -->
-  <div id="scroll-container">
-
-    <!-- Section: About -->
-    <section class="scroll-section section-content align-left" data-enter="8" data-leave="28"
-      data-animation="slide-left">
-      <div class="section-inner">
-        <a href="about.html" class="about-portrait">
-          <img src="public/portrait_opt.jpg" alt="Daniel Kroh — Wirtschaftsinformatiker" class="portrait-img">
-        </a>
-        <a href="about.html" class="section-label--link"><span class="section-label">002 / Über mich</span></a>
-        <h2 class="section-heading">Wirtschaftsinformatik<br>trifft Praxis</h2>
-        <p class="section-body">Ich bin Daniel, Wirtschaftsinformatiker aus Bad Lippspringe. Ich baue moderne Websites,
+  <!-- Über mich -->
+  <section class="static-section static-section--alt" id="about">
+    <div class="static-grid static-grid--img-left">
+      <div class="static-image" data-static-anim="slide-left">
+        <div class="static-image-wrap">
+          <a href="about.html">
+            <img src="public/ai_daniel_office.png" alt="Daniel Kroh am Arbeitsplatz — Webentwicklung & KI-Lösungen" loading="lazy" />
+          </a>
+          <div class="static-image-glow static-image-glow--cyan"></div>
+        </div>
+      </div>
+      <div class="static-text" data-static-anim="slide-right">
+        <span class="section-label">Über mich</span>
+        <h2 class="static-heading">Wirtschaftsinformatik<br><span class="heading-accent">trifft Praxis</span></h2>
+        <p class="static-body">Ich bin Daniel, Wirtschaftsinformatiker aus Bad Lippspringe. Ich baue moderne Websites,
           optimiere Ihre Sichtbarkeit bei Google und automatisiere Geschäftsprozesse mit KI — damit Sie sich auf Ihr
           Kerngeschäft konzentrieren können.</p>
+        <a href="about.html" class="static-link">Mehr erfahren &rarr;</a>
       </div>
-    </section>
-
-    <!-- Section: Cloud & Data -->
-    <section class="scroll-section section-content align-right" data-enter="24" data-leave="38"
-      data-animation="slide-right">
-      <div class="section-inner">
-        <span class="section-label">003 / Webdesign</span>
-        <h2 class="section-heading">Websites, die<br>arbeiten</h2>
-        <p class="section-body">Ihre neue Website steht in wenigen Wochen. Sie lädt blitzschnell, wird bei Google gefunden und verwandelt Besucher in Anfragen — ohne Baukastensystem, ohne versteckte Kosten.</p>
-      </div>
-    </section>
-
-    <!-- Section: AI Solutions -->
-    <section class="scroll-section section-content align-left" data-enter="36" data-leave="50" data-animation="fade-up">
-      <div class="section-inner">
-        <span class="section-label">004 / K.I. Lösungen</span>
-        <h2 class="section-heading">Intelligente<br>Automatisierung</h2>
-        <p class="section-body">Kundenanfragen automatisch beantworten, Abläufe vereinfachen, Routineaufgaben abgeben — KI dort einsetzen, wo sie Ihnen konkret Zeit und Geld spart.</p>
-      </div>
-    </section>
-
-    <!-- Section: Stats -->
-    <section class="scroll-section section-stats" data-enter="48" data-leave="62" data-animation="stagger-up">
-      <div class="stats-grid">
-        <div class="stat">
-          <span class="stat-number" data-value="2" data-decimals="0">0</span>
-          <span class="stat-suffix">s</span>
-          <span class="stat-label">Ladezeit Ihrer Website</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-value="24" data-decimals="0">0</span>
-          <span class="stat-suffix">h</span>
-          <span class="stat-label">Antwortzeit garantiert</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-value="0" data-decimals="0">0</span>
-          <span class="stat-suffix">€</span>
-          <span class="stat-label">Erstgespräch kostenlos</span>
-        </div>
-        <div class="stat">
-          <span class="stat-number" data-value="1" data-decimals="0">0</span>
-          <span class="stat-suffix"></span>
-          <span class="stat-label">Fester Ansprechpartner</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Trust & SEO -->
-    <section class="scroll-section section-content align-right" data-enter="58" data-leave="76"
-      data-animation="scale-up">
-      <div class="section-inner">
-        <span class="section-label">005 / Vertrauen</span>
-        <h2 class="section-heading">Transparent und<br>auf Augenhöhe</h2>
-        <p class="section-body">Keine versteckten Kosten, kein Fachchinesisch. Sie bekommen klare Reportings,
-          regelmäßige Updates und einen direkten Draht zu mir — persönlich, nicht über eine Agentur-Hotline.</p>
-      </div>
-    </section>
-
-    <!-- Section: CTA -->
-    <section class="scroll-section section-cta align-left" data-enter="72" data-leave="92" data-animation="clip-reveal"
-      data-persist="true">
-      <div class="section-inner">
-        <span class="section-label">006 / Kontakt</span>
-        <h2 class="section-heading">Bereit für den<br>nächsten Schritt?</h2>
-        <p class="section-body">Lassen Sie uns in einem unverbindlichen Gespräch herausfinden, wie ich Ihr Unternehmen
-          digital voranbringen kann.</p>
-        <a href="kontakt.html" class="cta-button">Kostenloses Erstgespräch buchen</a>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- ============================================
-       STATIC SECTIONS (below scroll animation)
-       ============================================ -->
+    </div>
+  </section>
 
   <!-- Section 1: Leistungen -->
   <section class="static-section" id="services">
@@ -317,8 +214,64 @@
     </div>
   </section>
 
+  <!-- Kundenstimmen -->
+  <section class="static-section static-section--alt" id="kundenstimmen">
+    <div class="testimonials-container">
+      <span class="section-label">Kundenstimmen</span>
+      <h2 class="static-heading">Was Kunden<br><span class="heading-accent">über mich sagen</span></h2>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+          </div>
+          <blockquote class="testimonial-text">&bdquo;Seit der neuen Website bekomme ich deutlich mehr Anfragen über Google. Daniel hat genau verstanden, wie ich mein Kosmetikstudio online präsentieren möchte — modern, professionell und mit Online-Buchung.&ldquo;</blockquote>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Sandra M.</span>
+            <span class="testimonial-role">Inhaberin, Kosmetikstudio Paderborn</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+          </div>
+          <blockquote class="testimonial-text">&bdquo;Endlich jemand, der nicht in Fachchinesisch redet. Daniel hat unseren kompletten Buchungsprozess mit KI automatisiert — wir sparen jetzt locker 10 Stunden pro Woche.&ldquo;</blockquote>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Thomas K.</span>
+            <span class="testimonial-role">Geschäftsführer, Handwerksbetrieb Detmold</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 20 20" width="18" height="18"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.27l-4.77 2.51.91-5.33L2.27 6.68l5.34-.78L10 1z" fill="currentColor"/></svg>
+          </div>
+          <blockquote class="testimonial-text">&bdquo;Schnell, zuverlässig und immer erreichbar. Unsere Praxis-Website lädt jetzt blitzschnell und wir stehen bei Google auf Seite 1 für unsere wichtigsten Suchbegriffe.&ldquo;</blockquote>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Dr. Julia F.</span>
+            <span class="testimonial-role">Zahnärztin, Praxis in Bad Lippspringe</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Referenzen -->
-  <section class="static-section static-section--alt" id="referenzen">
+  <section class="static-section" id="referenzen">
     <div class="referenzen-container">
       <span class="section-label">Referenzen</span>
       <h2 class="static-heading">Projekte &<br><span class="heading-accent">Erfahrung</span></h2>
@@ -448,14 +401,11 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/app.js"></script>
-
-  <script src="js/cookie-banner.js"></script>
 </body>
 
 </html>
