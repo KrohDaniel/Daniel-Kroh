@@ -86,10 +86,13 @@
     ctx.drawImage(img, dx, dy, dw, dh);
   }
 
-  // ---- PRELOADER (TWO-PHASE) ----
+  // ---- PRELOADER (FAST-START) ----
+  // Loads first 10 frames, then resolves immediately so the page
+  // becomes interactive. Remaining frames load in the background.
   function loadFrames() {
     return new Promise((resolve) => {
       let loaded = 0;
+      const CRITICAL = Math.min(10, FRAME_COUNT);
 
       function updateProgress() {
         const pct = Math.round((loaded / FRAME_COUNT) * 100);
@@ -116,27 +119,29 @@
         });
       }
 
-      // Phase 1: first 10 frames
+      // Phase 1: load critical frames, then show the page
       const phase1 = [];
-      for (let i = 0; i < Math.min(10, FRAME_COUNT); i++) {
+      for (let i = 0; i < CRITICAL; i++) {
         phase1.push(loadFrame(i));
       }
 
       Promise.all(phase1).then(() => {
         drawFrame(0);
-        // Phase 2: remaining frames in batches of 20
+        // Resolve immediately — page becomes interactive now
+        resolve();
+
+        // Phase 2: load remaining frames in background batches
         let queue = [];
-        for (let i = 10; i < FRAME_COUNT; i++) {
+        for (let i = CRITICAL; i < FRAME_COUNT; i++) {
           queue.push(i);
         }
 
         function loadBatch() {
           if (queue.length === 0) {
             allLoaded = true;
-            resolve();
             return;
           }
-          const batch = queue.splice(0, 20);
+          const batch = queue.splice(0, 15);
           Promise.all(batch.map(loadFrame)).then(loadBatch);
         }
 
