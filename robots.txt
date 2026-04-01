@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kroh-daniel.de/sitemap.xml

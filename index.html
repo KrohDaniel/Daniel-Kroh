@@ -22,6 +22,77 @@
   <script defer src="DEINE_UMAMI_URL/script.js" data-website-id="DEINE_WEBSITE_ID"></script>
   <!-- Google Search Console — Verifizierungscode hier eintragen -->
   <!-- <meta name="google-site-verification" content="DEIN_VERIFIZIERUNGSCODE" /> -->
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://kroh-daniel.de/#business",
+        "name": "Daniel Kroh — Webdesign, SEO & KI-Lösungen",
+        "url": "https://kroh-daniel.de",
+        "logo": "https://kroh-daniel.de/media/logo_transparent.png",
+        "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+        "description": "Webdesign, SEO & KI-Automatisierung für Unternehmen in Paderborn, Bad Lippspringe und OWL. Individuelle Websites, Local SEO und intelligente Automatisierung.",
+        "telephone": "+4917641045997",
+        "email": "info@kroh-daniel.de",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bad Lippspringe",
+          "addressRegion": "NRW",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 51.7833,
+          "longitude": 8.8167
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Paderborn" },
+          { "@type": "City", "name": "Bad Lippspringe" },
+          { "@type": "City", "name": "Bielefeld" },
+          { "@type": "City", "name": "Detmold" },
+          { "@type": "City", "name": "Gütersloh" }
+        ],
+        "serviceType": ["Webdesign", "SEO", "KI-Automatisierung", "Webentwicklung"],
+        "priceRange": "€€",
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/daniel-kroh-098047333/",
+          "https://www.instagram.com/daniel_kroh_/"
+        ],
+        "founder": { "@id": "https://kroh-daniel.de/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://kroh-daniel.de/#person",
+        "name": "Daniel Kroh",
+        "jobTitle": "Webdesigner & Entwickler",
+        "url": "https://kroh-daniel.de",
+        "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/daniel-kroh-098047333/",
+          "https://www.instagram.com/daniel_kroh_/"
+        ],
+        "worksFor": { "@id": "https://kroh-daniel.de/#business" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kroh-daniel.de/#website",
+        "name": "Daniel Kroh",
+        "url": "https://kroh-daniel.de",
+        "publisher": { "@id": "https://kroh-daniel.de/#person" }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -72,7 +143,7 @@
       <div class="static-image" data-static-anim="slide-left">
         <div class="static-image-wrap">
           <a href="about.html">
-            <img src="public/ai_daniel_office.png" alt="Daniel Kroh am Arbeitsplatz — Webentwicklung & KI-Lösungen" loading="lazy" />
+            <img src="public/ai_daniel_office_opt.jpg" alt="Daniel Kroh am Arbeitsplatz — Webentwicklung & KI-Lösungen" width="800" height="447" loading="lazy" />
           </a>
           <div class="static-image-glow static-image-glow--cyan"></div>
         </div>
@@ -135,7 +206,7 @@
       <div class="static-image" data-static-anim="slide-right">
         <div class="static-image-wrap">
           <img src="public/ai_data_cloud_opt.jpg" alt="Webdesign & Digitale Lösungen — Moderne Datenvisualisierung"
-            loading="lazy" />
+            width="800" height="446" loading="lazy" />
           <div class="static-image-glow static-image-glow--cyan"></div>
         </div>
       </div>
@@ -148,7 +219,7 @@
       <div class="static-image" data-static-anim="slide-left">
         <div class="static-image-wrap">
           <img src="public/ai_location_picture_opt.jpg"
-            alt="Standort Paderborn — Digitale Stadtlandschaft mit Standortmarker" loading="lazy" />
+            alt="Standort Paderborn — Digitale Stadtlandschaft mit Standortmarker" width="800" height="446" loading="lazy" />
           <div class="static-image-glow static-image-glow--amber"></div>
         </div>
       </div>
@@ -207,7 +278,7 @@
       <div class="static-image" data-static-anim="slide-right">
         <div class="static-image-wrap">
           <img src="public/ai_trust_seo_opt.jpg" alt="SEO Performance Dashboard — Verifizierte Core Web Vitals und Rankings"
-            loading="lazy" />
+            width="800" height="446" loading="lazy" />
           <div class="static-image-glow static-image-glow--gold"></div>
         </div>
       </div>
@@ -361,15 +432,15 @@
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Leistungen</span>
-        <a href="leistungen.html">Webdesign</a>
-        <a href="leistungen.html">SEO & Performance</a>
-        <a href="leistungen.html">K.I. Automatisierung</a>
-        <a href="leistungen.html#preise">Preise</a>
+        <a href="leistungen.html#leistungen">Webdesign Paderborn</a>
+        <a href="leistungen.html#leistungen">SEO & Local Search OWL</a>
+        <a href="leistungen.html#leistungen">KI-Automatisierung</a>
+        <a href="leistungen.html#preise">Preise & Pakete</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
-        <a href="about.html">Über mich</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="about.html">Über Daniel Kroh</a>
+        <a href="kontakt.html">Kontakt & Erstgespräch</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
@@ -401,11 +472,11 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script defer src="js/config.js"></script>
+  <script defer src="js/nav.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 
 </html>
