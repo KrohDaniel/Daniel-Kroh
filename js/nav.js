@@ -27,3 +27,17 @@
     if (e.key === "Escape" && mobileNav.classList.contains("is-open")) toggle();
   });
 })();
+
+/* Scroll Progress Bar */
+(function () {
+  "use strict";
+  var bar = document.getElementById("scrollProgress");
+  if (!bar) return;
+
+  window.addEventListener("scroll", function () {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = progress + "%";
+  }, { passive: true });
+})();
