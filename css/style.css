@@ -62,6 +62,13 @@ img {
   background: var(--bg-dark);
 }
 
+/* Blended image — fades into dark background */
+.blended-image {
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 85%);
+          mask-image: radial-gradient(ellipse at center, #000 45%, transparent 85%);
+}
+
 /* Scroll Progress Bar — positioned at bottom of header */
 .site-header {
   overflow: visible;
