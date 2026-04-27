@@ -33,7 +33,7 @@ module.exports = async function handler(req, res) {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        secret: process.env.TURNSTILE_SECRET_KEY || "",
+        secret: (process.env.TURNSTILE_SECRET_KEY || "").trim(),
         response: turnstileToken,
         remoteip: typeof ip === "string" ? ip.split(",")[0].trim() : "",
       }).toString(),
