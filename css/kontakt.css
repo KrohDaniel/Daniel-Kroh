@@ -344,6 +344,14 @@ a.kontakt-channel:hover {
   color: var(--white);
 }
 
+/* Turnstile Widget */
+.form-turnstile {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  min-height: 65px;
+}
+
 /* Submit Button */
 .form-submit {
   display: inline-flex;

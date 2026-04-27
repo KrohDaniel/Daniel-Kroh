@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="css/kontakt.css">
   <!-- Umami Analytics — DSGVO-konform -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="b5acfa81-7a81-4a46-b56d-cf7454781f12"></script>
+  <!-- Cloudflare Turnstile (explicit render — site key from /api/config) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileReady" async defer></script>
   <link rel="stylesheet" href="css/cookie-banner.css">
 </head>
 <body>
@@ -138,7 +140,11 @@
       <!-- Right: Contact Form -->
       <div class="kontakt-form-wrap" data-anim="fade-up">
         <form class="kontakt-form" id="kontakt-form">
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <!-- Honeypot fields (must remain empty — visually hidden from humans) -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+            <label>Webseite<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <label>Firma<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+          </div>
 
           <div class="form-group">
             <label for="name" class="form-label">Name</label>
@@ -178,6 +184,10 @@
           <div class="form-group">
             <label for="message" class="form-label">Nachricht</label>
             <textarea id="message" name="message" class="form-input form-textarea" placeholder="Beschreiben Sie kurz Ihr Projekt oder Anliegen..." rows="5" required></textarea>
+          </div>
+
+          <div class="form-turnstile">
+            <div id="turnstile-widget"></div>
           </div>
 
           <button type="submit" class="form-submit cta-button">

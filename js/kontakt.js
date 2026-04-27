@@ -80,18 +80,94 @@
     overlay.querySelector(".success-overlay-backdrop").addEventListener("click", hideSuccessOverlay);
   }
 
+  // ---- TURNSTILE WIDGET (explicit render with site key from /api/config) ----
+  let turnstileWidgetId = null;
+  let turnstileApiReady = false;
+  let turnstileSiteKey = null;
+
+  const submitBtnEl = form ? form.querySelector(".form-submit") : null;
+  const submitTextEl = form ? form.querySelector(".form-submit-text") : null;
+  const originalSubmitText = submitTextEl ? submitTextEl.textContent : "Nachricht senden";
+
+  function setSubmitDisabled(disabled, label) {
+    if (!submitBtnEl) return;
+    submitBtnEl.disabled = disabled;
+    if (submitTextEl && label) submitTextEl.textContent = label;
+  }
+
+  // Disable submit until widget is ready
+  setSubmitDisabled(true, "Lade Bot-Schutz...");
+
+  function tryRenderTurnstile() {
+    if (!turnstileApiReady || !turnstileSiteKey) return;
+    const container = document.getElementById("turnstile-widget");
+    if (!container || !window.turnstile) return;
+    if (turnstileWidgetId !== null) return;
+    turnstileWidgetId = window.turnstile.render(container, {
+      sitekey: turnstileSiteKey,
+      theme: "dark",
+      callback: function () {
+        setSubmitDisabled(false, originalSubmitText);
+      },
+      "expired-callback": function () {
+        setSubmitDisabled(true, "Bot-Schutz erneuern");
+      },
+      "error-callback": function () {
+        setSubmitDisabled(true, "Bot-Schutz Fehler");
+      },
+    });
+  }
+
+  // Cloudflare's api.js calls this once it's loaded
+  window.onTurnstileReady = function () {
+    turnstileApiReady = true;
+    tryRenderTurnstile();
+  };
+
+  // Fetch the site key from our API
+  fetch("/api/config")
+    .then(function (r) { return r.json(); })
+    .then(function (cfg) {
+      if (!cfg || !cfg.turnstileSiteKey) {
+        setSubmitDisabled(true, "Konfiguration fehlt");
+        console.error("TURNSTILE_SITE_KEY env variable is not set on the server.");
+        return;
+      }
+      turnstileSiteKey = cfg.turnstileSiteKey;
+      tryRenderTurnstile();
+    })
+    .catch(function (err) {
+      console.error("Config load failed:", err);
+      setSubmitDisabled(true, "Verbindungsfehler");
+    });
+
+  function resetTurnstileWidget() {
+    if (window.turnstile && turnstileWidgetId !== null) {
+      window.turnstile.reset(turnstileWidgetId);
+      setSubmitDisabled(true, originalSubmitText);
+    }
+  }
+
   // ---- FORM SUBMISSION ----
   if (form) {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      // Honeypot check
+      // Honeypot check (frontend — silent reject for bots)
       const honey = form.querySelector('[name="_honey"]');
-      if (honey && honey.value) return;
+      const honeyWebsite = form.querySelector('[name="website"]');
+      if ((honey && honey.value) || (honeyWebsite && honeyWebsite.value)) return;
 
       const submitBtn = form.querySelector(".form-submit");
       const submitText = form.querySelector(".form-submit-text");
       const originalText = submitText ? submitText.textContent : "";
+
+      // Cloudflare Turnstile token
+      const turnstileToken = form.querySelector('[name="cf-turnstile-response"]');
+      if (!turnstileToken || !turnstileToken.value) {
+        alert("Bitte bestätigen Sie, dass Sie kein Roboter sind.");
+        return;
+      }
 
       // Loading state
       submitBtn.disabled = true;
@@ -107,6 +183,9 @@
         phone: form.querySelector("#phone").value,
         interesse: interesse,
         message: form.querySelector("#message").value,
+        turnstileToken: turnstileToken.value,
+        website: honeyWebsite ? honeyWebsite.value : "",
+        _honey: honey ? honey.value : "",
       };
 
       try {
@@ -118,17 +197,20 @@
 
         if (res.ok) {
           form.reset();
+          resetTurnstileWidget();
           submitBtn.disabled = false;
           if (submitText) submitText.textContent = originalText;
           showSuccessOverlay();
         } else {
           const data = await res.json().catch(function () { return {}; });
           alert(data.error || "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+          resetTurnstileWidget();
           submitBtn.disabled = false;
           if (submitText) submitText.textContent = originalText;
         }
       } catch (err) {
         alert("Verbindungsfehler. Bitte versuchen Sie es erneut oder schreiben Sie direkt an info@kroh-daniel.de");
+        if (window.turnstile) window.turnstile.reset();
         submitBtn.disabled = false;
         if (submitText) submitText.textContent = originalText;
       }

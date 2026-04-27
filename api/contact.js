@@ -10,11 +10,41 @@ module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST");
 
-  const { name, email, phone, interesse, message } = req.body;
+  const { name, email, phone, interesse, message, turnstileToken, website, _honey } = req.body;
+
+  // Honeypot check — silently reject bot submissions
+  if (website || _honey) {
+    return res.status(200).json({ success: true });
+  }
 
   // Basic validation
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Name, E-Mail und Nachricht sind Pflichtfelder." });
+  }
+
+  // Cloudflare Turnstile verification
+  if (!turnstileToken) {
+    return res.status(400).json({ error: "Bot-Schutz fehlt. Bitte Seite neu laden." });
+  }
+
+  try {
+    const ip = req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || "";
+    const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: process.env.TURNSTILE_SECRET_KEY || "",
+        response: turnstileToken,
+        remoteip: typeof ip === "string" ? ip.split(",")[0].trim() : "",
+      }).toString(),
+    });
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      return res.status(403).json({ error: "Bot-Verifizierung fehlgeschlagen. Bitte erneut versuchen." });
+    }
+  } catch (err) {
+    console.error("Turnstile verify error:", err);
+    return res.status(500).json({ error: "Bot-Verifizierung nicht erreichbar." });
   }
 
   // Format interesse (array of checked values)
