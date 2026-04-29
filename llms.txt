@@ -1,0 +1,43 @@
+# Daniel Kroh — Software-Architekt & Prozess-Optimierer
+
+> Daniel Kroh entwickelt maßgeschneiderte Software für mittelständische Unternehmen. Digitale Prozesse, Web-Anwendungen und KI-Lösungen — aus Bad Lippspringe für OWL.
+
+Daniel Kroh ist Wirtschaftsinformatiker (B.Sc.) und arbeitet aktuell am Master Informatik (HSBI Bielefeld). Spezialisiert auf Software-Architektur, Prozessautomatisierung, Web-Anwendungen und KI-Integration für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe (OWL). Standort: Bad Lippspringe, Region Paderborn.
+
+Fokus auf maßgeschneiderte Lösungen statt Festpreis-Pakete. Jedes Projekt beginnt mit einem strukturierten Prozess-Audit (15 Min, kostenfrei). Anschließend erhalten Auftraggeber ein konkretes Architektur-Konzept mit transparenter Aufwandsschätzung. Code und Daten gehören dem Auftraggeber — kein Vendor-Lock-in.
+
+## Lösungsbereiche
+
+- [Prozessautomatisierung](https://kroh-daniel.de/leistungen.html): Workflows zur Ablösung manueller Routinen, Datenflüsse zwischen Systemen, automatische Dokumentenerstellung
+- [Web-Anwendungen](https://kroh-daniel.de/leistungen.html): Individuelle Plattformen, Portale und maßgeschneiderte Web-Lösungen mit eigener Geschäftslogik
+- [KI-Integration](https://kroh-daniel.de/leistungen.html): Anbindung von OpenAI, Anthropic und anderen LLMs für Klassifizierung, Dokumentenauswertung und Wissensdatenbanken
+- [Architektur-Beratung](https://kroh-daniel.de/leistungen.html): Strukturiertes Prozess-Audit, Architektur-Bewertung, Anforderungsanalyse, Roadmap
+
+## Wichtige Seiten
+
+- [Startseite](https://kroh-daniel.de/): Übersicht über Lösungsbereiche und Erfolgsgeschichten
+- [Über mich](https://kroh-daniel.de/about.html): Werdegang, Skill-Set, Arbeitsweise
+- [Lösungen](https://kroh-daniel.de/leistungen.html): Detaillierte Beschreibung der vier Architektur-Lösungen, Arbeitsweise, FAQ
+- [Kontakt](https://kroh-daniel.de/kontakt.html): Kontaktformular mit Engpass-Auswahl
+- [Prozess-Audit](https://kroh-daniel.de/termin.html): Direkt einen Audit-Termin buchen
+
+## Kontakt
+
+- E-Mail: info@kroh-daniel.de
+- Telefon: +49 176 410 45 997
+- Standort: Bad Lippspringe, Nordrhein-Westfalen, Deutschland
+- Region: OWL (Ostwestfalen-Lippe), Paderborn, Bielefeld, Detmold, Gütersloh
+
+## Differenzierung
+
+- Keine Festpreis-Pakete, keine Baukasten-Lösungen
+- Persönlicher Ansprechpartner — kein Account Manager, keine Agentur-Strukturen
+- Akademischer Hintergrund (Wirtschaftsinformatik B.Sc., Informatik M.Sc. in Arbeit) kombiniert mit Praxiserfahrung aus dem IT-Bereich von Atruvia AG (Banking-Sektor, BaFin-regulierte Umgebung)
+- Vendor-neutrale Tool-Auswahl, Code-Hoheit beim Auftraggeber
+- Lokale Verankerung in OWL, deutschlandweite Remote-Zusammenarbeit möglich
+
+## Rechtliches
+
+- [Impressum](https://kroh-daniel.de/impressum.html)
+- [Datenschutzerklärung](https://kroh-daniel.de/datenschutz.html)
+- [AGB](https://kroh-daniel.de/agb.html)

@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helfende Hände — Interaktive Live-Demo · Daniel Kroh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Helfende Hände brand */
+  --navy: #0F2D40;
+  --navy-2: #1B4055;
+  --navy-deep: #0A1F2E;
+  --amber: #D97706;
+  --amber-deep: #B85F05;
+  --shell: #F8FAF8;
+  --shell-2: #EFEAE3;
+  --warm: #FAF6F0;
+  --border: #E5E0D6;
+  --border-light: #EFEAE0;
+  --text: #1F2937;
+  --text-2: #4B5563;
+  --text-muted: #6B7280;
+  --green: #5B8A47;
+
+  /* Tour chrome (Daniel Kroh) */
+  --chrome: #0E1320;
+  --chrome-2: #161D2F;
+  --chrome-line: rgba(255,255,255,.08);
+  --chrome-text: #E7ECF4;
+  --chrome-muted: #94A0BB;
+  --cyan: #5BD3F0;
+  --cyan-deep: #00B8E6;
+  --t-amber: #F2B36B;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+
+  --shadow-sm: 0 1px 2px rgba(15,45,64,.04);
+  --shadow-md: 0 4px 6px -1px rgba(15,45,64,.06), 0 2px 4px -2px rgba(15,45,64,.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15,45,64,.08), 0 4px 6px -4px rgba(15,45,64,.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15,45,64,.10), 0 8px 10px -6px rgba(15,45,64,.06);
+  --shadow-chrome: 0 30px 80px rgba(0,0,0,.45);
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 22px;
+  --max: 1400px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--chrome);color:var(--chrome-text);line-height:1.55;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
+input,textarea,select{font:inherit}
+img{max-width:100%;display:block}
+
+/* ===== TOUR CHROME (gleiche Sprache wie aesthera & erholungs) ===== */
+.tour-bg{position:fixed;inset:0;background:radial-gradient(1200px 600px at 20% 0%,rgba(91,211,240,.06),transparent 60%),radial-gradient(900px 600px at 90% 100%,rgba(242,179,107,.05),transparent 60%),var(--chrome);z-index:-2}
+.tour-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 30%,transparent 90%)}
+
+.tour-topbar{position:sticky;top:0;z-index:50;background:rgba(14,19,32,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--chrome-line)}
+.tour-topbar-inner{max-width:var(--max);margin:0 auto;padding:1rem 2rem;display:flex;align-items:center;gap:2rem}
+.tour-brand{display:flex;align-items:center;gap:.8rem;font-size:.82rem;letter-spacing:.04em;color:var(--chrome-muted)}
+.tour-brand-mark{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--chrome-line);border-radius:8px;background:linear-gradient(135deg,rgba(91,211,240,.15),rgba(242,179,107,.10));color:var(--cyan);font-weight:700;font-size:.65rem;letter-spacing:.08em;font-family:var(--font-display)}
+.tour-brand strong{color:var(--chrome-text);font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem}
+.tour-brand-sep{width:1px;height:16px;background:var(--chrome-line)}
+.tour-brand em{font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--chrome-text);letter-spacing:.005em;font-weight:500}
+
+.demo-safe-badge{margin-left:auto;display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;font-size:.72rem;font-weight:500;letter-spacing:.02em;color:#9DE5C8;background:rgba(76,217,162,.08);border:1px solid rgba(76,217,162,.25);border-radius:999px;cursor:help;transition:all .2s}
+.demo-safe-badge:hover{background:rgba(76,217,162,.14);border-color:rgba(76,217,162,.4)}
+.demo-safe-badge svg{color:#6FE0B0}
+@media(max-width:900px){.demo-safe-badge span{display:none}.demo-safe-badge{padding:.45rem}}
+
+.tour-back{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;font-size:.82rem;color:var(--chrome-muted);border:1px solid var(--chrome-line);border-radius:999px;transition:all .25s ease}
+.tour-back:hover{color:var(--chrome-text);border-color:rgba(91,211,240,.4);background:rgba(91,211,240,.05)}
+
+.tour-stepnav{max-width:var(--max);margin:0 auto;padding:2rem 2rem 1.5rem}
+.tour-stepnav-track{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+.tour-stepnav-track::before{content:'';position:absolute;top:18px;left:8.33%;right:8.33%;height:1px;background:var(--chrome-line)}
+.tour-stepnav-track::after{content:'';position:absolute;top:18px;left:8.33%;height:1px;width:var(--progress,0%);background:linear-gradient(90deg,var(--cyan),var(--t-amber));transition:width .55s cubic-bezier(.65,0,.35,1);box-shadow:0 0 12px rgba(91,211,240,.5)}
+.step-pill{display:flex;flex-direction:column;align-items:center;gap:.6rem;position:relative;cursor:pointer;padding:0 .25rem;text-align:center}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--chrome-2);border:1px solid var(--chrome-line);display:grid;place-items:center;font-size:.8rem;font-weight:500;color:var(--chrome-muted);position:relative;z-index:2;transition:all .3s ease}
+.step-pill[data-state="done"] .step-dot{background:linear-gradient(135deg,var(--cyan),var(--cyan-deep));border-color:var(--cyan);color:var(--chrome)}
+.step-pill[data-state="active"] .step-dot{background:var(--chrome);border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 0 4px rgba(91,211,240,.15),0 0 20px rgba(91,211,240,.4);transform:scale(1.08)}
+.step-pill[data-state="active"] .step-dot::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(91,211,240,.3);animation:pulse-ring 2s ease-out infinite}
+@keyframes pulse-ring{0%{transform:scale(.95);opacity:.8}100%{transform:scale(1.4);opacity:0}}
+.step-label{font-size:.75rem;letter-spacing:.04em;color:var(--chrome-muted);line-height:1.3;max-width:11ch;transition:color .3s}
+.step-pill[data-state="active"] .step-label{color:var(--chrome-text)}
+.step-pill[data-state="done"] .step-label{color:var(--chrome-text);opacity:.85}
+
+.tour-meta{max-width:var(--max);margin:0 auto;padding:0 2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.tour-meta-left{display:flex;align-items:center;gap:1rem}
+.tour-step-num{font-family:var(--font-display);font-size:1.5rem;color:var(--cyan);font-weight:600;letter-spacing:-.02em}
+.tour-step-title{font-size:1rem;letter-spacing:.02em;color:var(--chrome-text);font-weight:500}
+.tour-step-desc{font-size:.85rem;color:var(--chrome-muted);max-width:60ch}
+.tour-tech{display:flex;gap:.5rem;flex-wrap:wrap}
+.tech-badge{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .7rem;border-radius:999px;border:1px solid var(--chrome-line);color:var(--chrome-muted);background:rgba(255,255,255,.02);display:inline-flex;align-items:center;gap:.4rem}
+.tech-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cyan)}
+.tech-badge.amber::before{background:var(--t-amber)}
+.tech-badge.green::before{background:#6FE0B0}
+
+.tour-stage-wrap{max-width:var(--max);margin:0 auto;padding:0 2rem 2rem}
+.tour-stage{position:relative;background:var(--shell);color:var(--text);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-chrome),0 0 0 1px var(--chrome-line);font-family:var(--font-sans);min-height:70vh}
+.stage-chrome{background:linear-gradient(180deg,#1a2033,#141a2a);border-bottom:1px solid var(--chrome-line);padding:.7rem 1.2rem;display:flex;align-items:center;gap:1rem}
+.stage-dots{display:flex;gap:.4rem}
+.stage-dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18)}
+.stage-dots span:nth-child(1){background:#FF5F57}
+.stage-dots span:nth-child(2){background:#FEBC2E}
+.stage-dots span:nth-child(3){background:#28C840}
+.stage-url{flex:1;background:rgba(0,0,0,.35);border:1px solid var(--chrome-line);border-radius:8px;padding:.35rem .9rem;font-size:.78rem;color:var(--chrome-muted);font-family:ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.02em;display:flex;align-items:center;gap:.55rem}
+.stage-url svg{width:11px;height:11px;opacity:.7;flex-shrink:0}
+.stage-url-path{color:var(--chrome-text)}
+.stage-tag{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);padding:.25rem .55rem;border:1px solid rgba(91,211,240,.3);border-radius:4px;background:rgba(91,211,240,.08)}
+.stage-tag.app{color:var(--t-amber);border-color:rgba(242,179,107,.3);background:rgba(242,179,107,.08)}
+
+.step-view{display:none;animation:stepIn .55s cubic-bezier(.16,1,.3,1)}
+.step-view.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.tour-controls{max-width:var(--max);margin:0 auto;padding:1.5rem 2rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.tour-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.85rem 1.6rem;border-radius:999px;font-size:.85rem;letter-spacing:.03em;border:1px solid var(--chrome-line);color:var(--chrome-text);background:rgba(255,255,255,.03);transition:all .25s ease;font-family:var(--font-display);font-weight:500}
+.tour-btn:hover:not(:disabled){border-color:rgba(91,211,240,.5);background:rgba(91,211,240,.08);color:var(--cyan);transform:translateY(-1px)}
+.tour-btn:disabled{opacity:.35;cursor:not-allowed}
+.tour-btn.primary{background:linear-gradient(135deg,var(--cyan),var(--cyan-deep));color:var(--chrome);border-color:transparent;font-weight:600;box-shadow:0 8px 20px rgba(0,184,230,.25)}
+.tour-btn.primary:hover:not(:disabled){color:var(--chrome);transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,184,230,.35)}
+.tour-progress-text{font-size:.78rem;color:var(--chrome-muted);letter-spacing:.04em}
+.tour-progress-text strong{color:var(--chrome-text);font-weight:500}
+
+.tour-stats{max-width:var(--max);margin:0 auto 3rem;padding:0 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.stat-card{background:rgba(255,255,255,.02);border:1px solid var(--chrome-line);border-radius:var(--radius);padding:1.4rem 1.5rem;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;height:2px;width:30%;background:linear-gradient(90deg,var(--cyan),transparent)}
+.stat-num{font-family:var(--font-serif);font-size:2.1rem;font-weight:500;color:var(--chrome-text);letter-spacing:-.02em;line-height:1}
+.stat-num em{font-style:italic;color:var(--cyan)}
+.stat-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--chrome-muted);margin-top:.55rem}
+
+/* ============================================================
+   HELFENDE HÄNDE STYLES (inside .tour-stage)
+   ============================================================ */
+.tour-stage h1,.tour-stage h2,.tour-stage h3,.tour-stage h4{font-family:var(--font-serif);color:var(--navy);font-weight:500;letter-spacing:-.005em}
+
+/* Public Header */
+.hh-header{position:sticky;top:0;z-index:5;background:rgba(248,250,248,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.hh-logo{display:flex;align-items:center;gap:.7rem}
+.hh-logo-mark{width:42px;height:42px;display:grid;place-items:center;color:var(--navy)}
+.hh-logo-mark svg{width:36px;height:36px;stroke-width:1.3}
+.hh-logo-text{display:flex;flex-direction:column;line-height:1.05}
+.hh-logo-text strong{font-family:var(--font-serif);color:var(--navy);font-weight:600;font-size:1.1rem;font-style:italic}
+.hh-logo-text span{color:var(--text-muted);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-top:.15rem}
+.hh-nav{display:flex;gap:1.8rem;font-size:.88rem}
+.hh-nav a{color:var(--text-2);transition:color .25s;font-weight:500}
+.hh-nav a:hover,.hh-nav a.is-active{color:var(--amber)}
+.hh-nav a.is-active{font-weight:600}
+.hh-cta{padding:.65rem 1.3rem;background:var(--amber);color:#fff;border-radius:999px;font-size:.82rem;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;box-shadow:0 2px 8px rgba(217,119,6,.2)}
+.hh-cta:hover{background:var(--amber-deep);transform:translateY(-1px)}
+
+.btn-hh{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.95rem 1.7rem;background:var(--amber);color:#fff;border-radius:8px;font-size:.92rem;font-weight:600;transition:all .25s;cursor:pointer;border:none;box-shadow:0 4px 12px rgba(217,119,6,.18)}
+.btn-hh:hover{background:var(--amber-deep);transform:translateY(-2px)}
+.btn-hh-outline{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.95rem 1.7rem;background:transparent;color:var(--navy);border:2px solid var(--navy);border-radius:8px;font-size:.92rem;font-weight:600;transition:all .25s;cursor:pointer}
+.btn-hh-outline:hover{background:var(--navy);color:#fff}
+.btn-hh-sm{padding:.55rem 1.1rem;font-size:.78rem;border-radius:8px}
+
+/* ============= STEP 1: AUFKLÄRUNGS-WEBSITE ============= */
+.hh-hero{position:relative;padding:0 2rem;display:grid;grid-template-columns:1.05fr .95fr;min-height:560px;align-items:stretch;background:var(--shell)}
+.hh-hero-text{padding:3rem 2.5rem 3rem 1rem;display:flex;flex-direction:column;justify-content:center}
+.hh-hero-pill{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem 1rem;border-radius:999px;background:rgba(217,119,6,.1);color:var(--amber);font-size:.78rem;font-weight:600;letter-spacing:.05em;width:fit-content;margin-bottom:1.2rem}
+.hh-hero-pill svg{width:14px;height:14px}
+.hh-hero h1{font-family:var(--font-serif);font-size:3.2rem;font-weight:500;color:var(--navy);line-height:1.05;margin-bottom:1.2rem;letter-spacing:-.01em;text-wrap:balance}
+.hh-hero h1 em{font-style:italic;color:var(--amber)}
+.hh-hero-sub{font-size:1.05rem;color:var(--text-2);max-width:42ch;margin-bottom:2rem;line-height:1.7}
+.hh-hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem}
+.hh-hero-trust{display:flex;gap:1.5rem;flex-wrap:wrap;padding-top:1.6rem;border-top:1px solid var(--border)}
+.hh-trust-item{display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--text-2)}
+.hh-trust-item svg{width:18px;height:18px;color:var(--amber);flex-shrink:0}
+.hh-trust-item strong{color:var(--navy);font-weight:600}
+
+.hh-hero-img{position:relative;border-radius:0;overflow:hidden;background:var(--shell-2);min-height:480px;margin:1.5rem 0}
+.hh-hero-img .photo-ph{width:100%;height:100%;background:linear-gradient(180deg,rgba(15,45,64,.05),rgba(217,119,6,.08)),repeating-linear-gradient(135deg,rgba(15,45,64,.04) 0 8px,transparent 8px 16px),var(--shell-2);position:relative;display:flex;align-items:flex-end;padding:2rem}
+.hh-hero-img .photo-meta{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--navy);background:rgba(255,255,255,.85);padding:.4rem .7rem;border-radius:6px;letter-spacing:.04em}
+.hh-hero-img .floating-ico{position:absolute;display:grid;place-items:center;background:#fff;border-radius:50%;box-shadow:var(--shadow-lg);color:var(--amber)}
+.hh-hero-img .floating-ico.ico-1{top:15%;right:8%;width:64px;height:64px}
+.hh-hero-img .floating-ico.ico-1 svg{width:30px;height:30px}
+.hh-hero-img .floating-ico.ico-2{bottom:18%;left:8%;width:74px;height:74px;color:var(--navy)}
+.hh-hero-img .floating-ico.ico-2 svg{width:34px;height:34px}
+
+.locations-strip{display:flex;justify-content:center;gap:0;padding:1.4rem 2rem;background:var(--warm);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);align-items:center}
+.locations-strip .locations-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-right:1.5rem}
+.locations-strip .loc{display:inline-flex;align-items:center;gap:.4rem;font-size:.88rem;color:var(--text-2);font-weight:500;padding:0 1.2rem;border-right:1px solid var(--border)}
+.locations-strip .loc:last-child{border-right:none}
+.locations-strip .loc svg{width:14px;height:14px;color:var(--amber)}
+
+/* Entlastungsbetrag explainer */
+.entlastung{padding:3.5rem 2rem;background:var(--shell)}
+.entlastung-shell{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:.95fr 1.05fr;gap:3rem;align-items:start}
+.entlastung-text .pre{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:.8rem}
+.entlastung-text h2{font-size:2.4rem;line-height:1.1;margin-bottom:1rem;font-style:italic}
+.entlastung-text p{color:var(--text-2);font-size:1rem;line-height:1.7;margin-bottom:1rem}
+.entlastung-text .quote{padding:1rem 1.2rem;background:var(--warm);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;font-style:italic;color:var(--navy);margin-top:1.5rem;font-family:var(--font-serif);font-size:.95rem}
+.entlastung-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem 2rem 1.7rem;box-shadow:var(--shadow-md);position:relative}
+.entlastung-card::before{content:'§ 45b SGB XI';position:absolute;top:-12px;left:24px;background:var(--navy);color:#fff;padding:.25rem .8rem;border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.04em}
+.entlastung-card h3{font-size:1.3rem;color:var(--navy);margin-bottom:.4rem;font-style:italic}
+.entlastung-card .big-num{font-family:var(--font-serif);font-size:3.4rem;color:var(--amber);font-weight:600;line-height:1;letter-spacing:-.02em;margin:1rem 0 .25rem}
+.entlastung-card .big-num em{font-size:1rem;font-style:normal;color:var(--text-muted);font-weight:500;letter-spacing:.02em;font-family:var(--font-sans)}
+.entlastung-card .big-sub{color:var(--text-2);font-size:.88rem;margin-bottom:1.4rem}
+.entlastung-list{display:flex;flex-direction:column;gap:.7rem;padding-top:1.2rem;border-top:1px solid var(--border-light)}
+.entlastung-item{display:flex;gap:.8rem;align-items:flex-start}
+.entlastung-item .check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(91,138,71,.12);color:var(--green);display:grid;place-items:center}
+.entlastung-item .check svg{width:13px;height:13px}
+.entlastung-item .txt{font-size:.88rem;color:var(--text-2);line-height:1.5}
+.entlastung-item .txt strong{color:var(--navy);font-weight:600}
+
+/* Services */
+.hh-services{padding:3.5rem 2rem;background:var(--warm)}
+.hh-section-head{text-align:center;margin-bottom:2.5rem;max-width:680px;margin-left:auto;margin-right:auto}
+.hh-section-head h2{font-size:2.4rem;font-style:italic;color:var(--navy);margin-bottom:.6rem;line-height:1.15}
+.hh-section-head .ornament{display:inline-flex;align-items:center;gap:.6rem;color:var(--amber);margin-bottom:.8rem}
+.hh-section-head .ornament::before,.hh-section-head .ornament::after{content:'';width:36px;height:1px;background:currentColor;opacity:.4}
+.hh-section-head .ornament span{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+.hh-section-head p{color:var(--text-2);font-size:1rem;margin-top:.6rem;line-height:1.65}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:1100px;margin:0 auto}
+.svc-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:2rem 1.6rem 1.8rem;transition:all .25s;display:flex;flex-direction:column;gap:.8rem}
+.svc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--amber)}
+.svc-icon{width:56px;height:56px;border-radius:14px;background:rgba(217,119,6,.1);color:var(--amber);display:grid;place-items:center;margin-bottom:.4rem}
+.svc-icon svg{width:28px;height:28px;stroke-width:1.5}
+.svc-card h4{font-family:var(--font-serif);font-size:1.25rem;color:var(--navy);font-style:italic;font-weight:500}
+.svc-card p{font-size:.88rem;color:var(--text-2);line-height:1.6}
+.svc-card .price{font-size:.78rem;color:var(--text-muted);padding-top:.6rem;border-top:1px dashed var(--border-light);margin-top:auto}
+.svc-card .price strong{color:var(--navy)}
+
+/* ============= STEP 2: ANFRAGE-FORMULAR ============= */
+.req-page{padding:2.5rem 2rem;background:var(--shell)}
+.req-shell{max-width:1000px;margin:0 auto}
+.req-head{text-align:center;margin-bottom:2rem}
+.req-head .pre{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:.6rem}
+.req-head h2{font-size:2.2rem;font-style:italic;color:var(--navy);margin-bottom:.5rem}
+.req-head p{color:var(--text-2);max-width:46ch;margin:0 auto}
+.req-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem}
+
+.req-form{background:#fff;border-radius:16px;padding:2.2rem;box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
+.req-stepper{display:flex;align-items:center;gap:.5rem;margin-bottom:1.8rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border-light)}
+.req-stepper .pip{display:flex;align-items:center;gap:.5rem;flex:1;font-size:.78rem;color:var(--text-muted);font-weight:500}
+.req-stepper .pip .num{width:24px;height:24px;border-radius:50%;background:var(--shell-2);color:var(--text-muted);display:grid;place-items:center;font-size:.75rem;font-weight:700}
+.req-stepper .pip.done .num{background:var(--green);color:#fff}
+.req-stepper .pip.active{color:var(--navy);font-weight:600}
+.req-stepper .pip.active .num{background:var(--navy);color:#fff}
+.req-stepper .pip-line{flex:0 0 24px;height:1px;background:var(--border)}
+
+.req-section-title{font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);font-style:italic;margin-bottom:1rem;padding-bottom:.4rem;border-bottom:1px solid var(--border-light)}
+.req-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.req-field{display:flex;flex-direction:column;gap:.35rem}
+.req-field label{font-size:.78rem;font-weight:600;color:var(--navy)}
+.req-field input,.req-field select,.req-field textarea{padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;background:var(--shell);font-size:.88rem;color:var(--text);transition:all .2s;font-family:inherit}
+.req-field input:focus,.req-field select:focus,.req-field textarea:focus{outline:none;border-color:var(--amber);background:#fff;box-shadow:0 0 0 3px rgba(217,119,6,.12)}
+.req-field textarea{min-height:80px;resize:vertical}
+.req-field .hint{font-size:.7rem;color:var(--text-muted)}
+
+.req-pgrade{display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;margin-bottom:1rem}
+.pgrade-opt{padding:.7rem .4rem;border:1px solid var(--border);border-radius:8px;background:var(--shell);text-align:center;font-size:.78rem;font-weight:600;color:var(--text-2);cursor:pointer;transition:all .2s}
+.pgrade-opt:hover{border-color:var(--amber);background:#fff}
+.pgrade-opt.selected{border-color:var(--amber);background:rgba(217,119,6,.08);color:var(--navy);box-shadow:0 0 0 2px rgba(217,119,6,.15)}
+.pgrade-opt .lbl{display:block;font-size:.66rem;color:var(--text-muted);font-weight:500;margin-top:.15rem;text-transform:uppercase;letter-spacing:.04em}
+.pgrade-opt.selected .lbl{color:var(--amber)}
+
+.need-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-bottom:1rem}
+.need-chip{display:flex;align-items:center;gap:.55rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:8px;background:var(--shell);font-size:.85rem;color:var(--text-2);cursor:pointer;transition:all .2s}
+.need-chip:hover{border-color:var(--amber)}
+.need-chip.selected{border-color:var(--amber);background:rgba(217,119,6,.06);color:var(--navy)}
+.need-chip svg{width:16px;height:16px;color:var(--amber);opacity:0;flex-shrink:0;transition:opacity .2s}
+.need-chip.selected svg{opacity:1}
+
+.dsgvo-row{display:flex;gap:.6rem;align-items:flex-start;padding:.9rem 1rem;background:var(--warm);border-radius:8px;margin-top:1rem;font-size:.78rem;color:var(--text-2);line-height:1.55}
+.dsgvo-row svg{width:18px;height:18px;color:var(--green);flex-shrink:0;margin-top:1px}
+.dsgvo-row strong{color:var(--navy)}
+
+.req-actions{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border-light)}
+.req-actions .meta{font-size:.78rem;color:var(--text-muted)}
+
+.req-side{display:flex;flex-direction:column;gap:1rem}
+.side-card{background:#fff;border-radius:14px;padding:1.4rem 1.5rem;border:1px solid var(--border-light);box-shadow:var(--shadow-sm)}
+.side-card h3{font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);font-style:italic;margin-bottom:.7rem}
+.side-card .pre{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:.4rem}
+.side-card p{font-size:.85rem;color:var(--text-2);line-height:1.55}
+.side-card .promise{display:flex;gap:.5rem;align-items:flex-start;font-size:.82rem;color:var(--text-2);padding:.45rem 0;border-bottom:1px dashed var(--border-light)}
+.side-card .promise:last-child{border-bottom:none}
+.side-card .promise svg{width:14px;height:14px;color:var(--green);flex-shrink:0;margin-top:3px}
+.side-card .promise strong{color:var(--navy)}
+.side-card.contact{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border:none}
+.side-card.contact h3{color:#fff}
+.side-card.contact .phone{font-family:var(--font-serif);font-size:1.6rem;font-style:italic;font-weight:600;color:var(--t-amber);margin:.6rem 0;letter-spacing:-.005em}
+.side-card.contact .hours{font-size:.78rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:.4rem}
+.side-card.contact .hours svg{width:14px;height:14px}
+
+/* ============= STEP 3: AUTH & MITARBEITER-ONBOARDING ============= */
+.auth-page{padding:0;background:var(--shell);min-height:560px;display:grid;grid-template-columns:1fr 1.2fr}
+.auth-side{padding:3rem 2.5rem;background:linear-gradient(180deg,var(--navy),var(--navy-deep));color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.auth-side::before{content:'';position:absolute;right:-100px;bottom:-100px;width:300px;height:300px;border-radius:50%;background:rgba(217,119,6,.12)}
+.auth-side .pre{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--t-amber);font-weight:700;margin-bottom:1rem;position:relative;z-index:1}
+.auth-side h2{font-family:var(--font-serif);font-size:2.4rem;color:#fff;font-style:italic;line-height:1.1;margin-bottom:1.2rem;position:relative;z-index:1;text-wrap:balance}
+.auth-side p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.7;max-width:38ch;position:relative;z-index:1}
+.auth-quotes{position:relative;z-index:1;padding-top:1.5rem;margin-top:1.5rem;border-top:1px solid rgba(255,255,255,.12)}
+.auth-quote{font-family:var(--font-serif);font-style:italic;font-size:1rem;line-height:1.55;color:#fff;margin-bottom:1rem}
+.auth-quote .author{display:block;font-style:normal;font-family:var(--font-sans);font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.35rem}
+
+.auth-form{padding:3rem 2.5rem;display:flex;flex-direction:column;justify-content:center;background:var(--shell)}
+.auth-card{max-width:440px;margin:0 auto;width:100%}
+.auth-tabs{display:flex;gap:0;background:var(--shell-2);border-radius:10px;padding:.3rem;margin-bottom:1.8rem}
+.auth-tab{flex:1;padding:.7rem;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .2s;text-align:center}
+.auth-tab.active{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
+.auth-card h3{font-family:var(--font-serif);font-size:1.7rem;color:var(--navy);font-style:italic;margin-bottom:.4rem}
+.auth-card .sub{font-size:.88rem;color:var(--text-2);margin-bottom:1.6rem}
+.auth-field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
+.auth-field label{font-size:.78rem;font-weight:600;color:var(--navy)}
+.auth-field input{padding:.85rem 1rem;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:.92rem;color:var(--text);font-family:inherit}
+.auth-field input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(217,119,6,.12)}
+.auth-card .btn-hh{width:100%;margin-top:.4rem}
+.role-pills{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.2rem}
+.role-pill{padding:.85rem 1rem;border:1px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--text-2);text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.role-pill svg{width:20px;height:20px;color:var(--text-muted)}
+.role-pill:hover{border-color:var(--amber)}
+.role-pill.selected{border-color:var(--amber);background:rgba(217,119,6,.06);color:var(--navy)}
+.role-pill.selected svg{color:var(--amber)}
+.invite-strip{margin-top:1.4rem;padding:.85rem 1rem;background:rgba(91,138,71,.08);border:1px dashed var(--green);border-radius:8px;font-size:.78rem;color:var(--text-2);display:flex;align-items:center;gap:.5rem;line-height:1.4}
+.invite-strip svg{width:16px;height:16px;color:var(--green);flex-shrink:0}
+.invite-strip code{background:rgba(91,138,71,.12);padding:.1rem .35rem;border-radius:4px;font-size:.74rem;color:var(--green)}
+
+/* ============= STEP 4: EINSATZ-KALENDER ============= */
+.app-shell{display:grid;grid-template-columns:240px 1fr;min-height:680px;background:var(--shell)}
+.app-sidebar{background:var(--navy);color:#fff;padding:1.5rem 0;display:flex;flex-direction:column}
+.sb-brand{padding:0 1.4rem 1.5rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1rem}
+.sb-brand-mark{width:34px;height:34px;display:grid;place-items:center;color:var(--t-amber)}
+.sb-brand-mark svg{width:30px;height:30px;stroke-width:1.4}
+.sb-brand-text{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:1rem;line-height:1.1}
+.sb-brand-text small{display:block;font-family:var(--font-sans);font-style:normal;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-top:.15rem}
+.sb-section{padding:.7rem 1.4rem .4rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:700}
+.sb-link{display:flex;align-items:center;gap:.7rem;padding:.65rem 1.4rem;color:rgba(255,255,255,.8);font-size:.86rem;border-left:3px solid transparent;transition:all .2s;cursor:pointer}
+.sb-link svg{width:17px;height:17px;flex-shrink:0;opacity:.7}
+.sb-link:hover{background:rgba(255,255,255,.04);color:#fff}
+.sb-link.active{background:rgba(217,119,6,.12);color:#fff;border-left-color:var(--amber)}
+.sb-link.active svg{color:var(--t-amber);opacity:1}
+.sb-user{margin-top:auto;padding:1rem 1.4rem;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:.6rem}
+.sb-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--t-amber));color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.sb-user-info{font-size:.78rem}
+.sb-user-info strong{color:#fff;display:block;font-weight:600}
+.sb-user-info span{color:rgba(255,255,255,.55);font-size:.7rem}
+
+.app-main{padding:1.6rem 2rem 2rem;overflow-x:auto}
+.app-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border-light)}
+.app-page-title{font-family:var(--font-serif);font-size:1.55rem;font-style:italic;color:var(--navy)}
+.app-page-title small{display:block;font-size:.78rem;color:var(--text-muted);font-style:normal;font-family:var(--font-sans);font-weight:500;margin-top:.2rem}
+.app-actions{display:flex;gap:.5rem;align-items:center}
+.app-search{display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.82rem;color:var(--text-muted);width:240px}
+.app-search svg{width:14px;height:14px}
+
+.cal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.8rem}
+.view-toggle{display:flex;background:var(--shell-2);border-radius:8px;padding:.25rem;gap:.2rem}
+.view-toggle button{padding:.45rem 1rem;border-radius:6px;font-size:.78rem;font-weight:600;color:var(--text-muted);cursor:pointer;background:transparent;border:none}
+.view-toggle button.active{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
+.cal-week-nav{display:flex;align-items:center;gap:.6rem}
+.cal-week-nav .nav-btn{width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;color:var(--text-2)}
+.cal-week-nav .nav-btn:hover{border-color:var(--amber);color:var(--amber)}
+.cal-week-nav .week-label{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--navy);min-width:200px;text-align:center}
+
+.cal-week{background:#fff;border:1px solid var(--border-light);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:60px repeat(7,1fr);min-height:480px}
+.cal-week .hour-col,.cal-week .day-col{border-right:1px solid var(--border-light)}
+.cal-week .day-col:last-child{border-right:none}
+.cal-week .head{padding:.7rem .5rem;background:var(--warm);border-bottom:1px solid var(--border-light);text-align:center;font-size:.72rem;font-weight:700;color:var(--navy);position:sticky;top:0}
+.cal-week .head.today{color:var(--amber);background:rgba(217,119,6,.06)}
+.cal-week .head .num{font-family:var(--font-serif);font-size:1.1rem;display:block;margin-top:.1rem;font-weight:600}
+.cal-week .hour-col{position:relative}
+.cal-week .hour-cell{height:54px;border-bottom:1px solid var(--border-light);font-size:.65rem;color:var(--text-muted);text-align:right;padding:.2rem .5rem;font-family:ui-monospace,monospace}
+.cal-week .day-col{position:relative}
+.cal-week .day-col .grid-cell{height:54px;border-bottom:1px solid var(--border-light)}
+.deploy{position:absolute;left:3px;right:3px;border-radius:6px;padding:.35rem .5rem;font-size:.7rem;line-height:1.25;color:#fff;cursor:pointer;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.08);transition:all .15s;border-left:3px solid rgba(255,255,255,.4)}
+.deploy:hover{transform:scale(1.02);z-index:3;box-shadow:0 4px 12px rgba(0,0,0,.16)}
+.deploy strong{display:block;font-weight:600}
+.deploy span{opacity:.85;font-size:.65rem}
+.deploy.amber{background:#D97706}
+.deploy.navy{background:#1E5878}
+.deploy.green{background:#5B8A47}
+.deploy.purple{background:#7C5BA0}
+.deploy.gray{background:#6B7280}
+
+.cal-legend{margin-top:1rem;display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.75rem;color:var(--text-muted);padding:.8rem 1rem;background:#fff;border:1px solid var(--border-light);border-radius:10px}
+.cal-legend .item{display:inline-flex;align-items:center;gap:.4rem}
+.cal-legend .swatch{width:12px;height:12px;border-radius:3px}
+
+/* ============= STEP 5: KUNDEN-AKTE ============= */
+.cust-page{padding:0;background:var(--shell)}
+.cust-toolbar{padding:1.4rem 2rem;background:#fff;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
+.crumbs{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--text-muted)}
+.crumbs a{color:var(--navy);font-weight:500}
+.crumbs svg{width:12px;height:12px}
+
+.cust-shell{display:grid;grid-template-columns:1.4fr 1fr;gap:0;align-items:start}
+.cust-main{padding:2rem;border-right:1px solid var(--border-light);min-height:560px}
+.cust-side{padding:2rem;background:var(--warm);min-height:560px}
+
+.cust-header-block{display:flex;gap:1.4rem;align-items:flex-start;margin-bottom:1.8rem}
+.cust-avatar-lg{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#7C5BA0,#A675C9);color:#fff;display:grid;place-items:center;font-family:var(--font-serif);font-size:2.1rem;font-weight:600;flex-shrink:0;box-shadow:var(--shadow-md)}
+.cust-name h2{font-size:2rem;font-style:italic;color:var(--navy);margin-bottom:.2rem}
+.cust-name .sub{font-size:.85rem;color:var(--text-muted);display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.cust-name .sub .dot{width:4px;height:4px;border-radius:50%;background:var(--text-muted)}
+.cust-status{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;background:rgba(91,138,71,.12);color:var(--green);border-radius:999px;font-size:.72rem;font-weight:700;margin-top:.5rem}
+.cust-status::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+
+.cust-tabs{display:flex;gap:0;border-bottom:1px solid var(--border-light);margin-bottom:1.4rem}
+.cust-tab{padding:.8rem 1.2rem;font-size:.86rem;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.cust-tab.active{color:var(--navy);border-bottom-color:var(--amber)}
+.cust-tab:hover{color:var(--navy)}
+
+.cust-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.cust-info-card{background:#fff;border:1px solid var(--border-light);border-radius:12px;padding:1.2rem 1.3rem}
+.cust-info-card .lbl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:.4rem}
+.cust-info-card .val{font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);font-weight:500;line-height:1.4}
+.cust-info-card .ext{font-size:.78rem;color:var(--text-2);margin-top:.3rem;line-height:1.45}
+.cust-info-card.amber{border-color:rgba(217,119,6,.3);background:rgba(217,119,6,.04)}
+.cust-info-card.amber .val{color:var(--amber-deep)}
+
+.cust-section{margin-bottom:1.6rem}
+.cust-section h3{font-family:var(--font-serif);font-size:1.15rem;font-style:italic;color:var(--navy);margin-bottom:.8rem;display:flex;align-items:center;gap:.55rem}
+.cust-section h3 svg{width:16px;height:16px;color:var(--amber)}
+.cust-notes{background:#fff;border:1px solid var(--border-light);border-radius:10px;padding:1.1rem 1.3rem;font-size:.88rem;color:var(--text-2);line-height:1.6}
+.cust-notes em{color:var(--navy);font-style:italic}
+
+.activity-list{background:#fff;border:1px solid var(--border-light);border-radius:12px;overflow:hidden}
+.activity-row{padding:.85rem 1.2rem;display:grid;grid-template-columns:auto 1fr auto auto;gap:.9rem;align-items:center;border-bottom:1px solid var(--border-light);font-size:.85rem}
+.activity-row:last-child{border-bottom:none}
+.activity-row .date{font-family:ui-monospace,monospace;font-size:.78rem;color:var(--text-muted);white-space:nowrap}
+.activity-row .who{color:var(--navy);font-weight:600}
+.activity-row .who span{display:block;font-size:.72rem;color:var(--text-muted);font-weight:400}
+.activity-row .dur{font-size:.78rem;color:var(--text-2);font-family:ui-monospace,monospace}
+.activity-row .status-pill{font-size:.7rem;padding:.2rem .55rem;border-radius:999px;font-weight:600}
+.activity-row .status-pill.done{background:rgba(91,138,71,.12);color:var(--green)}
+.activity-row .status-pill.scheduled{background:rgba(217,119,6,.1);color:var(--amber)}
+
+/* Side */
+.cust-side h3{font-family:var(--font-serif);font-style:italic;font-size:1.15rem;color:var(--navy);margin-bottom:.8rem}
+.kontaktbox{background:#fff;border:1px solid var(--border-light);border-radius:12px;padding:1.2rem 1.3rem;margin-bottom:1rem}
+.kontaktbox .row{display:flex;justify-content:space-between;padding:.45rem 0;font-size:.85rem;border-bottom:1px dashed var(--border-light)}
+.kontaktbox .row:last-child{border-bottom:none}
+.kontaktbox .row .lbl{color:var(--text-muted)}
+.kontaktbox .row .val{color:var(--navy);font-weight:600}
+
+.budget-card{background:linear-gradient(135deg,#fff,#FAF6F0);border:1px solid var(--border-light);border-radius:12px;padding:1.3rem 1.4rem;margin-bottom:1rem}
+.budget-card .lbl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:.4rem}
+.budget-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.6rem}
+.budget-row .num{font-family:var(--font-serif);font-size:1.75rem;color:var(--amber);font-weight:600}
+.budget-row .max{font-size:.82rem;color:var(--text-muted)}
+.budget-bar{height:8px;background:var(--shell-2);border-radius:999px;overflow:hidden;margin-bottom:.45rem}
+.budget-bar .fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--t-amber));border-radius:999px;width:62%}
+.budget-card .meta{font-size:.75rem;color:var(--text-2);display:flex;justify-content:space-between}
+
+.docs-list{background:#fff;border:1px solid var(--border-light);border-radius:12px;padding:.4rem 0}
+.doc-row{padding:.7rem 1.2rem;display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--border-light);font-size:.85rem}
+.doc-row:last-child{border-bottom:none}
+.doc-row svg{width:18px;height:18px;color:var(--amber);flex-shrink:0}
+.doc-row .doc-name{color:var(--navy);font-weight:500;flex:1}
+.doc-row .doc-meta{font-size:.7rem;color:var(--text-muted);font-family:ui-monospace,monospace}
+
+.dsgvo-banner{margin-top:1rem;padding:.85rem 1rem;background:rgba(15,45,64,.04);border:1px solid var(--border);border-radius:10px;font-size:.78rem;color:var(--text-2);display:flex;gap:.6rem;line-height:1.5}
+.dsgvo-banner svg{width:16px;height:16px;color:var(--navy);flex-shrink:0;margin-top:1px}
+.dsgvo-banner strong{color:var(--navy)}
+
+/* ============= STEP 6: ABRECHNUNG / KOSTENTRÄGER ============= */
+.abr-page{padding:0;background:var(--shell)}
+.abr-shell{padding:2rem;display:grid;grid-template-columns:1fr;gap:1.4rem}
+.abr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.abr-stat{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:1.4rem 1.5rem}
+.abr-stat .lbl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:.5rem}
+.abr-stat .num{font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--navy);font-style:italic;line-height:1;letter-spacing:-.02em}
+.abr-stat .num em{font-style:normal;color:var(--amber);font-family:var(--font-sans);font-size:1rem;font-weight:500}
+.abr-stat .delta{font-size:.78rem;color:var(--green);font-weight:600;margin-top:.4rem;display:inline-flex;align-items:center;gap:.25rem}
+.abr-stat .delta.down{color:var(--text-muted)}
+.abr-stat .delta svg{width:13px;height:13px}
+
+.abr-row{display:grid;grid-template-columns:1.4fr 1fr;gap:1.4rem}
+
+.abr-table-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;overflow:hidden}
+.abr-table-head{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
+.abr-table-head h3{font-family:var(--font-serif);font-style:italic;font-size:1.15rem;color:var(--navy)}
+.abr-filter{display:flex;gap:.4rem;background:var(--shell-2);border-radius:6px;padding:.2rem}
+.abr-filter button{padding:.35rem .8rem;font-size:.74rem;font-weight:600;color:var(--text-muted);border-radius:4px;background:transparent;border:none;cursor:pointer}
+.abr-filter button.active{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
+
+.abr-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.abr-table th{text-align:left;padding:.85rem 1.5rem;background:var(--warm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);font-weight:700;border-bottom:1px solid var(--border-light)}
+.abr-table td{padding:.95rem 1.5rem;border-bottom:1px solid var(--border-light);color:var(--text-2);vertical-align:middle}
+.abr-table tr:last-child td{border-bottom:none}
+.abr-table tr:hover td{background:var(--warm)}
+.abr-table .cust{display:flex;align-items:center;gap:.7rem}
+.abr-table .cust .avatar{width:30px;height:30px;border-radius:50%;color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:700;flex-shrink:0}
+.abr-table .cust strong{color:var(--navy);font-weight:600}
+.abr-table .cust span{display:block;font-size:.7rem;color:var(--text-muted);font-weight:500}
+.abr-table .amount{font-family:ui-monospace,monospace;font-weight:600;color:var(--navy);font-size:.92rem}
+.abr-table .pill{display:inline-block;font-size:.7rem;padding:.2rem .6rem;border-radius:999px;font-weight:600}
+.abr-table .pill.bezahlt{background:rgba(91,138,71,.12);color:var(--green)}
+.abr-table .pill.offen{background:rgba(217,119,6,.12);color:var(--amber)}
+.abr-table .pill.versand{background:rgba(91,211,240,.12);color:var(--cyan-deep)}
+.abr-table .pill.entwurf{background:var(--shell-2);color:var(--text-muted)}
+
+.export-card{background:linear-gradient(135deg,var(--navy),var(--navy-deep));border-radius:14px;padding:2rem;color:#fff;position:relative;overflow:hidden}
+.export-card::before{content:'';position:absolute;right:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:rgba(217,119,6,.12)}
+.export-card .pre{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t-amber);font-weight:700;margin-bottom:.5rem;position:relative;z-index:1}
+.export-card h3{font-family:var(--font-serif);font-style:italic;color:#fff;font-size:1.45rem;line-height:1.15;margin-bottom:.6rem;position:relative;z-index:1}
+.export-card p{color:rgba(255,255,255,.78);font-size:.88rem;margin-bottom:1.5rem;line-height:1.6;position:relative;z-index:1}
+
+.export-row{display:flex;flex-direction:column;gap:.7rem;position:relative;z-index:1;margin-bottom:1.4rem}
+.export-fmt{display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:.85rem;cursor:pointer;transition:all .2s}
+.export-fmt:hover{background:rgba(255,255,255,.1);border-color:rgba(217,119,6,.3)}
+.export-fmt .ico{width:32px;height:32px;border-radius:6px;display:grid;place-items:center;font-family:var(--font-display);font-size:.65rem;font-weight:700;letter-spacing:.04em;flex-shrink:0}
+.export-fmt .ico.csv{background:#5B8A47;color:#fff}
+.export-fmt .ico.pdf{background:#D45050;color:#fff}
+.export-fmt .ico.xml{background:#5B6BA0;color:#fff}
+.export-fmt .label{flex:1;color:#fff;font-weight:600}
+.export-fmt .meta{font-size:.7rem;color:rgba(255,255,255,.6)}
+
+.export-btn{width:100%;padding:.95rem;background:var(--amber);color:#fff;border-radius:8px;font-weight:600;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:.5rem;border:none;cursor:pointer;position:relative;z-index:1}
+.export-btn:hover{background:var(--amber-deep)}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .tour-stats { grid-template-columns: repeat(2, 1fr); }
+  .hh-hero { grid-template-columns: 1fr; padding: 0; }
+  .hh-hero-text { padding: 2.5rem 1.5rem; }
+  .hh-hero-img { margin: 0; min-height: 320px; }
+  .hh-hero h1 { font-size: 2.4rem; }
+  .entlastung-shell { grid-template-columns: 1fr; gap: 2rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .req-grid { grid-template-columns: 1fr; }
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-side { padding: 2rem 1.5rem; }
+  .app-shell { grid-template-columns: 1fr; }
+  .app-sidebar { display: none; }
+  .cal-week { font-size: .65rem; min-width: 700px; }
+  .cust-shell { grid-template-columns: 1fr; }
+  .cust-main { border-right: none; border-bottom: 1px solid var(--border-light); }
+  .abr-stats { grid-template-columns: repeat(2, 1fr); }
+  .abr-row { grid-template-columns: 1fr; }
+  .locations-strip { flex-wrap: wrap; }
+  .locations-strip .locations-label { width: 100%; text-align: center; margin: 0 0 .6rem; }
+}
+@media (max-width: 720px) {
+  .tour-topbar-inner { padding: .8rem 1rem; gap: .8rem; }
+  .tour-stepnav, .tour-meta, .tour-stage-wrap, .tour-controls, .tour-stats { padding-left: 1rem; padding-right: 1rem; }
+  .step-label { font-size: .62rem; max-width: 8ch; }
+  .tour-meta { flex-direction: column; align-items: flex-start; }
+  .tour-stats { grid-template-columns: 1fr 1fr; }
+  .hh-nav { display: none; }
+  .hh-hero h1 { font-size: 1.9rem; }
+  .req-row { grid-template-columns: 1fr; }
+  .req-pgrade { grid-template-columns: repeat(2, 1fr); }
+  .need-grid { grid-template-columns: 1fr; }
+  .role-pills { grid-template-columns: 1fr; }
+  .cust-grid { grid-template-columns: 1fr; }
+  .abr-stats { grid-template-columns: 1fr; }
+  .abr-table th, .abr-table td { padding: .65rem .8rem; }
+}
+
+/* Meta toggle button — hidden on desktop */
+.tour-meta-toggle { display: none; }
+
+/* ===== Phone-sized: tighter chrome, hide labels ===== */
+@media (max-width: 700px) {
+  /* Meta block becomes collapsible */
+  .tour-meta {
+    position: relative;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .5rem;
+    padding: .8rem 1rem .9rem !important;
+    border-bottom: 1px solid var(--chrome-line);
+  }
+  .tour-meta-left { gap: .8rem; align-items: center; padding-right: 2.5rem; }
+  .tour-step-num { font-size: 1.3rem; flex-shrink: 0; }
+  .tour-meta-text { min-width: 0; flex: 1; }
+  .tour-step-title { font-size: .92rem; }
+  .tour-step-desc { font-size: .8rem; line-height: 1.45; margin-top: .15rem; }
+
+  .tour-meta-toggle {
+    display: grid; place-items: center;
+    position: absolute; top: .65rem; right: .85rem;
+    width: 32px; height: 32px;
+    background: rgba(91,211,240,.06);
+    border: 1px solid var(--chrome-line);
+    border-radius: 999px;
+    color: var(--chrome-muted);
+    cursor: pointer;
+    transition: transform .25s ease, background .2s, color .2s;
+  }
+  .tour-meta-toggle:hover { color: var(--chrome-text); background: rgba(91,211,240,.12); }
+  .tour-meta-toggle svg { transition: transform .3s ease; }
+
+  body.meta-collapsed .tour-step-desc,
+  body.meta-collapsed .tour-tech { display: none; }
+  body.meta-collapsed .tour-meta { padding-bottom: .65rem !important; border-bottom-color: transparent; }
+  body.meta-collapsed .tour-meta-toggle svg { transform: rotate(-90deg); }
+
+  .tour-tech { gap: .4rem; }
+  .tech-badge { font-size: .68rem; padding: .35rem .65rem; }
+
+  .tour-topbar-inner { padding: .65rem .85rem; gap: .65rem; flex-wrap: nowrap; }
+  .tour-brand { gap: .5rem; font-size: .72rem; min-width: 0; flex: 1; overflow: hidden; }
+  .tour-brand strong { font-size: .62rem; letter-spacing: .08em; }
+  .tour-brand-sep { display: none; }
+  .tour-brand em { font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .demo-safe-badge { margin-left: 0; flex-shrink: 0; }
+  .tour-back {
+    padding: .45rem .55rem;
+    font-size: 0;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .tour-back svg { width: 16px; height: 16px; }
+
+  .tour-stepnav { padding: 1.1rem 1rem .9rem; }
+  .tour-stepnav-track::before,
+  .tour-stepnav-track::after { top: 14px; left: 8.33%; right: 8.33%; }
+  .step-pill { padding: 0; gap: .35rem; }
+  .step-dot { width: 28px; height: 28px; font-size: .78rem; }
+  .step-label { display: none; }
+
+  .stage-chrome { padding: .55rem .7rem; gap: .55rem; }
+  .stage-dots { gap: .3rem; }
+  .stage-dots span { width: 8px; height: 8px; }
+  .stage-url { font-size: .7rem; padding: .35rem .6rem; min-width: 0; overflow: hidden; }
+  .stage-url > span:not(.stage-url-path) {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+  }
+  .stage-url-path { display: none; }
+  .stage-tag { display: none; }
+  .tour-stage-wrap { padding: 0 .6rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="tour-bg" aria-hidden="true"></div>
+
+<header class="tour-topbar">
+  <div class="tour-topbar-inner">
+    <a href="demo.html" class="tour-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Demo-Übersicht
+    </a>
+    <div class="tour-brand">
+      <span class="tour-brand-mark">DK</span>
+      <strong>Daniel&nbsp;Kroh</strong>
+      <span class="tour-brand-sep"></span>
+      <em>Helfende Hände</em>
+    </div>
+    <div class="demo-safe-badge" title="Diese Tour ist eine Demo. Es werden keine echten Daten verarbeitet.">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Demo-Modus · keine echten Daten · kein E-Mail-Versand</span>
+    </div>
+  </div>
+</header>
+
+<div class="tour-stepnav">
+  <div class="tour-stepnav-track" id="stepNavTrack" style="--progress:0%">
+    <button class="step-pill" data-step="1" data-state="active">
+      <span class="step-dot">1</span><span class="step-label">Aufklärung</span>
+    </button>
+    <button class="step-pill" data-step="2" data-state="">
+      <span class="step-dot">2</span><span class="step-label">Anfrage</span>
+    </button>
+    <button class="step-pill" data-step="3" data-state="">
+      <span class="step-dot">3</span><span class="step-label">Auth · Onboarding</span>
+    </button>
+    <button class="step-pill" data-step="4" data-state="">
+      <span class="step-dot">4</span><span class="step-label">Einsätze</span>
+    </button>
+    <button class="step-pill" data-step="5" data-state="">
+      <span class="step-dot">5</span><span class="step-label">Kunden-Akte</span>
+    </button>
+    <button class="step-pill" data-step="6" data-state="">
+      <span class="step-dot">6</span><span class="step-label">Abrechnung</span>
+    </button>
+  </div>
+</div>
+
+<div class="tour-meta" id="tourMeta">
+  <div class="tour-meta-left">
+    <span class="tour-step-num" id="stepNum">01</span>
+    <div class="tour-meta-text">
+      <div class="tour-step-title" id="stepTitle">Aufklärungs-Website</div>
+      <div class="tour-step-desc" id="stepDesc">Vertrauensvolle Präsentation für Angehörige: Newsreader-Serif, ruhige Bildsprache, klare Erklärung des Entlastungsbetrags nach § 45b SGB XI.</div>
+    </div>
+  </div>
+  <div class="tour-tech" id="stepTech">
+    <span class="tech-badge">Next.js 15</span>
+    <span class="tech-badge amber">Tailwind v4</span>
+    <span class="tech-badge green">Newsreader · Inter</span>
+  </div>
+  <button class="tour-meta-toggle" id="tourMetaToggle" type="button" aria-expanded="true" aria-controls="tourMeta" aria-label="Details ein-/ausklappen">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+</div>
+
+<div class="tour-stage-wrap">
+  <div class="tour-stage">
+    <div class="stage-chrome">
+      <div class="stage-dots"><span></span><span></span><span></span></div>
+      <div class="stage-url">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>helfende-haende-bechler-sagel.de</span><span class="stage-url-path" id="stageUrlPath">/</span>
+      </div>
+      <div class="stage-tag" id="stageTag">PUBLIC</div>
+    </div>
+
+    <!-- ===== STEP 1: AUFKLÄRUNGS-WEBSITE ===== -->
+    <div class="step-view active" data-step-view="1">
+      <header class="hh-header">
+        <div class="hh-logo">
+          <div class="hh-logo-mark">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 36c4-2 8-2 12 0 4-3 9-3 13 0 4-2 8-2 11 0"/>
+              <path d="M22 30c2-3 4-5 7-6 3-1 6-1 9 0 3 1 5 3 6 6"/>
+              <path d="M28 24c1-2 3-3 5-3 1.5 0 3 .8 4 2"/>
+              <path d="M44 24c.5-1 1.5-1.5 2.5-1.2"/>
+            </svg>
+          </div>
+          <div class="hh-logo-text">
+            <strong>Helfende Hände</strong>
+            <span>Alltagsbegleitung · OWL</span>
+          </div>
+        </div>
+        <nav class="hh-nav">
+          <a href="#" class="is-active">Start</a>
+          <a href="#">Leistungen</a>
+          <a href="#">Entlastungsbetrag</a>
+          <a href="#">Über uns</a>
+          <a href="#">Kontakt</a>
+        </nav>
+        <a href="#" class="hh-cta">Kontakt aufnehmen</a>
+      </header>
+
+      <section class="hh-hero">
+        <div class="hh-hero-text">
+          <span class="hh-hero-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Schlangen · Bad Lippspringe · Paderborn
+          </span>
+          <h1>Herzlich Willkommen<br>bei <em>Helfende Hände</em></h1>
+          <p class="hh-hero-sub">Unser Bestreben liegt darin, Menschen mit einem Hilfebedarf in der alltäglichen Lebensführung zuverlässig und bedürfnisorientiert zu unterstützen.</p>
+          <div class="hh-hero-actions">
+            <a href="#" class="btn-hh">Kontakt aufnehmen
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="btn-hh-outline">Unsere Leistungen</a>
+          </div>
+          <div class="hh-hero-trust">
+            <div class="hh-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 7v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V7l-8-5z"/></svg>
+              <span><strong>Anerkannt</strong> nach § 45a SGB XI</span>
+            </div>
+            <div class="hh-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span><strong>Erstgespräch</strong> kostenlos & unverbindlich</span>
+            </div>
+            <div class="hh-trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+              <span><strong>Verlässlich</strong> & dauerhaft begleitet</span>
+            </div>
+          </div>
+        </div>
+        <div class="hh-hero-img">
+          <div class="photo-ph">
+            <span class="photo-meta">hero-haende-pflanzen.jpg</span>
+          </div>
+          <div class="floating-ico ico-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="floating-ico ico-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+        </div>
+      </section>
+
+      <div class="locations-strip">
+        <span class="locations-label">Wir begleiten in</span>
+        <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Schlangen</span>
+        <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Bad Lippspringe</span>
+        <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Paderborn</span>
+        <span class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Detmold</span>
+      </div>
+
+      <section class="entlastung">
+        <div class="entlastung-shell">
+          <div class="entlastung-text">
+            <div class="pre">Entlastungsbetrag</div>
+            <h2>Bis zu 131 € im Monat<br>für Ihre Entlastung.</h2>
+            <p>Pflegende Angehörige stehen oft alleine da. Der gesetzliche Entlastungsbetrag nach § 45b SGB XI ermöglicht es, einen Teil der Sorgearbeit in vertrauensvolle Hände zu geben — ohne eigene finanzielle Mehrbelastung.</p>
+            <p>Wir rechnen direkt mit Ihrer Pflegekasse ab. Sie unterschreiben einmal die Abtretungserklärung, alles Weitere übernehmen wir.</p>
+            <div class="quote">„Endlich kann ich wieder einmal in Ruhe einkaufen gehen, ohne ein schlechtes Gewissen." — Tochter einer Klientin aus Bad Lippspringe</div>
+          </div>
+          <div class="entlastung-card">
+            <h3>Ihr Entlastungsbetrag</h3>
+            <p style="color:var(--text-muted); font-size:.85rem">Pro Monat — direkt mit der Pflegekasse abgerechnet.</p>
+            <div class="big-num">131 € <em>/ Monat</em></div>
+            <p class="big-sub">Pflegegrad 1–5 · ab Pflegegrad 1 verfügbar</p>
+            <div class="entlastung-list">
+              <div class="entlastung-item">
+                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg></span>
+                <span class="txt"><strong>Keine Vorkasse</strong> — wir rechnen direkt mit der Kasse ab.</span>
+              </div>
+              <div class="entlastung-item">
+                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg></span>
+                <span class="txt"><strong>Bis zu 6 Monate übertragbar</strong> — nicht genutztes Budget verfällt nicht sofort.</span>
+              </div>
+              <div class="entlastung-item">
+                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg></span>
+                <span class="txt"><strong>Selbst entscheiden</strong> — wofür der Betrag eingesetzt wird.</span>
+              </div>
+              <div class="entlastung-item">
+                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg></span>
+                <span class="txt"><strong>Anerkannter Anbieter</strong> — nach §&nbsp;45a SGB XI in NRW.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hh-services">
+        <div class="hh-section-head">
+          <span class="ornament"><span>Unsere Leistungen</span></span>
+          <h2>Was wir für Sie tun.</h2>
+          <p>Wir unterstützen Menschen mit Hilfebedarf in der alltäglichen Lebensführung — diskret, geduldig, mit dem nötigen zeitlichen Rahmen.</p>
+        </div>
+        <div class="svc-grid">
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <h4>Begleitung im Alltag</h4>
+            <p>Spaziergänge, Vorlesen, Gespräche — gemeinsam Zeit verbringen, statt nur funktionieren.</p>
+            <div class="price"><strong>ab 32,50 €</strong> / Stunde · abrechnungsfähig</div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M21 12V6c0-1.66-4-3-9-3S3 4.34 3 6v6"/><path d="M3 12v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/></svg></div>
+            <h4>Hauswirtschaftliche Hilfe</h4>
+            <p>Einkäufe, Wäsche, Wohnungsreinigung — der Haushalt bleibt im gewohnten Takt.</p>
+            <div class="price"><strong>ab 32,50 €</strong> / Stunde · abrechnungsfähig</div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <h4>Termin- &amp; Arztbegleitung</h4>
+            <p>Mit zur Apotheke, zum Arzt, zur Behörde — Sie sind nicht allein.</p>
+            <div class="price"><strong>ab 32,50 €</strong> / Stunde · inkl. Fahrzeit</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== STEP 2: ANFRAGE-FORMULAR ===== -->
+    <div class="step-view" data-step-view="2">
+      <div class="req-page">
+        <div class="req-shell">
+          <div class="req-head">
+            <div class="pre">Erstkontakt · Persönlich</div>
+            <h2>Lassen Sie uns über Ihre Situation sprechen.</h2>
+            <p>Erstgespräch kostenlos · wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+          </div>
+
+          <div class="req-grid">
+            <form class="req-form">
+              <div class="req-stepper">
+                <div class="pip done"><span class="num">✓</span> Kontakt</div>
+                <div class="pip-line"></div>
+                <div class="pip active"><span class="num">2</span> Bedarf</div>
+                <div class="pip-line"></div>
+                <div class="pip"><span class="num">3</span> Bestätigung</div>
+              </div>
+
+              <div class="req-section-title">Wer benötigt Unterstützung?</div>
+              <div class="req-row">
+                <div class="req-field">
+                  <label>Name der pflegebedürftigen Person</label>
+                  <input type="text" value="Margarethe Brockmeyer">
+                </div>
+                <div class="req-field">
+                  <label>Geburtsjahr</label>
+                  <input type="number" value="1942">
+                </div>
+              </div>
+              <div class="req-row">
+                <div class="req-field" style="grid-column: 1 / -1">
+                  <label>Pflegegrad</label>
+                  <div class="req-pgrade">
+                    <div class="pgrade-opt">PG 1<span class="lbl">geringe</span></div>
+                    <div class="pgrade-opt">PG 2<span class="lbl">erheblich</span></div>
+                    <div class="pgrade-opt selected">PG 3<span class="lbl">schwer</span></div>
+                    <div class="pgrade-opt">PG 4<span class="lbl">schwerst</span></div>
+                    <div class="pgrade-opt">PG 5<span class="lbl">höchste</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="req-section-title" style="margin-top:1.4rem">Wobei dürfen wir helfen?</div>
+              <div class="need-grid">
+                <div class="need-chip selected">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Begleitung beim Spazierengehen
+                </div>
+                <div class="need-chip selected">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Einkäufe &amp; Erledigungen
+                </div>
+                <div class="need-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Hauswirtschaftliche Hilfe
+                </div>
+                <div class="need-chip selected">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Arzt- &amp; Termin-Begleitung
+                </div>
+                <div class="need-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Vorlesen &amp; Gespräche
+                </div>
+                <div class="need-chip">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                  Demenzbegleitung
+                </div>
+              </div>
+
+              <div class="req-row">
+                <div class="req-field">
+                  <label>Gewünschter Umfang</label>
+                  <select>
+                    <option>4 Stunden / Woche</option>
+                    <option selected>6 Stunden / Woche</option>
+                    <option>8 Stunden / Woche</option>
+                    <option>10+ Stunden / Woche</option>
+                    <option>Unregelmäßig / nach Bedarf</option>
+                  </select>
+                </div>
+                <div class="req-field">
+                  <label>Bevorzugte Zeit</label>
+                  <select>
+                    <option>Vormittags</option>
+                    <option selected>Nachmittags</option>
+                    <option>Abends</option>
+                    <option>Flexibel</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="req-row">
+                <div class="req-field" style="grid-column: 1 / -1">
+                  <label>Anmerkungen (optional)</label>
+                  <textarea placeholder="z.B. besondere Umstände, Vorlieben, Krankheitsbild">Meine Mutter geht seit dem Sturz nicht mehr gerne allein vor die Tür. Sie liebt die Gartenschau und mag ruhige Gespräche.</textarea>
+                </div>
+              </div>
+
+              <div class="dsgvo-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span><strong>DSGVO &amp; Vertraulichkeit.</strong> Alle Angaben werden ausschließlich zur Vorbereitung des Erstgesprächs verwendet — gespeichert in Supabase (EU-Region, Frankfurt), Row-Level-Security aktiv. Daten werden nach Vertragsabschluss in Ihre Akte überführt oder bei Nicht-Zustandekommen nach 30 Tagen gelöscht.</span>
+              </div>
+
+              <div class="req-actions">
+                <span class="meta">Schritt 2 von 3 · ca. 2 Min.</span>
+                <button type="button" class="btn-hh" id="reqContinueBtn">Anfrage senden
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </div>
+            </form>
+
+            <aside class="req-side">
+              <div class="side-card">
+                <div class="pre">Was passiert dann?</div>
+                <h3>Drei Schritte bis zur ersten Begleitung.</h3>
+                <div style="display:flex; flex-direction:column; gap:.6rem; margin-top:.8rem">
+                  <div class="promise">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                    <span><strong>Rückruf binnen 24 Std.</strong> — wir vereinbaren einen Termin bei Ihnen zu Hause.</span>
+                  </div>
+                  <div class="promise">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                    <span><strong>Kostenloses Erstgespräch</strong> — wir lernen uns kennen, prüfen Bedarf &amp; Pflegegrad.</span>
+                  </div>
+                  <div class="promise">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 13 4 4L19 7"/></svg>
+                    <span><strong>Erste Begleitung</strong> — meist innerhalb von 7–10 Tagen.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="side-card contact">
+                <div class="pre" style="color:var(--t-amber)">Lieber direkt anrufen?</div>
+                <h3>Persönlicher Kontakt.</h3>
+                <div class="phone">0521 · 30 14 287</div>
+                <div class="hours">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  Mo–Fr · 9:00–17:00 Uhr
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 3: AUTH & ONBOARDING ===== -->
+    <div class="step-view" data-step-view="3">
+      <div class="auth-page">
+        <div class="auth-side">
+          <div class="pre">Interne App · Begleiter:innen</div>
+          <h2>Werden Sie Teil unseres Teams.</h2>
+          <p>Die geschützte Begleiter-App bündelt Einsätze, Klient:innen-Akten und Stundenerfassung. Eingeladen werden ausschließlich anerkannte Helfer:innen, die nach Landesrecht NRW qualifiziert sind.</p>
+
+          <div class="auth-quotes">
+            <div class="auth-quote">
+              „Endlich keine Excel-Listen mehr. Ich sehe meine Termine im Kalender und stempele direkt nach dem Einsatz."
+              <span class="author">— Sandra B., Alltagsbegleiterin · seit 2024 dabei</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-form">
+          <div class="auth-card">
+            <div class="auth-tabs">
+              <div class="auth-tab active">Anmelden</div>
+              <div class="auth-tab">Registrieren</div>
+            </div>
+            <h3>Willkommen zurück.</h3>
+            <p class="sub">Melden Sie sich mit Ihrer Einladungs-E-Mail an.</p>
+
+            <div class="auth-field">
+              <label>E-Mail-Adresse</label>
+              <input type="email" value="sandra.bechler@beispiel.de">
+            </div>
+            <div class="auth-field">
+              <label>Passwort</label>
+              <input type="password" value="••••••••••••">
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin: .4rem 0 1rem; font-size:.78rem">
+              <label style="display:flex; align-items:center; gap:.4rem; color:var(--text-2)"><input type="checkbox" checked> Eingeloggt bleiben</label>
+              <a href="#" style="color:var(--amber); font-weight:600">Passwort vergessen?</a>
+            </div>
+
+            <button type="button" class="btn-hh" id="authContinueBtn">Anmelden
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+
+            <div class="invite-strip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              <span>Einladungs-System aktiv. Nur Personen mit gültigem <code>?invite=...</code>-Token können sich registrieren.</span>
+            </div>
+
+            <div style="margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid var(--border-light); font-size:.78rem; color:var(--text-muted); display:flex; align-items:center; gap:.5rem; justify-content:center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Geschützt durch Supabase Auth · MFA optional · DSGVO konform
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 4: EINSATZ-KALENDER ===== -->
+    <div class="step-view" data-step-view="4">
+      <div class="app-shell">
+        <aside class="app-sidebar">
+          <div class="sb-brand">
+            <div class="sb-brand-mark">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 36c4-2 8-2 12 0 4-3 9-3 13 0 4-2 8-2 11 0"/>
+                <path d="M22 30c2-3 4-5 7-6 3-1 6-1 9 0 3 1 5 3 6 6"/>
+                <path d="M28 24c1-2 3-3 5-3 1.5 0 3 .8 4 2"/>
+              </svg>
+            </div>
+            <div class="sb-brand-text">Helfende Hände<small>Begleiter-App</small></div>
+          </div>
+          <div class="sb-section">Übersicht</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</div>
+          <div class="sb-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Einsätze</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg> Kund:innen</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Mitarbeiter:innen</div>
+
+          <div class="sb-section">Verwaltung</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Kostenträger</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> Auswertungen</div>
+          <div class="sb-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Einstellungen</div>
+
+          <div class="sb-user">
+            <div class="sb-avatar">SB</div>
+            <div class="sb-user-info">
+              <strong>Sandra Bechler</strong>
+              <span>Alltagsbegleiterin</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="app-main">
+          <div class="app-topbar">
+            <div class="app-page-title">Einsätze<small>Kalenderansicht · Woche 19 · 04.–10. Mai 2026</small></div>
+            <div class="app-actions">
+              <div class="app-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                Klient:in suchen…
+              </div>
+              <button class="btn-hh btn-hh-sm">+ Neuer Einsatz</button>
+            </div>
+          </div>
+
+          <div class="cal-toolbar">
+            <div class="view-toggle">
+              <button>Tag</button>
+              <button class="active">Woche</button>
+              <button>Monat</button>
+            </div>
+            <div class="cal-week-nav">
+              <button class="nav-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+              <span class="week-label">04. – 10. Mai 2026</span>
+              <button class="nav-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </div>
+
+          <div class="cal-week" id="calWeek">
+            <div class="hour-col">
+              <div class="head" style="background:var(--shell)">&nbsp;</div>
+              <div class="hour-cell">8:00</div>
+              <div class="hour-cell">9:00</div>
+              <div class="hour-cell">10:00</div>
+              <div class="hour-cell">11:00</div>
+              <div class="hour-cell">12:00</div>
+              <div class="hour-cell">13:00</div>
+              <div class="hour-cell">14:00</div>
+              <div class="hour-cell">15:00</div>
+            </div>
+            <!-- Day cols injected via JS for cleanliness -->
+            <div class="day-col" data-day="Mo" data-num="04">
+              <div class="head">Mo<span class="num">04</span></div>
+            </div>
+            <div class="day-col" data-day="Di" data-num="05">
+              <div class="head">Di<span class="num">05</span></div>
+            </div>
+            <div class="day-col" data-day="Mi" data-num="06">
+              <div class="head today">Mi<span class="num">06</span></div>
+            </div>
+            <div class="day-col" data-day="Do" data-num="07">
+              <div class="head">Do<span class="num">07</span></div>
+            </div>
+            <div class="day-col" data-day="Fr" data-num="08">
+              <div class="head">Fr<span class="num">08</span></div>
+            </div>
+            <div class="day-col" data-day="Sa" data-num="09">
+              <div class="head">Sa<span class="num">09</span></div>
+            </div>
+            <div class="day-col" data-day="So" data-num="10">
+              <div class="head">So<span class="num">10</span></div>
+            </div>
+          </div>
+
+          <div class="cal-legend">
+            <div class="item"><span class="swatch" style="background:#D97706"></span> Begleitung</div>
+            <div class="item"><span class="swatch" style="background:#1E5878"></span> Hauswirtschaft</div>
+            <div class="item"><span class="swatch" style="background:#5B8A47"></span> Termin / Arzt</div>
+            <div class="item"><span class="swatch" style="background:#7C5BA0"></span> Demenzbegleitung</div>
+            <div class="item"><span class="swatch" style="background:#6B7280"></span> Urlaub / Geblockt</div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- ===== STEP 5: KUNDEN-AKTE ===== -->
+    <div class="step-view" data-step-view="5">
+      <div class="cust-page">
+        <div class="cust-toolbar">
+          <div class="crumbs">
+            <a href="#">Kund:innen</a>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <span>Margarethe Brockmeyer</span>
+          </div>
+          <div style="display:flex; gap:.4rem">
+            <button class="btn-hh-sm" style="background:#fff; color:var(--navy); border:1px solid var(--border); border-radius:8px; padding:.5rem 1rem; font-weight:600">Bearbeiten</button>
+            <button class="btn-hh btn-hh-sm">+ Neuer Einsatz</button>
+          </div>
+        </div>
+
+        <div class="cust-shell">
+          <div class="cust-main">
+            <div class="cust-header-block">
+              <div class="cust-avatar-lg">MB</div>
+              <div class="cust-name">
+                <h2>Margarethe Brockmeyer</h2>
+                <div class="sub">
+                  <span>* 1942 · 84 Jahre</span>
+                  <span class="dot"></span>
+                  <span>Bad Lippspringe</span>
+                  <span class="dot"></span>
+                  <span>Klientin seit 03/2025</span>
+                </div>
+                <div class="cust-status">Aktiv betreut</div>
+              </div>
+            </div>
+
+            <div class="cust-tabs">
+              <div class="cust-tab active">Übersicht</div>
+              <div class="cust-tab">Einsätze (38)</div>
+              <div class="cust-tab">Dokumente</div>
+              <div class="cust-tab">Abrechnung</div>
+              <div class="cust-tab">Notizen</div>
+            </div>
+
+            <div class="cust-grid">
+              <div class="cust-info-card amber">
+                <div class="lbl">Pflegegrad</div>
+                <div class="val">Pflegegrad 3</div>
+                <div class="ext">Festgestellt am 12.01.2025 durch MD NRW · Gültig unbefristet</div>
+              </div>
+              <div class="cust-info-card">
+                <div class="lbl">Hauptansprechperson</div>
+                <div class="val">Christine Brockmeyer</div>
+                <div class="ext">Tochter · Vollmacht nach § 1820 BGB hinterlegt</div>
+              </div>
+              <div class="cust-info-card">
+                <div class="lbl">Begleiterin</div>
+                <div class="val">Sandra Bechler</div>
+                <div class="ext">Hauptbezugsperson · seit März 2025 · 38 Einsätze</div>
+              </div>
+              <div class="cust-info-card">
+                <div class="lbl">Vereinbarter Umfang</div>
+                <div class="val">6 Std. / Woche</div>
+                <div class="ext">Mi 10:00 + Fr 14:00 · jeweils 3 Std.</div>
+              </div>
+            </div>
+
+            <div class="cust-section">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+                Pflegeplan &amp; besondere Hinweise
+              </h3>
+              <div class="cust-notes">
+                Frau Brockmeyer ist <em>geistig vollkommen klar</em>, leidet aber seit einem Sturz im Februar 2025 unter Unsicherheit beim Gehen. Sie liebt Spaziergänge in der Gartenschau und ruhige Gespräche bei einer Tasse Kaffee. Wichtig: <em>kein Drängen</em> — sie braucht ihre Zeit und legt Wert auf Würde. Allergien: Penicillin, Erdbeeren. Kontakt im Notfall: Christine (Tochter) — Mobilnummer in Kontaktbox rechts.
+              </div>
+            </div>
+
+            <div class="cust-section">
+              <h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                Letzte Einsätze
+              </h3>
+              <div class="activity-list">
+                <div class="activity-row">
+                  <span class="date">Mi · 29.04.</span>
+                  <span class="who">Spaziergang Gartenschau<span>Sandra Bechler · Begleitung</span></span>
+                  <span class="dur">3:00 h</span>
+                  <span class="status-pill done">Geleistet</span>
+                </div>
+                <div class="activity-row">
+                  <span class="date">Fr · 24.04.</span>
+                  <span class="who">Arzttermin Dr. Heuer<span>Sandra Bechler · Termin-Begleitung</span></span>
+                  <span class="dur">2:30 h</span>
+                  <span class="status-pill done">Geleistet</span>
+                </div>
+                <div class="activity-row">
+                  <span class="date">Mi · 22.04.</span>
+                  <span class="who">Einkauf &amp; Spaziergang<span>Sandra Bechler · Begleitung</span></span>
+                  <span class="dur">3:00 h</span>
+                  <span class="status-pill done">Geleistet</span>
+                </div>
+                <div class="activity-row">
+                  <span class="date">Mi · 06.05.</span>
+                  <span class="who">Spaziergang Kurpark<span>Sandra Bechler · Begleitung</span></span>
+                  <span class="dur">3:00 h</span>
+                  <span class="status-pill scheduled">Geplant</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="cust-side">
+            <h3>Kontakt &amp; Adresse</h3>
+            <div class="kontaktbox">
+              <div class="row"><span class="lbl">Adresse</span><span class="val">Burgstraße 12 · 33175 Bad Lippspringe</span></div>
+              <div class="row"><span class="lbl">Telefon</span><span class="val">0171 ··· (Tochter)</span></div>
+              <div class="row"><span class="lbl">E-Mail</span><span class="val">brockmeyer@beispiel.de</span></div>
+              <div class="row"><span class="lbl">Hausarzt</span><span class="val">Dr. med. Heuer · Paderborn</span></div>
+            </div>
+
+            <h3>Entlastungsbetrag · Mai 2026</h3>
+            <div class="budget-card">
+              <div class="lbl">Verbraucht / Verfügbar</div>
+              <div class="budget-row">
+                <span class="num">81 €</span>
+                <span class="max">/ 131 € · § 45b SGB XI</span>
+              </div>
+              <div class="budget-bar"><div class="fill"></div></div>
+              <div class="meta"><span>62 % verbraucht</span><span>50 € verfügbar</span></div>
+            </div>
+
+            <h3>Dokumente</h3>
+            <div class="docs-list">
+              <div class="doc-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="doc-name">Pflegegrad-Bescheid</span>
+                <span class="doc-meta">PDF · 12.01.25</span>
+              </div>
+              <div class="doc-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="doc-name">Abtretungserklärung Pflegekasse</span>
+                <span class="doc-meta">PDF · 03.03.25</span>
+              </div>
+              <div class="doc-row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="doc-name">Vollmacht (Tochter)</span>
+                <span class="doc-meta">PDF · 03.03.25</span>
+              </div>
+            </div>
+
+            <div class="dsgvo-banner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span><strong>Row-Level-Security aktiv.</strong> Diese Akte ist nur für Bezugspersonen sichtbar. Geschäftsführung sieht alles, Begleiter:innen nur ihre eigenen Klient:innen.</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 6: ABRECHNUNG ===== -->
+    <div class="step-view" data-step-view="6">
+      <div class="abr-page">
+        <div class="abr-shell">
+          <div class="app-topbar" style="border:none; padding:0; margin-bottom:0">
+            <div class="app-page-title">Abrechnung &amp; Kostenträger<small>Mai 2026 · 17 aktive Klient:innen</small></div>
+            <div class="app-actions">
+              <button class="btn-hh btn-hh-sm">+ Rechnung erstellen</button>
+            </div>
+          </div>
+
+          <div class="abr-stats">
+            <div class="abr-stat">
+              <div class="lbl">Eingegangen · Mai</div>
+              <div class="num">2.227 <em>€</em></div>
+              <div class="delta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+                +12 % ggü. April
+              </div>
+            </div>
+            <div class="abr-stat">
+              <div class="lbl">Offen · alle Kassen</div>
+              <div class="num">680 <em>€</em></div>
+              <div class="delta down">5 Rechnungen offen</div>
+            </div>
+            <div class="abr-stat">
+              <div class="lbl">Geleistete Stunden</div>
+              <div class="num">102:30 <em>h</em></div>
+              <div class="delta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+                17 Klient:innen
+              </div>
+            </div>
+            <div class="abr-stat">
+              <div class="lbl">Ø Erstattung pro Klient</div>
+              <div class="num">131 <em>€</em></div>
+              <div class="delta down">§ 45b SGB XI · ausgeschöpft</div>
+            </div>
+          </div>
+
+          <div class="abr-row">
+            <div class="abr-table-card">
+              <div class="abr-table-head">
+                <h3>Offene Posten · Mai 2026</h3>
+                <div class="abr-filter">
+                  <button class="active">Alle</button>
+                  <button>Offen</button>
+                  <button>Versendet</button>
+                  <button>Bezahlt</button>
+                </div>
+              </div>
+              <table class="abr-table">
+                <thead>
+                  <tr>
+                    <th>Klient:in</th>
+                    <th>Pflegekasse</th>
+                    <th>Stunden</th>
+                    <th>Betrag</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#7C5BA0,#A675C9)">MB</div><div><strong>M. Brockmeyer</strong><span>PG 3</span></div></div></td>
+                    <td>AOK NordWest</td>
+                    <td>14:00 h</td>
+                    <td class="amount">131,00 €</td>
+                    <td><span class="pill versand">Versendet</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#1E5878,#5BD3F0)">HK</div><div><strong>H. Karwowski</strong><span>PG 2</span></div></div></td>
+                    <td>BARMER</td>
+                    <td>13:30 h</td>
+                    <td class="amount">131,00 €</td>
+                    <td><span class="pill bezahlt">Bezahlt</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#D97706,#F2B36B)">RT</div><div><strong>R. Tewes</strong><span>PG 4</span></div></div></td>
+                    <td>Techniker KK</td>
+                    <td>14:00 h</td>
+                    <td class="amount">131,00 €</td>
+                    <td><span class="pill offen">Offen</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#5B8A47,#9DD073)">EH</div><div><strong>E. Hartmann</strong><span>PG 3</span></div></div></td>
+                    <td>DAK-Gesundheit</td>
+                    <td>11:00 h</td>
+                    <td class="amount">98,75 €</td>
+                    <td><span class="pill bezahlt">Bezahlt</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#5B6BA0,#9DA5DD)">WS</div><div><strong>W. Schäffer</strong><span>PG 2</span></div></div></td>
+                    <td>AOK NordWest</td>
+                    <td>14:00 h</td>
+                    <td class="amount">131,00 €</td>
+                    <td><span class="pill entwurf">Entwurf</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#D45050,#F08988)">IM</div><div><strong>I. Möller</strong><span>PG 5</span></div></div></td>
+                    <td>BARMER</td>
+                    <td>14:00 h</td>
+                    <td class="amount">131,00 €</td>
+                    <td><span class="pill versand">Versendet</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cust"><div class="avatar" style="background:linear-gradient(135deg,#0F2D40,#5BD3F0)">GP</div><div><strong>G. Pieper</strong><span>PG 3</span></div></div></td>
+                    <td>AOK NordWest</td>
+                    <td>10:00 h</td>
+                    <td class="amount">87,50 €</td>
+                    <td><span class="pill bezahlt">Bezahlt</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="export-card">
+              <div class="pre">Schnitt-Export</div>
+              <h3>Sammelabrechnung an die Pflegekassen.</h3>
+              <p>Ein Klick. Alle versendbaren Rechnungen werden im jeweiligen Pflegekassen-Format erzeugt — inklusive Datenträgerbegleitschein nach § 105 SGB XI.</p>
+
+              <div class="export-row">
+                <div class="export-fmt">
+                  <span class="ico csv">CSV</span>
+                  <span class="label">Datev / Buchhaltung<br><span class="meta">17 Klient:innen · 1 Datei</span></span>
+                </div>
+                <div class="export-fmt">
+                  <span class="ico pdf">PDF</span>
+                  <span class="label">Sammelrechnungen<br><span class="meta">17 Einzel-PDFs gebündelt</span></span>
+                </div>
+                <div class="export-fmt">
+                  <span class="ico xml">XML</span>
+                  <span class="label">§ 105 SGB XI · DTA<br><span class="meta">An GKV-Spitzenverband</span></span>
+                </div>
+              </div>
+
+              <button class="export-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Sammelabrechnung erstellen
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="tour-controls">
+  <button class="tour-btn" id="prevBtn" disabled>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Zurück
+  </button>
+  <div class="tour-progress-text">Schritt <strong id="stepCurrent">1</strong> von <strong>6</strong></div>
+  <button class="tour-btn primary" id="nextBtn">
+    Weiter
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
+</div>
+
+<div class="tour-stats">
+  <div class="stat-card">
+    <div class="stat-num">17 <em>Klient:innen</em></div>
+    <div class="stat-label">Aktiv betreut · OWL</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">131 <em>€</em></div>
+    <div class="stat-label">§ 45b SGB XI · Entlastungsbetrag</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">6 <em>Module</em></div>
+    <div class="stat-label">Public + Begleiter-App + Abrechnung</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">100 <em>%</em></div>
+    <div class="stat-label">DSGVO · Supabase EU · RLS aktiv</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const steps = [
+    { num:'01', title:'Aufklärungs-Website', urlPath:'/', tag:'PUBLIC',
+      desc:'Vertrauensvolle Präsentation für Angehörige: Newsreader-Serif, ruhige Bildsprache, klare Erklärung des Entlastungsbetrags nach § 45b SGB XI.',
+      tech:['<span class="tech-badge">Next.js 15</span>','<span class="tech-badge amber">Tailwind v4</span>','<span class="tech-badge green">Newsreader · Inter</span>'] },
+    { num:'02', title:'Anfrage-Formular', urlPath:'/kontakt/', tag:'PUBLIC',
+      desc:'Mehrstufiger Bedarfs-Erfasser mit Pflegegrad, Leistungs-Chips und DSGVO-Hinweis. Anfragen landen in Supabase und triggern eine Rückruf-E-Mail an die Geschäftsführung.',
+      tech:['<span class="tech-badge">React Server Actions</span>','<span class="tech-badge green">Supabase</span>','<span class="tech-badge amber">Resend</span>'] },
+    { num:'03', title:'Auth · Begleiter-Onboarding', urlPath:'/login/', tag:'AUTH', stageTagClass:'app',
+      desc:'Geschützte Begleiter-App mit Einladungs-System: nur per E-Mail-Token können Helfer:innen registrieren. MFA optional. RLS schützt jede Akte.',
+      tech:['<span class="tech-badge">Supabase Auth</span>','<span class="tech-badge green">Row-Level-Security</span>','<span class="tech-badge amber">Magic-Link</span>'] },
+    { num:'04', title:'Einsatz-Kalender', urlPath:'/dashboard/einsaetze/', tag:'APP', stageTagClass:'app',
+      desc:'Wochenansicht der Einsätze pro Begleiter:in. Drag-and-Drop-Umplanung, Serientermine, automatische Stundenerfassung — kein Excel mehr.',
+      tech:['<span class="tech-badge">Server Actions</span>','<span class="tech-badge green">Postgres · RPC</span>','<span class="tech-badge amber">date-fns</span>'] },
+    { num:'05', title:'Klient:innen-Akte', urlPath:'/dashboard/kunden/[id]/', tag:'APP', stageTagClass:'app',
+      desc:'Zentrale Detailansicht: Pflegegrad, Bezugsperson, Pflegeplan, Einsatz-Historie, Dokumente und Entlastungsbetrag-Budget — RLS-geschützt.',
+      tech:['<span class="tech-badge">RSC + Streaming</span>','<span class="tech-badge green">RLS-Policies</span>','<span class="tech-badge amber">PDF-Storage</span>'] },
+    { num:'06', title:'Abrechnung &amp; Kostenträger', urlPath:'/dashboard/auswertungen/', tag:'APP', stageTagClass:'app',
+      desc:'Pflegekassen-Abrechnung auf einen Klick: CSV für DATEV, PDF-Sammelrechnungen, DTA-XML nach § 105 SGB XI. Spart pro Monat ca. 6 Std. manueller Arbeit.',
+      tech:['<span class="tech-badge">Edge Functions</span>','<span class="tech-badge amber">DTA-XML · § 105</span>','<span class="tech-badge green">PDF-Generation</span>'] }
+  ];
+
+  const stepNum = document.getElementById('stepNum');
+  const stepTitle = document.getElementById('stepTitle');
+  const stepDesc = document.getElementById('stepDesc');
+  const stepTech = document.getElementById('stepTech');
+  const stepCurrent = document.getElementById('stepCurrent');
+  const stageUrlPath = document.getElementById('stageUrlPath');
+  const stageTag = document.getElementById('stageTag');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const stepNavTrack = document.getElementById('stepNavTrack');
+  const pills = document.querySelectorAll('.step-pill');
+  const views = document.querySelectorAll('.step-view');
+  let current = 1;
+
+  function render(n){
+    current = n;
+    const d = steps[n-1];
+    stepNum.textContent = d.num;
+    stepTitle.textContent = d.title;
+    stepDesc.innerHTML = d.desc;
+    stepTech.innerHTML = d.tech.join('');
+    stepCurrent.textContent = n;
+    stageUrlPath.textContent = d.urlPath;
+    stageTag.textContent = d.tag;
+    stageTag.className = 'stage-tag' + (d.stageTagClass ? ' '+d.stageTagClass : '');
+    pills.forEach((p,i)=>{
+      const idx=i+1;
+      p.dataset.state = idx<n ? 'done' : (idx===n ? 'active' : '');
+    });
+    stepNavTrack.style.setProperty('--progress', ((n-1)/5*83.33)+'%');
+    views.forEach(v=>v.classList.toggle('active', parseInt(v.dataset.stepView)===n));
+    prevBtn.disabled = n===1;
+    nextBtn.disabled = n===6;
+    nextBtn.innerHTML = n===6
+      ? 'Tour beendet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>'
+      : 'Weiter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prevBtn.addEventListener('click',()=>current>1 && render(current-1));
+  nextBtn.addEventListener('click',()=>current<6 && render(current+1));
+  pills.forEach(p=>p.addEventListener('click',()=>render(parseInt(p.dataset.step))));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'&&current<6) render(current+1);
+    if(e.key==='ArrowLeft'&&current>1) render(current-1);
+  });
+
+  // Meta toggle (mobile)
+  (function initMetaToggle() {
+    const btn = document.getElementById('tourMetaToggle');
+    if (!btn) return;
+    if (window.matchMedia('(max-width: 700px)').matches) {
+      document.body.classList.add('meta-collapsed');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', () => {
+      const collapsed = document.body.classList.toggle('meta-collapsed');
+      btn.setAttribute('aria-expanded', String(!collapsed));
+    });
+  })();
+
+  // Inject deployments + grid cells into calendar
+  // Hour 8 = top: 0; each hour = 54px. Head height fixed by CSS.
+  const HOUR_HEIGHT = 54;
+  const HEAD_OFFSET = 0; // grid cells start at 0 inside .day-col after .head
+  const dayDefs = {
+    'Mo': [
+      { startH: 9, durH: 2, type:'amber', title:'Frau Brockmeyer', sub:'Begleitung · Spaziergang' },
+      { startH: 13, durH: 2.5, type:'navy', title:'Herr Karwowski', sub:'Hauswirtschaft' }
+    ],
+    'Di': [
+      { startH: 8.5, durH: 2, type:'green', title:'Frau Möller', sub:'Arzttermin · Dr. Heuer' },
+      { startH: 14, durH: 1.5, type:'purple', title:'Herr Tewes', sub:'Demenzbegleitung' }
+    ],
+    'Mi': [
+      { startH: 9, durH: 3, type:'amber', title:'Frau Brockmeyer', sub:'Spaziergang Gartenschau' },
+      { startH: 13, durH: 1.5, type:'navy', title:'Frau Hartmann', sub:'Einkauf' }
+    ],
+    'Do': [
+      { startH: 10, durH: 2, type:'amber', title:'Herr Schäffer', sub:'Begleitung · Café' },
+      { startH: 13, durH: 2.5, type:'gray', title:'Geblockt', sub:'Fortbildung Demenz' }
+    ],
+    'Fr': [
+      { startH: 9, durH: 1, type:'green', title:'Herr Pieper', sub:'Therapeut · 9:00' },
+      { startH: 11, durH: 1.5, type:'navy', title:'Frau Möller', sub:'Hauswirtschaft' },
+      { startH: 14, durH: 3, type:'amber', title:'Frau Brockmeyer', sub:'Spaziergang + Café' }
+    ],
+    'Sa': [
+      { startH: 10, durH: 2, type:'amber', title:'Herr Tewes', sub:'Familienbesuch' }
+    ],
+    'So': []
+  };
+  const dayCols = document.querySelectorAll('.cal-week .day-col');
+  dayCols.forEach(col => {
+    const day = col.dataset.day;
+    // 9 grid cells (8:00 to 16:00, but visual is 8 hours displayed: actually 8 rows = 8h)
+    for(let i=0;i<8;i++){ const c = document.createElement('div'); c.className='grid-cell'; col.appendChild(c); }
+    (dayDefs[day]||[]).forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'deploy ' + d.type;
+      // grid cells start after .head — head height is dynamic; we offset using top
+      const top = (d.startH - 8) * HOUR_HEIGHT; // hours offset from 8:00
+      const height = d.durH * HOUR_HEIGHT - 4;
+      // wrap top inside the day col which has .head as first child
+      // Use absolute positioning relative to .day-col; account for head height
+      el.style.top = `calc(var(--head-h, 50px) + ${top}px)`;
+      el.style.height = height + 'px';
+      el.innerHTML = `<strong>${d.title}</strong><span>${d.sub}</span>`;
+      col.appendChild(el);
+    });
+  });
+  // measure head height once
+  requestAnimationFrame(()=>{
+    const head = document.querySelector('.cal-week .day-col .head');
+    if(head){ document.documentElement.style.setProperty('--head-h', head.offsetHeight + 'px'); }
+  });
+
+  // Pgrade selector
+  document.querySelectorAll('.pgrade-opt').forEach(o => {
+    o.addEventListener('click', () => {
+      document.querySelectorAll('.pgrade-opt').forEach(x => x.classList.remove('selected'));
+      o.classList.add('selected');
+    });
+  });
+  // Need chips
+  document.querySelectorAll('.need-chip').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('selected'));
+  });
+  // Role pills
+  document.querySelectorAll('.role-pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.role-pill').forEach(x => x.classList.remove('selected'));
+      p.classList.add('selected');
+    });
+  });
+  // Auth tabs
+  document.querySelectorAll('.auth-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.auth-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+  // Continue buttons
+  document.getElementById('reqContinueBtn')?.addEventListener('click', () => render(3));
+  document.getElementById('authContinueBtn')?.addEventListener('click', () => render(4));
+
+  render(1);
+})();
+</script>
+
+</body>
+</html>

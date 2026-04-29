@@ -1,121 +1,89 @@
 /* ================================================
    DANIEL KROH — Homepage Animations
-   Simple scroll-reveal animations (no frame/canvas)
+   IntersectionObserver-basiert (keine ScrollTrigger-Listener)
    ================================================ */
 
 (function () {
   "use strict";
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  // ---- HERO ENTRANCE ----
+  // ---- HERO ENTRANCE (einmalig, kein Scroll-Listener) ----
   function animateHero() {
     var hero = document.getElementById("hero");
     if (!hero) return;
-
-    var words = hero.querySelectorAll(".hero-heading span");
-    var tagline = hero.querySelector(".hero-tagline");
-    var cta = hero.querySelector(".hero-cta");
-    var label = hero.querySelector(".hero-label");
-
-    if (label) gsap.to(label, { opacity: 1, duration: 0.6, delay: 0.2 });
-    gsap.to(words, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out",
-      delay: 0.4,
-    });
-    if (tagline) gsap.to(tagline, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.9 });
-    if (cta) gsap.to(cta, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 1.2 });
+    hero.classList.add("hero--entered");
   }
 
-  // ---- STATIC SECTION SCROLL REVEALS ----
-  function initStaticSections() {
-    var isMobile = window.innerWidth <= 768;
-    var offset = isMobile ? 30 : 50;
-    var stagger = isMobile ? 0.08 : 0.12;
-    var duration = isMobile ? 0.7 : 0.9;
+  // ---- REVEAL via IntersectionObserver ----
+  function initReveal() {
+    var elements = document.querySelectorAll(
+      "[data-static-anim], [data-reveal]"
+    );
+    if (!elements.length) return;
 
-    document.querySelectorAll('[data-static-anim="slide-left"]').forEach(function (el) {
-      var children = el.querySelectorAll(
-        ".section-label, .static-heading, .static-body, .static-list, .static-link, .cta-button, .location-highlights, .trust-metrics"
-      );
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach(function (el) { el.classList.add("is-revealed"); });
+      return;
+    }
 
-      gsap.from(children, {
-        y: offset,
-        opacity: 0,
-        stagger: stagger,
-        duration: duration,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          toggleActions: "play none none none",
-        },
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          observer.unobserve(entry.target);
+        }
       });
-    });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
 
-    document.querySelectorAll('[data-static-anim="slide-right"]').forEach(function (el) {
-      var children = el.querySelectorAll(
-        ".section-label, .static-heading, .static-body, .static-list, .static-link, .cta-button, .location-highlights, .trust-metrics"
-      );
-
-      if (children.length > 0) {
-        gsap.from(children, {
-          y: offset,
-          opacity: 0,
-          stagger: stagger,
-          duration: duration,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        });
-      } else {
-        gsap.from(el, {
-          y: offset,
-          opacity: 0,
-          duration: duration,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
-    });
-
-    // Trust metric counters
-    document.querySelectorAll('.trust-metric[data-static-anim="counter"]').forEach(function (el) {
-      var target = parseInt(el.dataset.target);
-      var suffix = el.dataset.suffix || "";
-      var valueEl = el.querySelector(".trust-metric-value");
-
-      if (isNaN(target)) return;
-
-      var obj = { val: 0 };
-      gsap.to(obj, {
-        val: target,
-        duration: 1.5,
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%",
-          toggleActions: "play none none none",
-        },
-        onUpdate: function () {
-          valueEl.textContent = Math.round(obj.val) + suffix;
-        },
-      });
-    });
+    elements.forEach(function (el) { observer.observe(el); });
   }
 
-  // ---- INIT ----
-  animateHero();
-  initStaticSections();
+  // ---- COUNTER (einmalig beim ersten Sichtbarwerden) ----
+  function initCounters() {
+    var counters = document.querySelectorAll('.trust-metric[data-target]');
+    if (!counters.length || !("IntersectionObserver" in window)) {
+      counters.forEach(function (el) {
+        var valueEl = el.querySelector(".trust-metric-value");
+        if (valueEl) valueEl.textContent = el.dataset.target + (el.dataset.suffix || "");
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var target = parseInt(el.dataset.target, 10);
+        var suffix = el.dataset.suffix || "";
+        var valueEl = el.querySelector(".trust-metric-value");
+        if (!valueEl || isNaN(target)) {
+          observer.unobserve(el);
+          return;
+        }
+        var start = performance.now();
+        var duration = 1500;
+        function tick(now) {
+          var p = Math.min(1, (now - start) / duration);
+          var eased = 1 - Math.pow(1 - p, 3);
+          valueEl.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        observer.unobserve(el);
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+
+    counters.forEach(function (el) { observer.observe(el); });
+  }
+
+  function init() {
+    animateHero();
+    initReveal();
+    initCounters();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();

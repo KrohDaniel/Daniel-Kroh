@@ -8,9 +8,9 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  background: var(--bg-card);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 30px rgba(10, 14, 26, 0.08);
   padding: 1.5rem 2rem;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -37,7 +37,7 @@
   font-size: 0.88rem;
   font-weight: 300;
   line-height: 1.6;
-  color: var(--silver);
+  color: var(--text-2);
   margin: 0;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .cookie-banner-text a:hover {
-  color: var(--white);
+  color: var(--cyan-deep);
 }
 
 .cookie-banner-actions {
@@ -65,7 +65,7 @@
   text-transform: uppercase;
   padding: 0.7rem 1.5rem;
   border: none;
-  border-radius: 0;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
@@ -73,24 +73,25 @@
 
 .cookie-btn--accept {
   background: linear-gradient(135deg, var(--cyan), var(--cyan-glow));
-  color: var(--bg-dark);
+  color: #ffffff;
 }
 
 .cookie-btn--accept:hover {
   background: linear-gradient(135deg, var(--amber), var(--gold));
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+  box-shadow: 0 4px 15px rgba(232, 150, 16, 0.3);
 }
 
 .cookie-btn--essential {
   background: transparent;
-  color: var(--silver);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-2);
+  border: 1px solid var(--border-strong);
 }
 
 .cookie-btn--essential:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: var(--white);
+  border-color: var(--text-3);
+  color: var(--text-1);
+  background: var(--bg-alt);
 }
 
 /* ---- MOBILE ---- */

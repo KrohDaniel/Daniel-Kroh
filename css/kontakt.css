@@ -5,7 +5,12 @@
 /* ---- HEADER ---- */
 .about-header {
   mix-blend-mode: normal;
-  background: var(--bg-dark);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .nav-active {
@@ -30,7 +35,7 @@
   right: -15%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(0, 184, 230, 0.05) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -41,7 +46,7 @@
   left: -10%;
   width: 40vw;
   height: 40vw;
-  background: radial-gradient(circle, rgba(245, 166, 35, 0.03) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(232, 150, 16, 0.03) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -109,16 +114,19 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
-  background: var(--bg-navy);
-  border: 1px solid rgba(0, 212, 255, 0.06);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 a.kontakt-channel:hover {
-  border-color: rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 184, 230, 0.35);
   transform: translateX(4px);
+  box-shadow: var(--shadow-md);
 }
 
 .kontakt-channel-icon {
@@ -128,8 +136,8 @@ a.kontakt-channel:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.1);
+  background: var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: 50%;
   color: var(--cyan);
 }
@@ -167,8 +175,8 @@ a.kontakt-channel:hover {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 1.25rem;
-  background: rgba(0, 230, 118, 0.04);
-  border: 1px solid rgba(0, 230, 118, 0.12);
+  background: rgba(0, 177, 92, 0.04);
+  border: 1px solid rgba(0, 177, 92, 0.12);
   border-radius: 4px;
 }
 
@@ -177,13 +185,13 @@ a.kontakt-channel:hover {
   height: 10px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 8px rgba(0, 230, 118, 0.5);
+  box-shadow: 0 0 8px rgba(0, 177, 92, 0.5);
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(0, 230, 118, 0.5); }
-  50% { opacity: 0.6; box-shadow: 0 0 16px rgba(0, 230, 118, 0.3); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(0, 177, 92, 0.5); }
+  50% { opacity: 0.6; box-shadow: 0 0 16px rgba(0, 177, 92, 0.3); }
 }
 
 .kontakt-availability span {
@@ -230,37 +238,37 @@ a.kontakt-channel:hover {
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 400;
-  color: var(--white);
-  background: var(--bg-navy);
-  border: 1px solid rgba(0, 212, 255, 0.1);
+  color: var(--text-1);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
   padding: 1rem 1.25rem;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   -webkit-appearance: none;
-  border-radius: 0;
 }
 
 .form-input::placeholder {
-  color: var(--text-muted);
-  opacity: 0.6;
+  color: var(--text-3);
+  opacity: 0.7;
 }
 
 .form-input:focus {
   border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(0, 184, 230, 0.12);
 }
 
 .form-select {
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%238892a8' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%236b7488' stroke-width='1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1.25rem center;
   padding-right: 3rem;
 }
 
 .form-select option {
-  background: var(--bg-navy);
-  color: var(--white);
+  background: var(--bg);
+  color: var(--text-1);
 }
 
 .form-textarea {
@@ -274,8 +282,9 @@ a.kontakt-channel:hover {
   flex-direction: column;
   gap: 0.5rem;
   padding: 1.25rem;
-  background: var(--bg-navy);
-  border: 1px solid rgba(0, 212, 255, 0.1);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
 
 .form-checklist-group-label {
@@ -317,7 +326,7 @@ a.kontakt-channel:hover {
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  border: 1.5px solid rgba(0, 212, 255, 0.25);
+  border: 1.5px solid rgba(0, 184, 230, 0.4);
   border-radius: 3px;
   position: relative;
   transition: border-color 0.2s ease, background 0.2s ease;
@@ -325,7 +334,7 @@ a.kontakt-channel:hover {
 
 .form-check input:checked + .form-check-mark {
   border-color: var(--cyan);
-  background: rgba(0, 212, 255, 0.15);
+  background: rgba(0, 184, 230, 0.12);
 }
 
 .form-check input:checked + .form-check-mark::after {
@@ -394,15 +403,15 @@ a.kontakt-channel:hover {
 .success-overlay-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(5, 7, 15, 0.85);
+  background: rgba(10, 14, 26, 0.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 .success-modal {
   position: relative;
-  background: var(--bg-navy);
-  border: 1px solid rgba(0, 212, 255, 0.1);
+  background: var(--bg);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 3.5rem 3rem 2.5rem;
   max-width: 480px;
@@ -410,7 +419,7 @@ a.kontakt-channel:hover {
   text-align: center;
   transform: translateY(30px) scale(0.95);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 212, 255, 0.05);
+  box-shadow: 0 24px 80px rgba(10, 14, 26, 0.18), 0 0 0 1px rgba(0, 184, 230, 0.08);
 }
 
 .success-overlay.is-visible .success-modal {
@@ -502,25 +511,25 @@ a.kontakt-channel:hover {
 
 .success-btn--primary {
   background: var(--cyan);
-  color: var(--bg-dark);
+  color: #ffffff;
   border: none;
 }
 
 .success-btn--primary:hover {
-  background: #4dcdb0;
+  background: var(--cyan-deep);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(93, 224, 192, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 184, 230, 0.3);
 }
 
 .success-btn--secondary {
   background: transparent;
-  color: var(--silver);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-2);
+  border: 1px solid var(--border);
 }
 
 .success-btn--secondary:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: var(--white);
+  border-color: var(--border-strong);
+  color: var(--text-1);
 }
 
 /* ---- MOBILE ---- */
@@ -578,7 +587,7 @@ a.kontakt-channel:hover {
   padding: 5rem 5vw;
   background: var(--bg-navy);
   text-align: center;
-  border-top: 1px solid rgba(0, 212, 255, 0.06);
+  border-top: 1px solid var(--border);
 }
 
 .kontakt-cta-inner {

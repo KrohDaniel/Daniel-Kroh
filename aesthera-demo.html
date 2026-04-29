@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>aesthéra — Interaktive Live-Demo · Daniel Kroh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   GLOBAL TOKENS
+   - Aesthéra inside (warm cream, accent #C4AE8A, serif italic)
+   - Tour chrome outside (Daniel-Kroh-ish dark frame, cyan accent)
+   =========================================================== */
+:root{
+  /* Aesthéra palette */
+  --bg: #FCFAF8;
+  --surface: #FFFFFF;
+  --surface-2: #F5F1EB;
+  --border: #E8DFD5;
+  --text: #1C1917;
+  --text-muted: #57534E;
+  --accent: #C4AE8A;
+  --accent-hover: #B09872;
+  --accent-soft: #EFE5D4;
+
+  /* Tour chrome (Daniel Kroh DNA) */
+  --chrome: #0E1320;
+  --chrome-2: #161D2F;
+  --chrome-line: rgba(255,255,255,.08);
+  --chrome-text: #E7ECF4;
+  --chrome-muted: #94A0BB;
+  --cyan: #5BD3F0;
+  --cyan-deep: #00B8E6;
+  --amber: #F2B36B;
+
+  /* Type */
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+
+  --shadow-sm: 0 4px 20px rgba(0,0,0,.04);
+  --shadow-md: 0 10px 30px rgba(0,0,0,.07);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.10);
+  --shadow-chrome: 0 30px 80px rgba(0,0,0,.45);
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 22px;
+
+  --max: 1400px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--chrome);
+  color: var(--chrome-text);
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+input, textarea, select { font: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===========================================================
+   TOUR CHROME — outer frame
+   =========================================================== */
+.tour-bg {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(91,211,240,.06), transparent 60%),
+    radial-gradient(900px 600px at 90% 100%, rgba(242,179,107,.05), transparent 60%),
+    var(--chrome);
+  z-index: -2;
+}
+.tour-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 90%);
+}
+
+/* Top bar */
+.tour-topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(14,19,32,.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--chrome-line);
+}
+.tour-topbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex; align-items: center; gap: 2rem;
+}
+.tour-brand {
+  display: flex; align-items: center; gap: .8rem;
+  font-size: .82rem; letter-spacing: .04em;
+  color: var(--chrome-muted);
+}
+.tour-brand-mark {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border: 1px solid var(--chrome-line);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(91,211,240,.15), rgba(242,179,107,.10));
+  color: var(--cyan);
+  font-weight: 600; font-size: .7rem; letter-spacing: .12em;
+}
+.tour-brand strong { color: var(--chrome-text); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-size: .72rem; }
+.tour-brand-sep { width: 1px; height: 16px; background: var(--chrome-line); }
+.tour-brand em { font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; color: var(--chrome-text); letter-spacing: .02em; }
+
+.demo-safe-badge {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .45rem .8rem;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: #9DE5C8;
+  background: rgba(76, 217, 162, .08);
+  border: 1px solid rgba(76, 217, 162, .25);
+  border-radius: 999px;
+  cursor: help;
+  transition: background .2s, border-color .2s;
+}
+.demo-safe-badge:hover {
+  background: rgba(76, 217, 162, .14);
+  border-color: rgba(76, 217, 162, .4);
+}
+.demo-safe-badge svg { color: #6FE0B0; }
+@media (max-width: 900px) {
+  .demo-safe-badge span { display: none; }
+  .demo-safe-badge { padding: .45rem; }
+}
+
+.tour-back {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1rem;
+  font-size: .82rem; color: var(--chrome-muted);
+  border: 1px solid var(--chrome-line);
+  border-radius: 999px;
+  transition: all .25s ease;
+}
+.tour-back:hover { color: var(--chrome-text); border-color: rgba(91,211,240,.4); background: rgba(91,211,240,.05); }
+
+/* Step nav with connecting lines */
+.tour-stepnav {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 2rem 2rem 1.5rem;
+}
+.tour-stepnav-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+.tour-stepnav-track::before {
+  content: '';
+  position: absolute;
+  top: 18px; left: 8.33%; right: 8.33%;
+  height: 1px;
+  background: var(--chrome-line);
+}
+.tour-stepnav-track::after {
+  content: '';
+  position: absolute;
+  top: 18px; left: 8.33%;
+  height: 1px;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--cyan), var(--amber));
+  transition: width .55s cubic-bezier(.65,0,.35,1);
+  box-shadow: 0 0 12px rgba(91,211,240,.5);
+}
+.step-pill {
+  display: flex; flex-direction: column; align-items: center;
+  gap: .6rem;
+  position: relative;
+  cursor: pointer;
+  padding: 0 .25rem;
+  text-align: center;
+}
+.step-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--chrome-2);
+  border: 1px solid var(--chrome-line);
+  display: grid; place-items: center;
+  font-size: .8rem; font-weight: 500;
+  color: var(--chrome-muted);
+  position: relative; z-index: 2;
+  transition: all .3s ease;
+}
+.step-pill[data-state="done"] .step-dot {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-deep));
+  border-color: var(--cyan);
+  color: var(--chrome);
+}
+.step-pill[data-state="active"] .step-dot {
+  background: var(--chrome);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(91,211,240,.15), 0 0 20px rgba(91,211,240,.4);
+  transform: scale(1.08);
+}
+.step-pill[data-state="active"] .step-dot::after {
+  content: ''; position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(91,211,240,.3);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.95); opacity: .8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.step-label {
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--chrome-muted);
+  line-height: 1.3;
+  max-width: 11ch;
+  transition: color .3s;
+}
+.step-pill[data-state="active"] .step-label { color: var(--chrome-text); }
+.step-pill[data-state="done"] .step-label { color: var(--chrome-text); opacity: .85; }
+
+/* Sub-info under pills */
+.tour-meta {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 2rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.tour-meta-left {
+  display: flex; align-items: center; gap: 1rem;
+}
+.tour-step-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--cyan);
+  font-weight: 300;
+}
+.tour-step-title {
+  font-size: 1rem;
+  letter-spacing: .02em;
+  color: var(--chrome-text);
+  font-weight: 400;
+}
+.tour-step-desc {
+  font-size: .85rem;
+  color: var(--chrome-muted);
+  max-width: 56ch;
+}
+.tour-tech {
+  display: flex; gap: .5rem; flex-wrap: wrap;
+}
+.tech-badge {
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  border: 1px solid var(--chrome-line);
+  color: var(--chrome-muted);
+  background: rgba(255,255,255,.02);
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.tech-badge::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--cyan);
+}
+.tech-badge.amber::before { background: var(--amber); }
+
+/* Stage — the laptop-like inset for the Aesthéra app */
+.tour-stage-wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+.tour-stage {
+  position: relative;
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-chrome), 0 0 0 1px var(--chrome-line);
+  font-family: var(--font-sans);
+  /* let the page scroll naturally */
+  min-height: 70vh;
+}
+
+/* Browser-like top */
+.stage-chrome {
+  background: linear-gradient(180deg, #1a2033, #141a2a);
+  border-bottom: 1px solid var(--chrome-line);
+  padding: .7rem 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.stage-dots { display: flex; gap: .4rem; }
+.stage-dots span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,.18);
+}
+.stage-dots span:nth-child(1){ background:#FF5F57; }
+.stage-dots span:nth-child(2){ background:#FEBC2E; }
+.stage-dots span:nth-child(3){ background:#28C840; }
+.stage-url {
+  flex: 1;
+  background: rgba(0,0,0,.35);
+  border: 1px solid var(--chrome-line);
+  border-radius: 8px;
+  padding: .35rem .9rem;
+  font-size: .78rem;
+  color: var(--chrome-muted);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: .02em;
+  display: flex; align-items: center; gap: .55rem;
+}
+.stage-url svg { width: 11px; height: 11px; opacity: .7; flex-shrink: 0; }
+.stage-url-path { color: var(--chrome-text); }
+.stage-tag {
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--cyan);
+  padding: .25rem .55rem;
+  border: 1px solid rgba(91,211,240,.3);
+  border-radius: 4px;
+  background: rgba(91,211,240,.08);
+}
+
+/* Step container */
+.step-view {
+  display: none;
+  animation: stepIn .55s cubic-bezier(.16,1,.3,1);
+}
+.step-view.active { display: block; }
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom controls (in chrome) */
+.tour-controls {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+}
+.tour-btn {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .85rem 1.6rem;
+  border-radius: 999px;
+  font-size: .85rem; letter-spacing: .03em;
+  border: 1px solid var(--chrome-line);
+  color: var(--chrome-text);
+  background: rgba(255,255,255,.03);
+  transition: all .25s ease;
+}
+.tour-btn:hover:not(:disabled) {
+  border-color: rgba(91,211,240,.5);
+  background: rgba(91,211,240,.08);
+  color: var(--cyan);
+  transform: translateY(-1px);
+}
+.tour-btn:disabled { opacity: .35; cursor: not-allowed; }
+.tour-btn.primary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-deep));
+  color: var(--chrome);
+  border-color: transparent;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(0,184,230,.25);
+}
+.tour-btn.primary:hover:not(:disabled) {
+  color: var(--chrome);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,184,230,.35);
+}
+.tour-progress-text {
+  font-size: .78rem;
+  color: var(--chrome-muted);
+  letter-spacing: .04em;
+}
+.tour-progress-text strong { color: var(--chrome-text); font-weight: 500; }
+
+/* Mini stats strip below controls */
+.tour-stats {
+  max-width: var(--max);
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.stat-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--chrome-line);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; height: 2px; width: 30%;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--chrome-text);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.stat-num em { font-style: italic; color: var(--cyan); }
+.stat-label {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--chrome-muted);
+  margin-top: .55rem;
+}
+
+/* ===========================================================
+   AESTHÉRA APP STYLES — inside .tour-stage
+   =========================================================== */
+.tour-stage h1, .tour-stage h2, .tour-stage h3, .tour-stage h4 {
+  font-weight: 300; letter-spacing: -.02em; color: var(--text);
+}
+.tour-stage p { color: var(--text-muted); }
+.italic { font-family: var(--font-serif); font-style: italic; color: var(--accent); font-weight: 300; }
+
+/* Aesthéra header (sticky inside stage) */
+.ae-header {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(252,250,248,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ae-logo {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  letter-spacing: .02em;
+  color: var(--text);
+  font-weight: 400;
+}
+.ae-logo span { color: var(--accent); font-style: italic; }
+.ae-nav {
+  display: flex; gap: 2rem;
+  font-size: .85rem; letter-spacing: .04em;
+}
+.ae-nav a { color: var(--text-muted); transition: color .25s; }
+.ae-nav a:hover, .ae-nav a.is-active { color: var(--accent); }
+.ae-nav a.is-active { font-weight: 500; }
+
+/* Buttons */
+.btn-ae {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .9rem 2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 2px;
+  font-size: .82rem; font-weight: 400;
+  letter-spacing: .08em; text-transform: uppercase;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+  border: none;
+}
+.btn-ae:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(196,174,138,.3); }
+.btn-ae-outline {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .9rem 2rem;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: .82rem; font-weight: 400;
+  letter-spacing: .08em; text-transform: uppercase;
+  transition: all .35s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+}
+.btn-ae-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ae-sm { padding: .6rem 1.3rem; font-size: .72rem; }
+
+/* ===== STEP 1: Marketing Website ===== */
+.web-hero {
+  position: relative;
+  min-height: 520px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 3rem;
+  background: linear-gradient(135deg, #FCFAF8 60%, var(--surface-2));
+}
+.web-hero::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 45%; height: 100%;
+  background: var(--surface-2);
+  border-bottom-left-radius: 40px;
+  z-index: 0;
+}
+.web-hero-content { position: relative; z-index: 1; }
+.web-hero-eyebrow {
+  font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem; display: block;
+}
+.web-hero-title {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 300; line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.web-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 38ch;
+}
+.web-hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.web-hero-img-wrap {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center;
+}
+.web-hero-img-deco {
+  position: absolute; inset: -20px 20px 0 -20px;
+  border: 1px solid var(--accent);
+  border-radius: 200px 200px 0 0;
+  z-index: 0;
+}
+.web-hero-img {
+  width: 100%; max-width: 360px; aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 200px 200px 0 0;
+  box-shadow: var(--shadow-md);
+  position: relative; z-index: 1;
+}
+
+.web-section { padding: 5rem 3rem; }
+.web-section-head { text-align: center; margin-bottom: 3rem; max-width: 38rem; margin-inline: auto; }
+.web-section-head h2 {
+  font-family: var(--font-serif);
+  font-size: 2.6rem; font-weight: 300;
+  margin-bottom: .8rem;
+}
+.web-section-head p { color: var(--text-muted); }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+.svc-card {
+  background: var(--surface);
+  border: 1px solid rgba(196,174,138,.18);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+}
+.svc-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(196,174,138,.18);
+  border-color: rgba(196,174,138,.4);
+}
+.svc-thumb {
+  aspect-ratio: 4/3;
+  background: var(--surface-2);
+  position: relative; overflow: hidden;
+  display: grid; place-items: center;
+}
+.svc-thumb-icon {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 3.6rem; color: var(--accent); opacity: .5;
+  font-weight: 300;
+}
+.svc-card.has-img .svc-thumb { background-size: cover; background-position: center; }
+.svc-body { padding: 1.4rem 1.6rem 1.8rem; }
+.svc-title { font-size: 1.15rem; font-weight: 500; margin-bottom: .55rem; color: var(--text); }
+.svc-desc { font-size: .88rem; line-height: 1.6; }
+.svc-link {
+  display: inline-flex; align-items: center; gap: .35rem;
+  margin-top: 1rem;
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 500;
+  transition: gap .25s;
+}
+.svc-link:hover { gap: .65rem; }
+
+/* Before/After slider */
+.ba-section { background: var(--surface-2); }
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.ba-slider {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  box-shadow: var(--shadow-md);
+}
+.ba-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.ba-after-clip {
+  position: absolute; inset: 0;
+  width: var(--ba-pos, 50%);
+  overflow: hidden;
+  border-right: 2px solid #fff;
+  box-shadow: 2px 0 12px rgba(0,0,0,.2);
+}
+.ba-handle {
+  position: absolute; top: 50%;
+  left: var(--ba-pos, 50%);
+  transform: translate(-50%,-50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--accent);
+  display: grid; place-items: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+  pointer-events: none;
+}
+.ba-handle::before {
+  content: '↔';
+  color: var(--accent);
+  font-size: 1rem; font-weight: 600;
+}
+.ba-label {
+  position: absolute; top: 1rem;
+  padding: .35rem .8rem;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.ba-label.before { left: 1rem; }
+.ba-label.after  { right: 1rem; }
+
+/* Reviews */
+.rv-section { background: var(--surface); }
+.rv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.rv-card {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 1.8rem;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.rv-stars { color: #DDA80F; font-size: 1rem; letter-spacing: .1em; }
+.rv-text { font-style: italic; color: var(--text-muted); font-size: .92rem; line-height: 1.7; flex: 1; }
+.rv-author { font-weight: 500; font-size: .88rem; color: var(--text); }
+
+/* FAQ */
+.faq-section { background: var(--surface-2); padding-bottom: 5rem; }
+.faq-list { max-width: 48rem; margin: 0 auto; display: flex; flex-direction: column; gap: .6rem; }
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color .25s;
+}
+.faq-item.open { border-color: var(--accent); }
+.faq-q {
+  width: 100%;
+  padding: 1.3rem 1.6rem;
+  display: flex; align-items: center; justify-content: space-between;
+  text-align: left;
+  font-size: 1rem; font-weight: 400; color: var(--text);
+}
+.faq-q-icon {
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  color: var(--accent);
+  transition: transform .3s ease;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-q-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s cubic-bezier(.4,0,.2,1);
+  color: var(--text-muted);
+  font-size: .92rem;
+}
+.faq-item.open .faq-a { max-height: 240px; }
+.faq-a-inner { padding: 0 1.6rem 1.4rem; }
+
+/* Newsletter inline signup (bottom of website + standalone in step 2) */
+.nl-strip {
+  background: linear-gradient(135deg, #2A2520 0%, #3A332C 100%);
+  color: #FFF;
+  padding: 4rem 3rem;
+  text-align: center;
+}
+.nl-strip h2 { color: #FFF; font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: .8rem; }
+.nl-strip p { color: rgba(255,255,255,.7); margin-bottom: 2rem; }
+.nl-form {
+  max-width: 28rem; margin: 0 auto;
+  display: flex; gap: .6rem;
+}
+.nl-input {
+  flex: 1;
+  padding: .9rem 1.2rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.08);
+  color: #FFF;
+  font-size: .92rem;
+}
+.nl-input::placeholder { color: rgba(255,255,255,.45); }
+.nl-input:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,.12); }
+.nl-submit {
+  padding: .9rem 1.6rem;
+  background: var(--accent); color: #FFF; border: none; border-radius: 2px;
+  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer; transition: background .25s;
+}
+.nl-submit:hover { background: var(--accent-hover); }
+
+/* ===== STEP 2: DOI Flow ===== */
+.doi-wrap {
+  padding: 4rem 3rem;
+  display: grid; gap: 2rem;
+  background: var(--surface-2);
+  min-height: 600px;
+}
+.doi-stages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  position: relative;
+}
+.doi-stage {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.6rem 1.5rem;
+  position: relative;
+  transition: all .4s ease;
+  opacity: .5;
+}
+.doi-stage.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(196,174,138,.2);
+  transform: translateY(-4px);
+}
+.doi-stage.is-done { opacity: 1; }
+.doi-stage.is-done::after {
+  content: '✓'; position: absolute; top: 1rem; right: 1.2rem;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: #FFF;
+  display: grid; place-items: center; font-size: .75rem; font-weight: 600;
+}
+.doi-stage-num {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 2.4rem; color: var(--accent); font-weight: 300;
+  line-height: 1;
+}
+.doi-stage h3 { font-size: 1.05rem; font-weight: 500; margin-top: .8rem; margin-bottom: .4rem; }
+.doi-stage p { font-size: .85rem; line-height: 1.55; color: var(--text-muted); }
+
+.doi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 30rem; margin: 0 auto;
+  text-align: center;
+}
+.doi-card h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem; }
+.doi-card p { color: var(--text-muted); margin-bottom: 1.6rem; }
+.doi-card.is-mail {
+  background: #1F1A14; color: #FFF;
+  text-align: left; border-color: #1F1A14;
+  font-family: ui-monospace, monospace;
+  font-size: .85rem;
+  position: relative;
+}
+.doi-card.is-mail::before {
+  content: 'E-Mail · Resend';
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-family: var(--font-sans);
+  font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent);
+}
+.mail-from {
+  font-family: var(--font-sans); font-size: .8rem;
+  color: rgba(255,255,255,.6);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  padding-bottom: .8rem; margin-bottom: 1rem;
+}
+.mail-from strong { color: #FFF; }
+.mail-body { line-height: 1.7; color: rgba(255,255,255,.85); }
+.mail-body em { color: var(--accent); font-style: normal; font-family: var(--font-serif); font-size: 1.1rem; }
+.mail-cta {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: .75rem 1.5rem;
+  background: var(--accent); color: #FFF;
+  font-family: var(--font-sans);
+  font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .25s;
+}
+.mail-cta:hover { background: var(--accent-hover); }
+.mail-foot { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 1.4rem; }
+
+/* DOI confirmation success */
+.doi-success {
+  text-align: center;
+  padding: 2rem;
+}
+.doi-success-icon {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: grid; place-items: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* ===== STEP 3: Customer form ===== */
+.cf-wrap {
+  padding: 3rem 3rem 4rem;
+  background: linear-gradient(180deg, var(--bg), var(--surface-2));
+  min-height: 700px;
+}
+.cf-progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .5rem;
+  max-width: 36rem; margin: 0 auto 2.5rem;
+  position: relative;
+}
+.cf-progress-step {
+  text-align: center;
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  position: relative;
+}
+.cf-progress-step::before {
+  content: ''; position: absolute;
+  top: 12px; left: -50%; width: 100%; height: 1px;
+  background: var(--border); z-index: 0;
+}
+.cf-progress-step:first-child::before { display: none; }
+.cf-progress-step.done::before { background: var(--accent); }
+.cf-progress-step .num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: .75rem;
+  position: relative; z-index: 1;
+  transition: all .3s ease;
+}
+.cf-progress-step.is-active .num {
+  background: var(--accent); color: #FFF; border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(196,174,138,.2);
+}
+.cf-progress-step.done .num { background: var(--accent); color: #FFF; border-color: var(--accent); }
+.cf-progress-step.is-active span { color: var(--text); font-weight: 500; }
+
+.cf-card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  max-width: 36rem; margin: 0 auto;
+}
+.cf-card h2 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: .4rem; font-weight: 300; }
+.cf-card .cf-sub { color: var(--text-muted); margin-bottom: 2rem; font-size: .92rem; }
+.cf-step { display: none; }
+.cf-step.active { display: block; animation: stepIn .4s ease; }
+.cf-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.cf-field { margin-bottom: 1.1rem; display: flex; flex-direction: column; gap: .35rem; }
+.cf-field label {
+  font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cf-input {
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: .95rem;
+  transition: all .25s;
+}
+.cf-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(196,174,138,.15);
+}
+.cf-input.error { border-color: #C44; }
+
+.cf-radio-group { display: grid; gap: .5rem; }
+.cf-radio {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .25s;
+}
+.cf-radio:hover { border-color: var(--accent); background: var(--surface-2); }
+.cf-radio input { accent-color: var(--accent); }
+.cf-radio.is-selected { border-color: var(--accent); background: var(--accent-soft); }
+.cf-radio-name { font-size: .92rem; color: var(--text); flex: 1; }
+.cf-radio-meta { font-size: .78rem; color: var(--text-muted); }
+
+.cf-checkbox {
+  display: flex; align-items: flex-start; gap: .75rem;
+  padding: .8rem 0;
+  font-size: .85rem; line-height: 1.5;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.cf-checkbox input { margin-top: .15rem; accent-color: var(--accent); }
+.cf-checkbox a { color: var(--accent); text-decoration: underline; }
+
+.cf-actions {
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Customer form success state */
+.cf-success {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.cf-success-icon {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: grid; place-items: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+}
+.cf-success h2 { font-size: 2rem; }
+.cf-success p { margin-top: 1rem; }
+.cf-confetti {
+  position: relative;
+  height: 0;
+}
+.cf-confetti span {
+  position: absolute; top: 0; left: 50%;
+  width: 8px; height: 14px;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: fall 1.4s ease-in forwards;
+}
+
+@keyframes fall {
+  to { transform: translate(var(--dx,0), 220px) rotate(var(--rot, 220deg)); opacity: 0; }
+}
+
+/* ===== STEP 4: Admin Dashboard ===== */
+.adm-wrap {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 700px;
+}
+.adm-side {
+  background: #FFFFFF;
+  border-right: 1px solid var(--border);
+  padding: 2rem 1rem;
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.adm-side-brand {
+  font-family: var(--font-serif);
+  font-size: 1.4rem; font-weight: 400;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.2rem;
+}
+.adm-side-brand span { color: var(--accent); font-style: italic; }
+.adm-side-nav { display: flex; flex-direction: column; gap: .25rem; }
+.adm-side-nav a {
+  display: flex; align-items: center; gap: .8rem;
+  padding: .65rem 1rem;
+  border-radius: 6px;
+  font-size: .88rem;
+  color: var(--text-muted);
+  transition: all .2s;
+  cursor: pointer;
+}
+.adm-side-nav a:hover { background: var(--surface-2); color: var(--text); }
+.adm-side-nav a.is-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 500;
+}
+.adm-side-nav svg { width: 16px; height: 16px; flex-shrink: 0; }
+.adm-side-foot {
+  margin-top: auto;
+  padding: 1rem;
+  font-size: .72rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.adm-main { padding: 2rem 2.5rem; background: var(--surface-2); }
+.adm-h1 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; margin-bottom: .3rem; }
+.adm-h1-sub { color: var(--text-muted); font-size: .92rem; margin-bottom: 2rem; }
+
+.adm-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.adm-stat {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border);
+}
+.adm-stat-label {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: .5rem;
+}
+.adm-stat-num {
+  font-family: var(--font-serif);
+  font-size: 2.4rem; font-weight: 300;
+  line-height: 1;
+  color: var(--text);
+}
+.adm-stat-trend {
+  margin-top: .55rem;
+  font-size: .78rem;
+  color: #2D8B5C;
+  display: inline-flex; align-items: center; gap: .25rem;
+}
+.adm-stat-trend.flat { color: var(--text-muted); }
+
+.adm-cols {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;
+}
+.adm-panel {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 1.6rem;
+}
+.adm-panel h3 {
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+/* Mini chart */
+.adm-chart {
+  display: flex; align-items: flex-end; gap: .35rem;
+  height: 140px;
+}
+.adm-chart-bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--accent), var(--accent-hover));
+  border-radius: 3px 3px 0 0;
+  position: relative;
+  transition: height .8s ease;
+  min-height: 4px;
+}
+.adm-chart-bar::after {
+  content: attr(data-label);
+  position: absolute; bottom: -22px; left: 50%; transform: translateX(-50%);
+  font-size: .65rem; color: var(--text-muted);
+}
+.adm-chart-bar.now { background: linear-gradient(180deg, #2A2520, #4A3F32); }
+
+/* Recent activity */
+.adm-act { display: flex; flex-direction: column; gap: .8rem; }
+.adm-act-item {
+  display: flex; gap: .9rem;
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--border);
+}
+.adm-act-item:last-child { border-bottom: 0; padding-bottom: 0; }
+.adm-act-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  margin-top: 7px; flex-shrink: 0;
+}
+.adm-act-dot.green { background: #2D8B5C; }
+.adm-act-dot.gold { background: #DDA80F; }
+.adm-act-text { font-size: .88rem; line-height: 1.5; }
+.adm-act-text strong { color: var(--text); font-weight: 500; }
+.adm-act-time { font-size: .72rem; color: var(--text-muted); margin-top: .15rem; }
+
+/* ===== STEP 5: Customer list & detail ===== */
+.cl-toolbar {
+  display: flex; gap: 1rem; align-items: center;
+  margin-bottom: 1.5rem;
+}
+.cl-search {
+  flex: 1;
+  padding: .75rem 1rem .75rem 2.4rem;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2357534E' stroke-width='2'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>") no-repeat .85rem center;
+  font-size: .9rem;
+}
+.cl-search:focus { outline: none; border-color: var(--accent); }
+.cl-filter {
+  padding: .75rem 1rem;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface);
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+.cl-table {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.cl-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.6fr 1.4fr 1fr;
+  align-items: center;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  font-size: .9rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+.cl-row:last-child { border-bottom: 0; }
+.cl-row.head {
+  background: var(--surface-2);
+  font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); cursor: default; font-weight: 500;
+}
+.cl-row:not(.head):hover { background: var(--surface-2); }
+.cl-row.is-new { background: var(--accent-soft); }
+.cl-row.is-new:hover { background: #E8DAB8; }
+.cl-name { font-weight: 500; color: var(--text); }
+.cl-name-sub { font-size: .76rem; color: var(--text-muted); margin-top: .15rem; font-weight: 400; }
+.cl-pill {
+  display: inline-flex; align-items: center;
+  padding: .25rem .65rem;
+  border-radius: 999px;
+  font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+  background: var(--surface-2); color: var(--text-muted);
+}
+.cl-pill.gold { background: var(--accent-soft); color: var(--accent-hover); }
+.cl-pill.green { background: #DAEEDA; color: #2D8B5C; }
+
+/* Detail drawer */
+.cl-drawer {
+  position: absolute;
+  top: 0; right: 0;
+  width: 60%; max-width: 480px;
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -20px 0 60px rgba(0,0,0,.12);
+  transform: translateX(100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+  z-index: 10;
+  overflow-y: auto;
+  padding: 2rem;
+}
+.cl-drawer.is-open { transform: translateX(0); }
+.cl-drawer-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: all .2s;
+}
+.cl-drawer-close:hover { border-color: var(--accent); color: var(--accent); }
+.cl-drawer h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 300; margin-bottom: .25rem; }
+.cl-drawer-meta { color: var(--text-muted); font-size: .85rem; margin-bottom: 2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+
+.kv-list { display: grid; gap: 1rem; }
+.kv-row {
+  display: grid; grid-template-columns: 38% 1fr; gap: .8rem;
+  font-size: .88rem;
+  align-items: baseline;
+}
+.kv-row dt {
+  font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.kv-row dd { color: var(--text); }
+.kv-section-title {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); font-weight: 500;
+  margin-top: 1.6rem; margin-bottom: .8rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.kv-section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+/* ===== STEP 6: Newsletter editor ===== */
+.nle-wrap {
+  display: grid; grid-template-columns: 1fr 380px;
+  min-height: 700px;
+}
+.nle-editor { padding: 2.5rem 3rem; background: var(--surface-2); }
+.nle-side {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  padding: 2rem 1.6rem;
+  display: flex; flex-direction: column;
+  gap: 1.5rem;
+}
+.nle-side h3 {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 500;
+  margin-bottom: .8rem;
+}
+
+.nle-toolbar {
+  display: flex; gap: .25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .35rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.nle-toolbar button {
+  padding: .5rem .7rem;
+  border-radius: 4px;
+  font-size: .85rem;
+  color: var(--text-muted);
+  transition: all .2s;
+  min-width: 32px;
+}
+.nle-toolbar button:hover { background: var(--surface-2); color: var(--text); }
+.nle-toolbar button.is-active { background: var(--accent-soft); color: var(--accent-hover); }
+.nle-toolbar-sep { width: 1px; background: var(--border); margin: 0 .35rem; }
+.nle-ai {
+  margin-left: auto !important;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover)) !important;
+  color: #FFF !important;
+  font-size: .76rem !important;
+  letter-spacing: .06em;
+  padding: .5rem 1rem !important;
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.nle-ai:hover { transform: translateY(-1px); }
+.nle-subject {
+  width: 100%;
+  padding: .9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.nle-subject:focus { outline: none; border-color: var(--accent); }
+.nle-canvas {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 360px;
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.nle-canvas[contenteditable]:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+.nle-canvas h1 { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; }
+.nle-canvas h2 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; margin: 1.2rem 0 .6rem; }
+.nle-canvas p { color: var(--text); margin-bottom: 1rem; }
+.nle-canvas a { color: var(--accent); text-decoration: underline; }
+.nle-canvas em { font-style: italic; color: var(--accent); font-family: var(--font-serif); }
+
+/* Side: recipient list */
+.nle-rec {
+  display: flex; flex-direction: column;
+  gap: .35rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: .5rem;
+}
+.nle-rec::-webkit-scrollbar { width: 6px; }
+.nle-rec::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.nle-rec-row {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .55rem .7rem;
+  border-radius: 6px;
+  font-size: .85rem;
+  transition: background .15s;
+  cursor: pointer;
+}
+.nle-rec-row:hover { background: var(--surface-2); }
+.nle-rec-row input { accent-color: var(--accent); }
+.nle-rec-row span { flex: 1; }
+.nle-rec-row .meta { font-size: .72rem; color: var(--text-muted); }
+
+.nle-summary {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  font-size: .85rem;
+}
+.nle-summary-row {
+  display: flex; justify-content: space-between; padding: .25rem 0;
+  color: var(--text-muted);
+}
+.nle-summary-row strong { color: var(--text); font-weight: 500; }
+
+.nle-send-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent); color: #FFF;
+  border: none; border-radius: 8px;
+  font-size: .85rem; letter-spacing: .08em; text-transform: uppercase;
+  cursor: pointer;
+  transition: all .25s;
+  font-weight: 500;
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+}
+.nle-send-btn:hover:not(:disabled) { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,174,138,.3); }
+.nle-send-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Sending overlay */
+.nle-sending {
+  position: absolute;
+  inset: 0;
+  background: rgba(252,250,248,.96);
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.5rem;
+  z-index: 20;
+}
+.nle-sending.is-on { display: flex; }
+.nle-sending-ring {
+  width: 70px; height: 70px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.nle-sending-text {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text);
+}
+.nle-sending-counter { color: var(--text-muted); font-size: .9rem; }
+
+/* AI generate panel */
+.ai-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28,25,23,.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 30;
+  padding: 2rem;
+}
+.ai-overlay.is-on { display: flex; }
+.ai-modal {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 32rem; width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+.ai-modal h3 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; margin-bottom: .25rem; }
+.ai-modal p { font-size: .88rem; color: var(--text-muted); margin-bottom: 1.4rem; }
+.ai-prompt {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: .92rem;
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--font-sans);
+}
+.ai-prompt:focus { outline: none; border-color: var(--accent); }
+.ai-presets {
+  display: flex; gap: .5rem; flex-wrap: wrap;
+  margin: .8rem 0 1.5rem;
+}
+.ai-preset {
+  padding: .5rem .9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .76rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.ai-preset:hover { border-color: var(--accent); color: var(--accent); }
+.ai-actions { display: flex; gap: .8rem; justify-content: flex-end; }
+
+.ai-thinking {
+  display: flex; align-items: center; gap: .6rem;
+  color: var(--accent);
+  font-size: .85rem;
+  margin-top: .5rem;
+}
+.ai-thinking-dots {
+  display: inline-flex; gap: 3px;
+}
+.ai-thinking-dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  animation: ai-bounce 1.2s infinite;
+}
+.ai-thinking-dots span:nth-child(2) { animation-delay: .15s; }
+.ai-thinking-dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes ai-bounce {
+  0%, 60%, 100% { opacity: .3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* Confetti */
+.send-confetti {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+.send-confetti span {
+  position: absolute; top: -10px;
+  width: 10px; height: 14px;
+  border-radius: 2px;
+  animation: confetti-fall 2.4s ease-in forwards;
+}
+@keyframes confetti-fall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  background: var(--chrome-2);
+  color: var(--chrome-text);
+  border: 1px solid var(--cyan);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  font-size: .88rem;
+  display: flex; align-items: center; gap: .8rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.4);
+  transform: translateY(140%);
+  opacity: 0;
+  transition: all .4s cubic-bezier(.16,1,.3,1);
+  z-index: 100;
+}
+.toast.is-on { transform: translateY(0); opacity: 1; }
+.toast-icon {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: var(--chrome);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: .8rem;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .tour-stepnav-track { grid-template-columns: repeat(6, 1fr); gap: 0; }
+  .step-label { font-size: .65rem; max-width: 9ch; }
+  .tour-meta { flex-direction: column; align-items: flex-start; }
+  .tour-stats { grid-template-columns: repeat(2, 1fr); }
+
+  .web-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+  .web-hero::before { display: none; }
+  .web-hero-img-wrap { justify-content: center; }
+  .web-hero-img { max-width: 280px; }
+  .web-section { padding: 3rem 1.5rem; }
+  .svc-grid, .ba-grid, .rv-grid { grid-template-columns: 1fr; }
+
+  .doi-stages { grid-template-columns: 1fr; }
+  .doi-wrap { padding: 2rem 1.5rem; }
+
+  .cf-wrap { padding: 2rem 1.5rem; }
+  .cf-card { padding: 1.5rem; }
+  .cf-row { grid-template-columns: 1fr; }
+  .cf-progress span:not(.num) { display: none; }
+
+  .adm-wrap { grid-template-columns: 1fr; }
+  .adm-side { flex-direction: row; gap: 1rem; padding: 1rem; overflow-x: auto; }
+  .adm-side-foot { display: none; }
+  .adm-side-nav { flex-direction: row; gap: .25rem; flex-shrink: 0; }
+  .adm-side-brand { border-bottom: 0; padding: 0 .5rem; padding-bottom: 0; flex-shrink: 0; }
+  .adm-stats { grid-template-columns: repeat(2, 1fr); }
+  .adm-cols { grid-template-columns: 1fr; }
+  .adm-main { padding: 1.5rem; }
+
+  .cl-row { grid-template-columns: 1.6fr 1.4fr; font-size: .85rem; }
+  .cl-row > :nth-child(3),
+  .cl-row > :nth-child(4),
+  .cl-row > :nth-child(5) { display: none; }
+  .cl-drawer { width: 100%; max-width: none; }
+
+  .nle-wrap { grid-template-columns: 1fr; }
+  .nle-editor { padding: 1.5rem; }
+  .nle-side { border-left: 0; border-top: 1px solid var(--border); }
+
+  .tour-stage-wrap { padding: 0 .8rem 2rem; }
+  .tour-topbar-inner { padding: 1rem; }
+}
+
+/* Meta toggle button — hidden on desktop */
+.tour-meta-toggle { display: none; }
+
+/* ===== Phone-sized: tighter chrome, hide labels ===== */
+@media (max-width: 700px) {
+  /* Meta block becomes collapsible */
+  .tour-meta {
+    position: relative;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .5rem;
+    padding: .8rem 1rem .9rem !important;
+    border-bottom: 1px solid var(--chrome-line);
+  }
+  .tour-meta-left { gap: .8rem; align-items: center; padding-right: 2.5rem; }
+  .tour-step-num { font-size: 1.3rem; flex-shrink: 0; }
+  .tour-meta-text { min-width: 0; flex: 1; }
+  .tour-step-title { font-size: .92rem; }
+  .tour-step-desc { font-size: .8rem; line-height: 1.45; margin-top: .15rem; }
+
+  .tour-meta-toggle {
+    display: grid; place-items: center;
+    position: absolute; top: .65rem; right: .85rem;
+    width: 32px; height: 32px;
+    background: rgba(91,211,240,.06);
+    border: 1px solid var(--chrome-line);
+    border-radius: 999px;
+    color: var(--chrome-muted);
+    cursor: pointer;
+    transition: transform .25s ease, background .2s, color .2s;
+  }
+  .tour-meta-toggle:hover { color: var(--chrome-text); background: rgba(91,211,240,.12); }
+  .tour-meta-toggle svg { transition: transform .3s ease; }
+
+  /* Collapsed state: hide desc + tags, rotate chevron */
+  body.meta-collapsed .tour-step-desc,
+  body.meta-collapsed .tour-tech { display: none; }
+  body.meta-collapsed .tour-meta { padding-bottom: .65rem !important; border-bottom-color: transparent; }
+  body.meta-collapsed .tour-meta-toggle svg { transform: rotate(-90deg); }
+
+  .tour-tech { gap: .4rem; }
+  .tech-badge { font-size: .68rem; padding: .35rem .65rem; }
+
+  .tour-topbar-inner {
+    padding: .65rem .85rem;
+    gap: .65rem;
+  }
+  .tour-brand { gap: .5rem; font-size: .72rem; min-width: 0; flex: 1; }
+  .tour-brand strong { font-size: .62rem; letter-spacing: .08em; }
+  .tour-brand > div:not(.tour-brand-mark) { min-width: 0; overflow: hidden; }
+  .tour-brand > div span { display: none !important; }
+  .tour-brand-sep { display: none; }
+  .tour-brand em { font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .demo-safe-badge { margin-left: 0; flex-shrink: 0; }
+  .tour-back {
+    padding: .45rem .55rem;
+    font-size: 0;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .tour-back svg { width: 16px; height: 16px; }
+
+  .tour-stepnav { padding: 1.1rem 1rem .9rem; }
+  .tour-stepnav-track { gap: 0; }
+  .tour-stepnav-track::before,
+  .tour-stepnav-track::after { top: 14px; left: 8.33%; right: 8.33%; }
+  .step-pill { padding: 0; gap: .35rem; }
+  .step-dot { width: 28px; height: 28px; font-size: .78rem; }
+  .step-label { display: none; }
+
+  .stage-chrome { padding: .55rem .7rem; gap: .55rem; }
+  .stage-dots { gap: .3rem; }
+  .stage-dots span { width: 8px; height: 8px; }
+  .stage-url { font-size: .7rem; padding: .35rem .6rem; min-width: 0; overflow: hidden; }
+  .stage-url > span:not(.stage-url-path) {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+  }
+  .stage-url-path { display: none; }
+  .stage-tag { display: none; }
+
+  .tour-stage-wrap { padding: 0 .6rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="tour-bg"></div>
+
+<!-- ============== TOUR TOPBAR ============== -->
+<div class="tour-topbar">
+  <div class="tour-topbar-inner">
+    <div class="tour-brand">
+      <div class="tour-brand-mark">DK</div>
+      <div>
+        <strong>Daniel Kroh</strong>
+        <span style="display:block; font-size:.7rem; color:var(--chrome-muted); margin-top:.15rem;">Live-Demo · Kundenprojekt</span>
+      </div>
+      <div class="tour-brand-sep"></div>
+      <em>aesthéra</em>
+    </div>
+    <div class="demo-safe-badge" title="Diese Demo läuft komplett im Browser. Es werden keine Daten gespeichert oder versendet. Alle Namen, Bilder und E-Mails sind frei erfunden.">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span>Demo-Modus · keine echten Daten · kein E-Mail-Versand</span>
+    </div>
+    <a href="index.html" class="tour-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Zurück zur Übersicht
+    </a>
+  </div>
+
+  <!-- Step navigation -->
+  <div class="tour-stepnav">
+    <div class="tour-stepnav-track" id="stepNavTrack">
+      <button class="step-pill" data-step="1" data-state="active">
+        <span class="step-dot">1</span>
+        <span class="step-label">Marketing-Website</span>
+      </button>
+      <button class="step-pill" data-step="2">
+        <span class="step-dot">2</span>
+        <span class="step-label">Newsletter-Anmeldung</span>
+      </button>
+      <button class="step-pill" data-step="3">
+        <span class="step-dot">3</span>
+        <span class="step-label">Kundenformular</span>
+      </button>
+      <button class="step-pill" data-step="4">
+        <span class="step-dot">4</span>
+        <span class="step-label">Admin-Dashboard</span>
+      </button>
+      <button class="step-pill" data-step="5">
+        <span class="step-dot">5</span>
+        <span class="step-label">Kundenverwaltung</span>
+      </button>
+      <button class="step-pill" data-step="6">
+        <span class="step-dot">6</span>
+        <span class="step-label">Newsletter-Tool</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step meta -->
+  <div class="tour-meta" id="tourMeta">
+    <div class="tour-meta-left">
+      <span class="tour-step-num" id="stepNum">01</span>
+      <div class="tour-meta-text">
+        <div class="tour-step-title" id="stepTitle">Marketing-Website</div>
+        <div class="tour-step-desc" id="stepDesc">Local-SEO-optimiertes Schaufenster mit Behandlungen, Vorher/Nachher, Reviews und FAQ. Reduziert Anrufe & WhatsApp-Anfragen, qualifiziert Buchungen vor.</div>
+      </div>
+    </div>
+    <div class="tour-tech" id="stepTech">
+      <span class="tech-badge">Next.js 16</span>
+      <span class="tech-badge">SSR + ISR</span>
+      <span class="tech-badge amber">Schema.org / LocalBusiness</span>
+    </div>
+    <button class="tour-meta-toggle" id="tourMetaToggle" type="button" aria-expanded="true" aria-controls="tourMeta" aria-label="Details ein-/ausklappen">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ============== STAGE ============== -->
+<div class="tour-stage-wrap">
+  <div class="tour-stage" id="tourStage">
+
+    <!-- Stage chrome -->
+    <div class="stage-chrome">
+      <div class="stage-dots"><span></span><span></span><span></span></div>
+      <div class="stage-url">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>permanent-makeup-paderborn.de</span><span class="stage-url-path" id="stageUrlPath">/</span>
+      </div>
+      <div class="stage-tag" id="stageTag">PUBLIC</div>
+    </div>
+
+    <!-- ============ STEP 1 — Marketing Website ============ -->
+    <div class="step-view active" data-view="1">
+      <header class="ae-header">
+        <div class="ae-logo">aesth<span>é</span>ra</div>
+        <nav class="ae-nav">
+          <a class="is-active">Start</a>
+          <a>Behandlungen</a>
+          <a>Preise</a>
+          <a>Über mich</a>
+          <a>Kontakt</a>
+        </nav>
+      </header>
+
+      <section class="web-hero">
+        <div class="web-hero-content">
+          <span class="web-hero-eyebrow">Präzision trifft Ästhetik</span>
+          <h1 class="web-hero-title">Natürlichkeit<br><span class="italic">neu definiert</span></h1>
+          <p class="web-hero-desc">Besonders spezialisiert auf die Härchentechnik. Mehr als 7 Jahre Erfahrung für ultra-natürliche Ergebnisse und einen lebendigen Blick.</p>
+          <div class="web-hero-cta">
+            <button class="btn-ae" onclick="goToStep(3)">Termin vereinbaren</button>
+            <button class="btn-ae-outline">Behandlungen</button>
+          </div>
+        </div>
+        <div class="web-hero-img-wrap">
+          <div class="web-hero-img-deco"></div>
+          <div class="web-hero-img" style="background:linear-gradient(180deg,#E8DFD5,#C4AE8A); display:grid; place-items:center;">
+            <span style="font-family:var(--font-serif); font-size:5rem; color:#FFF; opacity:.6; font-style:italic;">Studio</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="web-section" style="background:var(--surface);">
+        <div class="web-section-head">
+          <h2>Expertise in PMU</h2>
+          <p>100% individuell abgestimmt auf deine Gesichtszüge</p>
+        </div>
+        <div class="svc-grid" id="svcGrid"></div>
+      </section>
+
+      <section class="web-section ba-section">
+        <div class="web-section-head">
+          <h2>Ergebnisse, die für sich sprechen</h2>
+          <p>Vorher / Nachher — verschieb den Regler zum Vergleichen</p>
+        </div>
+        <div class="ba-grid">
+          <div class="ba-slider" data-ba>
+            <img class="ba-img" src="public/swipe_3_vorher.jpeg" alt="Vorher" loading="lazy">
+            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_3_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <span class="ba-label before">Vorher</span>
+            <span class="ba-label after">Nachher</span>
+            <div class="ba-handle"></div>
+          </div>
+          <div class="ba-slider" data-ba>
+            <img class="ba-img" src="public/swipe_1_vorher.jpeg" alt="Vorher" loading="lazy">
+            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_1_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <span class="ba-label before">Vorher</span>
+            <span class="ba-label after">Nachher</span>
+            <div class="ba-handle"></div>
+          </div>
+          <div class="ba-slider" data-ba>
+            <img class="ba-img" src="public/swipe_2_vorher.jpeg" alt="Vorher" loading="lazy">
+            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_2_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <span class="ba-label before">Vorher</span>
+            <span class="ba-label after">Nachher</span>
+            <div class="ba-handle"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="web-section rv-section">
+        <div class="web-section-head">
+          <h2>Kundenstimmen</h2>
+          <p>Was Saras Kundinnen sagen</p>
+        </div>
+        <div class="rv-grid" id="rvGrid"></div>
+      </section>
+
+      <section class="web-section faq-section">
+        <div class="web-section-head">
+          <h2>Häufige Fragen</h2>
+          <p>Alles was du vor deinem Termin wissen musst</p>
+        </div>
+        <div class="faq-list" id="faqList"></div>
+      </section>
+
+      <section class="nl-strip">
+        <h2>Bleib in Kontakt</h2>
+        <p>Aktuelle Aktionen, Pflegetipps und neue Behandlungen — direkt in dein Postfach.</p>
+        <form class="nl-form" onsubmit="event.preventDefault(); goToStep(2);">
+          <input class="nl-input" type="email" placeholder="deine@email.de" required>
+          <button class="nl-submit" type="submit">Anmelden</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- ============ STEP 2 — DOI Flow ============ -->
+    <div class="step-view" data-view="2">
+      <div class="doi-wrap">
+        <div class="doi-stages" id="doiStages">
+          <div class="doi-stage is-active" data-doi="1">
+            <div class="doi-stage-num">01</div>
+            <h3>E-Mail eintragen</h3>
+            <p>Besucherin trägt ihre E-Mail auf der Website ein. Pending in der Datenbank, kein Versand erlaubt.</p>
+          </div>
+          <div class="doi-stage" data-doi="2">
+            <div class="doi-stage-num">02</div>
+            <h3>Bestätigungs-Mail</h3>
+            <p>Resend versendet eine Mail mit einmaligem Token. Server-Action im App-Router, mit Logging.</p>
+          </div>
+          <div class="doi-stage" data-doi="3">
+            <div class="doi-stage-num">03</div>
+            <h3>Bestätigung & Aktivierung</h3>
+            <p>Klick auf den Link aktiviert den Kontakt — DSGVO-konform, dokumentiert mit IP & Timestamp.</p>
+          </div>
+        </div>
+
+        <div id="doiActive">
+          <!-- Stage 1 -->
+          <div class="doi-card" data-doi-card="1">
+            <h2>Newsletter <span class="italic">abonnieren</span></h2>
+            <p>Trag deine E-Mail-Adresse ein. Du erhältst eine Bestätigungs-Mail, danach bist du dabei.</p>
+            <form id="doiForm" onsubmit="event.preventDefault(); doiSubmit();" style="display:grid; gap:.8rem;">
+              <input class="cf-input" id="doiEmail" type="email" placeholder="deine@email.de" required style="text-align:center; padding:1rem;">
+              <label class="cf-checkbox" style="justify-content:center;">
+                <input type="checkbox" required>
+                Ich akzeptiere die <a>Datenschutzerklärung</a>.
+              </label>
+              <button class="btn-ae" type="submit" style="margin-top:.5rem;">Anmelden</button>
+            </form>
+          </div>
+
+          <!-- Stage 2 (mail) -->
+          <div class="doi-card is-mail" data-doi-card="2" hidden>
+            <div class="mail-from">
+              An: <span id="doiMailTo">deine@email.de</span><br>
+              Von: <strong>aesthéra &lt;noreply@aesthera-mail.de&gt;</strong><br>
+              Betreff: Bestätige deine Newsletter-Anmeldung
+            </div>
+            <div class="mail-body">
+              <em>Willkommen bei aesthéra.</em><br><br>
+              Klick einmal auf den Button unten, um deine Anmeldung zu bestätigen — danach bekommst du Pflegetipps, neue Behandlungen und Aktionen direkt in dein Postfach.<br><br>
+              <a class="mail-cta" onclick="doiConfirm()">Anmeldung bestätigen</a><br>
+              <span class="mail-foot">Wenn du dich nicht angemeldet hast, ignoriere diese Mail einfach. Der Link verfällt nach 24h.</span>
+            </div>
+          </div>
+
+          <!-- Stage 3 (success) -->
+          <div class="doi-card" data-doi-card="3" hidden>
+            <div class="doi-success">
+              <div class="doi-success-icon">✓</div>
+              <h2>Du bist <span class="italic">dabei</span></h2>
+              <p>Deine Anmeldung ist bestätigt. Wir freuen uns, dich begrüßen zu dürfen.</p>
+              <div style="background:var(--surface-2); padding:1rem; border-radius:8px; font-size:.78rem; color:var(--text-muted); margin:1.5rem 0;">
+                <strong style="color:var(--text);">DSGVO-Audit-Log:</strong><br>
+                Confirmed: <span id="doiTimestamp"></span><br>
+                IP: 84.165.•••.••• · Token: <code style="color:var(--accent);" id="doiToken"></code>
+              </div>
+              <button class="btn-ae-outline" onclick="goToStep(3)">Weiter zum Kundenformular →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ STEP 3 — Customer form ============ -->
+    <div class="step-view" data-view="3">
+      <div class="cf-wrap">
+        <div class="cf-progress" id="cfProgress">
+          <div class="cf-progress-step is-active"><span class="num">1</span><span>Persönlich</span></div>
+          <div class="cf-progress-step"><span class="num">2</span><span>Behandlung</span></div>
+          <div class="cf-progress-step"><span class="num">3</span><span>Anamnese</span></div>
+          <div class="cf-progress-step"><span class="num">4</span><span>Bestätigen</span></div>
+        </div>
+
+        <div class="cf-card" id="cfCard">
+          <!-- Step 1 -->
+          <div class="cf-step active" data-cf="1">
+            <h2>Persönliche Daten</h2>
+            <p class="cf-sub">Damit wir dich für deinen Termin kennen.</p>
+            <div class="cf-row">
+              <div class="cf-field">
+                <label>Vorname</label>
+                <input class="cf-input" id="cfFirstName" type="text" placeholder="Sara">
+              </div>
+              <div class="cf-field">
+                <label>Nachname</label>
+                <input class="cf-input" id="cfLastName" type="text" placeholder="Müller">
+              </div>
+            </div>
+            <div class="cf-field">
+              <label>E-Mail</label>
+              <input class="cf-input" id="cfEmail" type="email" placeholder="sara@example.com">
+            </div>
+            <div class="cf-row">
+              <div class="cf-field">
+                <label>Telefon</label>
+                <input class="cf-input" id="cfPhone" type="tel" placeholder="+49 ...">
+              </div>
+              <div class="cf-field">
+                <label>Geburtsdatum</label>
+                <input class="cf-input" id="cfBirth" type="date">
+              </div>
+            </div>
+            <div class="cf-actions">
+              <span></span>
+              <button class="btn-ae btn-ae-sm" onclick="cfNext(1)">Weiter →</button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="cf-step" data-cf="2">
+            <h2>Welche Behandlung?</h2>
+            <p class="cf-sub">Du kannst die Auswahl später noch im Beratungsgespräch anpassen.</p>
+            <div class="cf-radio-group" id="cfTreatments">
+              <label class="cf-radio">
+                <input type="radio" name="cfTreatment" value="haerchentechnik">
+                <span class="cf-radio-name">Härchentechnik</span>
+                <span class="cf-radio-meta">ab 480€</span>
+              </label>
+              <label class="cf-radio">
+                <input type="radio" name="cfTreatment" value="softlips">
+                <span class="cf-radio-name">Softlips</span>
+                <span class="cf-radio-meta">ab 520€</span>
+              </label>
+              <label class="cf-radio">
+                <input type="radio" name="cfTreatment" value="nature-liner">
+                <span class="cf-radio-name">Nature Liner</span>
+                <span class="cf-radio-meta">ab 380€</span>
+              </label>
+              <label class="cf-radio">
+                <input type="radio" name="cfTreatment" value="lashlifting">
+                <span class="cf-radio-name">Lashlifting</span>
+                <span class="cf-radio-meta">ab 65€</span>
+              </label>
+              <label class="cf-radio">
+                <input type="radio" name="cfTreatment" value="browlifting">
+                <span class="cf-radio-name">Browlifting</span>
+                <span class="cf-radio-meta">ab 55€</span>
+              </label>
+            </div>
+            <div class="cf-actions">
+              <button class="btn-ae-outline btn-ae-sm" onclick="cfPrev(2)">← Zurück</button>
+              <button class="btn-ae btn-ae-sm" onclick="cfNext(2)">Weiter →</button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="cf-step" data-cf="3">
+            <h2>Kurze Anamnese</h2>
+            <p class="cf-sub">Für deine Sicherheit und das beste Ergebnis.</p>
+            <div class="cf-field">
+              <label>Bist du aktuell schwanger oder stillst du?</label>
+              <div class="cf-radio-group">
+                <label class="cf-radio"><input type="radio" name="cfPregnant" value="nein"><span class="cf-radio-name">Nein</span></label>
+                <label class="cf-radio"><input type="radio" name="cfPregnant" value="ja"><span class="cf-radio-name">Ja</span></label>
+              </div>
+            </div>
+            <div class="cf-field">
+              <label>Allergien oder bekannte Hauterkrankungen?</label>
+              <textarea class="cf-input" id="cfAllergies" rows="3" placeholder="Optional — z.B. Nickel-Allergie, Neurodermitis, ..."></textarea>
+            </div>
+            <div class="cf-field">
+              <label>Nimmst du blutverdünnende Medikamente?</label>
+              <div class="cf-radio-group">
+                <label class="cf-radio"><input type="radio" name="cfBlood" value="nein"><span class="cf-radio-name">Nein</span></label>
+                <label class="cf-radio"><input type="radio" name="cfBlood" value="ja"><span class="cf-radio-name">Ja, derzeit</span></label>
+              </div>
+            </div>
+            <div class="cf-actions">
+              <button class="btn-ae-outline btn-ae-sm" onclick="cfPrev(3)">← Zurück</button>
+              <button class="btn-ae btn-ae-sm" onclick="cfNext(3)">Weiter →</button>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="cf-step" data-cf="4">
+            <h2>Alles korrekt?</h2>
+            <p class="cf-sub">Prüf deine Daten und schick die Anfrage ab.</p>
+            <div id="cfReview" style="background:var(--surface-2); border-radius:8px; padding:1.2rem 1.4rem; font-size:.88rem; line-height:1.8; margin-bottom:1.4rem;"></div>
+            <label class="cf-checkbox">
+              <input type="checkbox" id="cfAgreeNl">
+              Ja, schick mir auch den aesthéra-Newsletter mit Pflegetipps und Aktionen.
+            </label>
+            <label class="cf-checkbox">
+              <input type="checkbox" required id="cfAgreeDsgvo">
+              Ich akzeptiere die <a>Datenschutzerklärung</a> und stimme der Verarbeitung meiner Daten zu.
+            </label>
+            <div class="cf-actions">
+              <button class="btn-ae-outline btn-ae-sm" onclick="cfPrev(4)">← Zurück</button>
+              <button class="btn-ae btn-ae-sm" onclick="cfSubmit()">Anfrage senden</button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="cf-step" data-cf="success">
+            <div class="cf-success">
+              <div class="cf-success-icon">✓</div>
+              <h2 style="font-family:var(--font-serif); font-weight:300;">Deine Anfrage ist <span class="italic">da</span></h2>
+              <p>Sara meldet sich zeitnah persönlich für die Terminbestätigung.</p>
+              <div class="cf-confetti" id="cfConfetti"></div>
+              <div style="margin-top:2rem; display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap;">
+                <button class="btn-ae btn-ae-sm" onclick="goToStep(4)">Im Admin ansehen →</button>
+                <button class="btn-ae-outline btn-ae-sm" onclick="cfReset()">Neue Anfrage</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ STEP 4 — Admin Dashboard ============ -->
+    <div class="step-view" data-view="4">
+      <div class="adm-wrap">
+        <aside class="adm-side">
+          <div class="adm-side-brand">aesth<span>é</span>ra<br><span style="font-family:var(--font-sans); font-style:normal; color:var(--text-muted); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;">Admin</span></div>
+          <nav class="adm-side-nav">
+            <a class="is-active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Dashboard
+            </a>
+            <a onclick="goToStep(5)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Kundinnen
+            </a>
+            <a onclick="goToStep(6)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              Newsletter
+            </a>
+            <a>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Einstellungen
+            </a>
+          </nav>
+          <div class="adm-side-foot">Sara Klein<br>sara@aesthera-mail.de</div>
+        </aside>
+
+        <main class="adm-main">
+          <h1 class="adm-h1">Hallo Sara <span class="italic">·</span> guten Morgen</h1>
+          <p class="adm-h1-sub">Hier ist dein Überblick — Stand heute.</p>
+
+          <div class="adm-stats" id="admStats">
+            <div class="adm-stat">
+              <div class="adm-stat-label">Kundinnen gesamt</div>
+              <div class="adm-stat-num" id="statCustomers">42</div>
+              <div class="adm-stat-trend">▲ +<span id="statCustomersDelta">3</span> diese Woche</div>
+            </div>
+            <div class="adm-stat">
+              <div class="adm-stat-label">Newsletter-Abos</div>
+              <div class="adm-stat-num" id="statSubs">128</div>
+              <div class="adm-stat-trend">▲ +12 diesen Monat</div>
+            </div>
+            <div class="adm-stat">
+              <div class="adm-stat-label">Offene Anfragen</div>
+              <div class="adm-stat-num" id="statRequests">7</div>
+              <div class="adm-stat-trend flat">Bleibt zu reagieren</div>
+            </div>
+            <div class="adm-stat">
+              <div class="adm-stat-label">Conversion-Rate</div>
+              <div class="adm-stat-num">68<span style="font-size:1.4rem;">%</span></div>
+              <div class="adm-stat-trend">▲ +4% vs. Vormonat</div>
+            </div>
+          </div>
+
+          <div class="adm-cols">
+            <div class="adm-panel">
+              <h3>Anfragen pro Monat</h3>
+              <div class="adm-chart" id="admChart"></div>
+              <div style="margin-top:2rem; font-size:.78rem; color:var(--text-muted); display:flex; gap:1.2rem;">
+                <span style="display:inline-flex; align-items:center; gap:.4rem;"><span style="width:10px; height:10px; background:var(--accent); border-radius:2px;"></span> Vorherige Monate</span>
+                <span style="display:inline-flex; align-items:center; gap:.4rem;"><span style="width:10px; height:10px; background:#2A2520; border-radius:2px;"></span> Aktueller Monat</span>
+              </div>
+            </div>
+
+            <div class="adm-panel">
+              <h3>Letzte Aktivität</h3>
+              <div class="adm-act" id="admAct"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- ============ STEP 5 — Customer list ============ -->
+    <div class="step-view" data-view="5">
+      <div class="adm-wrap" style="position:relative;">
+        <aside class="adm-side">
+          <div class="adm-side-brand">aesth<span>é</span>ra<br><span style="font-family:var(--font-sans); font-style:normal; color:var(--text-muted); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;">Admin</span></div>
+          <nav class="adm-side-nav">
+            <a onclick="goToStep(4)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Dashboard
+            </a>
+            <a class="is-active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Kundinnen
+            </a>
+            <a onclick="goToStep(6)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+              Newsletter
+            </a>
+          </nav>
+          <div class="adm-side-foot">Sara Klein</div>
+        </aside>
+
+        <main class="adm-main">
+          <h1 class="adm-h1">Kundinnen</h1>
+          <p class="adm-h1-sub">Alle Anfragen, sortiert nach neuesten zuerst.</p>
+
+          <div class="cl-toolbar">
+            <input class="cl-search" id="clSearch" placeholder="Nach Name, E-Mail oder Behandlung suchen ...">
+            <select class="cl-filter" id="clFilter">
+              <option value="">Alle Behandlungen</option>
+              <option>Härchentechnik</option>
+              <option>Softlips</option>
+              <option>Nature Liner</option>
+              <option>Lashlifting</option>
+              <option>Browlifting</option>
+            </select>
+          </div>
+
+          <div class="cl-table" id="clTable">
+            <div class="cl-row head">
+              <div>Kundin</div>
+              <div>E-Mail</div>
+              <div>Behandlung</div>
+              <div>Eingegangen</div>
+              <div>Status</div>
+            </div>
+            <!-- rows injected -->
+          </div>
+        </main>
+
+        <!-- Detail drawer -->
+        <aside class="cl-drawer" id="clDrawer">
+          <button class="cl-drawer-close" onclick="closeDrawer()">×</button>
+          <div id="clDrawerBody"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ============ STEP 6 — Newsletter editor ============ -->
+    <div class="step-view" data-view="6">
+      <div class="nle-wrap" style="position:relative;">
+        <div class="nle-editor">
+          <div class="nle-toolbar">
+            <button title="Fett" data-cmd="bold"><strong>B</strong></button>
+            <button title="Kursiv" data-cmd="italic"><em>I</em></button>
+            <button title="Unterstrichen" data-cmd="underline"><u>U</u></button>
+            <div class="nle-toolbar-sep"></div>
+            <button title="Überschrift" data-cmd="formatBlock" data-arg="H2">H</button>
+            <button title="Zitat" data-cmd="formatBlock" data-arg="BLOCKQUOTE">"</button>
+            <button title="Link" data-cmd="createLink">⌘ Link</button>
+            <div class="nle-toolbar-sep"></div>
+            <button title="Liste" data-cmd="insertUnorderedList">• Liste</button>
+            <button class="nle-ai" onclick="openAi()">✨ KI-Vorschlag</button>
+          </div>
+
+          <input class="nle-subject" id="nleSubject" type="text" value="Neue Behandlungen für den Frühling — Härchentechnik & Lashlifting">
+
+          <div class="nle-canvas" id="nleCanvas" contenteditable="true">
+            <h1>Frühling im aesthéra-Studio</h1>
+            <p>Liebe <em>Kundin</em>,</p>
+            <p>der Frühling kommt — und mit ihm die Lust auf einen frischen, natürlichen Look. Diesen Monat habe ich zwei Highlights für dich:</p>
+            <h2>Härchentechnik — der Klassiker, neu interpretiert</h2>
+            <p>Mit feinster Nadelführung zeichne ich einzelne Härchen so präzise, dass selbst aus nächster Nähe niemand erkennt, dass deine Brauen "gemacht" sind.</p>
+            <h2>Lashlifting + Färben — der Wow-Effekt für deinen Blick</h2>
+            <p>Für 65€ bekommst du in 60 Minuten einen natürlichen Wimpernswing inklusive Färbung — perfekt für die Tage, an denen Mascara einfach nicht reichen soll.</p>
+            <p>Termine ab sofort buchbar.<br>Herzliche Grüße<br>Sara</p>
+          </div>
+        </div>
+
+        <aside class="nle-side">
+          <div>
+            <h3>Empfänger</h3>
+            <div class="nle-rec" id="nleRec"></div>
+          </div>
+
+          <div class="nle-summary" id="nleSummary"></div>
+
+          <button class="nle-send-btn" id="nleSendBtn" onclick="sendNewsletter()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            Newsletter versenden
+          </button>
+
+          <div style="font-size:.75rem; color:var(--text-muted); line-height:1.6;">
+            Versand erfolgt über <strong style="color:var(--text);">Resend</strong> mit personalisierter Anrede pro Empfänger. Öffnungs- & Klick-Tracking aktiv.
+          </div>
+        </aside>
+
+        <!-- Sending overlay -->
+        <div class="nle-sending" id="nleSending">
+          <div class="nle-sending-ring"></div>
+          <div class="nle-sending-text">Newsletter wird versendet...</div>
+          <div class="nle-sending-counter" id="nleCounter">0 von 0</div>
+        </div>
+
+        <!-- Send confetti -->
+        <div class="send-confetti" id="sendConfetti" style="display:none;"></div>
+
+        <!-- AI overlay -->
+        <div class="ai-overlay" id="aiOverlay">
+          <div class="ai-modal">
+            <h3>Newsletter <span class="italic">generieren</span></h3>
+            <p>Beschreib kurz, worum es geht — Sara erhält einen fertigen Entwurf, den sie anpassen kann.</p>
+            <textarea class="ai-prompt" id="aiPrompt" placeholder="z.B. Frühlingsaktion auf Lashlifting & Härchentechnik, Termine im April"></textarea>
+            <div class="ai-presets">
+              <span class="ai-preset" onclick="document.getElementById('aiPrompt').value=this.textContent">Frühlingsaktion auf Lashlifting</span>
+              <span class="ai-preset" onclick="document.getElementById('aiPrompt').value=this.textContent">Pflegetipps nach PMU</span>
+              <span class="ai-preset" onclick="document.getElementById('aiPrompt').value=this.textContent">Neuer Behandlungsraum</span>
+            </div>
+            <div class="ai-thinking" id="aiThinking" style="display:none;">
+              <span class="ai-thinking-dots"><span></span><span></span><span></span></span>
+              KI generiert deinen Entwurf...
+            </div>
+            <div class="ai-actions">
+              <button class="btn-ae-outline btn-ae-sm" onclick="closeAi()">Abbrechen</button>
+              <button class="btn-ae btn-ae-sm" onclick="runAi()">Entwurf erstellen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /.tour-stage -->
+</div> <!-- /.tour-stage-wrap -->
+
+<!-- ============== TOUR CONTROLS ============== -->
+<div class="tour-controls">
+  <button class="tour-btn" id="prevBtn" onclick="goToStep(currentStep - 1)" disabled>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+    Vorheriger Schritt
+  </button>
+  <div class="tour-progress-text">
+    Schritt <strong id="progressNow">1</strong> von <strong>6</strong> · <span id="progressName">Marketing-Website</span>
+  </div>
+  <button class="tour-btn primary" id="nextBtn" onclick="goToStep(currentStep + 1)">
+    Nächster Schritt
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+</div>
+
+<!-- ============== STATS ============== -->
+<div class="tour-stats">
+  <div class="stat-card">
+    <div class="stat-num"><em>6</em> Module</div>
+    <div class="stat-label">Vernetzt im Backend</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">Double-<em>Opt-In</em></div>
+    <div class="stat-label">DSGVO-konform</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num"><em>KI</em>-Newsletter</div>
+    <div class="stat-label">Gemini-gestützter Editor</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num"><em>1</em> Stack</div>
+    <div class="stat-label">Next.js · Prisma · Resend</div>
+  </div>
+</div>
+
+<!-- ============== TOAST ============== -->
+<div class="toast" id="toast">
+  <span class="toast-icon">!</span>
+  <div id="toastText">Hi</div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const STEP_META = {
+  1: {
+    num: '01', title: 'Marketing-Website',
+    desc: 'Local-SEO-optimiertes Schaufenster mit Behandlungen, Vorher/Nachher, Reviews und FAQ. Reduziert Anrufe & WhatsApp-Anfragen, qualifiziert Buchungen vor.',
+    url: '/',
+    tag: 'PUBLIC',
+    tech: ['Next.js 16', 'SSR + ISR', '<span class="tech-badge amber">Schema.org / LocalBusiness</span>']
+  },
+  2: {
+    num: '02', title: 'Newsletter-Anmeldung · Double-Opt-In',
+    desc: 'DSGVO-konformer Anmeldeflow: E-Mail eintragen → Bestätigungsmail → Token-Click. Ohne Confirmed-Status keine Versanderlaubnis.',
+    url: '/newsletter/subscribe',
+    tag: 'PUBLIC',
+    tech: ['Resend', 'Token + Expiry', '<span class="tech-badge amber">DSGVO-Audit-Log</span>']
+  },
+  3: {
+    num: '03', title: 'Kundenformular · Multi-Step',
+    desc: 'Digitale Erfassung statt Papier. Persönliche Daten, Behandlung, Anamnese & Bestätigung — Validation client- und server-side.',
+    url: '/kundenformular',
+    tag: 'PUBLIC',
+    tech: ['React Server Actions', 'Zod-Validation', '<span class="tech-badge amber">Prisma → SQLite</span>']
+  },
+  4: {
+    num: '04', title: 'Admin-Dashboard',
+    desc: 'Geschützte Übersicht für Sara: KPIs, Anfragen-Trend, letzte Aktivitäten. Authentifiziert via Middleware mit Session-Cookies.',
+    url: '/admin',
+    tag: 'PROTECTED',
+    tech: ['Middleware-Auth', 'Charts (recharts)', '<span class="tech-badge amber">Session-Cookies</span>']
+  },
+  5: {
+    num: '05', title: 'Kundenverwaltung',
+    desc: 'Volltextsuche, Filter, Detail-Drawer mit kompletter Historie. Neu eingegangene Anfragen sind sofort sichtbar.',
+    url: '/admin/customers',
+    tag: 'PROTECTED',
+    tech: ['Server Components', 'Optimistic UI', '<span class="tech-badge amber">Drawer-Pattern</span>']
+  },
+  6: {
+    num: '06', title: 'Newsletter-Tool · Editor + Versand',
+    desc: 'Tiptap-basierter Rich-Editor mit KI-Generator. Empfänger-Selektion, Versand über Resend mit Personalisierung & Tracking.',
+    url: '/admin/newsletter',
+    tag: 'PROTECTED',
+    tech: ['Tiptap', 'Gemini AI', '<span class="tech-badge amber">Resend + Webhooks</span>']
+  }
+};
+
+let currentStep = 1;
+let cfStep = 1;
+const cfData = {};
+
+// Demo customer database — fictional demo personas, no relation to real customers
+const customers = [
+  { id: 1, firstName: 'Marlene',  lastName: 'Fuchsberger', email: 'marlene.f@demo-mail.de',  phone: '+49 171 ••• 1042', treatment: 'Härchentechnik', date: 'vor 2 Std.',    status: 'Neu',     newsletter: true,  birth: '1992-04-18', allergies: 'Keine', pregnant: 'nein', blood: 'nein' },
+  { id: 2, firstName: 'Pia',      lastName: 'Veltmann',    email: 'pia.veltmann@beispiel.de', phone: '+49 152 ••• 8244', treatment: 'Softlips',       date: 'vor 5 Std.',    status: 'Bestätigt', newsletter: true,  birth: '1988-09-02', allergies: 'Nickel', pregnant: 'nein', blood: 'nein' },
+  { id: 3, firstName: 'Henrike',  lastName: 'Borchert',    email: 'h.borchert@example.com',   phone: '+49 176 ••• 5527', treatment: 'Lashlifting',    date: 'gestern',       status: 'Bestätigt', newsletter: false, birth: '1995-11-26', allergies: 'Keine', pregnant: 'nein', blood: 'nein' },
+  { id: 4, firstName: 'Yvonne',   lastName: 'Quattlitz',   email: 'yvonne.q@demo-mail.de',    phone: '+49 173 ••• 9013', treatment: 'Härchentechnik', date: '3 Tage',        status: 'Bestätigt', newsletter: true,  birth: '1990-01-14', allergies: 'Keine', pregnant: 'nein', blood: 'nein' },
+  { id: 5, firstName: 'Saskia',   lastName: 'Pohlmann',    email: 's.pohlmann@beispiel.de',   phone: '+49 162 ••• 3471', treatment: 'Browlifting',    date: '1 Woche',       status: 'Termin', newsletter: false, birth: '1985-07-30', allergies: 'Keine', pregnant: 'nein', blood: 'nein' },
+  { id: 6, firstName: 'Thalia',   lastName: 'Westerkamp',  email: 'thalia.w@example.com',     phone: '+49 152 ••• 6088', treatment: 'Nature Liner',   date: '2 Wochen',      status: 'Termin', newsletter: true,  birth: '1993-03-08', allergies: 'Keine', pregnant: 'nein', blood: 'nein' }
+];
+
+// Recipients for newsletter — confirmed subscribers
+const recipients = customers.filter(c => c.newsletter).map(c => ({ id: c.id, name: c.firstName + ' ' + c.lastName, email: c.email, selected: true }));
+// Plus a few standalone subscribers (also fictional)
+recipients.push(
+  { id: 100, name: 'Almut Krenzler',      email: 'almut.k@demo-mail.de',     selected: true },
+  { id: 101, name: 'Bettina Aalbers',     email: 'b.aalbers@beispiel.de',    selected: true },
+  { id: 102, name: 'Cornelia Pötter',     email: 'cornelia.p@example.com',   selected: true },
+  { id: 103, name: 'Dorothea Singh',      email: 'd.singh@demo-mail.de',     selected: false }
+);
+
+// ============================================================
+// STEP NAVIGATION
+// ============================================================
+function goToStep(n) {
+  if (n < 1 || n > 6) return;
+  currentStep = n;
+
+  // Update views
+  document.querySelectorAll('.step-view').forEach(v => {
+    v.classList.toggle('active', parseInt(v.dataset.view) === n);
+  });
+
+  // Update step pills
+  document.querySelectorAll('.step-pill').forEach(p => {
+    const sn = parseInt(p.dataset.step);
+    if (sn < n) p.dataset.state = 'done';
+    else if (sn === n) p.dataset.state = 'active';
+    else p.dataset.state = '';
+  });
+
+  // Progress bar (between dots, percentage of track that's "done")
+  const segments = 5; // 6 dots → 5 segments between them
+  const filled = (n - 1) / segments * 100;
+  document.getElementById('stepNavTrack').style.setProperty('--progress', (filled * (100 - 16.66) / 100) + '%');
+
+  // Meta
+  const m = STEP_META[n];
+  document.getElementById('stepNum').textContent = m.num;
+  document.getElementById('stepTitle').textContent = m.title;
+  document.getElementById('stepDesc').textContent = m.desc;
+  document.getElementById('stepTech').innerHTML = m.tech.map(t => t.startsWith('<') ? t : `<span class="tech-badge">${t}</span>`).join('');
+
+  // Stage chrome
+  document.getElementById('stageUrlPath').textContent = m.url;
+  const tagEl = document.getElementById('stageTag');
+  tagEl.textContent = m.tag;
+  tagEl.style.color = m.tag === 'PROTECTED' ? 'var(--amber)' : 'var(--cyan)';
+  tagEl.style.borderColor = m.tag === 'PROTECTED' ? 'rgba(242,179,107,.4)' : 'rgba(91,211,240,.3)';
+  tagEl.style.background = m.tag === 'PROTECTED' ? 'rgba(242,179,107,.08)' : 'rgba(91,211,240,.08)';
+
+  // Bottom controls
+  document.getElementById('prevBtn').disabled = n === 1;
+  const nextBtn = document.getElementById('nextBtn');
+  if (n === 6) { nextBtn.disabled = true; nextBtn.style.opacity='.4'; }
+  else { nextBtn.disabled = false; nextBtn.style.opacity=''; }
+  document.getElementById('progressNow').textContent = n;
+  document.getElementById('progressName').textContent = m.title;
+
+  // Scroll to top of stage
+  window.scrollTo({ top: document.querySelector('.tour-stage-wrap').offsetTop - 120, behavior: 'smooth' });
+
+  // Hooks per step
+  if (n === 4) renderAdminChart();
+}
+
+// Pill clicks
+document.querySelectorAll('.step-pill').forEach(p => {
+  p.addEventListener('click', () => goToStep(parseInt(p.dataset.step)));
+});
+
+// Keyboard
+window.addEventListener('keydown', (e) => {
+  if (e.target.matches('input, textarea, [contenteditable]')) return;
+  if (e.key === 'ArrowRight') goToStep(currentStep + 1);
+  if (e.key === 'ArrowLeft')  goToStep(currentStep - 1);
+});
+
+// Meta toggle (mobile)
+(function initMetaToggle() {
+  const btn = document.getElementById('tourMetaToggle');
+  if (!btn) return;
+  // Default: collapsed on phone-sized viewports
+  if (window.matchMedia('(max-width: 700px)').matches) {
+    document.body.classList.add('meta-collapsed');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  btn.addEventListener('click', () => {
+    const collapsed = document.body.classList.toggle('meta-collapsed');
+    btn.setAttribute('aria-expanded', String(!collapsed));
+  });
+})();
+
+// ============================================================
+// STEP 1 — Website content
+// ============================================================
+const services = [
+  { title: 'Härchentechnik', desc: 'Feinste Härchenzeichnung für perfekt geformte, natürliche Augenbrauen.', icon: 'H' },
+  { title: 'Softlips',       desc: 'Sanfte Lippenschattierung für optisch mehr Volumen und Frische.',         icon: 'S' },
+  { title: 'Nature Liner',   desc: 'Wimpernkranzverdichtung für einen ausdrucksstarken, natürlichen Blick.',  icon: 'N' },
+  { title: 'Lashlifting',    desc: 'Natürlicher Wimpernswing inkl. Färben & Keratinpflege.',                  icon: 'L' },
+  { title: 'Browlifting',    desc: 'Perfekt gepflegte, volle Augenbrauen in Traumform.',                       icon: 'B' },
+  { title: 'Nature Freckles',desc: 'Natürlich wirkende Sommersprossen für einen jugendlichen Look.',           icon: 'F' }
+];
+document.getElementById('svcGrid').innerHTML = services.map(s => `
+  <article class="svc-card">
+    <div class="svc-thumb"><span class="svc-thumb-icon">${s.icon}</span></div>
+    <div class="svc-body">
+      <h3 class="svc-title">${s.title}</h3>
+      <p class="svc-desc">${s.desc}</p>
+      <a class="svc-link">Mehr erfahren →</a>
+    </div>
+  </article>
+`).join('');
+
+const reviews = [
+  { author: 'Marlene F.',  text: 'Die Stimmung war entspannt, alle Fragen wurden kompetent beantwortet und das Ergebnis ist genau wie erhofft — total natürlich und schön.' },
+  { author: 'Henrike B.',  text: 'Sara arbeitet unglaublich präzise, sauber und hochprofessionell. Mittlerweile bin ich Stammkundin und komme regelmäßig.' },
+  { author: 'Pia V.',      text: 'Ich bin durch Empfehlungen auf Sara aufmerksam geworden. Bei jedem Termin super glücklich mit dem Ergebnis — sie nimmt sich Zeit und kann ihr Handwerk.' }
+];
+document.getElementById('rvGrid').innerHTML = reviews.map(r => `
+  <div class="rv-card">
+    <div class="rv-stars">★★★★★</div>
+    <p class="rv-text">"${r.text}"</p>
+    <div class="rv-author">— ${r.author}</div>
+  </div>
+`).join('');
+
+const faqs = [
+  { q: 'Wie lange hält ein Permanent Make-up?', a: 'In der Regel 1–3 Jahre. Die Haltbarkeit hängt von Hauttyp, Pflege und Sonneneinstrahlung ab. Eine kleine Auffrischung nach 12–18 Monaten hält das Ergebnis frisch.' },
+  { q: 'Tut die Behandlung weh?', a: 'Vor jeder Behandlung wird die Haut mit einer hochwertigen Betäubungscreme vorbereitet. Die meisten Kundinnen empfinden ein leichtes Kribbeln oder Druckgefühl — keine Schmerzen.' },
+  { q: 'Wie lange dauert ein Termin?', a: 'Plan etwa 2,5 bis 3 Stunden ein. Darin enthalten: Beratung, Vorzeichnung, eigentliche Behandlung und Pflegehinweise.' },
+  { q: 'Gibt es eine Garantie auf das Ergebnis?', a: 'Ja — eine Nacharbeit ist im Preis enthalten. So stelle ich sicher, dass dein Ergebnis perfekt sitzt.' }
+];
+document.getElementById('faqList').innerHTML = faqs.map((f, i) => `
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="faq-q-icon">+</span></button>
+    <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+  </div>
+`).join('');
+function toggleFaq(i) {
+  const items = document.querySelectorAll('.faq-item');
+  items.forEach((el, idx) => el.classList.toggle('open', idx === i && !el.classList.contains('open')));
+}
+
+// Before/After interaction
+function setupBaSliders() {
+  document.querySelectorAll('[data-ba]').forEach(el => {
+    const setPos = (clientX) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const clamped = Math.max(2, Math.min(98, x));
+      el.style.setProperty('--ba-pos', clamped + '%');
+    };
+    let active = false;
+    el.addEventListener('mousedown', e => { active = true; setPos(e.clientX); });
+    el.addEventListener('mousemove', e => { if (active) setPos(e.clientX); });
+    window.addEventListener('mouseup', () => active = false);
+    el.addEventListener('mousemove', e => { if (e.buttons === 0) return; setPos(e.clientX); });
+    el.addEventListener('touchstart', e => setPos(e.touches[0].clientX), {passive:true});
+    el.addEventListener('touchmove',  e => setPos(e.touches[0].clientX), {passive:true});
+    el.addEventListener('click', e => setPos(e.clientX));
+  });
+}
+setupBaSliders();
+
+// ============================================================
+// STEP 2 — Double Opt-In
+// ============================================================
+function doiSubmit() {
+  const email = document.getElementById('doiEmail').value;
+  document.getElementById('doiMailTo').textContent = email || 'deine@email.de';
+  setDoiStage(2);
+  toast('E-Mail mit Bestätigungslink versendet.', 'mail');
+}
+function doiConfirm() {
+  setDoiStage(3);
+  document.getElementById('doiTimestamp').textContent = new Date().toLocaleString('de-DE');
+  document.getElementById('doiToken').textContent = 't_' + Math.random().toString(36).slice(2, 10);
+  toast('Anmeldung bestätigt.', 'check');
+}
+function setDoiStage(n) {
+  document.querySelectorAll('.doi-stage').forEach(s => {
+    const sn = parseInt(s.dataset.doi);
+    s.classList.toggle('is-active', sn === n);
+    s.classList.toggle('is-done', sn < n);
+  });
+  document.querySelectorAll('[data-doi-card]').forEach(c => {
+    c.hidden = parseInt(c.dataset.doiCard) !== n;
+  });
+}
+
+// ============================================================
+// STEP 3 — Customer form
+// ============================================================
+function cfNext(from) {
+  // collect data from current step
+  if (from === 1) {
+    cfData.firstName = document.getElementById('cfFirstName').value || 'Marlene';
+    cfData.lastName  = document.getElementById('cfLastName').value  || 'Fuchsberger';
+    cfData.email     = document.getElementById('cfEmail').value     || 'marlene.f@demo-mail.de';
+    cfData.phone     = document.getElementById('cfPhone').value     || '+49 171 ••• 1042';
+    cfData.birth     = document.getElementById('cfBirth').value     || '';
+  }
+  if (from === 2) {
+    const r = document.querySelector('input[name="cfTreatment"]:checked');
+    cfData.treatment = r ? r.value : 'haerchentechnik';
+  }
+  if (from === 3) {
+    cfData.pregnant = (document.querySelector('input[name="cfPregnant"]:checked') || {value:'nein'}).value;
+    cfData.allergies = document.getElementById('cfAllergies').value || 'Keine';
+    cfData.blood = (document.querySelector('input[name="cfBlood"]:checked') || {value:'nein'}).value;
+  }
+  showCfStep(from + 1);
+  if (from === 3) renderCfReview();
+}
+function cfPrev(from) { showCfStep(from - 1); }
+function showCfStep(n) {
+  cfStep = n;
+  document.querySelectorAll('.cf-step').forEach(s => s.classList.remove('active'));
+  const target = (n === 'success') ? document.querySelector('[data-cf="success"]') : document.querySelector('[data-cf="' + n + '"]');
+  if (target) target.classList.add('active');
+  document.querySelectorAll('.cf-progress-step').forEach((p, i) => {
+    p.classList.remove('is-active', 'done');
+    if (typeof n === 'number') {
+      if (i + 1 < n) p.classList.add('done');
+      if (i + 1 === n) p.classList.add('is-active');
+    }
+  });
+  // Animate radio selection
+  document.querySelectorAll('.cf-radio').forEach(r => {
+    const inp = r.querySelector('input');
+    inp.addEventListener('change', () => {
+      r.parentElement.querySelectorAll('.cf-radio').forEach(rr => rr.classList.remove('is-selected'));
+      r.classList.add('is-selected');
+    }, { once: true });
+  });
+}
+function renderCfReview() {
+  const treatmentNames = {
+    'haerchentechnik': 'Härchentechnik (ab 480€)',
+    'softlips':        'Softlips (ab 520€)',
+    'nature-liner':    'Nature Liner (ab 380€)',
+    'lashlifting':     'Lashlifting (ab 65€)',
+    'browlifting':     'Browlifting (ab 55€)'
+  };
+  document.getElementById('cfReview').innerHTML = `
+    <div><strong>${cfData.firstName} ${cfData.lastName}</strong></div>
+    <div style="color:var(--text-muted); margin-bottom:.6rem;">${cfData.email} · ${cfData.phone}</div>
+    <div style="border-top:1px solid var(--border); padding-top:.7rem; margin-top:.4rem;">
+      Behandlung: <strong>${treatmentNames[cfData.treatment] || cfData.treatment}</strong><br>
+      Anamnese: ${cfData.allergies === 'Keine' ? 'Keine Auffälligkeiten' : cfData.allergies}
+    </div>
+  `;
+}
+function cfSubmit() {
+  if (!document.getElementById('cfAgreeDsgvo').checked) {
+    toast('Bitte Datenschutzerklärung bestätigen.', 'warn');
+    return;
+  }
+  cfData.newsletter = document.getElementById('cfAgreeNl').checked;
+  // Add to customers
+  const newId = Math.max(...customers.map(c => c.id)) + 1;
+  const newCustomer = {
+    id: newId,
+    firstName: cfData.firstName, lastName: cfData.lastName,
+    email: cfData.email, phone: cfData.phone,
+    treatment: ({haerchentechnik:'Härchentechnik', softlips:'Softlips', 'nature-liner':'Nature Liner', lashlifting:'Lashlifting', browlifting:'Browlifting'})[cfData.treatment] || 'Härchentechnik',
+    date: 'gerade eben', status: 'Neu',
+    newsletter: !!cfData.newsletter,
+    birth: cfData.birth || '—', allergies: cfData.allergies || 'Keine',
+    pregnant: cfData.pregnant || 'nein', blood: cfData.blood || 'nein',
+    isFresh: true
+  };
+  customers.unshift(newCustomer);
+  if (cfData.newsletter) {
+    recipients.unshift({ id: newId, name: newCustomer.firstName + ' ' + newCustomer.lastName, email: newCustomer.email, selected: true, isFresh: true });
+  }
+  // Update stat counters
+  const sc = document.getElementById('statCustomers');
+  if (sc) sc.textContent = parseInt(sc.textContent) + 1;
+  const scd = document.getElementById('statCustomersDelta');
+  if (scd) scd.textContent = parseInt(scd.textContent) + 1;
+  const sr = document.getElementById('statRequests');
+  if (sr) sr.textContent = parseInt(sr.textContent) + 1;
+  if (cfData.newsletter) {
+    const ss = document.getElementById('statSubs');
+    if (ss) ss.textContent = parseInt(ss.textContent) + 1;
+  }
+
+  showCfStep('success');
+  fireConfetti(document.getElementById('cfConfetti'), 30);
+  toast('Anfrage von ' + cfData.firstName + ' ' + cfData.lastName + ' eingegangen.', 'check');
+
+  // Re-render admin lists
+  renderRecipients();
+  renderActivity();
+  renderCustomerTable();
+}
+function cfReset() {
+  document.querySelectorAll('.cf-card input').forEach(i => { if (i.type !== 'radio' && i.type !== 'checkbox') i.value = ''; else i.checked = false; });
+  document.querySelectorAll('.cf-radio').forEach(r => r.classList.remove('is-selected'));
+  showCfStep(1);
+}
+
+function fireConfetti(host, count) {
+  if (!host) return;
+  host.innerHTML = '';
+  const colors = ['#C4AE8A', '#B09872', '#DDA80F', '#2D8B5C', '#1C1917'];
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('span');
+    s.style.background = colors[i % colors.length];
+    s.style.left = (40 + Math.random() * 20) + '%';
+    s.style.setProperty('--dx', (Math.random() * 320 - 160) + 'px');
+    s.style.setProperty('--rot', (Math.random() * 540) + 'deg');
+    s.style.animationDelay = (Math.random() * .4) + 's';
+    host.appendChild(s);
+  }
+  setTimeout(() => { host.innerHTML = ''; }, 1800);
+}
+
+// ============================================================
+// STEP 4 — Admin chart + activity
+// ============================================================
+function renderAdminChart() {
+  const data = [4, 7, 5, 9, 12, 8, 11, 14, 10, 13, 17, 21];
+  const months = ['Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez', 'Jan', 'Feb', 'Mär', 'Apr'];
+  const max = Math.max(...data);
+  const host = document.getElementById('admChart');
+  host.innerHTML = data.map((v, i) => `
+    <div class="adm-chart-bar ${i === data.length - 1 ? 'now' : ''}" style="height:0" data-label="${months[i]}"></div>
+  `).join('');
+  // Animate
+  setTimeout(() => {
+    host.querySelectorAll('.adm-chart-bar').forEach((b, i) => {
+      b.style.height = (data[i] / max * 100) + '%';
+    });
+  }, 100);
+  renderActivity();
+}
+function renderActivity() {
+  const recent = customers.slice(0, 5);
+  const colors = ['', 'green', 'gold'];
+  document.getElementById('admAct').innerHTML = recent.map((c, i) => `
+    <div class="adm-act-item">
+      <span class="adm-act-dot ${colors[i % 3]}"></span>
+      <div>
+        <div class="adm-act-text"><strong>${c.firstName} ${c.lastName}</strong> hat eine Anfrage für <strong>${c.treatment}</strong> gesendet</div>
+        <div class="adm-act-time">${c.date}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// STEP 5 — Customer list & drawer
+// ============================================================
+function renderCustomerTable() {
+  const search = (document.getElementById('clSearch')?.value || '').toLowerCase();
+  const filter = document.getElementById('clFilter')?.value || '';
+  const rows = customers.filter(c => {
+    const matchSearch = !search || (c.firstName + ' ' + c.lastName + ' ' + c.email + ' ' + c.treatment).toLowerCase().includes(search);
+    const matchFilter = !filter || c.treatment === filter;
+    return matchSearch && matchFilter;
+  });
+  const head = `<div class="cl-row head"><div>Kundin</div><div>E-Mail</div><div>Behandlung</div><div>Eingegangen</div><div>Status</div></div>`;
+  const body = rows.map(c => {
+    const statusClass = c.status === 'Bestätigt' ? 'green' : c.status === 'Termin' ? 'gold' : '';
+    return `
+      <div class="cl-row ${c.isFresh ? 'is-new' : ''}" onclick="openDrawer(${c.id})">
+        <div>
+          <div class="cl-name">${c.firstName} ${c.lastName}</div>
+          <div class="cl-name-sub">${c.phone}</div>
+        </div>
+        <div>${c.email}</div>
+        <div>${c.treatment}</div>
+        <div style="color:var(--text-muted);">${c.date}</div>
+        <div><span class="cl-pill ${statusClass}">${c.status}</span></div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('clTable').innerHTML = head + body;
+}
+function openDrawer(id) {
+  const c = customers.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('clDrawerBody').innerHTML = `
+    <h2>${c.firstName} <span class="italic">${c.lastName}</span></h2>
+    <div class="cl-drawer-meta">Anfrage eingegangen ${c.date} · ID #${c.id}</div>
+
+    <div class="kv-section-title">Kontakt</div>
+    <dl class="kv-list">
+      <div class="kv-row"><dt>E-Mail</dt><dd>${c.email}</dd></div>
+      <div class="kv-row"><dt>Telefon</dt><dd>${c.phone}</dd></div>
+      <div class="kv-row"><dt>Geburtsdatum</dt><dd>${c.birth || '—'}</dd></div>
+    </dl>
+
+    <div class="kv-section-title">Behandlung</div>
+    <dl class="kv-list">
+      <div class="kv-row"><dt>Gewünscht</dt><dd>${c.treatment}</dd></div>
+      <div class="kv-row"><dt>Status</dt><dd><span class="cl-pill ${c.status==='Bestätigt'?'green':c.status==='Termin'?'gold':''}">${c.status}</span></dd></div>
+      <div class="kv-row"><dt>Newsletter</dt><dd>${c.newsletter ? 'Ja, abonniert' : 'Nein'}</dd></div>
+    </dl>
+
+    <div class="kv-section-title">Anamnese</div>
+    <dl class="kv-list">
+      <div class="kv-row"><dt>Schwanger / stillt</dt><dd>${c.pregnant === 'ja' ? 'Ja' : 'Nein'}</dd></div>
+      <div class="kv-row"><dt>Allergien</dt><dd>${c.allergies || 'Keine'}</dd></div>
+      <div class="kv-row"><dt>Blutverdünner</dt><dd>${c.blood === 'ja' ? 'Ja' : 'Nein'}</dd></div>
+    </dl>
+
+    <div style="display:flex; gap:.6rem; margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+      <button class="btn-ae btn-ae-sm" style="flex:1;" onclick="confirmCustomer(${c.id})">Termin bestätigen</button>
+      <button class="btn-ae-outline btn-ae-sm" style="flex:1;">E-Mail antworten</button>
+    </div>
+  `;
+  document.getElementById('clDrawer').classList.add('is-open');
+}
+function closeDrawer() { document.getElementById('clDrawer').classList.remove('is-open'); }
+function confirmCustomer(id) {
+  const c = customers.find(x => x.id === id);
+  if (c) { c.status = 'Bestätigt'; c.isFresh = false; renderCustomerTable(); openDrawer(id); toast('Kundin bestätigt — automatische E-Mail versendet.', 'check'); }
+}
+document.getElementById('clSearch').addEventListener('input', renderCustomerTable);
+document.getElementById('clFilter').addEventListener('change', renderCustomerTable);
+
+// ============================================================
+// STEP 6 — Newsletter editor
+// ============================================================
+function renderRecipients() {
+  document.getElementById('nleRec').innerHTML = recipients.map(r => `
+    <label class="nle-rec-row" style="${r.isFresh ? 'background:var(--accent-soft);' : ''}">
+      <input type="checkbox" ${r.selected ? 'checked' : ''} onchange="toggleRec(${r.id}, this.checked)">
+      <span>${r.name}<br><span class="meta">${r.email}</span></span>
+    </label>
+  `).join('');
+  renderSummary();
+}
+function toggleRec(id, on) {
+  const r = recipients.find(x => x.id === id);
+  if (r) { r.selected = on; renderSummary(); }
+}
+function renderSummary() {
+  const selected = recipients.filter(r => r.selected).length;
+  document.getElementById('nleSummary').innerHTML = `
+    <div class="nle-summary-row"><span>Empfänger ausgewählt</span><strong>${selected}</strong></div>
+    <div class="nle-summary-row"><span>Versand-Service</span><strong>Resend</strong></div>
+    <div class="nle-summary-row"><span>Personalisierung</span><strong>Aktiv</strong></div>
+    <div class="nle-summary-row"><span>Tracking</span><strong>Open + Click</strong></div>
+  `;
+  document.getElementById('nleSendBtn').disabled = selected === 0;
+}
+
+// Toolbar
+document.querySelectorAll('.nle-toolbar button[data-cmd]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cmd = btn.dataset.cmd;
+    const arg = btn.dataset.arg;
+    if (cmd === 'createLink') {
+      const url = prompt('URL:');
+      if (url) document.execCommand('createLink', false, url);
+    } else {
+      document.execCommand(cmd, false, arg);
+    }
+  });
+});
+
+function sendNewsletter() {
+  const selected = recipients.filter(r => r.selected);
+  if (!selected.length) return;
+  const overlay = document.getElementById('nleSending');
+  const counter = document.getElementById('nleCounter');
+  overlay.classList.add('is-on');
+  let i = 0;
+  counter.textContent = `0 von ${selected.length}`;
+  const tick = () => {
+    i++;
+    counter.textContent = `${i} von ${selected.length}`;
+    if (i < selected.length) setTimeout(tick, 240 + Math.random() * 120);
+    else setTimeout(() => {
+      overlay.classList.remove('is-on');
+      fireBigConfetti();
+      toast(`Newsletter erfolgreich an ${selected.length} Empfänger versendet.`, 'check');
+    }, 500);
+  };
+  setTimeout(tick, 400);
+}
+function fireBigConfetti() {
+  const host = document.getElementById('sendConfetti');
+  host.style.display = 'block';
+  host.innerHTML = '';
+  const colors = ['#C4AE8A', '#B09872', '#DDA80F', '#2D8B5C', '#5BD3F0', '#F2B36B'];
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('span');
+    s.style.background = colors[i % colors.length];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * .8) + 's';
+    s.style.transform = `rotate(${Math.random() * 360}deg)`;
+    host.appendChild(s);
+  }
+  setTimeout(() => { host.style.display = 'none'; host.innerHTML = ''; }, 2800);
+}
+
+// AI overlay
+function openAi()  { document.getElementById('aiOverlay').classList.add('is-on'); }
+function closeAi() { document.getElementById('aiOverlay').classList.remove('is-on'); document.getElementById('aiThinking').style.display = 'none'; }
+function runAi() {
+  const prompt = document.getElementById('aiPrompt').value.trim();
+  if (!prompt) { toast('Bitte beschreib kurz dein Thema.', 'warn'); return; }
+  document.getElementById('aiThinking').style.display = 'flex';
+  setTimeout(() => {
+    document.getElementById('aiThinking').style.display = 'none';
+    closeAi();
+    // Generate a topical draft based on keywords
+    let subject, html;
+    const p = prompt.toLowerCase();
+    if (p.includes('frühling') || p.includes('lashlifting')) {
+      subject = 'Frühlings-Special: Lashlifting & Härchentechnik bei aesthéra';
+      html = `<h1>Frühlingsfrische für deinen Blick</h1>
+        <p>Liebe <em>Kundin</em>,</p>
+        <p>der Frühling ist da — Zeit für leichte, natürliche Ergebnisse, die einfach zu deinem neuen Outfit passen.</p>
+        <h2>Lashlifting + Färben — 60 Minuten Wow</h2>
+        <p>Für 65€ schwingen deine Wimpern für ca. 6–8 Wochen wie nach einem Profi-Make-up. Ohne tägliches Mascara-Drama.</p>
+        <h2>Härchentechnik — 10% bis Ende April</h2>
+        <p>Buch jetzt einen Termin im April und sicher dir 10% auf die Erstbehandlung Härchentechnik.</p>
+        <p>Bis bald im Studio,<br>Sara</p>`;
+    } else if (p.includes('pflege') || p.includes('nachsorge')) {
+      subject = 'Pflegetipps nach deinem PMU — die ersten 14 Tage';
+      html = `<h1>Pflege macht den Unterschied</h1>
+        <p>Liebe <em>Kundin</em>,</p>
+        <p>nach einer PMU-Behandlung entscheiden die ersten 14 Tage über dein Endergebnis. Hier meine wichtigsten Tipps:</p>
+        <h2>Tag 1–3</h2>
+        <p>Nicht reiben, nicht nass machen, kein Make-up auf der Stelle. Trag die mitgegebene Pflegecreme dünn auf.</p>
+        <h2>Tag 4–14</h2>
+        <p>Achte auf Sonnenschutz und meide Sauna, Schwimmbad und Solarium komplett.</p>
+        <p>Fragen? Schreib mir einfach.<br>Sara</p>`;
+    } else {
+      subject = 'Neuigkeiten aus dem aesthéra-Studio';
+      html = `<h1>Was bei aesthéra Neues passiert</h1>
+        <p>Liebe <em>Kundin</em>,</p>
+        <p>${prompt} — hier ein kurzer Überblick und alles, was du wissen musst.</p>
+        <p>Termine sind ab sofort buchbar.<br>Herzlich,<br>Sara</p>`;
+    }
+    document.getElementById('nleSubject').value = subject;
+    document.getElementById('nleCanvas').innerHTML = html;
+    toast('KI-Entwurf eingefügt — du kannst ihn jetzt anpassen.', 'check');
+  }, 1700);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+let toastTimer;
+function toast(msg, kind) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  const icon = t.querySelector('.toast-icon');
+  if (kind === 'check') { icon.textContent = '✓'; icon.style.background = '#2D8B5C'; t.style.borderColor = '#2D8B5C'; }
+  else if (kind === 'warn') { icon.textContent = '!'; icon.style.background = '#DDA80F'; t.style.borderColor = '#DDA80F'; }
+  else if (kind === 'mail') { icon.textContent = '✉'; icon.style.background = 'var(--cyan)'; t.style.borderColor = 'var(--cyan)'; }
+  else { icon.textContent = 'i'; icon.style.background = 'var(--cyan)'; t.style.borderColor = 'var(--cyan)'; }
+  t.classList.add('is-on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('is-on'), 3200);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+goToStep(1);
+renderCustomerTable();
+renderRecipients();
+</script>
+
+</body>
+</html>

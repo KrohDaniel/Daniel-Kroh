@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Über mich — Daniel Kroh</title>
+  <title>Über mich — Daniel Kroh | Software-Architekt aus Bad Lippspringe</title>
   <meta name="description"
-    content="Daniel Kroh — Wirtschaftsinformatiker aus Bad Lippspringe. Webdesign, SEO und KI-Lösungen für den Mittelstand in OWL.">
+    content="Daniel Kroh — Wirtschaftsinformatiker und Software-Architekt aus Bad Lippspringe. Maßgeschneiderte digitale Lösungen für mittelständische Unternehmen in OWL.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Über mich — Daniel Kroh">
-  <meta property="og:description" content="Wirtschaftsinformatiker aus Bad Lippspringe. Webdesign, SEO und KI-Lösungen für den Mittelstand in OWL.">
+  <meta property="og:title" content="Über mich — Daniel Kroh | Software-Architekt">
+  <meta property="og:description" content="Wirtschaftsinformatiker und Software-Architekt aus Bad Lippspringe. Maßgeschneiderte digitale Lösungen für den Mittelstand in OWL.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <meta property="og:url" content="https://kroh-daniel.de/about.html">
   <meta property="og:type" content="website">
@@ -30,6 +30,45 @@
   <!-- Umami Analytics — DSGVO-konform -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="b5acfa81-7a81-4a46-b56d-cf7454781f12"></script>
   <link rel="stylesheet" href="css/cookie-banner.css">
+
+  <!-- Schema.org: Person (E-E-A-T) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://kroh-daniel.de/about.html#person",
+    "name": "Daniel Kroh",
+    "jobTitle": "Software-Architekt & Prozess-Optimierer",
+    "description": "Wirtschaftsinformatiker (B.Sc.) und Master-Student Informatik (HSBI Bielefeld). Spezialisiert auf Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.",
+    "url": "https://kroh-daniel.de/about.html",
+    "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bad Lippspringe",
+      "addressRegion": "NRW",
+      "addressCountry": "DE"
+    },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "FH Münster" },
+      { "@type": "CollegeOrUniversity", "name": "HSBI Bielefeld" }
+    ],
+    "knowsAbout": [
+      "Software-Architektur",
+      "Prozessautomatisierung",
+      "Web-Anwendungen",
+      "KI-Integration",
+      "Wirtschaftsinformatik",
+      "Test-Architektur",
+      "BaFin-Compliance"
+    ],
+    "worksFor": { "@id": "https://kroh-daniel.de/#business" },
+    "sameAs": [
+      "https://www.linkedin.com/in/daniel-kroh-098047333/",
+      "https://www.instagram.com/daniel_kroh_/",
+      "https://github.com/KrohDaniel"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -43,6 +82,7 @@
         <a href="index.html">Home</a>
         <a href="about.html" class="nav-active">Über mich</a>
         <a href="leistungen.html">Leistungen</a>
+        <a href="demo.html">Demo</a>
         <a href="kontakt.html">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
@@ -57,6 +97,7 @@
       <a href="index.html">Home</a>
       <a href="about.html" class="nav-active">Über mich</a>
       <a href="leistungen.html">Leistungen</a>
+      <a href="demo.html">Demo</a>
       <a href="kontakt.html">Kontakt</a>
     </nav>
   </div>
@@ -70,10 +111,11 @@
           <span class="line">Daniel</span>
           <span class="line accent">Kroh</span>
         </h1>
-        <p class="about-hero-role">Wirtschaftsinformatiker & Entwickler</p>
+        <p class="about-hero-role">Software-Architekt & Wirtschaftsinformatiker</p>
         <div class="about-hero-divider"></div>
-        <p class="about-hero-intro">Ich verbinde betriebswirtschaftliches Verständnis mit technischer Umsetzung — und
-          helfe Unternehmen in OWL, das Beste aus modernen Web-Technologien und KI herauszuholen.</p>
+        <p class="about-hero-intro">Ich entwerfe digitale Architekturen für mittelständische Unternehmen in OWL. Mein
+          Fokus: Prozesse verstehen, Engpässe identifizieren und maßgeschneiderte Software entwickeln, die
+          spürbar entlastet.</p>
       </div>
       <div class="about-hero-portrait">
         <div class="portrait-frame">
@@ -95,12 +137,13 @@
     <div class="about-section-inner">
       <div class="about-text-block align-offset-left">
         <span class="section-label">002 / Philosophie</span>
-        <h2 class="about-heading">Technik, die<br><span class="heading-accent">Sinn ergibt</span></h2>
+        <h2 class="about-heading">Architektur, die<br><span class="heading-accent">Sinn ergibt</span></h2>
         <p class="about-body">Viele Unternehmen wissen, dass sie digital besser aufgestellt sein sollten — aber nicht,
-          wo sie anfangen sollen. Genau da setze ich an: Mit klaren Lösungen, die zu Ihrem Betrieb passen, statt mit
-          Technik um der Technik willen.</p>
-        <p class="about-body">Mein Anspruch: Jedes Projekt soll einen konkreten Nutzen haben. Ob eine Website, die
-          Kunden bringt, oder eine KI-Automatisierung, die Ihnen Zeit spart.</p>
+          wo sie anfangen sollen. Genau da setze ich an: zuerst der Prozess, dann die Architektur, dann die Technik.
+          Nie umgekehrt.</p>
+        <p class="about-body">Mein Anspruch: Jede Lösung muss einen messbaren Nutzen haben. Ob eine automatisierte
+          Auftragsabwicklung, eine individuelle Web-Anwendung oder eine KI-Integration — der Maßstab ist immer der
+          gleiche: spart Zeit, reduziert Fehler, schafft Skalierbarkeit.</p>
       </div>
     </div>
   </section>
@@ -113,8 +156,8 @@
       <div class="workspace-caption">
         <span class="section-label">003 / Arbeitsweise</span>
         <h2 class="about-heading">Studium trifft<br><span class="heading-accent">Praxis</span></h2>
-        <p class="about-body">Von der Konzeption bis zum fertigen Produkt — ich begleite den gesamten Prozess.
-          Hands-on, strukturiert und immer mit dem Blick auf den Nutzen für Ihr Unternehmen.</p>
+        <p class="about-body">Von der Engpass-Analyse bis zum laufenden Betrieb — ich begleite den gesamten Prozess.
+          Strukturiert, mit Verantwortung und immer mit dem Blick auf den unternehmerischen Nutzen.</p>
       </div>
     </div>
   </section>
@@ -133,11 +176,11 @@
               <path d="M12 16l4 4-4 4M20 24h8" />
             </svg>
           </div>
-          <h3 class="skill-title">Web Development</h3>
-          <p class="skill-desc">Moderne, performante Websites und Web-Anwendungen — individuell entwickelt, nicht aus
-            dem Baukasten.</p>
+          <h3 class="skill-title">Software-Architektur</h3>
+          <p class="skill-desc">Maßgeschneiderte Web-Anwendungen und individuelle Plattformen — sauber strukturiert,
+            wartbar und mit Ihrem Unternehmen wachsend.</p>
           <div class="skill-tags">
-            <span>Moderne Frameworks</span><span>Schnelle Ladezeiten</span><span>Sauberer Code</span>
+            <span>Architektur-Design</span><span>Skalierbarkeit</span><span>Sauberer Code</span>
           </div>
         </div>
 
@@ -149,11 +192,11 @@
                 d="M20 4v6M20 30v6M4 20h6M30 20h6M8.3 8.3l4.2 4.2M27.5 27.5l4.2 4.2M8.3 31.7l4.2-4.2M27.5 12.5l4.2-4.2" />
             </svg>
           </div>
-          <h3 class="skill-title">KI & Automatisierung</h3>
-          <p class="skill-desc">Intelligente Chatbots, automatisierte Workflows und KI-gestützte Geschäftsprozesse.
-          </p>
+          <h3 class="skill-title">Prozessautomatisierung & KI</h3>
+          <p class="skill-desc">Manuelle Routineaufgaben durch automatisierte Workflows ersetzen — mit KI als
+            Werkzeug zur Effizienzsteigerung, nicht als Selbstzweck.</p>
           <div class="skill-tags">
-            <span>Chatbots</span><span>Automatisierung</span><span>Schnittstellen</span>
+            <span>Workflow-Automation</span><span>KI-Integration</span><span>Schnittstellen</span>
           </div>
         </div>
 
@@ -164,11 +207,11 @@
               <path d="M20 20V4M20 20l16 8M20 20L4 28" />
             </svg>
           </div>
-          <h3 class="skill-title">SaaS & Produktentwicklung</h3>
-          <p class="skill-desc">Eigene Software-Produkte konzipieren, entwickeln und betreiben — von der Idee bis zum
-            Launch.</p>
+          <h3 class="skill-title">Plattform-Entwicklung</h3>
+          <p class="skill-desc">Eigene Software-Plattformen konzipieren, entwickeln und betreiben — von der ersten
+            Idee bis zum produktiven System.</p>
           <div class="skill-tags">
-            <span>Eigene Software</span><span>Bezahlsysteme</span><span>Cloud-Hosting</span>
+            <span>Individualsoftware</span><span>Cloud-Architektur</span><span>Bezahlsysteme</span>
           </div>
         </div>
 
@@ -180,11 +223,11 @@
               <path d="M4 6h32v28H4z" />
             </svg>
           </div>
-          <h3 class="skill-title">SEO & Performance</h3>
-          <p class="skill-desc">Technisches SEO, lokale Sichtbarkeit und datengestützte Optimierung für bessere
-            Rankings.</p>
+          <h3 class="skill-title">Performance & Sichtbarkeit</h3>
+          <p class="skill-desc">Technische Performance, strukturierte Daten und lokale Auffindbarkeit — als
+            Fundament jeder Web-Anwendung mitgedacht.</p>
           <div class="skill-tags">
-            <span>Google Search Console</span><span>Schema.org</span><span>Core Web Vitals</span>
+            <span>Core Web Vitals</span><span>Schema.org</span><span>Local Search</span>
           </div>
         </div>
 
@@ -195,10 +238,11 @@
               <path d="M16 12h8M16 18h8M16 24h4" />
             </svg>
           </div>
-          <h3 class="skill-title">Beratung & Strategie</h3>
-          <p class="skill-desc">Gemeinsam herausfinden, was Ihr Unternehmen digital wirklich braucht — und den kürzesten Weg dahin planen.</p>
+          <h3 class="skill-title">Prozess-Audit & Strategie</h3>
+          <p class="skill-desc">Strukturierte Engpass-Analyse und digitaler Fahrplan — den kürzesten Weg zur
+            spürbaren Entlastung gemeinsam definieren.</p>
           <div class="skill-tags">
-            <span>Digitale Strategie</span><span>Konzeption</span><span>Workshops</span>
+            <span>Prozess-Audit</span><span>Anforderungsanalyse</span><span>Architektur-Beratung</span>
           </div>
         </div>
 
@@ -211,10 +255,10 @@
             </svg>
           </div>
           <h3 class="skill-title">Wirtschaftsinformatik</h3>
-          <p class="skill-desc">Die Brücke zwischen Technik und Geschäft — Prozesse verstehen, analysieren und digital
-            abbilden.</p>
+          <p class="skill-desc">Die Brücke zwischen Geschäft und Technik — betriebliche Abläufe analysieren,
+            verstehen und sauber in Software übersetzen.</p>
           <div class="skill-tags">
-            <span>Prozessoptimierung</span><span>Anforderungsanalyse</span><span>Projektmanagement</span>
+            <span>Prozessanalyse</span><span>Anforderungsmanagement</span><span>Projektsteuerung</span>
           </div>
         </div>
       </div>
@@ -235,8 +279,8 @@
           <div class="timeline-content">
             <span class="timeline-year">Seit 2026</span>
             <h3 class="timeline-title">M.Sc. Informatik — HSBI Bielefeld</h3>
-            <p class="timeline-desc">Vertiefung in Softwareentwicklung und KI. Parallel dazu: Aufbau meiner
-              Selbstständigkeit mit Webdesign, SEO und KI-Lösungen für den Mittelstand.</p>
+            <p class="timeline-desc">Vertiefung in Softwareentwicklung, Architektur und KI. Parallel dazu: Aufbau
+              meiner Selbstständigkeit mit maßgeschneiderten Software-Lösungen für den Mittelstand in OWL.</p>
           </div>
         </div>
 
@@ -245,7 +289,9 @@
           <div class="timeline-content">
             <span class="timeline-year">März 2026</span>
             <h3 class="timeline-title">Gründung — Daniel Kroh Digital</h3>
-            <p class="timeline-desc">Offizieller Start der Selbstständigkeit. Webdesign, SEO und KI-Automatisierung für kleine und mittelständische Unternehmen in OWL — aus der Überzeugung, dass gute digitale Lösungen nicht nur Konzernen vorbehalten sein sollten.</p>
+            <p class="timeline-desc">Offizieller Start der Selbstständigkeit. Software-Architektur,
+              Prozessautomatisierung und KI-Integration für kleine und mittelständische Unternehmen in OWL — aus der
+              Überzeugung, dass maßgeschneiderte digitale Lösungen nicht nur Konzernen vorbehalten sein sollten.</p>
           </div>
         </div>
 
@@ -254,8 +300,8 @@
           <div class="timeline-content">
             <span class="timeline-year">Erste Kunden</span>
             <h3 class="timeline-title">Kundenprojekte & Referenzen</h3>
-            <p class="timeline-desc">Umsetzung realer Projekte: Websites, SEO-Optimierungen und KI-Automatisierungen
-              für lokale Unternehmen in der Region OWL.</p>
+            <p class="timeline-desc">Umsetzung realer Projekte: Web-Anwendungen, Prozessautomatisierung und
+              KI-Integration für lokale Unternehmen in der Region OWL.</p>
           </div>
         </div>
 
@@ -285,10 +331,10 @@
   <section class="about-section about-cta" data-anim="fade-up">
     <div class="about-section-inner about-cta-inner">
       <span class="section-label">006 / Zusammenarbeit</span>
-      <h2 class="about-heading about-cta-heading">Lassen Sie uns<br><span class="heading-accent">sprechen</span></h2>
-      <p class="about-body about-cta-body">Sie haben eine Idee, ein Projekt oder eine Herausforderung? Ich freue
-        mich auf ein unverbindliches Gespräch.</p>
-      <a href="kontakt.html" class="cta-button">Kontakt aufnehmen</a>
+      <h2 class="about-heading about-cta-heading">Wo liegt Ihr<br><span class="heading-accent">Engpass?</span></h2>
+      <p class="about-body about-cta-body">Sie spüren, dass Prozesse Zeit kosten oder Wachstum bremsen? Lassen Sie uns
+        in einem strukturierten Prozess-Audit gemeinsam herausfinden, wo der größte Hebel liegt.</p>
+      <a href="kontakt.html" class="cta-button">Prozess-Audit anfragen</a>
     </div>
   </section>
 
@@ -297,7 +343,7 @@
     <div class="footer-top">
       <div class="footer-brand-col">
         <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
-        <p class="footer-tagline">Websites, die Kunden bringen. Für Unternehmen in OWL.</p>
+        <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -314,11 +360,11 @@
         </a>
       </div>
       <div class="footer-nav-col">
-        <span class="footer-nav-title">Leistungen</span>
-        <a href="leistungen.html">Webdesign</a>
-        <a href="leistungen.html">SEO & Performance</a>
-        <a href="leistungen.html">K.I. Automatisierung</a>
-        <a href="leistungen.html#preise">Preise</a>
+        <span class="footer-nav-title">Lösungen</span>
+        <a href="leistungen.html">Prozessautomatisierung</a>
+        <a href="leistungen.html">Web-Anwendungen</a>
+        <a href="leistungen.html">KI-Integration</a>
+        <a href="leistungen.html">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
@@ -355,12 +401,9 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/about.js"></script>
+  <script defer src="js/reveal.js"></script>
 
   <script src="js/cookie-banner.js"></script>
 </body>

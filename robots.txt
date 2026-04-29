@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /
 Sitemap: https://kroh-daniel.de/sitemap.xml
+
+# AI Crawler — context for LLM-based search
+# llms.txt at https://kroh-daniel.de/llms.txt

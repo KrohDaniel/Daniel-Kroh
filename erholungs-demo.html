@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erholungs Apartments — Interaktive Live-Demo · Daniel Kroh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   GLOBAL TOKENS
+   - Erholungs inside (warm cream/green, accent #C9A84C)
+   - Tour chrome outside (Daniel-Kroh-ish dark frame, cyan accent)
+   =========================================================== */
+:root{
+  /* Erholungs palette (Tailwind theme aus globals.css) */
+  --bg: #FAFAF7;
+  --surface: #FFFFFF;
+  --surface-2: #F5EFE6;
+  --surface-3: #E8DFD2;
+  --border: #E5E2DC;
+  --border-light: #F0EDE7;
+  --primary: #2D5016;
+  --primary-light: #3D6B1E;
+  --primary-dark: #1E3A0E;
+  --accent: #C9A84C;
+  --accent-light: #D4B85E;
+  --accent-dark: #B59539;
+  --orange: #E89610;
+  --text: #1A1A1A;
+  --text-light: #4A4A4A;
+  --text-muted: #7A7A7A;
+
+  /* Tour chrome (Daniel Kroh DNA) */
+  --chrome: #0E1320;
+  --chrome-2: #161D2F;
+  --chrome-line: rgba(255,255,255,.08);
+  --chrome-text: #E7ECF4;
+  --chrome-muted: #94A0BB;
+  --cyan: #5BD3F0;
+  --cyan-deep: #00B8E6;
+  --amber: #F2B36B;
+
+  /* Type */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+
+  --shadow-sm: 0 1px 2px 0 rgba(45, 80, 22, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(45, 80, 22, 0.06), 0 2px 4px -2px rgba(45, 80, 22, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(45, 80, 22, 0.08), 0 4px 6px -4px rgba(45, 80, 22, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(45, 80, 22, 0.10), 0 8px 10px -6px rgba(45, 80, 22, 0.06);
+  --shadow-chrome: 0 30px 80px rgba(0,0,0,.45);
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 22px;
+
+  --max: 1400px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--chrome);
+  color: var(--chrome-text);
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+input, textarea, select { font: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ===========================================================
+   TOUR CHROME — outer frame (gleiche Sprache wie aesthera-demo)
+   =========================================================== */
+.tour-bg {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(91,211,240,.06), transparent 60%),
+    radial-gradient(900px 600px at 90% 100%, rgba(242,179,107,.05), transparent 60%),
+    var(--chrome);
+  z-index: -2;
+}
+.tour-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 90%);
+}
+
+.tour-topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(14,19,32,.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--chrome-line);
+}
+.tour-topbar-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex; align-items: center; gap: 2rem;
+}
+.tour-brand {
+  display: flex; align-items: center; gap: .8rem;
+  font-size: .82rem; letter-spacing: .04em;
+  color: var(--chrome-muted);
+}
+.tour-brand-mark {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border: 1px solid var(--chrome-line);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(91,211,240,.15), rgba(242,179,107,.10));
+  color: var(--cyan);
+  font-weight: 700; font-size: .65rem; letter-spacing: .08em;
+  font-family: var(--font-display);
+}
+.tour-brand strong { color: var(--chrome-text); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-size: .72rem; }
+.tour-brand-sep { width: 1px; height: 16px; background: var(--chrome-line); }
+.tour-brand em { font-family: var(--font-display); font-style: normal; font-size: 1rem; color: var(--chrome-text); letter-spacing: .005em; font-weight: 600; }
+
+.demo-safe-badge {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .45rem .8rem;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: #9DE5C8;
+  background: rgba(76, 217, 162, .08);
+  border: 1px solid rgba(76, 217, 162, .25);
+  border-radius: 999px;
+  cursor: help;
+  transition: background .2s, border-color .2s;
+}
+.demo-safe-badge:hover { background: rgba(76, 217, 162, .14); border-color: rgba(76, 217, 162, .4); }
+.demo-safe-badge svg { color: #6FE0B0; }
+@media (max-width: 900px) {
+  .demo-safe-badge span { display: none; }
+  .demo-safe-badge { padding: .45rem; }
+}
+
+.tour-back {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1rem;
+  font-size: .82rem; color: var(--chrome-muted);
+  border: 1px solid var(--chrome-line);
+  border-radius: 999px;
+  transition: all .25s ease;
+}
+.tour-back:hover { color: var(--chrome-text); border-color: rgba(91,211,240,.4); background: rgba(91,211,240,.05); }
+
+/* Step nav */
+.tour-stepnav { max-width: var(--max); margin: 0 auto; padding: 2rem 2rem 1.5rem; }
+.tour-stepnav-track {
+  position: relative; display: grid;
+  grid-template-columns: repeat(6, 1fr); gap: 0;
+}
+.tour-stepnav-track::before {
+  content: ''; position: absolute;
+  top: 18px; left: 8.33%; right: 8.33%;
+  height: 1px; background: var(--chrome-line);
+}
+.tour-stepnav-track::after {
+  content: ''; position: absolute;
+  top: 18px; left: 8.33%;
+  height: 1px; width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--cyan), var(--amber));
+  transition: width .55s cubic-bezier(.65,0,.35,1);
+  box-shadow: 0 0 12px rgba(91,211,240,.5);
+}
+.step-pill {
+  display: flex; flex-direction: column; align-items: center;
+  gap: .6rem; position: relative; cursor: pointer;
+  padding: 0 .25rem; text-align: center;
+}
+.step-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--chrome-2); border: 1px solid var(--chrome-line);
+  display: grid; place-items: center;
+  font-size: .8rem; font-weight: 500; color: var(--chrome-muted);
+  position: relative; z-index: 2; transition: all .3s ease;
+}
+.step-pill[data-state="done"] .step-dot {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-deep));
+  border-color: var(--cyan); color: var(--chrome);
+}
+.step-pill[data-state="active"] .step-dot {
+  background: var(--chrome); border-color: var(--cyan); color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(91,211,240,.15), 0 0 20px rgba(91,211,240,.4);
+  transform: scale(1.08);
+}
+.step-pill[data-state="active"] .step-dot::after {
+  content: ''; position: absolute; inset: -6px;
+  border-radius: 50%; border: 1px solid rgba(91,211,240,.3);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.95); opacity: .8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.step-label {
+  font-size: .75rem; letter-spacing: .04em;
+  color: var(--chrome-muted); line-height: 1.3;
+  max-width: 11ch; transition: color .3s;
+}
+.step-pill[data-state="active"] .step-label { color: var(--chrome-text); }
+.step-pill[data-state="done"] .step-label { color: var(--chrome-text); opacity: .85; }
+
+/* Sub-info */
+.tour-meta {
+  max-width: var(--max); margin: 0 auto;
+  padding: 0 2rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.tour-meta-left { display: flex; align-items: center; gap: 1rem; }
+.tour-step-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--cyan);
+  font-weight: 600; letter-spacing: -.02em;
+}
+.tour-step-title { font-size: 1rem; letter-spacing: .02em; color: var(--chrome-text); font-weight: 500; }
+.tour-step-desc { font-size: .85rem; color: var(--chrome-muted); max-width: 56ch; }
+.tour-tech { display: flex; gap: .5rem; flex-wrap: wrap; }
+.tech-badge {
+  font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: .4rem .7rem; border-radius: 999px;
+  border: 1px solid var(--chrome-line); color: var(--chrome-muted);
+  background: rgba(255,255,255,.02);
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.tech-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); }
+.tech-badge.amber::before { background: var(--amber); }
+.tech-badge.green::before { background: #6FE0B0; }
+
+/* Stage */
+.tour-stage-wrap { max-width: var(--max); margin: 0 auto; padding: 0 2rem 2rem; }
+.tour-stage {
+  position: relative;
+  background: var(--bg); color: var(--text);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-chrome), 0 0 0 1px var(--chrome-line);
+  font-family: var(--font-sans);
+  min-height: 70vh;
+}
+
+.stage-chrome {
+  background: linear-gradient(180deg, #1a2033, #141a2a);
+  border-bottom: 1px solid var(--chrome-line);
+  padding: .7rem 1.2rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.stage-dots { display: flex; gap: .4rem; }
+.stage-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.18); }
+.stage-dots span:nth-child(1){ background:#FF5F57; }
+.stage-dots span:nth-child(2){ background:#FEBC2E; }
+.stage-dots span:nth-child(3){ background:#28C840; }
+.stage-url {
+  flex: 1;
+  background: rgba(0,0,0,.35);
+  border: 1px solid var(--chrome-line);
+  border-radius: 8px;
+  padding: .35rem .9rem;
+  font-size: .78rem; color: var(--chrome-muted);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: .02em;
+  display: flex; align-items: center; gap: .55rem;
+}
+.stage-url svg { width: 11px; height: 11px; opacity: .7; flex-shrink: 0; }
+.stage-url-path { color: var(--chrome-text); }
+.stage-tag {
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--cyan);
+  padding: .25rem .55rem;
+  border: 1px solid rgba(91,211,240,.3);
+  border-radius: 4px;
+  background: rgba(91,211,240,.08);
+}
+.stage-tag.email { color: var(--amber); border-color: rgba(242,179,107,.3); background: rgba(242,179,107,.08); }
+
+.step-view { display: none; animation: stepIn .55s cubic-bezier(.16,1,.3,1); }
+.step-view.active { display: block; }
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom controls */
+.tour-controls {
+  max-width: var(--max); margin: 0 auto;
+  padding: 1.5rem 2rem 3rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.tour-btn {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .85rem 1.6rem; border-radius: 999px;
+  font-size: .85rem; letter-spacing: .03em;
+  border: 1px solid var(--chrome-line);
+  color: var(--chrome-text);
+  background: rgba(255,255,255,.03);
+  transition: all .25s ease;
+  font-family: var(--font-display); font-weight: 500;
+}
+.tour-btn:hover:not(:disabled) {
+  border-color: rgba(91,211,240,.5);
+  background: rgba(91,211,240,.08);
+  color: var(--cyan); transform: translateY(-1px);
+}
+.tour-btn:disabled { opacity: .35; cursor: not-allowed; }
+.tour-btn.primary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-deep));
+  color: var(--chrome); border-color: transparent; font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0,184,230,.25);
+}
+.tour-btn.primary:hover:not(:disabled) {
+  color: var(--chrome); transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,184,230,.35);
+}
+.tour-progress-text { font-size: .78rem; color: var(--chrome-muted); letter-spacing: .04em; }
+.tour-progress-text strong { color: var(--chrome-text); font-weight: 500; }
+
+/* Stats strip */
+.tour-stats {
+  max-width: var(--max); margin: 0 auto 3rem; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.stat-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--chrome-line);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; height: 2px; width: 30%;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 600;
+  color: var(--chrome-text); letter-spacing: -.03em; line-height: 1;
+}
+.stat-num em { font-style: normal; color: var(--cyan); }
+.stat-label {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--chrome-muted); margin-top: .55rem;
+}
+
+/* ===========================================================
+   ERHOLUNGS APP STYLES — inside .tour-stage
+   =========================================================== */
+.tour-stage h1, .tour-stage h2, .tour-stage h3, .tour-stage h4 {
+  color: var(--text); font-family: var(--font-sans);
+}
+
+/* Erholungs Header (sticky) */
+.eh-header {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.eh-logo {
+  display: flex; align-items: center; gap: .6rem;
+  font-weight: 700; color: var(--text); font-size: 1.15rem;
+}
+.eh-logo-mark {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--orange), #F2B36B);
+  color: #fff; font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(232,150,16,.25);
+  position: relative;
+}
+.eh-logo-mark::after {
+  content: ''; position: absolute;
+  bottom: 4px; right: 4px; width: 14px; height: 6px;
+  background: linear-gradient(90deg, #2D5016 50%, #6FA53A 50%);
+  border-radius: 999px;
+}
+.eh-logo-text {
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.eh-logo-text strong { color: var(--orange); font-weight: 700; font-size: 1.05rem; }
+.eh-logo-text span { color: var(--primary); font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; }
+.eh-nav { display: flex; gap: 1.8rem; font-size: .88rem; }
+.eh-nav a { color: var(--text-light); transition: color .25s; font-weight: 500; }
+.eh-nav a:hover, .eh-nav a.is-active { color: var(--primary); }
+.eh-nav a.is-active { font-weight: 600; }
+.eh-cta-btn {
+  padding: .55rem 1.1rem; background: var(--primary); color: #fff;
+  border-radius: 999px; font-size: .82rem; font-weight: 600;
+  transition: all .2s; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .4rem;
+}
+.eh-cta-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
+
+/* Buttons */
+.btn-eh {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .85rem 1.6rem;
+  background: var(--primary); color: #fff;
+  border-radius: 999px;
+  font-size: .85rem; font-weight: 600;
+  transition: all .25s ease;
+  cursor: pointer; border: none;
+  box-shadow: 0 4px 12px rgba(45,80,22,.15);
+}
+.btn-eh:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 8px 18px rgba(45,80,22,.25); }
+.btn-eh-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .85rem 1.6rem;
+  background: transparent; color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 999px;
+  font-size: .85rem; font-weight: 600;
+  transition: all .25s ease; cursor: pointer;
+}
+.btn-eh-outline:hover { background: var(--primary); color: #fff; }
+.btn-eh-accent {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .85rem 1.6rem;
+  background: var(--accent); color: #fff;
+  border-radius: 999px;
+  font-size: .85rem; font-weight: 600;
+  transition: all .25s ease; cursor: pointer; border: none;
+  box-shadow: 0 4px 12px rgba(201,168,76,.25);
+}
+.btn-eh-accent:hover { background: var(--accent-dark); transform: translateY(-2px); }
+
+.btn-eh-sm { padding: .55rem 1.1rem; font-size: .78rem; }
+
+/* ===== STEP 1: Marketing Website ===== */
+.eh-hero {
+  position: relative;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; min-height: 540px;
+  background: var(--bg);
+}
+.eh-hero-text { padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+.eh-hero-rating {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--surface-2);
+  padding: .5rem .9rem; border-radius: 999px;
+  font-size: .85rem; font-weight: 600; color: var(--text);
+  width: fit-content; margin-bottom: 1rem;
+}
+.eh-hero-rating .star { color: var(--accent); }
+.eh-hero-rating .muted { color: var(--text-muted); font-weight: 500; }
+.eh-hero-title {
+  font-size: 2.6rem; line-height: 1.08; font-weight: 700;
+  color: var(--text); margin-bottom: .8rem;
+  letter-spacing: -.02em; text-wrap: balance;
+}
+.eh-hero-title .accent-text { color: var(--primary); }
+.eh-hero-sub {
+  font-size: 1.05rem; color: var(--text-light);
+  margin-bottom: 1.4rem; max-width: 32ch;
+  line-height: 1.55;
+}
+.eh-usp-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.eh-usp-pills span {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .5rem .85rem;
+  background: rgba(45,80,22,.08);
+  color: var(--primary);
+  border-radius: 999px;
+  font-size: .8rem; font-weight: 600;
+}
+.eh-booking-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.2rem;
+}
+.eh-booking-row { display: grid; grid-template-columns: 1fr 1fr 90px; gap: .6rem; }
+.eh-booking-field { display: flex; flex-direction: column; gap: .25rem; }
+.eh-booking-field label { font-size: .68rem; color: var(--text-muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.eh-booking-field .value {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: .55rem .7rem;
+  font-size: .85rem; color: var(--text); font-weight: 500;
+  display: flex; align-items: center; gap: .35rem;
+}
+.eh-booking-field svg { width: 14px; height: 14px; color: var(--primary); }
+.eh-booking-bar .btn-eh { width: 100%; padding: .7rem; font-size: .78rem; }
+.eh-quick-links { display: flex; gap: .6rem; }
+.eh-quick-link {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: .5rem .9rem; border-radius: 999px;
+  font-size: .8rem; font-weight: 600; color: var(--primary);
+  transition: all .2s;
+}
+.eh-quick-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.eh-quick-link .price-tag {
+  background: rgba(45,80,22,.12); color: var(--primary);
+  padding: .15rem .45rem; border-radius: 999px;
+  font-size: .7rem; font-weight: 700;
+}
+.eh-quick-link:hover .price-tag { background: rgba(255,255,255,.18); color: #fff; }
+
+.eh-hero-images {
+  position: relative; padding: 1.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: .8rem;
+}
+.eh-hero-img {
+  position: relative; border-radius: 14px; overflow: hidden;
+  background: var(--surface-3); box-shadow: var(--shadow-lg);
+  cursor: pointer; transition: transform .4s;
+}
+.eh-hero-img:hover { transform: translateY(-3px); }
+.eh-hero-img .placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: .4rem;
+  background:
+    linear-gradient(135deg, rgba(45,80,22,.85), rgba(45,80,22,.45)),
+    repeating-linear-gradient(45deg, rgba(0,0,0,.05) 0 8px, transparent 8px 16px),
+    var(--surface-3);
+  color: #fff; padding: 1rem;
+}
+.eh-hero-img .placeholder svg { width: 36px; height: 36px; opacity: .9; }
+.eh-hero-img .placeholder-label { font-family: ui-monospace, monospace; font-size: .7rem; letter-spacing: .05em; opacity: .85; }
+.eh-hero-img .img-overlay {
+  position: absolute; inset: auto 0 0 0; padding: .9rem;
+  background: linear-gradient(0deg, rgba(0,0,0,.7), transparent);
+  color: #fff;
+}
+.eh-hero-img .img-overlay h4 { font-size: 1rem; font-weight: 700; margin: 0 0 .15rem; color: #fff; }
+.eh-hero-img .img-overlay p { font-size: .72rem; opacity: .85; margin: 0 0 .35rem; }
+.eh-hero-img .price-badge {
+  display: inline-block;
+  background: var(--accent); color: #fff;
+  padding: .15rem .55rem; border-radius: 999px;
+  font-size: .68rem; font-weight: 700;
+}
+
+/* Trust bar */
+.eh-trust {
+  display: flex; justify-content: space-around;
+  padding: 1.5rem 2rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.eh-trust-item {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: .85rem; color: var(--text-light); font-weight: 500;
+}
+.eh-trust-item svg { width: 20px; height: 20px; color: var(--primary); }
+.eh-trust-item strong { color: var(--text); }
+
+/* Apartment cards */
+.eh-section { padding: 3rem 2rem; }
+.eh-section-head { text-align: center; margin-bottom: 2.2rem; }
+.eh-section-head h2 {
+  font-size: 1.9rem; font-weight: 700; color: var(--text);
+  margin-bottom: .6rem; letter-spacing: -.02em;
+}
+.eh-section-head .underline { width: 60px; height: 3px; background: var(--accent); border-radius: 999px; margin: 0 auto; }
+.eh-section-head p { color: var(--text-muted); margin-top: .8rem; max-width: 50ch; margin-left: auto; margin-right: auto; }
+
+.eh-apt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+.eh-apt-card {
+  background: var(--surface); border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all .3s ease;
+  display: flex; flex-direction: column;
+}
+.eh-apt-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-xl); }
+.eh-apt-img { aspect-ratio: 4/3; position: relative; background: var(--surface-3); }
+.eh-apt-img .placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(232,150,16,.4), rgba(45,80,22,.5)),
+    repeating-linear-gradient(45deg, rgba(0,0,0,.05) 0 6px, transparent 6px 12px);
+  color: #fff;
+}
+.eh-apt-img .placeholder svg { width: 48px; height: 48px; opacity: .9; }
+.eh-apt-img .price-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: var(--accent); color: #fff;
+  padding: .35rem .9rem; border-radius: 999px;
+  font-size: .8rem; font-weight: 700;
+  box-shadow: var(--shadow-md);
+}
+.eh-apt-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.eh-apt-body h3 { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+.eh-apt-body .sub { font-size: .8rem; color: var(--text-muted); font-weight: 600; margin-bottom: .75rem; }
+.eh-apt-body p { color: var(--text-light); font-size: .9rem; line-height: 1.55; margin-bottom: 1rem; }
+.eh-amenities { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 1.2rem; }
+.eh-amenity { display: inline-flex; align-items: center; gap: .35rem; font-size: .72rem; color: var(--text-muted); }
+.eh-amenity svg { width: 14px; height: 14px; }
+.eh-apt-body .btn-eh { align-self: flex-start; margin-top: auto; padding: .65rem 1.3rem; font-size: .8rem; }
+
+/* USP Section */
+.eh-usp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.eh-usp-card {
+  text-align: center; padding: 1.5rem 1rem;
+  background: var(--surface); border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+.eh-usp-icon {
+  width: 50px; height: 50px;
+  border-radius: 12px; margin: 0 auto .9rem;
+  background: rgba(45,80,22,.08);
+  display: grid; place-items: center;
+  color: var(--primary);
+}
+.eh-usp-icon svg { width: 24px; height: 24px; }
+.eh-usp-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .35rem; color: var(--text); }
+.eh-usp-card p { font-size: .8rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Reviews */
+.eh-reviews-bg { background: var(--surface-2); }
+.eh-rating-headline {
+  text-align: center; margin-bottom: 2rem;
+}
+.eh-rating-stars {
+  display: inline-flex; align-items: center; gap: .35rem;
+  margin-bottom: .6rem; font-size: 1.1rem; font-weight: 700;
+}
+.eh-rating-stars svg { width: 22px; height: 22px; color: var(--accent); fill: var(--accent); }
+.eh-review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.eh-review-card {
+  background: var(--surface); padding: 1.5rem;
+  border-radius: 14px; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: .65rem;
+}
+.eh-review-quote { color: var(--accent); opacity: .4; }
+.eh-review-quote svg { width: 22px; height: 22px; }
+.eh-review-stars { display: flex; gap: 2px; }
+.eh-review-stars svg { width: 14px; height: 14px; color: var(--accent); fill: var(--accent); }
+.eh-review-text { font-size: .85rem; color: var(--text-light); line-height: 1.55; flex: 1; }
+.eh-review-foot { display: flex; align-items: center; justify-content: space-between; padding-top: .8rem; border-top: 1px solid var(--border-light); }
+.eh-review-foot .name { font-size: .82rem; font-weight: 600; color: var(--text); }
+.eh-review-foot .date { font-size: .7rem; color: var(--text-muted); }
+.eh-review-source {
+  font-size: .68rem; padding: .2rem .55rem; border-radius: 999px; font-weight: 600;
+}
+.eh-review-source.google { background: #E8F0FE; color: #1A73E8; }
+.eh-review-source.booking { background: #EEF2FF; color: #4F46E5; }
+.eh-review-source.airbnb { background: #FFF1F2; color: #E11D48; }
+
+/* ===== STEP 2: Verfügbarkeitskalender ===== */
+.cal-page { padding: 2.5rem 2rem; background: var(--surface-2); min-height: 70vh; }
+.cal-shell {
+  max-width: 1100px; margin: 0 auto;
+  background: var(--surface); border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.cal-header {
+  padding: 1.4rem 2rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cal-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+.cal-header .apt-toggle { display: flex; gap: .4rem; }
+.cal-header .apt-toggle button {
+  padding: .55rem 1rem; border-radius: 999px;
+  font-size: .8rem; font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--bg); color: var(--text-light);
+  cursor: pointer; transition: all .2s;
+}
+.cal-header .apt-toggle button.active {
+  background: var(--primary); color: #fff; border-color: var(--primary);
+}
+.cal-body { padding: 1.8rem 2rem 2rem; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.cal-nav button {
+  width: 36px; height: 36px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: grid; place-items: center; cursor: pointer; color: var(--text-light);
+  transition: all .2s;
+}
+.cal-nav button:hover { background: var(--surface-2); color: var(--primary); border-color: var(--primary); }
+.cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.cal-month-title { text-align: center; font-weight: 700; font-size: 1.05rem; color: var(--text); margin-bottom: 1rem; }
+.cal-weekhead { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: .5rem; }
+.cal-weekhead div {
+  text-align: center; padding: .4rem 0;
+  font-size: .68rem; font-weight: 700; letter-spacing: .08em;
+  color: var(--text-muted); text-transform: uppercase;
+}
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+.cal-day {
+  aspect-ratio: 1; display: grid; place-items: center;
+  font-size: .85rem; cursor: pointer; position: relative;
+  transition: all .15s; border-radius: 999px;
+  color: var(--text);
+}
+.cal-day:hover { background: rgba(201,168,76,.12); }
+.cal-day.empty { cursor: default; }
+.cal-day.disabled { color: rgba(0,0,0,.2); cursor: not-allowed; }
+.cal-day.disabled:hover { background: transparent; }
+.cal-day.blocked {
+  text-decoration: line-through; color: rgba(0,0,0,.3);
+  cursor: not-allowed;
+  background: repeating-linear-gradient(45deg, transparent 0 4px, rgba(0,0,0,.06) 4px 5px);
+}
+.cal-day.blocked:hover { background: repeating-linear-gradient(45deg, transparent 0 4px, rgba(0,0,0,.06) 4px 5px); }
+.cal-day.today { font-weight: 700; }
+.cal-day.today::after { content: ''; position: absolute; bottom: 6px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+.cal-day.in-range { background: rgba(201,168,76,.15); border-radius: 0; }
+.cal-day.range-start, .cal-day.range-end {
+  background: var(--accent); color: #fff; font-weight: 700;
+  z-index: 2;
+}
+.cal-day.range-start { border-radius: 999px 0 0 999px; }
+.cal-day.range-end { border-radius: 0 999px 999px 0; }
+.cal-day.range-start.range-end { border-radius: 999px; }
+
+.cal-status {
+  margin-top: 1.4rem; padding: .9rem 1.2rem;
+  background: var(--surface-2); border-radius: 10px;
+  text-align: center; font-size: .88rem; color: var(--text-light);
+}
+.cal-status strong { color: var(--text); }
+.cal-legend {
+  display: flex; gap: 1.5rem; justify-content: center;
+  margin-top: 1.2rem; flex-wrap: wrap;
+  font-size: .72rem; color: var(--text-muted);
+}
+.cal-legend .item { display: inline-flex; align-items: center; gap: .4rem; }
+.cal-legend .swatch { width: 12px; height: 12px; border-radius: 50%; }
+.cal-legend .swatch.selected { background: var(--accent); }
+.cal-legend .swatch.in-range { background: rgba(201,168,76,.25); border: 1px solid rgba(201,168,76,.5); }
+.cal-legend .swatch.blocked { background: rgba(0,0,0,.06); }
+
+.cal-summary {
+  margin-top: 1.4rem; padding: 1.4rem;
+  background: linear-gradient(135deg, rgba(45,80,22,.04), rgba(201,168,76,.05));
+  border: 1px solid var(--border); border-radius: 12px;
+  display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
+}
+.cal-summary-text {
+  font-size: .82rem; color: var(--text-muted);
+}
+.cal-summary-text .price-line { display: flex; justify-content: space-between; padding: .35rem 0; }
+.cal-summary-text .price-total { display: flex; justify-content: space-between; padding-top: .6rem; margin-top: .35rem; border-top: 1px solid var(--border); font-weight: 700; color: var(--text); font-size: 1rem; }
+.cal-summary-text .discount { color: var(--primary); font-weight: 600; }
+
+/* iCal sync indicator */
+.ical-strip {
+  margin-top: 1rem; padding: .85rem 1.1rem;
+  background: linear-gradient(135deg, rgba(45,80,22,.06), rgba(45,80,22,.02));
+  border-radius: 10px; border: 1px solid rgba(45,80,22,.12);
+  display: flex; align-items: center; gap: .8rem; font-size: .8rem; color: var(--text-light);
+}
+.ical-strip svg { width: 18px; height: 18px; color: var(--primary); flex-shrink: 0; }
+.ical-strip .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #6FA53A; box-shadow: 0 0 0 4px rgba(111,165,58,.2); animation: sync-pulse 1.6s ease-in-out infinite; }
+@keyframes sync-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+
+/* ===== STEP 3: Buchungs-Flow ===== */
+.book-page { padding: 2.5rem 2rem; background: var(--surface-2); }
+.book-shell { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+.book-form, .book-summary {
+  background: var(--surface); border-radius: 16px;
+  box-shadow: var(--shadow-md); padding: 2rem;
+}
+.book-form h2 { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+.book-form .sub { font-size: .85rem; color: var(--text-muted); margin-bottom: 1.6rem; }
+.book-step-pills {
+  display: flex; gap: .35rem; margin-bottom: 1.5rem;
+  padding-bottom: 1.4rem; border-bottom: 1px solid var(--border);
+}
+.book-step-pill {
+  flex: 1; padding: .55rem .8rem;
+  font-size: .72rem; font-weight: 600; letter-spacing: .03em;
+  background: var(--surface-2); color: var(--text-muted);
+  border-radius: 8px;
+  display: flex; align-items: center; gap: .4rem;
+  border-left: 3px solid transparent;
+}
+.book-step-pill .num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--surface-3); color: var(--text-muted);
+  display: grid; place-items: center;
+  font-size: .65rem; font-weight: 700;
+}
+.book-step-pill.active { background: rgba(45,80,22,.08); color: var(--primary); border-left-color: var(--primary); }
+.book-step-pill.active .num { background: var(--primary); color: #fff; }
+.book-step-pill.done { color: var(--primary); }
+.book-step-pill.done .num { background: var(--primary); color: #fff; }
+
+.book-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+.book-field { display: flex; flex-direction: column; gap: .35rem; }
+.book-field label { font-size: .75rem; font-weight: 600; color: var(--text); }
+.book-field input, .book-field select, .book-field textarea {
+  padding: .65rem .85rem;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); font-size: .88rem; color: var(--text);
+  transition: all .2s; font-family: inherit;
+}
+.book-field input:focus, .book-field select:focus, .book-field textarea:focus {
+  outline: none; border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(45,80,22,.1);
+}
+.book-field textarea { min-height: 80px; resize: vertical; }
+.book-field .hint { font-size: .7rem; color: var(--text-muted); }
+
+.book-summary h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+.book-summary-img {
+  aspect-ratio: 16/10; border-radius: 10px; overflow: hidden;
+  margin-bottom: 1rem; position: relative; background: var(--surface-3);
+}
+.book-summary-img .placeholder {
+  width: 100%; height: 100%; display: grid; place-items: center;
+  background: linear-gradient(135deg, rgba(232,150,16,.4), rgba(45,80,22,.5)),
+              repeating-linear-gradient(45deg, rgba(0,0,0,.05) 0 6px, transparent 6px 12px);
+  color: #fff;
+}
+.book-summary-img .placeholder svg { width: 42px; height: 42px; opacity: .9; }
+.book-summary-line {
+  display: flex; justify-content: space-between; padding: .55rem 0;
+  font-size: .85rem; color: var(--text-light);
+  border-bottom: 1px dashed var(--border-light);
+}
+.book-summary-line:last-of-type { border-bottom: none; }
+.book-summary-line .lbl { color: var(--text-muted); }
+.book-summary-line .val { font-weight: 600; color: var(--text); }
+.book-summary-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: .9rem; margin-top: .9rem;
+  border-top: 1px solid var(--border);
+  font-weight: 700; color: var(--text);
+}
+.book-summary-total .num { font-size: 1.5rem; color: var(--primary); }
+.book-summary-savings {
+  background: rgba(111,165,58,.08); color: #2D5016;
+  padding: .55rem .85rem; border-radius: 8px;
+  font-size: .78rem; font-weight: 600;
+  display: flex; align-items: center; gap: .4rem;
+  margin-top: .8rem;
+}
+.book-summary-savings svg { width: 14px; height: 14px; }
+
+.book-payment {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .6rem;
+  margin-top: 1rem;
+}
+.payment-option {
+  padding: .9rem .8rem; border: 2px solid var(--border);
+  border-radius: 10px; cursor: pointer;
+  display: flex; align-items: center; gap: .55rem;
+  transition: all .2s; background: var(--bg);
+  font-size: .82rem; font-weight: 600; color: var(--text);
+}
+.payment-option:hover { border-color: var(--primary); }
+.payment-option.selected { border-color: var(--primary); background: rgba(45,80,22,.04); }
+.payment-option .pay-mark {
+  width: 28px; height: 18px; border-radius: 4px;
+  display: grid; place-items: center;
+  font-size: .55rem; font-weight: 800; letter-spacing: .03em;
+  font-family: var(--font-display);
+}
+.pay-mark.stripe { background: #635BFF; color: #fff; }
+.pay-mark.paypal { background: #003087; color: #FFC439; }
+.pay-mark.transfer { background: var(--surface-2); color: var(--text-light); border: 1px solid var(--border); }
+.pay-mark.invoice { background: var(--surface-2); color: var(--text-light); border: 1px solid var(--border); }
+
+.dsgvo-note {
+  font-size: .72rem; color: var(--text-muted);
+  background: var(--surface-2); padding: .8rem 1rem;
+  border-radius: 8px; line-height: 1.5;
+  margin-top: 1rem;
+  display: flex; gap: .55rem;
+}
+.dsgvo-note svg { width: 16px; height: 16px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+
+.book-actions { display: flex; justify-content: space-between; margin-top: 1.6rem; }
+
+/* ===== STEP 4: Bestätigung & E-Mail ===== */
+.confirm-page {
+  padding: 2.5rem 2rem;
+  background: linear-gradient(180deg, var(--surface-2), var(--bg));
+}
+.confirm-shell { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.confirm-success {
+  background: var(--surface); border-radius: 16px;
+  box-shadow: var(--shadow-md); padding: 2.2rem;
+  text-align: center;
+}
+.confirm-check {
+  width: 70px; height: 70px; border-radius: 50%;
+  background: linear-gradient(135deg, #6FA53A, var(--primary));
+  margin: 0 auto 1.2rem;
+  display: grid; place-items: center;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(45,80,22,.25);
+  position: relative;
+}
+.confirm-check::before {
+  content: ''; position: absolute; inset: -8px;
+  border-radius: 50%; border: 2px solid rgba(45,80,22,.15);
+  animation: pulse-ring 2s ease-out infinite;
+}
+.confirm-check svg { width: 32px; height: 32px; }
+.confirm-success h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: .4rem; color: var(--text); }
+.confirm-success p { color: var(--text-light); font-size: .92rem; margin-bottom: 1.5rem; }
+.confirm-num {
+  font-family: ui-monospace, monospace; font-size: .85rem;
+  background: var(--surface-2); padding: .6rem 1rem;
+  border-radius: 999px; display: inline-block;
+  margin-bottom: 1.5rem; color: var(--text);
+}
+.confirm-num span { color: var(--text-muted); }
+.confirm-actions { display: flex; gap: .6rem; justify-content: center; flex-wrap: wrap; }
+
+.confirm-details { padding: 1.5rem; background: var(--surface-2); border-radius: 12px; margin-top: 1.5rem; text-align: left; }
+.confirm-details h4 { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); font-weight: 700; margin-bottom: .8rem; }
+.confirm-detail-row { display: flex; justify-content: space-between; padding: .4rem 0; font-size: .85rem; border-bottom: 1px dashed var(--border); }
+.confirm-detail-row:last-child { border-bottom: none; }
+.confirm-detail-row .lbl { color: var(--text-muted); }
+.confirm-detail-row .val { font-weight: 600; color: var(--text); }
+
+/* E-Mail mockup */
+.email-mockup {
+  background: #fff;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  font-family: var(--font-sans);
+}
+.email-head {
+  background: var(--surface-2);
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: .4rem;
+}
+.email-head .em-row { display: flex; gap: .6rem; font-size: .8rem; color: var(--text-light); }
+.email-head .em-row .em-lbl { color: var(--text-muted); width: 60px; }
+.email-head .em-row .em-val { color: var(--text); font-weight: 500; }
+.email-head .em-subject { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-top: .3rem; }
+.email-body {
+  padding: 1.5rem 1.4rem;
+  background: linear-gradient(180deg, #fff, var(--surface-2) 90%);
+  font-size: .85rem; line-height: 1.65; color: var(--text-light);
+}
+.email-body .eb-logo {
+  display: flex; align-items: center; gap: .55rem;
+  padding-bottom: 1rem; margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.email-body h3 { color: var(--text); margin-bottom: .8rem; font-size: 1.05rem; font-weight: 700; }
+.email-body p { margin-bottom: .9rem; color: var(--text-light); font-size: .85rem; }
+.email-body .eb-block {
+  background: var(--surface);
+  border-left: 3px solid var(--primary);
+  padding: .9rem 1.1rem;
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.email-body .eb-block .eb-line { display: flex; justify-content: space-between; font-size: .82rem; padding: .15rem 0; }
+.email-body .eb-block .eb-lbl { color: var(--text-muted); }
+.email-body .eb-block .eb-val { color: var(--text); font-weight: 600; }
+.email-body .eb-cta {
+  display: inline-block;
+  background: var(--primary); color: #fff !important;
+  padding: .65rem 1.4rem; border-radius: 999px;
+  font-weight: 600; font-size: .82rem;
+  margin: .5rem 0;
+}
+.email-body .eb-foot {
+  font-size: .72rem; color: var(--text-muted);
+  padding-top: 1rem; margin-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.email-meta-strip {
+  margin-top: 1rem;
+  display: flex; gap: .5rem; flex-wrap: wrap;
+}
+.email-meta {
+  font-size: .68rem;
+  padding: .35rem .7rem;
+  background: rgba(91,211,240,.08);
+  color: var(--cyan-deep);
+  border: 1px solid rgba(91,211,240,.25);
+  border-radius: 999px;
+  font-family: ui-monospace, monospace;
+  letter-spacing: .03em;
+  display: inline-flex; align-items: center; gap: .35rem;
+}
+.email-meta.green { background: rgba(111,165,58,.08); color: var(--primary); border-color: rgba(111,165,58,.25); }
+.email-meta svg { width: 11px; height: 11px; }
+
+/* ===== STEP 5: Wohlbefinden Massage ===== */
+.massage-page { background: var(--bg); }
+.massage-hero {
+  position: relative; padding: 3rem 2rem; text-align: center;
+  background: linear-gradient(135deg, rgba(45,80,22,.04), rgba(201,168,76,.06));
+  border-bottom: 1px solid var(--border);
+}
+.massage-pre {
+  display: inline-block;
+  font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+  padding: .35rem .9rem;
+  background: rgba(201,168,76,.1);
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.massage-hero h2 { font-size: 2.4rem; font-weight: 700; color: var(--text); letter-spacing: -.02em; margin-bottom: .6rem; text-wrap: balance; }
+.massage-hero .underline { width: 60px; height: 3px; background: var(--accent); border-radius: 999px; margin: 0 auto 1rem; }
+.massage-hero p { color: var(--text-light); max-width: 50ch; margin: 0 auto; font-size: 1rem; }
+
+.pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; padding: 2.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.pkg-card {
+  background: var(--surface); border-radius: 14px;
+  padding: 2rem 1.6rem;
+  box-shadow: var(--shadow-sm); border: 1px solid var(--border-light);
+  transition: all .25s; position: relative; overflow: hidden;
+}
+.pkg-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.pkg-card.popular {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(201,168,76,.1), var(--shadow-md);
+}
+.pkg-card.popular::before {
+  content: 'Beliebt'; position: absolute; top: 0; right: 0;
+  background: var(--accent); color: #fff;
+  padding: .35rem .9rem; font-size: .72rem; font-weight: 700;
+  letter-spacing: .04em; border-bottom-left-radius: 14px;
+}
+.pkg-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(45,80,22,.08); color: var(--primary);
+  display: grid; place-items: center; margin-bottom: 1rem;
+}
+.pkg-icon svg { width: 26px; height: 26px; }
+.pkg-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
+.pkg-card p { color: var(--text-muted); font-size: .85rem; line-height: 1.55; margin-bottom: 1rem; }
+.pkg-meta { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--text-muted); margin-bottom: .8rem; }
+.pkg-meta svg { width: 14px; height: 14px; }
+.pkg-price { padding-top: .8rem; border-top: 1px solid var(--border-light); }
+.pkg-price .num { font-size: 2rem; font-weight: 700; color: var(--primary); font-family: var(--font-display); }
+
+.combo-banner {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem 2.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.combo-card {
+  background: var(--surface); border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  display: flex; align-items: center; gap: .9rem;
+  border: 1px solid;
+}
+.combo-card.gold { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.04); }
+.combo-card.green { border-color: rgba(45,80,22,.2); background: rgba(45,80,22,.04); }
+.combo-card svg { width: 28px; height: 28px; flex-shrink: 0; }
+.combo-card.gold svg { color: var(--accent); }
+.combo-card.green svg { color: var(--primary); }
+.combo-card .text { font-size: .9rem; color: var(--text); }
+.combo-card .text strong { color: var(--text); }
+
+.massage-process {
+  padding: 2.5rem 2rem; background: var(--surface-2);
+}
+.process-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: .6rem; position: relative; }
+.process-grid::before {
+  content: ''; position: absolute;
+  top: 24px; left: 10%; right: 10%; height: 2px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  z-index: 0; opacity: .3;
+}
+.process-step {
+  text-align: center; position: relative; z-index: 1;
+}
+.process-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--surface); color: var(--primary);
+  border: 2px solid var(--primary);
+  display: grid; place-items: center; margin: 0 auto .6rem;
+  font-weight: 700; font-family: var(--font-display);
+}
+.process-step h5 { font-size: .85rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+.process-step p { font-size: .72rem; color: var(--text-muted); line-height: 1.45; }
+
+/* ===== STEP 6: Local SEO Bad Lippspringe ===== */
+.seo-page { background: var(--bg); }
+.seo-hero {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff; padding: 3rem 2rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.seo-hero::before {
+  content: ''; position: absolute; right: -100px; top: -100px;
+  width: 350px; height: 350px; border-radius: 50%;
+  background: rgba(201,168,76,.08);
+}
+.seo-hero::after {
+  content: ''; position: absolute; left: -60px; bottom: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+}
+.seo-hero-pre {
+  display: inline-block;
+  font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700;
+  margin-bottom: .8rem; position: relative; z-index: 1;
+}
+.seo-hero h2 { font-size: 2.2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .8rem; color: #fff; position: relative; z-index: 1; }
+.seo-hero h2 em { font-style: italic; font-weight: 400; color: var(--accent); }
+.seo-hero p { color: rgba(255,255,255,.85); max-width: 50ch; margin: 0 auto; position: relative; z-index: 1; }
+
+.seo-rank-row {
+  max-width: 1100px; margin: -1.5rem auto 0; padding: 0 2rem;
+  position: relative; z-index: 2;
+}
+.seo-rank-card {
+  background: var(--surface); border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 1.4rem 1.6rem;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 1.4rem; align-items: center;
+}
+.serp-rank-num {
+  display: grid; place-items: center;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #4285F4, #1A73E8);
+  color: #fff; border-radius: 12px;
+  font-size: 1.6rem; font-weight: 800; font-family: var(--font-display);
+}
+.seo-rank-card .label {
+  font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 700; margin-bottom: .25rem;
+}
+.seo-rank-card .query { font-size: 1rem; color: var(--text); font-weight: 600; }
+.seo-rank-card .domain { font-size: .8rem; color: var(--text-muted); margin-top: .15rem; font-family: ui-monospace, monospace; }
+.seo-rank-card .delta { font-size: .82rem; font-weight: 700; color: #15803D; display: inline-flex; align-items: center; gap: .25rem; }
+
+/* SERP mockup */
+.serp { max-width: 1100px; margin: 1.5rem auto; padding: 0 2rem; }
+.serp-shell { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; box-shadow: var(--shadow-sm); }
+.serp-bar {
+  display: flex; align-items: center; gap: .8rem;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--border-light); margin-bottom: 1rem;
+}
+.serp-google {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700; font-size: 1.25rem;
+  letter-spacing: -.02em;
+}
+.serp-google .b { color: #4285F4; }
+.serp-google .r { color: #EA4335; }
+.serp-google .y { color: #FBBC05; }
+.serp-google .g { color: #34A853; }
+.serp-input {
+  flex: 1; padding: .55rem 1rem;
+  background: var(--surface-2);
+  border-radius: 999px;
+  font-size: .82rem; color: var(--text);
+  display: flex; align-items: center; gap: .55rem;
+}
+.serp-input svg { width: 14px; height: 14px; color: var(--text-muted); }
+.serp-result {
+  padding: 1rem 0; border-bottom: 1px dashed var(--border-light);
+}
+.serp-result:last-child { border-bottom: none; }
+.serp-result.us {
+  background: rgba(201,168,76,.05);
+  border-radius: 8px; padding: 1rem; margin: .5rem 0;
+  border-bottom: 1px solid rgba(201,168,76,.2);
+  position: relative;
+}
+.serp-result.us::before {
+  content: '↑ Ihr Eintrag';
+  position: absolute; top: -10px; right: 12px;
+  background: var(--accent); color: #fff;
+  padding: .15rem .55rem; border-radius: 999px;
+  font-size: .65rem; font-weight: 700; letter-spacing: .04em;
+}
+.serp-domain { font-size: .75rem; color: var(--text-muted); margin-bottom: .2rem; font-family: ui-monospace, monospace; }
+.serp-title { font-size: 1rem; font-weight: 500; color: #1A0DAB; margin-bottom: .25rem; }
+.serp-result.us .serp-title { color: var(--primary); font-weight: 600; }
+.serp-snippet { font-size: .82rem; color: var(--text-light); line-height: 1.45; }
+.serp-stars { display: inline-flex; gap: 1px; color: var(--accent); margin-right: .4rem; }
+.serp-stars svg { width: 11px; height: 11px; fill: currentColor; }
+
+.attractions-grid { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.attr-card {
+  background: var(--surface); border-radius: 12px;
+  border: 1px solid var(--border-light);
+  overflow: hidden; transition: all .25s;
+  display: flex; flex-direction: column;
+}
+.attr-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.attr-thumb {
+  aspect-ratio: 16/10; position: relative;
+  display: grid; place-items: center;
+  color: #fff;
+}
+.attr-thumb.therme { background: linear-gradient(135deg, #2196F3, #1565C0); }
+.attr-thumb.kurwald { background: linear-gradient(135deg, #6FA53A, #2D5016); }
+.attr-thumb.exter { background: linear-gradient(135deg, #C9A84C, #8B6F1F); }
+.attr-thumb.garten { background: linear-gradient(135deg, #EC4899, #A21856); }
+.attr-thumb.see { background: linear-gradient(135deg, #38BDF8, #1E40AF); }
+.attr-thumb.wandern { background: linear-gradient(135deg, #84CC16, #166534); }
+.attr-thumb svg { width: 38px; height: 38px; opacity: .9; }
+.attr-thumb .dist {
+  position: absolute; top: .8rem; right: .8rem;
+  background: rgba(255,255,255,.95); color: var(--primary);
+  padding: .2rem .6rem; border-radius: 999px;
+  font-size: .68rem; font-weight: 700;
+  display: inline-flex; align-items: center; gap: .25rem;
+}
+.attr-thumb .dist svg { width: 10px; height: 10px; opacity: 1; }
+.attr-body { padding: 1rem 1.2rem; }
+.attr-body h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+.attr-body p { font-size: .8rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Schema.org indicator */
+.seo-schema {
+  max-width: 1100px; margin: 0 auto 3rem; padding: 0 2rem;
+}
+.schema-shell {
+  background: #0E1320; color: #E7ECF4;
+  border-radius: 12px; padding: 1.4rem 1.6rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .75rem; line-height: 1.55;
+  border: 1px solid var(--chrome-line);
+  position: relative;
+}
+.schema-shell::before {
+  content: 'Schema.org · LodgingBusiness JSON-LD';
+  position: absolute; top: -10px; left: 16px;
+  background: var(--accent); color: #fff;
+  padding: .2rem .7rem; border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+}
+.schema-shell .key { color: #5BD3F0; }
+.schema-shell .str { color: #F2B36B; }
+.schema-shell .num-l { color: #9DE5C8; }
+.schema-shell .br { color: #94A0BB; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .tour-stats { grid-template-columns: repeat(2, 1fr); }
+  .eh-hero { grid-template-columns: 1fr; }
+  .eh-hero-images { grid-template-columns: 1fr 1fr; padding: 0 2.5rem 2.5rem; }
+  .eh-apt-grid { grid-template-columns: 1fr; }
+  .eh-usp-grid { grid-template-columns: repeat(2, 1fr); }
+  .eh-review-grid { grid-template-columns: 1fr; }
+  .cal-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .book-shell { grid-template-columns: 1fr; }
+  .pkg-grid { grid-template-columns: 1fr; }
+  .combo-banner { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid::before { display: none; }
+  .attractions-grid { grid-template-columns: repeat(2, 1fr); }
+  .confirm-shell { grid-template-columns: 1fr; }
+  .seo-rank-card { grid-template-columns: auto 1fr; }
+  .seo-rank-card .delta { grid-column: 2; }
+}
+@media (max-width: 720px) {
+  .tour-topbar-inner { padding: .8rem 1rem; gap: .8rem; }
+  .tour-stepnav, .tour-meta, .tour-stage-wrap, .tour-controls, .tour-stats { padding-left: 1rem; padding-right: 1rem; }
+  .tour-stepnav-track { grid-template-columns: repeat(6, 1fr); gap: 0; }
+  .step-label { font-size: .62rem; max-width: 8ch; }
+  .tour-meta { flex-direction: column; align-items: flex-start; }
+  .tour-stats { grid-template-columns: 1fr 1fr; }
+  .eh-hero-text { padding: 2rem 1.5rem; }
+  .eh-hero-title { font-size: 1.9rem; }
+  .eh-section { padding: 2rem 1rem; }
+  .eh-nav { display: none; }
+  .eh-apt-grid { gap: 1rem; }
+  .attractions-grid { grid-template-columns: 1fr; }
+  .pkg-grid { padding: 2rem 1rem; }
+  .book-payment { grid-template-columns: 1fr; }
+}
+
+/* Meta toggle button — hidden on desktop */
+.tour-meta-toggle { display: none; }
+
+/* ===== Phone-sized: tighter chrome, hide labels ===== */
+@media (max-width: 700px) {
+  /* Meta block becomes collapsible */
+  .tour-meta {
+    position: relative;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .5rem;
+    padding: .8rem 1rem .9rem !important;
+    border-bottom: 1px solid var(--chrome-line);
+  }
+  .tour-meta-left { gap: .8rem; align-items: center; padding-right: 2.5rem; }
+  .tour-step-num { font-size: 1.3rem; flex-shrink: 0; }
+  .tour-meta-text { min-width: 0; flex: 1; }
+  .tour-step-title { font-size: .92rem; }
+  .tour-step-desc { font-size: .8rem; line-height: 1.45; margin-top: .15rem; }
+
+  .tour-meta-toggle {
+    display: grid; place-items: center;
+    position: absolute; top: .65rem; right: .85rem;
+    width: 32px; height: 32px;
+    background: rgba(91,211,240,.06);
+    border: 1px solid var(--chrome-line);
+    border-radius: 999px;
+    color: var(--chrome-muted);
+    cursor: pointer;
+    transition: transform .25s ease, background .2s, color .2s;
+  }
+  .tour-meta-toggle:hover { color: var(--chrome-text); background: rgba(91,211,240,.12); }
+  .tour-meta-toggle svg { transition: transform .3s ease; }
+
+  body.meta-collapsed .tour-step-desc,
+  body.meta-collapsed .tour-tech { display: none; }
+  body.meta-collapsed .tour-meta { padding-bottom: .65rem !important; border-bottom-color: transparent; }
+  body.meta-collapsed .tour-meta-toggle svg { transform: rotate(-90deg); }
+
+  .tour-tech { gap: .4rem; }
+  .tech-badge { font-size: .68rem; padding: .35rem .65rem; }
+
+  .tour-topbar-inner { padding: .65rem .85rem; gap: .65rem; flex-wrap: nowrap; }
+  .tour-brand { gap: .5rem; font-size: .72rem; min-width: 0; flex: 1; overflow: hidden; }
+  .tour-brand strong { font-size: .62rem; letter-spacing: .08em; }
+  .tour-brand-sep { display: none; }
+  .tour-brand em { font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .demo-safe-badge { margin-left: 0; flex-shrink: 0; }
+  .tour-back {
+    padding: .45rem .55rem;
+    font-size: 0;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .tour-back svg { width: 16px; height: 16px; }
+
+  .tour-stepnav { padding: 1.1rem 1rem .9rem; }
+  .tour-stepnav-track::before,
+  .tour-stepnav-track::after { top: 14px; left: 8.33%; right: 8.33%; }
+  .step-pill { padding: 0; gap: .35rem; }
+  .step-dot { width: 28px; height: 28px; font-size: .78rem; }
+  .step-label { display: none; }
+
+  .stage-chrome { padding: .55rem .7rem; gap: .55rem; }
+  .stage-dots { gap: .3rem; }
+  .stage-dots span { width: 8px; height: 8px; }
+  .stage-url { font-size: .7rem; padding: .35rem .6rem; min-width: 0; overflow: hidden; }
+  .stage-url > span:not(.stage-url-path) {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+  }
+  .stage-url-path { display: none; }
+  .stage-tag { display: none; }
+  .tour-stage-wrap { padding: 0 .6rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="tour-bg" aria-hidden="true"></div>
+
+<!-- ===== TOP BAR ===== -->
+<header class="tour-topbar">
+  <div class="tour-topbar-inner">
+    <a href="demo.html" class="tour-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Demo-Übersicht
+    </a>
+    <div class="tour-brand">
+      <span class="tour-brand-mark">DK</span>
+      <strong>Daniel&nbsp;Kroh</strong>
+      <span class="tour-brand-sep"></span>
+      <em>Erholungs Apartments</em>
+    </div>
+    <div class="demo-safe-badge" title="Diese Tour ist eine Demo. Es werden keine echten Daten verarbeitet, keine Mails versendet und keine Zahlungen ausgeführt.">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Demo-Modus · keine echten Daten · kein E-Mail-Versand</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== STEP NAV ===== -->
+<div class="tour-stepnav">
+  <div class="tour-stepnav-track" id="stepNavTrack" style="--progress:0%">
+    <button class="step-pill" data-step="1" data-state="active">
+      <span class="step-dot">1</span>
+      <span class="step-label">Marketing-Site</span>
+    </button>
+    <button class="step-pill" data-step="2" data-state="">
+      <span class="step-dot">2</span>
+      <span class="step-label">Kalender</span>
+    </button>
+    <button class="step-pill" data-step="3" data-state="">
+      <span class="step-dot">3</span>
+      <span class="step-label">Buchung</span>
+    </button>
+    <button class="step-pill" data-step="4" data-state="">
+      <span class="step-dot">4</span>
+      <span class="step-label">Bestätigung</span>
+    </button>
+    <button class="step-pill" data-step="5" data-state="">
+      <span class="step-dot">5</span>
+      <span class="step-label">Massage</span>
+    </button>
+    <button class="step-pill" data-step="6" data-state="">
+      <span class="step-dot">6</span>
+      <span class="step-label">Local SEO</span>
+    </button>
+  </div>
+</div>
+
+<div class="tour-meta" id="tourMeta">
+  <div class="tour-meta-left">
+    <span class="tour-step-num" id="stepNum">01</span>
+    <div class="tour-meta-text">
+      <div class="tour-step-title" id="stepTitle">Marketing-Website</div>
+      <div class="tour-step-desc" id="stepDesc">Hero mit Booking-Bar, USP-Stripe, Apartment-Cards, Reviews aus Booking.com / Google / Airbnb. SEO-optimiert für „Ferienwohnung Bad Lippspringe".</div>
+    </div>
+  </div>
+  <div class="tour-tech" id="stepTech">
+    <span class="tech-badge">Next.js 16</span>
+    <span class="tech-badge">TypeScript</span>
+    <span class="tech-badge amber">Tailwind v4</span>
+  </div>
+  <button class="tour-meta-toggle" id="tourMetaToggle" type="button" aria-expanded="true" aria-controls="tourMeta" aria-label="Details ein-/ausklappen">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+</div>
+
+<!-- ===== STAGE ===== -->
+<div class="tour-stage-wrap">
+  <div class="tour-stage">
+    <div class="stage-chrome">
+      <div class="stage-dots"><span></span><span></span><span></span></div>
+      <div class="stage-url">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>erholungs-apartments.de</span><span class="stage-url-path" id="stageUrlPath">/</span>
+      </div>
+      <div class="stage-tag" id="stageTag">PUBLIC</div>
+    </div>
+
+    <!-- ===== STEP 1: MARKETING WEBSITE ===== -->
+    <div class="step-view active" data-step-view="1">
+      <header class="eh-header">
+        <div class="eh-logo">
+          <div class="eh-logo-mark">EA</div>
+          <div class="eh-logo-text">
+            <strong>Erholungs</strong>
+            <span>Apartments</span>
+          </div>
+        </div>
+        <nav class="eh-nav">
+          <a href="#" class="is-active">Start</a>
+          <a href="#">Apartments</a>
+          <a href="#">Massage</a>
+          <a href="#">Bad Lippspringe</a>
+          <a href="#">Bewertungen</a>
+        </nav>
+        <button class="eh-cta-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Buchen
+        </button>
+      </header>
+
+      <section class="eh-hero">
+        <div class="eh-hero-text">
+          <div class="eh-hero-rating">
+            <svg class="star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>9.0/10</span>
+            <span class="muted">Booking.com</span>
+          </div>
+          <h1 class="eh-hero-title">
+            Ferienwohnungen<br><span class="accent-text">in Bad Lippspringe</span>
+          </h1>
+          <p class="eh-hero-sub">Direkt am Kurwald, nur 5 Gehminuten zur Westfalen Therme. Mit Massage-Angebot im Haus.</p>
+          <div class="eh-usp-pills">
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8Z"/><circle cx="12" cy="10" r="3"/></svg> 500m Therme</span>
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg> Gratis WLAN</span>
+            <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9h6v6H9z"/></svg> Kostenlos Parken</span>
+          </div>
+
+          <div class="eh-booking-bar">
+            <div class="eh-booking-row">
+              <div class="eh-booking-field">
+                <label>Anreise</label>
+                <div class="value">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Mi · 13. Mai
+                </div>
+              </div>
+              <div class="eh-booking-field">
+                <label>Abreise</label>
+                <div class="value">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  So · 17. Mai
+                </div>
+              </div>
+              <div class="eh-booking-field">
+                <label>Gäste</label>
+                <div class="value">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                  2
+                </div>
+              </div>
+            </div>
+            <button class="btn-eh" style="margin-top:.7rem">Verfügbarkeit prüfen</button>
+          </div>
+
+          <div class="eh-quick-links">
+            <a href="#" class="eh-quick-link">Kellerchen <span class="price-tag">ab 45€</span></a>
+            <a href="#" class="eh-quick-link">Apartment <span class="price-tag">ab 70€</span></a>
+          </div>
+        </div>
+
+        <div class="eh-hero-images">
+          <div class="eh-hero-img">
+            <div class="placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+              <span class="placeholder-label">apartment-doppelbett.jpg</span>
+            </div>
+            <div class="img-overlay">
+              <h4>Erholungs Apartment</h4>
+              <p>Erdgeschoss · bis 2 Pers. + 1 Kind</p>
+              <span class="price-badge">ab 70€/Nacht</span>
+            </div>
+          </div>
+          <div class="eh-hero-img">
+            <div class="placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+              <span class="placeholder-label">kellerchen-himmelbett.jpg</span>
+            </div>
+            <div class="img-overlay">
+              <h4>Erholungs Kellerchen</h4>
+              <p>~25 m² · bis 2 Personen</p>
+              <span class="price-badge">ab 45€/Nacht</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="eh-trust">
+        <div class="eh-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><strong>500m</strong> Westfalen Therme</span>
+        </div>
+        <div class="eh-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <span><strong>24/7</strong> Self-Check-in</span>
+        </div>
+        <div class="eh-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <span><strong>9.0/10</strong> Booking.com</span>
+        </div>
+        <div class="eh-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 7v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V7l-8-5z"/></svg>
+          <span><strong>SSL</strong> & DSGVO</span>
+        </div>
+      </div>
+
+      <section class="eh-section">
+        <div class="eh-section-head">
+          <h2>Unsere Unterkünfte</h2>
+          <div class="underline"></div>
+          <p>Zwei liebevoll eingerichtete Ferienwohnungen für Ihren Erholungsurlaub.</p>
+        </div>
+        <div class="eh-apt-grid">
+          <div class="eh-apt-card">
+            <div class="eh-apt-img">
+              <div class="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+              </div>
+              <span class="price-badge">ab 45€/Nacht</span>
+            </div>
+            <div class="eh-apt-body">
+              <h3>Erholungs Kellerchen</h3>
+              <p class="sub">~25 qm · bis 2 Personen</p>
+              <p>Gemütliche Kellerwohnung mit Himmelbett, Küche und renoviertem Bad. Perfekt für Paare und Alleinreisende.</p>
+              <div class="eh-amenities">
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9h20v9H2z"/><path d="M2 12h20"/></svg> Doppelbett</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12V7h14v5"/><path d="M3 17h18"/></svg> Küche</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5"/><path d="M3 9h18"/><path d="M5 9V6a3 3 0 0 1 6 0"/><path d="M5 17v3"/><path d="M19 17v3"/></svg> Bad</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg> WLAN</span>
+              </div>
+              <button class="btn-eh">Details ansehen
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="eh-apt-card">
+            <div class="eh-apt-img">
+              <div class="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+              </div>
+              <span class="price-badge">ab 70€/Nacht</span>
+            </div>
+            <div class="eh-apt-body">
+              <h3>Erholungs Apartment</h3>
+              <p class="sub">Erdgeschoss · bis 2 Pers. + 1 Kind</p>
+              <p>Geräumiges Erdgeschoss-Apartment mit Doppelbett, Küche, Bad und Balkon. Ideal für Paare und Familien.</p>
+              <div class="eh-amenities">
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9h20v9H2z"/><path d="M2 12h20"/></svg> Doppelbett</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12V7h14v5"/><path d="M3 17h18"/></svg> Küche</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 6.5 3.5"/><path d="M3 9h18"/><path d="M5 9V6a3 3 0 0 1 6 0"/></svg> Bad</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/></svg> WLAN</span>
+                <span class="eh-amenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg> Balkon</span>
+              </div>
+              <button class="btn-eh">Details ansehen
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="eh-section" style="background:var(--surface-2)">
+        <div class="eh-section-head">
+          <h2>Warum Erholungs Apartments</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="eh-usp-grid">
+          <div class="eh-usp-card">
+            <div class="eh-usp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <h4>Top-Lage</h4>
+            <p>500m zur Therme, direkt am Kurwald.</p>
+          </div>
+          <div class="eh-usp-card">
+            <div class="eh-usp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14"/><path d="M2 12h20v9H2z"/><path d="M6 17h.01M10 17h.01"/></svg></div>
+            <h4>Massage im Haus</h4>
+            <p>Wohlbefinden-Massage direkt im Gebäude.</p>
+          </div>
+          <div class="eh-usp-card">
+            <div class="eh-usp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h4>Self-Check-in</h4>
+            <p>Schlüsselbox · 24/7 anreisen.</p>
+          </div>
+          <div class="eh-usp-card">
+            <div class="eh-usp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h4>Persönlicher Kontakt</h4>
+            <p>Direkt buchen · 0% Provision · 10% Rabatt.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="eh-section eh-reviews-bg">
+        <div class="eh-section-head">
+          <div class="eh-rating-stars" style="justify-content:center; display:flex">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span style="color:var(--text); margin-left:.4rem">4.9</span>
+          </div>
+          <h2>Was unsere Gäste sagen</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="eh-review-grid">
+          <div class="eh-review-card">
+            <div class="eh-review-quote"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/><path d="M14 21c3 0 7-1 7-8V5c0-1.25-.757-2-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/></svg></div>
+            <div class="eh-review-stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="eh-review-text">„Gepflegt und sauber, tolle Matratze, gemütliche Einrichtung und gut ausgestattete Küche. Sehr nette Gastgeber!"</p>
+            <div class="eh-review-foot">
+              <div>
+                <div class="name">Petra S.</div>
+                <div class="date">Januar 2025</div>
+              </div>
+              <span class="eh-review-source booking">Booking.com</span>
+            </div>
+          </div>
+
+          <div class="eh-review-card">
+            <div class="eh-review-quote"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/><path d="M14 21c3 0 7-1 7-8V5c0-1.25-.757-2-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/></svg></div>
+            <div class="eh-review-stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="eh-review-text">„Wunderbare kleine Wohnung, sehr sauber und gemütlich. Die Lage zur Therme ist perfekt!"</p>
+            <div class="eh-review-foot">
+              <div>
+                <div class="name">Maria K.</div>
+                <div class="date">Januar 2025</div>
+              </div>
+              <span class="eh-review-source google">Google</span>
+            </div>
+          </div>
+
+          <div class="eh-review-card">
+            <div class="eh-review-quote"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/><path d="M14 21c3 0 7-1 7-8V5c0-1.25-.757-2-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 5-3 6-3 6z"/></svg></div>
+            <div class="eh-review-stars">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <p class="eh-review-text">„Die Massage im Haus war das absolute Highlight unseres Aufenthalts! Unbedingt buchen!"</p>
+            <div class="eh-review-foot">
+              <div>
+                <div class="name">Frank D.</div>
+                <div class="date">Oktober 2024</div>
+              </div>
+              <span class="eh-review-source airbnb">Airbnb</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== STEP 2: AVAILABILITY CALENDAR ===== -->
+    <div class="step-view" data-step-view="2">
+      <div class="cal-page">
+        <div class="cal-shell">
+          <div class="cal-header">
+            <h2>Verfügbarkeit prüfen</h2>
+            <div class="apt-toggle" id="aptToggle">
+              <button class="active" data-apt="kellerchen">Kellerchen · ab 45€</button>
+              <button data-apt="apartment">Apartment · ab 70€</button>
+            </div>
+          </div>
+
+          <div class="cal-body">
+            <div class="cal-nav">
+              <button id="calPrev" aria-label="Vorheriger Monat">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <div style="font-size:.78rem; color:var(--text-muted); display:flex; align-items:center; gap:.5rem">
+                <span class="sync-dot"></span> Live-Sync mit Booking.com / Airbnb
+              </div>
+              <button id="calNext" aria-label="Nächster Monat">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+
+            <div class="cal-grid" id="calGrid"></div>
+
+            <div class="cal-status" id="calStatus">Bitte Anreisedatum auswählen — Mindestaufenthalt 2 Nächte.</div>
+
+            <div class="cal-legend">
+              <div class="item"><span class="swatch selected"></span> Ausgewählt</div>
+              <div class="item"><span class="swatch in-range"></span> Aufenthalt</div>
+              <div class="item"><span class="swatch blocked"></span> <span style="text-decoration:line-through">Belegt</span></div>
+              <div class="item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3"><circle cx="12" cy="20" r="1.5" fill="var(--accent)"/></svg> Heute</div>
+            </div>
+
+            <div class="cal-summary" id="calSummary" style="display:none">
+              <div class="cal-summary-text" id="calSummaryText"></div>
+              <button class="btn-eh" id="calContinue">Weiter zur Buchung
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <div class="ical-strip">
+              <span class="sync-dot"></span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+              <span><strong>iCal-Sync aktiv:</strong> Sperrtermine von Booking.com (alle 30 Min.), Airbnb (alle 60 Min.) automatisch eingelesen — Doppelbuchungen unmöglich.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 3: BOOKING FLOW ===== -->
+    <div class="step-view" data-step-view="3">
+      <div class="book-page">
+        <div class="book-shell">
+          <div class="book-form">
+            <h2>Buchung abschließen</h2>
+            <p class="sub">Wir benötigen nur das Nötigste — alle Daten DSGVO-konform.</p>
+
+            <div class="book-step-pills">
+              <div class="book-step-pill done"><span class="num">✓</span> Termin</div>
+              <div class="book-step-pill active"><span class="num">2</span> Daten</div>
+              <div class="book-step-pill"><span class="num">3</span> Zahlung</div>
+              <div class="book-step-pill"><span class="num">4</span> Bestätigung</div>
+            </div>
+
+            <div class="book-row">
+              <div class="book-field">
+                <label>Vorname</label>
+                <input type="text" value="Bernd" id="bookFirst">
+              </div>
+              <div class="book-field">
+                <label>Nachname</label>
+                <input type="text" value="Holtmann" id="bookLast">
+              </div>
+            </div>
+            <div class="book-row">
+              <div class="book-field">
+                <label>E-Mail</label>
+                <input type="email" value="b.holtmann@beispiel.de" id="bookEmail">
+                <span class="hint">Wird nur für die Buchungsbestätigung verwendet.</span>
+              </div>
+              <div class="book-field">
+                <label>Telefon</label>
+                <input type="tel" value="0160 1234567" id="bookPhone">
+              </div>
+            </div>
+            <div class="book-row">
+              <div class="book-field" style="grid-column:1 / -1">
+                <label>Adresse</label>
+                <input type="text" value="Kurpromenade 14, 33129 Delbrück">
+              </div>
+            </div>
+            <div class="book-row">
+              <div class="book-field" style="grid-column:1 / -1">
+                <label>Anmerkungen (optional)</label>
+                <textarea placeholder="z.B. späte Anreise, Allergien, Wunsch nach Massage-Termin">Geplant ist eine Wohlbefinden-Massage am Donnerstag, 14:00 Uhr — bitte ggf. Termin reservieren.</textarea>
+              </div>
+            </div>
+
+            <div style="margin-top:1.6rem">
+              <h4 style="font-size:.85rem; font-weight:700; color:var(--text); margin-bottom:.6rem; letter-spacing:.02em">Zahlungsart</h4>
+              <div class="book-payment">
+                <div class="payment-option selected">
+                  <span class="pay-mark stripe">VISA</span>
+                  Kreditkarte (Stripe)
+                </div>
+                <div class="payment-option">
+                  <span class="pay-mark paypal">P</span>
+                  PayPal
+                </div>
+                <div class="payment-option">
+                  <span class="pay-mark transfer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></span>
+                  Überweisung
+                </div>
+                <div class="payment-option">
+                  <span class="pay-mark invoice"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                  Vor Ort
+                </div>
+              </div>
+            </div>
+
+            <div class="dsgvo-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span><strong>DSGVO-konform.</strong> Ihre Daten werden ausschließlich zur Vertragsabwicklung in Firestore (EU-Region) gespeichert. Gemäß Art. 6 Abs. 1 lit. b DSGVO. Keine Weitergabe an Dritte. Löschung 10 Jahre nach Ende der Geschäftsbeziehung.</span>
+            </div>
+
+            <div class="book-actions">
+              <button class="btn-eh-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                Zurück
+              </button>
+              <button class="btn-eh" id="bookContinueToConfirm">
+                Verbindlich buchen · 343,80 €
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <aside class="book-summary">
+            <h3>Ihre Buchung</h3>
+            <div class="book-summary-img">
+              <div class="placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21V12h6v9"/></svg>
+              </div>
+            </div>
+            <div style="font-weight:700; color:var(--text); margin-bottom:.2rem">Erholungs Kellerchen</div>
+            <div style="font-size:.78rem; color:var(--text-muted); margin-bottom:1rem">~25 m² · bis 2 Personen</div>
+
+            <div class="book-summary-line">
+              <span class="lbl">Anreise</span>
+              <span class="val">Mi · 13. Mai 2026</span>
+            </div>
+            <div class="book-summary-line">
+              <span class="lbl">Abreise</span>
+              <span class="val">So · 17. Mai 2026</span>
+            </div>
+            <div class="book-summary-line">
+              <span class="lbl">Aufenthalt</span>
+              <span class="val">4 Nächte · 2 Pers.</span>
+            </div>
+            <div class="book-summary-line">
+              <span class="lbl">Grundpreis</span>
+              <span class="val">4 × 45 € = 180,00 €</span>
+            </div>
+            <div class="book-summary-line">
+              <span class="lbl">Endreinigung</span>
+              <span class="val">35,00 €</span>
+            </div>
+            <div class="book-summary-line">
+              <span class="lbl">Kurtaxe (4 × 2,70 €)</span>
+              <span class="val">21,60 €</span>
+            </div>
+
+            <div class="book-summary-savings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 1 1 0-4h12v4"/><path d="M4 6v14a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+              Direktbucher-Rabatt 10 % auf Grundpreis: −18,00 €
+            </div>
+
+            <div class="book-summary-total">
+              <span>Gesamtpreis</span>
+              <span class="num">218,60 €</span>
+            </div>
+            <p style="font-size:.7rem; color:var(--text-muted); margin-top:.55rem">Inkl. MwSt. · Anzahlung 30 % bei Buchung · Restbetrag bei Anreise.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 4: CONFIRMATION + EMAIL ===== -->
+    <div class="step-view" data-step-view="4">
+      <div class="confirm-page">
+        <div class="confirm-shell">
+          <div class="confirm-success">
+            <div class="confirm-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h2>Buchung bestätigt</h2>
+            <p>Vielen Dank, Bernd! Wir freuen uns auf Ihren Aufenthalt.</p>
+            <div class="confirm-num">Buchungsnummer: <span>#EA-2026-</span>0813</div>
+
+            <div class="confirm-actions">
+              <button class="btn-eh">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PDF herunterladen
+              </button>
+              <button class="btn-eh-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Zum Kalender hinzufügen
+              </button>
+            </div>
+
+            <div class="confirm-details">
+              <h4>Buchungsdetails</h4>
+              <div class="confirm-detail-row"><span class="lbl">Unterkunft</span><span class="val">Erholungs Kellerchen</span></div>
+              <div class="confirm-detail-row"><span class="lbl">Anreise</span><span class="val">Mi, 13.05. ab 14:00 Uhr</span></div>
+              <div class="confirm-detail-row"><span class="lbl">Abreise</span><span class="val">So, 17.05. bis 11:00 Uhr</span></div>
+              <div class="confirm-detail-row"><span class="lbl">Anzahlung (30 %)</span><span class="val">65,58 € · ✓ bezahlt</span></div>
+              <div class="confirm-detail-row"><span class="lbl">Restbetrag</span><span class="val">153,02 € bei Anreise</span></div>
+              <div class="confirm-detail-row"><span class="lbl">Self-Check-in Code</span><span class="val">📩 12h vor Anreise</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="email-mockup">
+              <div class="email-head">
+                <div class="em-row"><span class="em-lbl">Von</span><span class="em-val">buchung@erholungs-apartments.de</span></div>
+                <div class="em-row"><span class="em-lbl">An</span><span class="em-val">b.holtmann@beispiel.de</span></div>
+                <div class="em-row"><span class="em-lbl">Datum</span><span class="em-val">29.04.2026, 14:23</span></div>
+                <div class="em-subject">✓ Ihre Buchung in den Erholungs Apartments</div>
+              </div>
+              <div class="email-body">
+                <div class="eh-logo eb-logo">
+                  <div class="eh-logo-mark" style="width:30px; height:30px; font-size:.8rem">EA</div>
+                  <div class="eh-logo-text" style="font-size:.85rem">
+                    <strong>Erholungs Apartments</strong>
+                    <span style="font-size:.55rem">Bad Lippspringe</span>
+                  </div>
+                </div>
+                <h3>Hallo Bernd,</h3>
+                <p>vielen Dank für Ihre Buchung — wir freuen uns sehr auf Ihren Aufenthalt am Kurwald.</p>
+
+                <div class="eb-block">
+                  <div class="eb-line"><span class="eb-lbl">Buchungsnr.</span><span class="eb-val">#EA-2026-0813</span></div>
+                  <div class="eb-line"><span class="eb-lbl">Unterkunft</span><span class="eb-val">Erholungs Kellerchen</span></div>
+                  <div class="eb-line"><span class="eb-lbl">Anreise</span><span class="eb-val">Mi, 13.05.2026 ab 14:00</span></div>
+                  <div class="eb-line"><span class="eb-lbl">Abreise</span><span class="eb-val">So, 17.05.2026 bis 11:00</span></div>
+                  <div class="eb-line"><span class="eb-lbl">Gesamtpreis</span><span class="eb-val">218,60 €</span></div>
+                </div>
+
+                <p>12 Stunden vor Anreise erhalten Sie automatisch den Code für die Schlüsselbox per separater E-Mail. Bei Fragen erreichen Sie uns unter <strong>0177 1666353</strong>.</p>
+
+                <a href="#" class="eb-cta">Buchung anzeigen</a>
+
+                <p style="margin-top:1rem; font-size:.82rem">Übrigens: Bei Buchung des Apartments erhalten Sie <strong>10 % Rabatt</strong> auf die Wohlbefinden-Massage im Haus. Termin? Einfach kurz melden.</p>
+
+                <div class="eb-foot">
+                  Erholungs Apartments · Inhaberin: Lara Kroh · Kurpark-Straße 12 · 33175 Bad Lippspringe<br>
+                  Diese E-Mail wurde transaktional über Resend versendet · DKIM ✓ SPF ✓ DMARC ✓
+                </div>
+              </div>
+            </div>
+
+            <div class="email-meta-strip">
+              <span class="email-meta green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 12 2 2 4-4"/></svg> Resend.com · 287 ms</span>
+              <span class="email-meta">DKIM ✓</span>
+              <span class="email-meta">SPF ✓</span>
+              <span class="email-meta">DMARC ✓</span>
+              <span class="email-meta">DSGVO ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 5: WOHLBEFINDEN MASSAGE ===== -->
+    <div class="step-view" data-step-view="5">
+      <div class="massage-page">
+        <header class="eh-header">
+          <div class="eh-logo">
+            <div class="eh-logo-mark">EA</div>
+            <div class="eh-logo-text">
+              <strong>Erholungs</strong>
+              <span>Apartments</span>
+            </div>
+          </div>
+          <nav class="eh-nav">
+            <a href="#">Start</a>
+            <a href="#">Apartments</a>
+            <a href="#" class="is-active">Massage</a>
+            <a href="#">Bad Lippspringe</a>
+            <a href="#">Bewertungen</a>
+          </nav>
+          <button class="eh-cta-btn">Termin anfragen</button>
+        </header>
+
+        <div class="massage-hero">
+          <span class="massage-pre">Direkt im Haus</span>
+          <h2>Wohlbefinden Massage</h2>
+          <div class="underline"></div>
+          <p>Professionelle Massage-Behandlungen direkt in unserem Haus — ohne Anfahrt, ohne Stress. Erstgespräch kostenlos.</p>
+        </div>
+
+        <div class="pkg-grid">
+          <div class="pkg-card">
+            <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.6 5.6l4 4M14.4 14.4l4 4M5.6 18.4l4-4M14.4 9.6l4-4"/></svg></div>
+            <h3>Wohlfühlen</h3>
+            <p>Tiefenentspannung für Körper und Geist.</p>
+            <div class="pkg-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 60 Min.</div>
+            <div class="pkg-price"><span class="num">75 €</span></div>
+          </div>
+
+          <div class="pkg-card popular">
+            <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5.882V19.24a1.76 1.76 0 0 1-3.417.592l-2.147-6.15M18 13a3 3 0 1 0 0-6h-8.4a4 4 0 0 1-1.5-.3L4.6 4.4a1.5 1.5 0 0 1-.6-1.2c0-.8.7-1.5 1.5-1.5"/></svg></div>
+            <h3>Verspannungsfrei</h3>
+            <p>Gezielte Behandlung von Verspannungen und Schmerzen.</p>
+            <div class="pkg-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 90–95 Min.</div>
+            <div class="pkg-price"><span class="num">95 €</span></div>
+          </div>
+
+          <div class="pkg-card">
+            <div class="pkg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></svg></div>
+            <h3>Schmerzlösung</h3>
+            <p>Intensive Ganzkörperbehandlung für nachhaltige Schmerzlinderung.</p>
+            <div class="pkg-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 120–130 Min.</div>
+            <div class="pkg-price"><span class="num">130 €</span></div>
+          </div>
+        </div>
+
+        <div class="combo-banner">
+          <div class="combo-card gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><path d="M21 12c0 4.971-4.029 9-9 9s-9-4.029-9-9 4.029-9 9-9 9 4.029 9 9z"/></svg>
+            <div class="text"><strong>Erstgespräch kostenlos</strong> — wir beraten Sie gerne unverbindlich.</div>
+          </div>
+          <div class="combo-card green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg>
+            <div class="text"><strong>10 % Kombi-Rabatt</strong> auf alle Massagen — bei Buchung des Apartments oder Kellerchens.</div>
+          </div>
+        </div>
+
+        <div class="massage-process">
+          <div class="eh-section-head">
+            <h2>Was Sie erwartet</h2>
+            <div class="underline"></div>
+          </div>
+          <div class="process-grid">
+            <div class="process-step">
+              <div class="process-num">1</div>
+              <h5>Erstgespräch</h5>
+              <p>Beschwerden &amp; Wünsche besprechen.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">2</div>
+              <h5>Analyse</h5>
+              <p>Individuelle Beurteilung Ihres Körpers.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">3</div>
+              <h5>Behandlung</h5>
+              <p>Maßgeschneiderte Massage.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">4</div>
+              <h5>Nachgespräch</h5>
+              <p>Empfehlungen für Ihren Alltag.</p>
+            </div>
+            <div class="process-step">
+              <div class="process-num">5</div>
+              <h5>Begleitung</h5>
+              <p>Langfristige Unterstützung.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 6: LOCAL SEO BAD LIPPSPRINGE ===== -->
+    <div class="step-view" data-step-view="6">
+      <div class="seo-page">
+        <div class="seo-hero">
+          <span class="seo-hero-pre">Sehenswürdigkeiten &amp; Ausflugsziele</span>
+          <h2>Erleben Sie <em>Bad Lippspringe</em></h2>
+          <p>Heilklimatischer Kurort am Rande des Teutoburger Waldes — mit Therme, Kurwald und einzigartiger Landschaft.</p>
+        </div>
+
+        <div class="seo-rank-row">
+          <div class="seo-rank-card">
+            <div class="serp-rank-num">#2</div>
+            <div>
+              <div class="label">Google · organischer Treffer</div>
+              <div class="query">„ferienwohnung bad lippspringe"</div>
+              <div class="domain">erholungs-apartments.de</div>
+            </div>
+            <div class="delta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+              +6 Plätze (90 Tage)
+            </div>
+          </div>
+        </div>
+
+        <div class="serp">
+          <div class="serp-shell">
+            <div class="serp-bar">
+              <span class="serp-google"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></span>
+              <div class="serp-input">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                ferienwohnung bad lippspringe
+              </div>
+            </div>
+
+            <div class="serp-result">
+              <div class="serp-domain">booking.com › erholungs-apartments</div>
+              <div class="serp-title">Erholungs Apartments, Bad Lippspringe — Booking.com</div>
+              <div class="serp-snippet"><span class="serp-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span> 9.0 (37 Bewertungen) · Ferienwohnungen am Kurwald, 500m zur Westfalen Therme.</div>
+            </div>
+
+            <div class="serp-result us">
+              <div class="serp-domain">erholungs-apartments.de</div>
+              <div class="serp-title">Erholungs Apartments Bad Lippspringe — Ferienwohnungen nahe Westfalen Therme</div>
+              <div class="serp-snippet"><span class="serp-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span> 4.9 (84) · Direkt am Kurwald, 5 Gehminuten zur Therme. Mit Massage im Haus. Ab 45 €/Nacht. Direktbucher-Rabatt.</div>
+            </div>
+
+            <div class="serp-result">
+              <div class="serp-domain">airbnb.de › ferienwohnung-bad-lippspringe</div>
+              <div class="serp-title">Top 12 Ferienwohnungen in Bad Lippspringe — Airbnb</div>
+              <div class="serp-snippet">Finde günstige Unterkünfte, einzigartige Erlebnisse und Reiseziele in Bad Lippspringe.</div>
+            </div>
+
+            <div class="serp-result">
+              <div class="serp-domain">tripadvisor.de › Bad_Lippspringe</div>
+              <div class="serp-title">Die 10 besten Ferienwohnungen in Bad Lippspringe 2026</div>
+              <div class="serp-snippet">Suche und vergleiche Ferienhäuser und Ferienwohnungen in Bad Lippspringe.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="seo-section-head" style="text-align:center; padding:1.5rem 2rem 0">
+          <h3 style="font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:.4rem">Sehenswürdigkeiten in der Nähe</h3>
+          <p style="font-size:.85rem; color:var(--text-muted)">Eigene Detailseiten — pro Ziel eine Local-SEO-Landingpage.</p>
+        </div>
+
+        <div class="attractions-grid">
+          <div class="attr-card">
+            <div class="attr-thumb therme">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 500m</span>
+            </div>
+            <div class="attr-body">
+              <h4>Westfalen Therme</h4>
+              <p>Wasserwelt &amp; Saunalandschaft direkt am Kurwald.</p>
+            </div>
+          </div>
+
+          <div class="attr-card">
+            <div class="attr-thumb kurwald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 14h6l-2 8 10-12h-6z" opacity=".6"/><path d="M12 2 4 14h6l-2 8"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 300m</span>
+            </div>
+            <div class="attr-body">
+              <h4>Kurwald</h4>
+              <p>Heilklima im zertifizierten Kurwald.</p>
+            </div>
+          </div>
+
+          <div class="attr-card">
+            <div class="attr-thumb exter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 12km</span>
+            </div>
+            <div class="attr-body">
+              <h4>Externsteine</h4>
+              <p>Faszinierendes Naturdenkmal im Teuto.</p>
+            </div>
+          </div>
+
+          <div class="attr-card">
+            <div class="attr-thumb garten">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m4.5 3a4.5 4.5 0 1 1-4.5 4.5M16.5 12H15m-3 4.5A4.5 4.5 0 1 1 7.5 12M12 16.5V15M7.5 12H9"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 800m</span>
+            </div>
+            <div class="attr-body">
+              <h4>Gartenschau</h4>
+              <p>Ehemaliges Landesgartenschau-Gelände 2017.</p>
+            </div>
+          </div>
+
+          <div class="attr-card">
+            <div class="attr-thumb see">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M2 12c1-1 2-1.5 3-1.5"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 150m</span>
+            </div>
+            <div class="attr-body">
+              <h4>Dedingerheide See</h4>
+              <p>Idyllischer See für Spaziergänge.</p>
+            </div>
+          </div>
+
+          <div class="attr-card">
+            <div class="attr-thumb wandern">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h2"/><path d="M14 22h2"/><path d="M9 18a3 3 0 0 0 3-3"/><path d="m12 15-1-3"/><path d="M16 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/><path d="m17 11-3 1-3-2 4-4 3 3-1 2"/><path d="m9 22 2-9"/></svg>
+              <span class="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ab Haustür</span>
+            </div>
+            <div class="attr-body">
+              <h4>Wanderwege</h4>
+              <p>Hermannsweg, Eggeweg, Terrainkurwege.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="seo-schema">
+<pre class="schema-shell" style="white-space:pre-wrap; margin:0">{
+  <span class="key">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="key">"@type"</span>: <span class="str">"LodgingBusiness"</span>,
+  <span class="key">"name"</span>: <span class="str">"Erholungs Apartments Bad Lippspringe"</span>,
+  <span class="key">"address"</span>: { <span class="key">"@type"</span>: <span class="str">"PostalAddress"</span>, <span class="key">"addressLocality"</span>: <span class="str">"Bad Lippspringe"</span>, <span class="key">"postalCode"</span>: <span class="str">"33175"</span> },
+  <span class="key">"geo"</span>: { <span class="key">"@type"</span>: <span class="str">"GeoCoordinates"</span>, <span class="key">"latitude"</span>: <span class="num-l">51.7842</span>, <span class="key">"longitude"</span>: <span class="num-l">8.8194</span> },
+  <span class="key">"aggregateRating"</span>: { <span class="key">"@type"</span>: <span class="str">"AggregateRating"</span>, <span class="key">"ratingValue"</span>: <span class="num-l">4.9</span>, <span class="key">"reviewCount"</span>: <span class="num-l">84</span> },
+  <span class="key">"priceRange"</span>: <span class="str">"€€"</span>,
+  <span class="key">"amenityFeature"</span>: [<span class="str">"WLAN"</span>, <span class="str">"Parkplatz"</span>, <span class="str">"Massage"</span>, <span class="str">"Self-Check-in"</span>]
+}</pre>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.tour-stage -->
+</div><!-- /.tour-stage-wrap -->
+
+<!-- ===== CONTROLS ===== -->
+<div class="tour-controls">
+  <button class="tour-btn" id="prevBtn" disabled>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Zurück
+  </button>
+  <div class="tour-progress-text">Schritt <strong id="stepCurrent">1</strong> von <strong>6</strong></div>
+  <button class="tour-btn primary" id="nextBtn">
+    Weiter
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
+</div>
+
+<!-- ===== BOTTOM STATS ===== -->
+<div class="tour-stats">
+  <div class="stat-card">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Apartments · Live-Sync</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">6 <em>Module</em></div>
+    <div class="stat-label">Site · Booking · Payment · Mail · Massage · SEO</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">0%</div>
+    <div class="stat-label">Provision · Direktbucher</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">#2</div>
+    <div class="stat-label">Google · Hauptkeyword</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ===== STEP DATA =====
+  const steps = [
+    {
+      num: '01', title: 'Marketing-Website', urlPath: '/', tag: 'PUBLIC',
+      desc: 'Hero mit Booking-Bar, USP-Stripe, Apartment-Cards, Reviews aus Booking.com / Google / Airbnb. SEO-optimiert für „Ferienwohnung Bad Lippspringe".',
+      tech: ['<span class="tech-badge">Next.js 16</span>', '<span class="tech-badge">TypeScript</span>', '<span class="tech-badge amber">Tailwind v4</span>']
+    },
+    {
+      num: '02', title: 'Verfügbarkeitskalender', urlPath: '/buchen/', tag: 'PUBLIC',
+      desc: 'Interaktiver 2-Monats-Kalender mit iCal-Sync zu Booking.com & Airbnb. Range-Auswahl, Mindestaufenthalt, Sperrtermine im Hintergrund.',
+      tech: ['<span class="tech-badge">date-fns</span>', '<span class="tech-badge green">Firestore</span>', '<span class="tech-badge amber">iCal-Sync</span>']
+    },
+    {
+      num: '03', title: 'Buchungs-Flow', urlPath: '/buchen/daten/', tag: 'PUBLIC',
+      desc: 'Mehrstufiger Checkout: Daten → Zahlart → Bestätigung. Stripe + PayPal + Überweisung. Direktbucher-Rabatt 10 %.',
+      tech: ['<span class="tech-badge">Stripe</span>', '<span class="tech-badge">PayPal</span>', '<span class="tech-badge green">DSGVO</span>']
+    },
+    {
+      num: '04', title: 'Bestätigung & E-Mail', urlPath: '/buchen/bestaetigung/', tag: 'EMAIL', stageTagClass: 'email',
+      desc: 'Sofortige Buchungsbestätigung im Browser + transaktionale E-Mail über Resend mit DKIM/SPF/DMARC. PDF und ICS zum Download.',
+      tech: ['<span class="tech-badge amber">Resend.com</span>', '<span class="tech-badge">React Email</span>', '<span class="tech-badge green">DKIM ✓</span>']
+    },
+    {
+      num: '05', title: 'Wohlbefinden Massage', urlPath: '/wohlbefinden-massage/', tag: 'PUBLIC',
+      desc: 'Cross-Sell-Modul direkt im Haus: drei Pakete, 5-Schritte-Prozess, 10 % Kombi-Rabatt für Apartment-Gäste — bringt Mehrumsatz pro Aufenthalt.',
+      tech: ['<span class="tech-badge">Cross-Sell</span>', '<span class="tech-badge amber">+10 % Umsatz</span>']
+    },
+    {
+      num: '06', title: 'Local SEO Bad Lippspringe', urlPath: '/bad-lippspringe/', tag: 'SEO',
+      desc: 'Sechs eigene Landingpages für Sehenswürdigkeiten + Schema.org LodgingBusiness. Aktuell #2 für „ferienwohnung bad lippspringe" — +6 Plätze in 90 Tagen.',
+      tech: ['<span class="tech-badge">Schema.org</span>', '<span class="tech-badge amber">sitemap.xml</span>', '<span class="tech-badge green">+6 Plätze</span>']
+    }
+  ];
+
+  const stepNum = document.getElementById('stepNum');
+  const stepTitle = document.getElementById('stepTitle');
+  const stepDesc = document.getElementById('stepDesc');
+  const stepTech = document.getElementById('stepTech');
+  const stepCurrent = document.getElementById('stepCurrent');
+  const stageUrlPath = document.getElementById('stageUrlPath');
+  const stageTag = document.getElementById('stageTag');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const stepNavTrack = document.getElementById('stepNavTrack');
+  const pills = document.querySelectorAll('.step-pill');
+  const views = document.querySelectorAll('.step-view');
+
+  let current = 1;
+
+  function render(n){
+    current = n;
+    const data = steps[n-1];
+    stepNum.textContent = data.num;
+    stepTitle.textContent = data.title;
+    stepDesc.textContent = data.desc;
+    stepTech.innerHTML = data.tech.join('');
+    stepCurrent.textContent = n;
+    stageUrlPath.textContent = data.urlPath;
+    stageTag.textContent = data.tag;
+    stageTag.className = 'stage-tag' + (data.stageTagClass ? ' ' + data.stageTagClass : '');
+
+    pills.forEach((p, i) => {
+      const idx = i + 1;
+      if (idx < n) p.dataset.state = 'done';
+      else if (idx === n) p.dataset.state = 'active';
+      else p.dataset.state = '';
+    });
+
+    const prog = ((n-1) / 5) * 83.33;
+    stepNavTrack.style.setProperty('--progress', prog + '%');
+
+    views.forEach(v => {
+      v.classList.toggle('active', parseInt(v.dataset.stepView) === n);
+    });
+
+    prevBtn.disabled = n === 1;
+    nextBtn.disabled = n === 6;
+    nextBtn.innerHTML = n === 6
+      ? 'Tour beendet <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>'
+      : 'Weiter <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', () => current > 1 && render(current - 1));
+  nextBtn.addEventListener('click', () => current < 6 && render(current + 1));
+  pills.forEach(p => p.addEventListener('click', () => render(parseInt(p.dataset.step))));
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && current < 6) render(current + 1);
+    if (e.key === 'ArrowLeft' && current > 1) render(current - 1);
+  });
+
+  // Meta toggle (mobile)
+  (function initMetaToggle() {
+    const btn = document.getElementById('tourMetaToggle');
+    if (!btn) return;
+    if (window.matchMedia('(max-width: 700px)').matches) {
+      document.body.classList.add('meta-collapsed');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', () => {
+      const collapsed = document.body.classList.toggle('meta-collapsed');
+      btn.setAttribute('aria-expanded', String(!collapsed));
+    });
+  })();
+
+  // ============================================================
+  // CALENDAR (Step 2)
+  // ============================================================
+  const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  const WEEKDAYS = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+  let calMonth = 4; // Mai (0-indexed)
+  let calYear = 2026;
+  let activeApt = 'kellerchen';
+  let checkIn = null, checkOut = null;
+  // Demo blocked dates per apartment (yyyy-mm-dd)
+  const blockedByApt = {
+    kellerchen: new Set(['2026-05-04','2026-05-05','2026-05-06','2026-05-07','2026-05-08','2026-05-21','2026-05-22','2026-05-23','2026-06-01','2026-06-02','2026-06-12','2026-06-13','2026-06-14','2026-06-15']),
+    apartment: new Set(['2026-05-08','2026-05-09','2026-05-10','2026-05-11','2026-05-15','2026-05-16','2026-05-17','2026-05-25','2026-05-26','2026-06-05','2026-06-06','2026-06-07','2026-06-19','2026-06-20'])
+  };
+  const today = new Date(2026, 3, 29); // 29.04.2026 demo "today"
+
+  function fmtKey(y, m, d){
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+  function isBlocked(y, m, d){
+    return blockedByApt[activeApt].has(fmtKey(y, m, d));
+  }
+  function isPast(y, m, d){
+    const dt = new Date(y, m, d);
+    return dt < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  }
+  function dateKey(date){ return fmtKey(date.getFullYear(), date.getMonth(), date.getDate()); }
+
+  function buildMonth(y, m){
+    const first = new Date(y, m, 1);
+    const last = new Date(y, m+1, 0);
+    let firstWeekday = (first.getDay() + 6) % 7; // Mo=0
+    const total = last.getDate();
+    const html = [];
+    html.push(`<div><div class="cal-month-title">${MONTHS[m]} ${y}</div>`);
+    html.push('<div class="cal-weekhead">' + WEEKDAYS.map(w=>`<div>${w}</div>`).join('') + '</div>');
+    html.push('<div class="cal-days">');
+    for (let i = 0; i < firstWeekday; i++) html.push('<div class="cal-day empty"></div>');
+    for (let d = 1; d <= total; d++) {
+      const past = isPast(y, m, d);
+      const blocked = isBlocked(y, m, d);
+      const dt = new Date(y, m, d);
+      const isToday = (y === today.getFullYear() && m === today.getMonth() && d === today.getDate());
+      let cls = 'cal-day';
+      if (past) cls += ' disabled';
+      else if (blocked) cls += ' blocked';
+      if (isToday) cls += ' today';
+      // range visualization
+      if (checkIn && checkOut) {
+        if (dt > checkIn && dt < checkOut) cls += ' in-range';
+        if (dt.getTime() === checkIn.getTime()) cls += ' range-start';
+        if (dt.getTime() === checkOut.getTime()) cls += ' range-end';
+      } else if (checkIn && dt.getTime() === checkIn.getTime()) {
+        cls += ' range-start range-end';
+      }
+      const dataAttrs = past || blocked ? '' : `data-pick="${y}-${m}-${d}"`;
+      html.push(`<div class="${cls}" ${dataAttrs}>${d}</div>`);
+    }
+    html.push('</div></div>');
+    return html.join('');
+  }
+
+  function renderCalendar(){
+    const grid = document.getElementById('calGrid');
+    if (!grid) return;
+    const m2 = (calMonth + 1) % 12;
+    const y2 = m2 === 0 ? calYear + 1 : calYear;
+    grid.innerHTML = buildMonth(calYear, calMonth) + buildMonth(y2, m2);
+    grid.querySelectorAll('[data-pick]').forEach(el => {
+      el.addEventListener('click', () => {
+        const [y, m, d] = el.dataset.pick.split('-').map(Number);
+        pickDate(new Date(y, m, d));
+      });
+    });
+    updateCalStatus();
+  }
+
+  function rangeHasBlocked(start, end){
+    const cur = new Date(start);
+    cur.setDate(cur.getDate() + 1);
+    while (cur < end) {
+      if (isBlocked(cur.getFullYear(), cur.getMonth(), cur.getDate())) return true;
+      cur.setDate(cur.getDate() + 1);
+    }
+    return false;
+  }
+
+  function pickDate(dt){
+    if (!checkIn || (checkIn && checkOut) || dt <= checkIn) {
+      checkIn = dt; checkOut = null;
+    } else {
+      const nights = Math.round((dt - checkIn) / (1000*60*60*24));
+      if (nights < 2) { checkIn = dt; checkOut = null; }
+      else if (rangeHasBlocked(checkIn, dt)) { checkIn = dt; checkOut = null; }
+      else { checkOut = dt; }
+    }
+    renderCalendar();
+  }
+
+  function updateCalStatus(){
+    const s = document.getElementById('calStatus');
+    const sm = document.getElementById('calSummary');
+    const smt = document.getElementById('calSummaryText');
+    if (!s) return;
+    const fmt = (d) => `${d.getDate()}. ${MONTHS[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;
+    if (!checkIn) {
+      s.innerHTML = 'Bitte Anreisedatum auswählen — Mindestaufenthalt 2 Nächte.';
+      sm.style.display = 'none';
+    } else if (checkIn && !checkOut) {
+      s.innerHTML = `<strong>Anreise:</strong> ${fmt(checkIn)} — bitte Abreisedatum wählen (mind. 2 Nächte).`;
+      sm.style.display = 'none';
+    } else {
+      const nights = Math.round((checkOut - checkIn) / (1000*60*60*24));
+      s.innerHTML = `<strong>${fmt(checkIn)} → ${fmt(checkOut)}</strong> · ${nights} ${nights===1?'Nacht':'Nächte'} · 2 Pers.`;
+      const rate = activeApt === 'apartment' ? 70 : 45;
+      const base = nights * rate;
+      const cleaning = activeApt === 'apartment' ? 45 : 35;
+      const tax = nights * 2.7 * 2;
+      let discount = 0; let discountLabel = '';
+      if (nights >= 30) { discount = base * 0.20; discountLabel = 'Langzeit-Rabatt 20 %'; }
+      else if (nights >= 7) { discount = base * 0.10; discountLabel = 'Wochen-Rabatt 10 %'; }
+      const total = base + cleaning + tax - discount;
+      smt.innerHTML = `
+        <div class="price-line"><span>${nights} × ${rate} €</span><span>${base.toFixed(2)} €</span></div>
+        <div class="price-line"><span>Endreinigung</span><span>${cleaning.toFixed(2)} €</span></div>
+        <div class="price-line"><span>Kurtaxe (2 P. × 2,70 €)</span><span>${tax.toFixed(2)} €</span></div>
+        ${discount > 0 ? `<div class="price-line discount"><span>${discountLabel}</span><span>−${discount.toFixed(2)} €</span></div>` : ''}
+        <div class="price-total"><span>Gesamtpreis</span><span>${total.toFixed(2)} €</span></div>
+      `;
+      sm.style.display = 'grid';
+    }
+  }
+
+  // Apartment toggle
+  document.getElementById('aptToggle')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    document.querySelectorAll('#aptToggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeApt = btn.dataset.apt;
+    checkIn = null; checkOut = null;
+    renderCalendar();
+  });
+
+  // Calendar nav
+  document.getElementById('calPrev')?.addEventListener('click', () => {
+    if (calYear < today.getFullYear() || (calYear === today.getFullYear() && calMonth <= today.getMonth())) return;
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  });
+  document.getElementById('calNext')?.addEventListener('click', () => {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  });
+
+  document.getElementById('calContinue')?.addEventListener('click', () => render(3));
+  document.getElementById('bookContinueToConfirm')?.addEventListener('click', () => render(4));
+
+  // Payment options toggle
+  document.querySelectorAll('.payment-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+
+  // Initial render
+  renderCalendar();
+  render(1);
+})();
+</script>
+
+</body>
+</html>

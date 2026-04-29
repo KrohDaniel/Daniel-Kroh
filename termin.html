@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Termin buchen — Daniel Kroh | Kostenloses Erstgespräch</title>
-  <meta name="description" content="Buchen Sie ein kostenloses Erstgespräch mit Daniel Kroh. Wählen Sie einen passenden Termin — unkompliziert und unverbindlich.">
+  <title>Prozess-Audit buchen — Daniel Kroh | Software-Architekt aus OWL</title>
+  <meta name="description" content="Buchen Sie ein 15-minütiges Prozess-Audit mit Daniel Kroh. Strukturierte Engpass-Analyse für mittelständische Unternehmen — unverbindlich.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Termin buchen — Daniel Kroh">
-  <meta property="og:description" content="Kostenloses Erstgespräch buchen — unkompliziert und unverbindlich.">
+  <meta property="og:title" content="Prozess-Audit buchen — Daniel Kroh">
+  <meta property="og:description" content="15-minütige Engpass-Analyse für mittelständische Unternehmen — strukturiert und unverbindlich.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <meta property="og:url" content="https://kroh-daniel.de/termin.html">
   <meta property="og:type" content="website">
@@ -37,6 +37,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">Über mich</a>
         <a href="leistungen.html">Leistungen</a>
+        <a href="demo.html">Demo</a>
         <a href="kontakt.html">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
@@ -51,6 +52,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">Über mich</a>
       <a href="leistungen.html">Leistungen</a>
+      <a href="demo.html">Demo</a>
       <a href="kontakt.html">Kontakt</a>
     </nav>
   </div>
@@ -58,11 +60,11 @@
   <!-- Hero -->
   <section class="termin-hero">
     <div class="termin-hero-inner">
-      <span class="section-label">Termin buchen</span>
+      <span class="section-label">Prozess-Audit</span>
       <h1 class="termin-hero-heading">
-        Kostenloses<br><span class="heading-accent">Erstgespräch</span>
+        Engpass-Analyse<br><span class="heading-accent">in 15 Minuten</span>
       </h1>
-      <p class="termin-hero-sub">15 Minuten, in denen wir Ihr Projekt besprechen — unverbindlich und kostenlos. Wählen Sie einfach einen passenden Termin.</p>
+      <p class="termin-hero-sub">Strukturiertes Erstgespräch: Sie schildern den Engpass, ich skizziere mögliche Architektur-Ansätze. Unverbindlich. Wählen Sie einfach einen passenden Termin.</p>
     </div>
   </section>
 
@@ -117,7 +119,7 @@
             </button>
             <h2 class="timeslot-date" id="selected-date-label"></h2>
           </div>
-          <p class="timeslot-info">Wählen Sie eine verfügbare Uhrzeit (15 Min. Gespräch)</p>
+          <p class="timeslot-info">Wählen Sie eine verfügbare Uhrzeit (15 Min. Prozess-Audit)</p>
           <div class="timeslot-grid" id="timeslot-grid"></div>
         </div>
       </div>
@@ -134,7 +136,7 @@
           </div>
 
           <form class="termin-form" id="termin-form" action="https://formsubmit.co/info@kroh-daniel.de" method="POST">
-            <input type="hidden" name="_subject" value="Neue Terminbuchung — danielkroh.de">
+            <input type="hidden" name="_subject" value="Neues Prozess-Audit — kroh-daniel.de">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://kroh-daniel.de/termin.html?success=true">
             <input type="text" name="_honey" style="display:none">
@@ -170,11 +172,12 @@
               <label for="thema" class="form-label">Worum geht es?</label>
               <select id="thema" name="thema" class="form-input form-select" required>
                 <option value="" disabled selected>Bitte wählen</option>
-                <option value="Webdesign">Neue Website</option>
-                <option value="Redesign">Website-Redesign</option>
-                <option value="SEO">SEO & Sichtbarkeit</option>
-                <option value="KI-Automatisierung">K.I. & Automatisierung</option>
-                <option value="Beratung">Allgemeine Beratung</option>
+                <option value="Manuelle Prozesse">Manuelle Prozesse fressen Zeit</option>
+                <option value="Veraltete Systeme">Veraltete Systeme bremsen uns</option>
+                <option value="Skalierung">Wachstum scheitert an der Technik</option>
+                <option value="Sichtbarkeit">Kunden finden uns nicht online</option>
+                <option value="KI-Integration">KI sinnvoll einsetzen</option>
+                <option value="Architektur-Beratung">Architektur-Beratung & Strategie</option>
                 <option value="Sonstiges">Sonstiges</option>
               </select>
             </div>
@@ -185,7 +188,7 @@
             </div>
 
             <button type="submit" class="form-submit cta-button">
-              <span class="form-submit-text">Termin verbindlich buchen</span>
+              <span class="form-submit-text">Prozess-Audit verbindlich buchen</span>
               <svg class="form-submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -202,8 +205,8 @@
                 <polyline points="16 24 22 30 34 18"/>
               </svg>
             </div>
-            <h3 class="form-success-heading">Termin gebucht!</h3>
-            <p class="form-success-text">Vielen Dank. Sie erhalten in Kürze eine Bestätigung per E-Mail. Ich freue mich auf unser Gespräch.</p>
+            <h3 class="form-success-heading">Audit gebucht!</h3>
+            <p class="form-success-text">Vielen Dank. Sie erhalten in Kürze eine Bestätigung per E-Mail. Ich freue mich auf unsere strukturierte Engpass-Analyse.</p>
             <a href="index.html" class="cta-button cta-button--small">Zurück zur Startseite</a>
           </div>
         </div>
@@ -217,7 +220,7 @@
     <div class="footer-top">
       <div class="footer-brand-col">
         <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
-        <p class="footer-tagline">Websites, die Kunden bringen. Für Unternehmen in OWL.</p>
+        <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           info@kroh-daniel.de
@@ -228,17 +231,17 @@
         </a>
       </div>
       <div class="footer-nav-col">
-        <span class="footer-nav-title">Leistungen</span>
-        <a href="leistungen.html">Webdesign</a>
-        <a href="leistungen.html">SEO & Performance</a>
-        <a href="leistungen.html">K.I. Automatisierung</a>
-        <a href="leistungen.html#preise">Preise</a>
+        <span class="footer-nav-title">Lösungen</span>
+        <a href="leistungen.html">Prozessautomatisierung</a>
+        <a href="leistungen.html">Web-Anwendungen</a>
+        <a href="leistungen.html">KI-Integration</a>
+        <a href="leistungen.html">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
         <a href="about.html">Über mich</a>
         <a href="kontakt.html">Kontakt</a>
-        <a href="termin.html">Termin buchen</a>
+        <a href="termin.html">Prozess-Audit</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
@@ -260,11 +263,9 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/nav.js"></script>
+  <script defer src="js/reveal.js"></script>
   <script src="js/termin.js"></script>
   <script src="js/cookie-banner.js"></script>
 </body>

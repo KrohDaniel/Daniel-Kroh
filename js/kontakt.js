@@ -1,58 +1,10 @@
 /* ================================================
-   KONTAKT PAGE — Animations & Form
+   KONTAKT PAGE — Form, Turnstile & Success-Overlay
+   (Reveal-Animationen via reveal.js / CSS — kein GSAP / Lenis mehr)
    ================================================ */
 
 (function () {
   "use strict";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // ---- LENIS SMOOTH SCROLL ----
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-  });
-
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // ---- HERO ENTRANCE ----
-  const heroTl = gsap.timeline({ delay: 0.2 });
-
-  heroTl
-    .from(".kontakt-hero .section-label", {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: "power3.out",
-    })
-    .from(
-      ".kontakt-hero-heading",
-      { opacity: 0, y: 40, duration: 0.9, ease: "power3.out" },
-      "-=0.3"
-    )
-    .from(
-      ".kontakt-hero-sub",
-      { opacity: 0, y: 30, duration: 0.7, ease: "power3.out" },
-      "-=0.5"
-    );
-
-  // ---- FADE-UP ELEMENTS ----
-  document.querySelectorAll('[data-anim="fade-up"]').forEach(function (el) {
-    gsap.from(el, {
-      y: 40,
-      opacity: 0,
-      duration: 0.9,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    });
-  });
 
   // ---- SUCCESS OVERLAY ----
   const form = document.getElementById("kontakt-form");
@@ -77,7 +29,8 @@
   if (closeBtn) closeBtn.addEventListener("click", hideSuccessOverlay);
   if (closeBtnAlt) closeBtnAlt.addEventListener("click", hideSuccessOverlay);
   if (overlay) {
-    overlay.querySelector(".success-overlay-backdrop").addEventListener("click", hideSuccessOverlay);
+    const backdrop = overlay.querySelector(".success-overlay-backdrop");
+    if (backdrop) backdrop.addEventListener("click", hideSuccessOverlay);
   }
 
   // ---- TURNSTILE WIDGET (explicit render with site key from /api/config) ----
@@ -95,8 +48,7 @@
     if (submitTextEl && label) submitTextEl.textContent = label;
   }
 
-  // Disable submit until widget is ready
-  setSubmitDisabled(true, "Lade Bot-Schutz...");
+  if (form) setSubmitDisabled(true, "Lade Bot-Schutz...");
 
   function tryRenderTurnstile() {
     if (!turnstileApiReady || !turnstileSiteKey) return;
@@ -105,7 +57,7 @@
     if (turnstileWidgetId !== null) return;
     turnstileWidgetId = window.turnstile.render(container, {
       sitekey: turnstileSiteKey,
-      theme: "dark",
+      theme: "light",
       callback: function () {
         setSubmitDisabled(false, originalSubmitText);
       },
@@ -118,28 +70,28 @@
     });
   }
 
-  // Cloudflare's api.js calls this once it's loaded
   window.onTurnstileReady = function () {
     turnstileApiReady = true;
     tryRenderTurnstile();
   };
 
-  // Fetch the site key from our API
-  fetch("/api/config")
-    .then(function (r) { return r.json(); })
-    .then(function (cfg) {
-      if (!cfg || !cfg.turnstileSiteKey) {
-        setSubmitDisabled(true, "Konfiguration fehlt");
-        console.error("TURNSTILE_SITE_KEY env variable is not set on the server.");
-        return;
-      }
-      turnstileSiteKey = cfg.turnstileSiteKey;
-      tryRenderTurnstile();
-    })
-    .catch(function (err) {
-      console.error("Config load failed:", err);
-      setSubmitDisabled(true, "Verbindungsfehler");
-    });
+  if (form) {
+    fetch("/api/config")
+      .then(function (r) { return r.json(); })
+      .then(function (cfg) {
+        if (!cfg || !cfg.turnstileSiteKey) {
+          setSubmitDisabled(true, "Konfiguration fehlt");
+          console.error("TURNSTILE_SITE_KEY env variable is not set on the server.");
+          return;
+        }
+        turnstileSiteKey = cfg.turnstileSiteKey;
+        tryRenderTurnstile();
+      })
+      .catch(function (err) {
+        console.error("Config load failed:", err);
+        setSubmitDisabled(true, "Verbindungsfehler");
+      });
+  }
 
   function resetTurnstileWidget() {
     if (window.turnstile && turnstileWidgetId !== null) {
@@ -153,7 +105,6 @@
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      // Honeypot check (frontend — silent reject for bots)
       const honey = form.querySelector('[name="_honey"]');
       const honeyWebsite = form.querySelector('[name="website"]');
       if ((honey && honey.value) || (honeyWebsite && honeyWebsite.value)) return;
@@ -162,18 +113,15 @@
       const submitText = form.querySelector(".form-submit-text");
       const originalText = submitText ? submitText.textContent : "";
 
-      // Cloudflare Turnstile token
       const turnstileToken = form.querySelector('[name="cf-turnstile-response"]');
       if (!turnstileToken || !turnstileToken.value) {
         alert("Bitte bestätigen Sie, dass Sie kein Roboter sind.");
         return;
       }
 
-      // Loading state
       submitBtn.disabled = true;
       if (submitText) submitText.textContent = "Wird gesendet...";
 
-      // Collect checked interests
       const checked = Array.from(form.querySelectorAll('input[name="interesse"]:checked'));
       const interesse = checked.map(function (cb) { return cb.value; });
 

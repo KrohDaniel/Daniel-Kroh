@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leistungen & Preise — Daniel Kroh | Webdesign, SEO & K.I. Paderborn</title>
-  <meta name="description" content="Transparente Preise für Webdesign, lokales SEO und K.I. Automatisierung in Paderborn. Entdecken Sie unsere monatlichen Betreuungspakete.">
+  <title>Lösungen — Daniel Kroh | Software-Architektur & Prozessautomatisierung in OWL</title>
+  <meta name="description" content="Maßgeschneiderte Software-Architektur, Prozessautomatisierung, Web-Anwendungen und KI-Integration für mittelständische Unternehmen in Paderborn und OWL.">
   <!-- Open Graph -->
-  <meta property="og:title" content="Leistungen & Preise — Daniel Kroh">
-  <meta property="og:description" content="Transparente Preise für Webdesign, lokales SEO und K.I. Automatisierung in Paderborn.">
+  <meta property="og:title" content="Lösungen — Daniel Kroh | Software-Architekt">
+  <meta property="og:description" content="Maßgeschneiderte Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <meta property="og:url" content="https://kroh-daniel.de/leistungen.html">
   <meta property="og:type" content="website">
@@ -26,6 +26,61 @@
   <!-- Umami Analytics — DSGVO-konform -->
   <script defer src="https://cloud.umami.is/script.js" data-website-id="b5acfa81-7a81-4a46-b56d-cf7454781f12"></script>
   <link rel="stylesheet" href="css/cookie-banner.css">
+
+  <!-- Schema.org: Service + FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": "https://kroh-daniel.de/leistungen.html#service",
+        "name": "Software-Architektur & Prozess-Optimierung",
+        "provider": { "@id": "https://kroh-daniel.de/#business" },
+        "areaServed": { "@type": "AdministrativeArea", "name": "Ostwestfalen-Lippe" },
+        "serviceType": ["Prozessautomatisierung", "Web-Anwendungen", "KI-Integration", "Architektur-Beratung"],
+        "description": "Maßgeschneiderte Software-Architektur, Prozessautomatisierung, Web-Anwendungen und KI-Integration für mittelständische Unternehmen in OWL."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Was passiert im Prozess-Audit konkret?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "15 strukturierte Minuten: Sie schildern den Engpass, ich stelle gezielte Rückfragen zu Prozessen, Systemen und Schnittstellen. Am Ende wissen wir beide, ob und wie eine Software-Lösung sinnvoll ist — oder ob ein anderer Weg ehrlicher wäre. Kostenfrei und ohne Verkaufsdruck."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Warum gibt es keine Festpreise?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Weil maßgeschneiderte Software keine Stange Ware ist. Ein Festpreis erzwingt Standard-Lösungen — und Standard-Lösungen passen selten zu individuellen Prozessen. Stattdessen: konkretes Architektur-Konzept mit transparenter Aufwandsschätzung nach dem Audit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Gehört der Code nach dem Projekt mir?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ja, vollständig. Kein Vendor-Lock-in, keine proprietären Plattformen, die Sie an mich binden. Sie erhalten den Quellcode, die Dokumentation und die Hoheit über Ihre Daten."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Übernehmen Sie auch laufenden Betrieb und Weiterentwicklung?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Auf Wunsch ja. Hosting, Monitoring, neue Features, kontinuierliche Optimierung — Sie entscheiden, ob Sie das selbst übernehmen, an Dritte vergeben oder bei mir lassen. Es gibt keine Mindestvertragslaufzeit, die Sie zwingt."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- Fixed Header -->
@@ -37,6 +92,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">Über mich</a>
         <a href="leistungen.html" class="nav-active">Leistungen</a>
+        <a href="demo.html">Demo</a>
         <a href="kontakt.html">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
@@ -51,6 +107,7 @@
       <a href="index.html">Home</a>
       <a href="about.html">Über mich</a>
       <a href="leistungen.html" class="nav-active">Leistungen</a>
+      <a href="demo.html">Demo</a>
       <a href="kontakt.html">Kontakt</a>
     </nav>
   </div>
@@ -58,24 +115,24 @@
   <!-- ======== HERO ======== -->
   <section class="lp-hero">
     <div class="lp-hero-inner">
-      <span class="section-label">Leistungen & Preise</span>
+      <span class="section-label">Lösungen</span>
       <h1 class="lp-hero-heading">
-        Sie brauchen eine Website,<br>
-        <span class="heading-accent">die Kunden bringt.</span>
+        Software-Architektur für<br>
+        <span class="heading-accent">echte Engpässe.</span>
       </h1>
-      <p class="lp-hero-sub">Webdesign, SEO und KI-Automatisierung für Unternehmen in OWL. Festpreise. Kein Abo-Zwang. Ergebnisse ab Tag 1.</p>
+      <p class="lp-hero-sub">Keine Standardpakete. Keine Baukästen. Stattdessen maßgeschneiderte Architektur — von der Engpass-Analyse bis zum produktiven System. Für mittelständische Unternehmen in OWL.</p>
     </div>
   </section>
 
   <!-- ======== SERVICES GRID ======== -->
   <section class="lp-section" id="leistungen">
     <div class="lp-container">
-      <span class="section-label">001 / Leistungen</span>
-      <h2 class="lp-heading">Was ich für Sie<br><span class="heading-accent">leiste</span></h2>
+      <span class="section-label">001 / Architektur-Lösungen</span>
+      <h2 class="lp-heading">Vier Wege,<br><span class="heading-accent">Engpässe zu lösen.</span></h2>
 
       <div class="services-grid">
 
-        <!-- Service 1: Webdesign -->
+        <!-- Service 1: Prozessautomatisierung -->
         <div class="service-card" data-anim="stagger">
           <div class="service-icon service-icon--cyan">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -84,18 +141,18 @@
               <path d="M12 14l4 4-4 4M20 22h8"/>
             </svg>
           </div>
-          <h3 class="service-title">Webdesign & Development</h3>
-          <p class="service-desc">Individuelle Websites, die nicht nur gut aussehen, sondern auch gefunden werden. Responsives Design, schnelle Ladezeiten und sauberer Code — keine Templates.</p>
+          <h3 class="service-title">Prozessautomatisierung</h3>
+          <p class="service-desc"><strong>Engpass:</strong> Manuelle Routinearbeit, Excel-Listen, doppelte Datenpflege. <strong>Lösung:</strong> Workflows, die Anfragen, Angebote und Datenflüsse automatisch verarbeiten — fehlerfrei und nachvollziehbar.</p>
           <ul class="service-features">
-            <li>Individuelles Design nach Ihren Wünschen</li>
-            <li>Moderne, schnelle Entwicklung</li>
-            <li>Perfekt auf Handy, Tablet & Desktop</li>
-            <li>Blitzschnelle Ladezeiten</li>
-            <li>Einfache Inhaltspflege auf Wunsch</li>
+            <li>Anfrage- & Angebotsprozesse automatisieren</li>
+            <li>Datenflüsse zwischen Systemen orchestrieren</li>
+            <li>Manuelle Routinen durch Workflows ersetzen</li>
+            <li>Dokumente & Reports generieren lassen</li>
+            <li>Skalierbare Architektur statt Insellösung</li>
           </ul>
         </div>
 
-        <!-- Service 2: SEO -->
+        <!-- Service 2: Web-Anwendungen -->
         <div class="service-card" data-anim="stagger">
           <div class="service-icon service-icon--amber">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -104,18 +161,18 @@
               <path d="M20 6v2M28 10l-1.5 1.5M32 18h-2M28 26l-1.5-1.5"/>
             </svg>
           </div>
-          <h3 class="service-title">SEO & Local Search</h3>
-          <p class="service-desc">Bessere Sichtbarkeit in Paderborn und OWL. Strukturierte Optimierung für langfristige Rankings — lokal und überregional.</p>
+          <h3 class="service-title">Web-Anwendungen</h3>
+          <p class="service-desc"><strong>Engpass:</strong> Standardsoftware passt nicht zu Ihren Prozessen, oder Ihre Außendarstellung wirkt austauschbar. <strong>Lösung:</strong> Maßgeschneiderte Plattformen und Websites, die exakt zu Ihrem Geschäftsmodell passen.</p>
           <ul class="service-features">
-            <li>Website-Analyse & Optimierung</li>
-            <li>Bei Google in Ihrer Region gefunden werden</li>
-            <li>Texte, die Kunden ansprechen</li>
-            <li>Technik, damit Google Sie besser versteht</li>
-            <li>Monatlicher Bericht über Ihre Ergebnisse</li>
+            <li>Individuelle Plattformen & Portale</li>
+            <li>Performante Web-Anwendungen mit eigener Logik</li>
+            <li>Saubere Architektur & wartbarer Code</li>
+            <li>Lokale Sichtbarkeit & technisches SEO inklusive</li>
+            <li>Skalierbar mit Ihrem Unternehmen</li>
           </ul>
         </div>
 
-        <!-- Service 3: K.I. -->
+        <!-- Service 3: KI-Integration -->
         <div class="service-card" data-anim="stagger">
           <div class="service-icon service-icon--gold">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -125,18 +182,18 @@
               <circle cx="20" cy="20" r="3"/>
             </svg>
           </div>
-          <h3 class="service-title">K.I. Automatisierung</h3>
-          <p class="service-desc">Intelligente Chatbots, automatisierte Workflows und eigene SaaS-Lösungen. Sparen Sie Zeit und Kosten durch gezielten KI-Einsatz.</p>
+          <h3 class="service-title">KI-Integration</h3>
+          <p class="service-desc"><strong>Engpass:</strong> KI-Hype, aber kein klares Anwendungsszenario im Unternehmen. <strong>Lösung:</strong> KI gezielt dort einsetzen, wo sie messbar Zeit spart oder Qualität erhöht — als Werkzeug, nicht als Selbstzweck.</p>
           <ul class="service-features">
-            <li>Intelligenter Chatbot für Ihre Website</li>
-            <li>Kundenanfragen automatisch beantworten</li>
-            <li>Berichte & Auswertungen auf Knopfdruck</li>
-            <li>Abläufe automatisieren, Zeit sparen</li>
-            <li>Systeme miteinander verbinden</li>
+            <li>Anfragen klassifizieren & vorqualifizieren</li>
+            <li>Dokumente strukturiert auswerten</li>
+            <li>Wissensdatenbanken intelligent durchsuchen</li>
+            <li>Prozessdaten analysieren & Engpässe erkennen</li>
+            <li>Schnittstellen zu OpenAI, Anthropic & Co.</li>
           </ul>
         </div>
 
-        <!-- Service 4: K.I. Beratung -->
+        <!-- Service 4: Architektur-Beratung -->
         <div class="service-card" data-anim="stagger">
           <div class="service-icon service-icon--white">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -145,417 +202,105 @@
               <path d="M20 2v4M20 34v4M2 20h4M34 20h4"/>
             </svg>
           </div>
-          <h3 class="service-title">K.I. Beratung & Schulung</h3>
-          <p class="service-desc">Sie wissen, dass K.I. wichtig ist — aber nicht, wo Sie anfangen sollen? Ich zeige Ihnen in persönlicher 1:1-Betreuung, wie Sie K.I. gewinnbringend einsetzen.</p>
+          <h3 class="service-title">Architektur-Beratung</h3>
+          <p class="service-desc"><strong>Engpass:</strong> Gewachsene IT-Landschaft, technische Schulden, unklare Roadmap. <strong>Lösung:</strong> Strukturierte Engpass-Analyse, klarer Architektur-Fahrplan und Begleitung in der Umsetzung — ohne Lock-in.</p>
           <ul class="service-features">
-            <li>Persönliche 1:1-Beratung (vor Ort oder remote)</li>
-            <li>K.I.-Potenzialanalyse für Ihr Unternehmen</li>
-            <li>Praxisnahe Schulung für Sie und Ihr Team</li>
-            <li>Tool-Empfehlungen passend zu Ihrem Alltag</li>
-            <li>Umsetzungsbegleitung nach der Beratung</li>
+            <li>Strukturiertes Prozess-Audit</li>
+            <li>Architektur-Bewertung & Empfehlungen</li>
+            <li>Anforderungsanalyse & Roadmap</li>
+            <li>Vendor-neutrale Tool-Auswahl</li>
+            <li>Umsetzungsbegleitung nach Bedarf</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======== VALUE PROPOSITION ======== -->
+  <!-- ======== ARBEITSWEISE ======== -->
   <section class="lp-section lp-section--alt">
     <div class="lp-container lp-value-block">
-      <div class="lp-value-badge">Kein Risiko — garantiert</div>
+      <div class="lp-value-badge">So arbeite ich</div>
       <h2 class="lp-heading lp-heading--center">
-        Zwei Wege zu Ihrer<br>
-        <span class="heading-accent">neuen Website.</span>
+        Vom Engpass zur<br>
+        <span class="heading-accent">produktiven Lösung.</span>
       </h2>
       <div class="lp-value-card">
-        <h3 class="lp-value-title">Einmalzahlung oder monatliche Betreuung — Sie entscheiden.</h3>
-        <p class="lp-value-body">Sie möchten einmalig eine professionelle Website und danach selbstständig weitermachen? Oder lieber eine kontinuierliche Betreuung mit SEO, Updates und Support? Beides ist möglich. <strong>Wählen Sie das Modell, das zu Ihrem Unternehmen passt.</strong></p>
-        <p class="lp-value-body" style="margin-top: 1.5rem; color: var(--cyan); font-weight: 500;">Nicht zufrieden nach der ersten Korrekturschleife? Dann kostet es Sie nichts.</p>
+        <h3 class="lp-value-title">Vier Schritte. Jeder einzeln entscheidbar.</h3>
+        <p class="lp-value-body"><strong>1. Prozess-Audit (15 Min, kostenfrei)</strong> — Strukturierte Engpass-Analyse: Wo liegt der größte Hebel, was ist umsetzbar, was nicht?</p>
+        <p class="lp-value-body" style="margin-top: 1rem;"><strong>2. Architektur-Konzept</strong> — Konkreter Lösungsvorschlag mit Aufwandsschätzung, Technologie-Empfehlung und Roadmap.</p>
+        <p class="lp-value-body" style="margin-top: 1rem;"><strong>3. Umsetzung</strong> — Maßgeschneiderte Entwicklung in iterativen Schritten. Sie sehen jede Woche Fortschritt, nicht erst am Ende.</p>
+        <p class="lp-value-body" style="margin-top: 1rem;"><strong>4. Betrieb & Weiterentwicklung</strong> — Optional: laufende Betreuung, Monitoring, neue Features. Ohne Vendor-Lock-in. Der Code gehört Ihnen.</p>
       </div>
     </div>
   </section>
 
-  <!-- ======== PRICING: EINMALIG ======== -->
-  <section class="lp-section" id="preise">
-    <div class="lp-container">
-      <span class="section-label">002 / Website-Pakete</span>
-      <h2 class="lp-heading">Website zum<br><span class="heading-accent">Festpreis</span></h2>
-      <p class="pricing-intro">Einmalige Entwicklung — der Code gehört Ihnen. Optional mit monatlicher Wartung &amp; SEO-Betreuung.</p>
-
-      <div class="pricing-grid">
-
-        <!-- Starter Einmalig -->
-        <div class="pricing-card" data-anim="stagger">
-          <div class="pricing-header">
-            <span class="pricing-tier">Starter</span>
-            <h3 class="pricing-name">Landing Page</h3>
-            <p class="pricing-desc">Ideal für Gründer & Selbstständige — eine professionelle Seite, die sofort Vertrauen schafft und Anfragen generiert.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">999</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">einmalig</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              One-Page Design (Responsive)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Individuelles UI/UX Design
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Core Web Vitals optimiert
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Kontaktformular
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Basis SEO-Setup
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Impressum & Datenschutz
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Code-Übergabe nach Fertigstellung
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              Laufende Betreuung
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Landing Page anfragen</a>
-        </div>
-
-        <!-- Business Einmalig — Highlighted -->
-        <div class="pricing-card pricing-card--featured" data-anim="stagger">
-          <div class="pricing-badge">Beliebteste Wahl</div>
-          <div class="pricing-header">
-            <span class="pricing-tier">Business</span>
-            <h3 class="pricing-name">Unternehmens-Website</h3>
-            <p class="pricing-desc">Mehrere Seiten, professionelles Design und ein solides SEO-Fundament — alles, was ein wachsendes Unternehmen braucht.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">1.499</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">einmalig</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Bis zu 5 Seiten
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Premium UI/UX Design
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Responsive & Mobile-First
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Local SEO & Google Business Setup
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Schema Markup & Structured Data
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Google Analytics & Search Console
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              CMS-Integration nach Wunsch
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Code-Übergabe nach Fertigstellung
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta">Beliebtestes Paket sichern</a>
-        </div>
-
-        <!-- Premium Einmalig -->
-        <div class="pricing-card" data-anim="stagger">
-          <div class="pricing-header">
-            <span class="pricing-tier">Premium</span>
-            <h3 class="pricing-name">Digitales Komplettpaket</h3>
-            <p class="pricing-desc">Umfangreiche Website mit K.I.-Integration und Automatisierung — spart Ihnen wiederkehrende Aufgaben und macht Ihr Unternehmen rund um die Uhr erreichbar.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">2.999</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">einmalig</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Bis zu 10 Seiten
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Premium UI/UX Design (Responsive)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Local SEO, Schema Markup & Analytics
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              K.I. Chatbot Integration
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Workflow-Automatisierung (n8n)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              API-Anbindungen & Schnittstellen
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              2 Korrekturschleifen inklusive
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Code-Übergabe nach Fertigstellung
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Komplettpaket besprechen</a>
-        </div>
-
+  <!-- ======== INVESTITIONSRAHMEN ======== -->
+  <section class="lp-section" id="investitionsrahmen">
+    <div class="lp-container lp-value-block">
+      <span class="section-label">002 / Investitionsrahmen</span>
+      <h2 class="lp-heading lp-heading--center">Was eine maßgeschneiderte<br><span class="heading-accent">Lösung kostet.</span></h2>
+      <div class="lp-value-card">
+        <p class="lp-value-body">Maßgeschneiderte Software lässt sich nicht in Festpreis-Pakete pressen. Jedes Unternehmen hat andere Prozesse, andere Systemlandschaft, andere Anforderungen — und ein ehrliches Angebot bildet das ab.</p>
+        <p class="lp-value-body" style="margin-top: 1.5rem;"><strong>Deshalb:</strong> Jedes Projekt beginnt mit einem kostenfreien Prozess-Audit. Im Anschluss erhalten Sie ein konkretes Architektur-Konzept inklusive transparenter Aufwandsschätzung — bevor Sie sich für eine Umsetzung entscheiden.</p>
+        <p class="lp-value-body" style="margin-top: 1.5rem; color: var(--cyan); font-weight: 500;">Sie zahlen nicht für Pakete. Sie zahlen für Ergebnisse.</p>
+        <a href="kontakt.html" class="cta-button" style="margin-top: 2rem;">Prozess-Audit anfragen</a>
       </div>
-
-      <p class="pricing-note">Alle Festpreise zzgl. Domain- und Hosting-Kosten (ab ca. 5€/Monat).</p>
-      <p class="pricing-note" style="margin-top: 1rem;">Größeres Projekt im Kopf? <strong>Individuelle Lösungen ab 5.000 €</strong> — Shopsysteme, komplexe K.I.-Integrationen oder mehrstufige Automatisierungen. <a href="kontakt.html" style="color: var(--cyan); text-decoration: underline;">Lassen Sie uns sprechen.</a></p>
-      <p class="pricing-note" style="margin-top: 1rem; color: var(--amber); font-weight: 500;">Aktuell 2 Projektplätze für Q2 2026 verfügbar.</p>
-    </div>
-  </section>
-
-  <!-- ======== PRICING: MONATLICH ======== -->
-  <section class="lp-section lp-section--alt" id="betreuung">
-    <div class="lp-container">
-      <span class="section-label">003 / Wartung & SEO</span>
-      <h2 class="lp-heading">Monatliche<br><span class="heading-accent">Betreuung</span></h2>
-      <p class="pricing-intro">Optional zu jedem Website-Paket — oder für bestehende Websites. Hosting, Updates, SEO und Support aus einer Hand.</p>
-
-      <div class="pricing-grid">
-
-        <!-- Basis Betreuung -->
-        <div class="pricing-card" data-anim="stagger">
-          <div class="pricing-header">
-            <span class="pricing-tier">Basis</span>
-            <h3 class="pricing-name">Wartung & Sicherheit</h3>
-            <p class="pricing-desc">Ihre Website bleibt sicher, schnell und online — ohne dass Sie sich darum kümmern müssen.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">99</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">/ Monat</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Hosting & SSL inklusive
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Sicherheits- & Software-Updates
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Uptime-Monitoring
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Kleine Textänderungen (bis 1h/Monat)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              E-Mail Support
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              SEO-Optimierung
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              Monatlicher Report
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Betreuung anfragen</a>
-        </div>
-
-        <!-- SEO Betreuung — Highlighted -->
-        <div class="pricing-card pricing-card--featured" data-anim="stagger">
-          <div class="pricing-badge">Empfohlen</div>
-          <div class="pricing-header">
-            <span class="pricing-tier">Wachstum</span>
-            <h3 class="pricing-name">SEO & Sichtbarkeit</h3>
-            <p class="pricing-desc">Aktive SEO-Betreuung, damit Sie in Paderborn und OWL langfristig gefunden werden.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">199</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">/ Monat</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Hosting, SSL & Uptime-Monitoring
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Sicherheits- & Software-Updates
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Local SEO Optimierung
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Google Business Pflege
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Monatlicher SEO-Report
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Content-Änderungen (bis 2h/Monat)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Google Analytics & Search Console
-            </li>
-            <li class="excluded">
-              <span class="pf-icon pf-x"></span>
-              K.I. Chatbot Betreuung
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta">Betreuung anfragen</a>
-        </div>
-
-        <!-- Komplett Betreuung -->
-        <div class="pricing-card" data-anim="stagger">
-          <div class="pricing-header">
-            <span class="pricing-tier">Komplett</span>
-            <h3 class="pricing-name">Rundum-Betreuung</h3>
-            <p class="pricing-desc">Ihr digitaler Partner — Sie konzentrieren sich auf Ihr Geschäft, ich kümmere mich um Website, SEO, K.I. und Strategie.</p>
-          </div>
-          <div class="pricing-price">
-            <span class="pricing-amount">349</span>
-            <span class="pricing-currency">€</span>
-            <span class="pricing-period">/ Monat</span>
-          </div>
-          <ul class="pricing-features">
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Hosting, SSL & Uptime-Monitoring
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Local SEO & Google Business Pflege
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Monatlicher SEO-Report & Analytics
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              K.I. Chatbot Pflege & Updates
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Workflow-Überwachung & Automatisierung
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Priority Support (&lt; 12h Reaktionszeit)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Content-Änderungen (bis 4h/Monat)
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Persönlicher Ansprechpartner
-            </li>
-            <li class="included">
-              <span class="pf-icon pf-check"></span>
-              Quartals-Strategiegespräch
-            </li>
-          </ul>
-          <a href="kontakt.html" class="pricing-cta pricing-cta--outline">Betreuung anfragen</a>
-        </div>
-
-      </div>
-
-      <p class="pricing-note">Betreuungspakete mit 6 Monaten Mindestlaufzeit, danach monatlich kündbar. Kombinierbar mit jedem Website-Paket.</p>
     </div>
   </section>
 
   <!-- ======== FAQ ======== -->
   <section class="lp-section lp-section--alt" id="faq">
     <div class="lp-container">
-      <span class="section-label">004 / FAQ</span>
-      <h2 class="lp-heading">Häufige Fragen<br><span class="heading-accent">zum Pricing</span></h2>
+      <span class="section-label">003 / FAQ</span>
+      <h2 class="lp-heading">Häufige Fragen<br><span class="heading-accent">zur Zusammenarbeit</span></h2>
 
       <div class="faq-list">
 
         <details class="faq-item" data-anim="faq">
           <summary class="faq-question">
-            <span>Gibt es eine Mindestvertragslaufzeit für die Pakete?</span>
+            <span>Was passiert im Prozess-Audit konkret?</span>
             <span class="faq-chevron">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Die monatlichen Betreuungspakete haben eine Mindestlaufzeit von 6 Monaten, danach sind sie monatlich kündbar. Das gibt beiden Seiten genug Zeit, echte Ergebnisse zu erzielen. Die Website-Festpreise haben keine Laufzeit — Sie zahlen einmal und der Code gehört Ihnen.</p>
+            <p>15 strukturierte Minuten: Sie schildern den Engpass, ich stelle gezielte Rückfragen zu Prozessen, Systemen und Schnittstellen. Am Ende wissen wir beide, ob und wie eine Software-Lösung sinnvoll ist — oder ob ein anderer Weg ehrlicher wäre. Kostenfrei und ohne Verkaufsdruck.</p>
           </div>
         </details>
 
         <details class="faq-item" data-anim="faq">
           <summary class="faq-question">
-            <span>Was genau beinhaltet der technische Support?</span>
+            <span>Warum gibt es keine Festpreise?</span>
             <span class="faq-chevron">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Der technische Support umfasst schnelle Hilfe bei Ausfällen, Bugfixes, das Einspielen von Sicherheitsupdates sowie Beratung bei technischen Fragestellungen. Die garantierte Reaktionszeit hängt vom Paket ab — beim Komplett-Paket antworten wir innerhalb von 12 Stunden.</p>
+            <p>Weil maßgeschneiderte Software keine Stange Ware ist. Ein Festpreis erzwingt Standard-Lösungen — und Standard-Lösungen passen selten zu individuellen Prozessen. Stattdessen: konkretes Architektur-Konzept mit transparenter Aufwandsschätzung nach dem Audit. Sie sehen genau, wofür Sie zahlen.</p>
           </div>
         </details>
 
         <details class="faq-item" data-anim="faq">
           <summary class="faq-question">
-            <span>Gehört die Website nach Vertragsabschluss mir?</span>
+            <span>Gehört der Code nach dem Projekt mir?</span>
             <span class="faq-chevron">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Ja. Bei den Festpreis-Paketen erhalten Sie den vollständigen Quellcode nach Fertigstellung und Bezahlung. Texte, Bilder und Inhalte gehören selbstverständlich immer Ihnen. Sie können die Website dann selbst hosten oder die Wartung optional an mich abgeben.</p>
+            <p>Ja, vollständig. Kein Vendor-Lock-in, keine proprietären Plattformen, die Sie an mich binden. Sie erhalten den Quellcode, die Dokumentation und die Hoheit über Ihre Daten. Wenn Sie irgendwann mit jemand anderem weiterarbeiten wollen, ist das technisch jederzeit möglich.</p>
           </div>
         </details>
 
         <details class="faq-item" data-anim="faq">
           <summary class="faq-question">
-            <span>Ich brauche etwas Spezielles. Gibt es individuelle Pakete?</span>
+            <span>Übernehmen Sie auch laufenden Betrieb und Weiterentwicklung?</span>
             <span class="faq-chevron">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l5 5 5-5"/></svg>
             </span>
           </summary>
           <div class="faq-answer">
-            <p>Absolut. Wenn Ihre Projektanforderungen die genannten Pakete übersteigen (z.B. komplexe Shopsysteme oder tiefgreifende K.I.-Integrationen in bestehende CRM-Systeme), schnüren wir ein maßgeschneidertes Angebot für Sie.</p>
+            <p>Auf Wunsch ja. Hosting, Monitoring, neue Features, kontinuierliche Optimierung — Sie entscheiden, ob Sie das selbst übernehmen, an Dritte vergeben oder bei mir lassen. Es gibt keine Mindestvertragslaufzeit, die Sie zwingt.</p>
           </div>
         </details>
 
@@ -566,13 +311,13 @@
   <!-- ======== CTA ======== -->
   <section class="lp-section lp-cta-section">
     <div class="lp-container lp-cta-inner">
-      <span class="section-label">005 / Loslegen</span>
+      <span class="section-label">004 / Loslegen</span>
       <h2 class="lp-heading lp-heading--center">
-        Bereit für Ihren<br>
-        <span class="heading-accent">digitalen Vorsprung?</span>
+        Wo liegt Ihr<br>
+        <span class="heading-accent">Engpass?</span>
       </h2>
-      <p class="lp-cta-body">Lassen Sie uns in einem unverbindlichen Gespräch herausfinden, welches Paket am besten zu Ihrem Unternehmen passt.</p>
-      <a href="kontakt.html" class="cta-button" style="margin-top: 1.5rem;">Jetzt Kontakt aufnehmen</a>
+      <p class="lp-cta-body">15 strukturierte Minuten, in denen wir Ihren größten Hebel identifizieren — kostenfrei und ohne Verkaufsdruck.</p>
+      <a href="termin.html" class="cta-button" style="margin-top: 1.5rem;">Prozess-Audit buchen</a>
     </div>
   </section>
 
@@ -581,7 +326,7 @@
     <div class="footer-top">
       <div class="footer-brand-col">
         <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
-        <p class="footer-tagline">Websites, die Kunden bringen. Für Unternehmen in OWL.</p>
+        <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           info@kroh-daniel.de
@@ -592,11 +337,11 @@
         </a>
       </div>
       <div class="footer-nav-col">
-        <span class="footer-nav-title">Leistungen</span>
-        <a href="leistungen.html">Webdesign</a>
-        <a href="leistungen.html">SEO & Performance</a>
-        <a href="leistungen.html">K.I. Automatisierung</a>
-        <a href="leistungen.html#preise">Preise</a>
+        <span class="footer-nav-title">Lösungen</span>
+        <a href="leistungen.html">Prozessautomatisierung</a>
+        <a href="leistungen.html">Web-Anwendungen</a>
+        <a href="leistungen.html">KI-Integration</a>
+        <a href="leistungen.html">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
@@ -623,12 +368,9 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/leistungen.js"></script>
+  <script defer src="js/reveal.js"></script>
 
   <script src="js/cookie-banner.js"></script>
 </body>

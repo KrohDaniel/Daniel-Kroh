@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Demos — Daniel Kroh</title>
+<meta name="description" content="Interaktive Live-Demos der Kundenprojekte von Daniel Kroh — Marketing-Website, Kundenformular, Admin-Dashboard und Newsletter-Tool im Browser erleben.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f7f9fc;
+  --card: #ffffff;
+  --cyan: #00b8e6;
+  --cyan-deep: #00a3cc;
+  --amber: #e89610;
+  --gold: #d4a017;
+  --green: #00b15c;
+  --text-1: #0a0e1a;
+  --text-2: #3a4357;
+  --text-3: #6b7488;
+  --border: #e6eaf2;
+  --shadow-soft: 0 2px 8px rgba(10,14,26,.04), 0 1px 2px rgba(10,14,26,.06);
+  --shadow-hover: 0 12px 40px rgba(10,14,26,.08), 0 0 0 1px rgba(0,184,230,.15);
+  --shadow-btn: 0 8px 24px rgba(232,150,16,.25);
+  --grad-brand: linear-gradient(135deg,#00b8e6,#e89610);
+  --grad-cta: linear-gradient(135deg,#00b8e6,#00a3cc);
+  --grad-cta-hover: linear-gradient(135deg,#e89610,#d4a017);
+  --display: 'Space Grotesk', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  font-weight: 400;
+  color: var(--text-1);
+  background: var(--bg);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container { max-width: 1300px; margin: 0 auto; padding: 0 5vw; }
+
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; color: var(--text-1); text-wrap: balance; }
+.h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+.h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.body { font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.75; color: var(--text-2); font-weight: 400; }
+.body--lg { font-size: clamp(1.05rem, 1.3vw, 1.2rem); }
+.muted { color: var(--text-3); }
+
+.label {
+  font-family: var(--display);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.label.with-line::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.grad-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ===== Header (matches main) ===== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 5vw;
+  background: rgba(255,255,255,.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 rgba(10,14,26,.04);
+}
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.brand { display: flex; align-items: center; gap: .65rem; font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; }
+.brand-mark {
+  width: 32px; height: 32px;
+  background: var(--grad-brand);
+  position: relative;
+  display: grid; place-items: center;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+}
+.brand-mark span { position: relative; z-index: 1; }
+nav.nav { display: flex; gap: 2.25rem; align-items: center; }
+nav.nav a {
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--text-2);
+  position: relative;
+  transition: color .2s ease;
+}
+nav.nav a:hover { color: var(--text-1); }
+nav.nav a.active { color: var(--text-1); }
+nav.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+nav.nav a:hover::after, nav.nav a.active::after { transform: scaleX(1); }
+.header-cta {
+  font-family: var(--display);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .7rem 1.4rem;
+  background: var(--grad-cta);
+  color: #fff;
+  border-radius: 4px;
+  transition: all .3s ease;
+}
+.header-cta:hover { background: var(--grad-cta-hover); transform: translateY(-2px); box-shadow: var(--shadow-btn); }
+.hamburger { display: none; width: 32px; height: 32px; flex-direction: column; justify-content: center; gap: 5px; padding: 0; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-1); transition: transform .3s ease, opacity .3s ease; margin: 0 auto; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,.94);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.mobile-nav.open { opacity: 1; pointer-events: auto; }
+.mobile-nav a { font-family: var(--display); font-weight: 600; font-size: 1.6rem; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: .92rem;
+  letter-spacing: .02em;
+  padding: 1rem 1.75rem;
+  background: var(--grad-cta);
+  color: #fff;
+  border-radius: 4px;
+  transition: all .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn:hover { background: var(--grad-cta-hover); transform: translateY(-2px); box-shadow: var(--shadow-btn); }
+.btn .arr { transition: transform .3s ease; }
+.btn:hover .arr { transform: translateX(4px); }
+.btn--ghost {
+  background: transparent;
+  color: var(--text-1);
+  border: 1px solid var(--border);
+}
+.btn--ghost:hover { background: transparent; border-color: var(--cyan); color: var(--cyan-deep); box-shadow: 0 0 0 4px rgba(0,184,230,.08); }
+
+/* ===== Hero ===== */
+.hero {
+  padding: 11rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(800px 400px at 15% 20%, rgba(0,184,230,.08), transparent 70%),
+    radial-gradient(700px 400px at 85% 0%, rgba(232,150,16,.06), transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 56rem;
+}
+.hero-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .45rem .85rem;
+  background: rgba(0,184,230,.08);
+  border: 1px solid rgba(0,184,230,.2);
+  border-radius: 999px;
+  font-family: var(--display);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--cyan-deep);
+  margin-bottom: 1.5rem;
+}
+.hero-meta::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .6; transform: scale(.85); }
+}
+.hero p.lede {
+  margin-top: 1.75rem;
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 44rem;
+}
+.hero-stats {
+  margin-top: 3rem;
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.hero-stat strong {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--text-1);
+  line-height: 1.1;
+}
+.hero-stat span {
+  display: block;
+  margin-top: .35rem;
+  font-size: .85rem;
+  color: var(--text-3);
+  letter-spacing: .02em;
+}
+
+/* ===== Demo Cards ===== */
+.demos {
+  padding: 4rem 0 8rem;
+}
+.demo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.demo-card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  box-shadow: var(--shadow-soft);
+  transition: transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+}
+.demo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(10,14,26,.10), 0 0 0 1px var(--cyan), 0 0 60px rgba(0,184,230,.18);
+  border-color: var(--cyan);
+}
+.demo-card::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--grad-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s ease;
+  z-index: 3;
+}
+.demo-card:hover::before { transform: scaleX(1); }
+
+/* ===== Phone mockup column ===== */
+.demo-phone {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0,184,230,.10), transparent 60%),
+    linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem 4rem;
+  overflow: hidden;
+  min-height: 480px;
+}
+.demo-phone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,184,230,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,184,230,.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 80%);
+  pointer-events: none;
+}
+.demo-phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 9 / 19;
+  background: #0E1320;
+  border-radius: 30px;
+  padding: 8px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.05) inset,
+    0 0 0 1px rgba(0,0,0,.3),
+    0 18px 40px rgba(10,14,26,.20),
+    0 0 60px rgba(0,184,230,.10);
+  transition: transform .5s cubic-bezier(.4,0,.2,1);
+  z-index: 1;
+}
+.demo-card:hover .demo-phone-frame {
+  transform: translateY(-4px) rotate(-1.5deg);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.05) inset,
+    0 0 0 1px rgba(0,0,0,.3),
+    0 30px 60px rgba(10,14,26,.25),
+    0 0 80px rgba(0,184,230,.20);
+}
+.demo-phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+}
+.demo-phone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.demo-phone-frame::before {
+  content: '';
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 64px; height: 16px;
+  background: #0E1320;
+  border-radius: 0 0 11px 11px;
+  z-index: 2;
+}
+.demo-phone-tag {
+  position: absolute;
+  bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--display);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  padding: .4rem .85rem;
+  background: rgba(255,255,255,.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  z-index: 2;
+  white-space: nowrap;
+}
+.demo-phone-tag::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+.demo-phone-tag.upcoming::before {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+}
+
+/* ===== Body column ===== */
+.demo-body {
+  padding: 2.75rem 2.75rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.demo-tag {
+  font-family: var(--display);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+}
+.demo-tag::before {
+  content: '';
+  width: 1.25rem;
+  height: 1px;
+  background: var(--cyan);
+}
+.demo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.demo-title {
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+}
+.demo-logo {
+  height: 2.4rem;
+  width: auto;
+  max-width: 9rem;
+  object-fit: contain;
+}
+.demo-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+.demo-desc strong { color: var(--text-1); font-weight: 600; }
+
+.modules {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem 1.5rem;
+  margin-top: .5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.module {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  font-size: .9rem;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.module-icon {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  background: rgba(0,184,230,.1);
+  color: var(--cyan-deep);
+  display: grid;
+  place-items: center;
+  margin-top: 1px;
+}
+.module-icon svg { width: 12px; height: 12px; }
+.module strong {
+  display: block;
+  color: var(--text-1);
+  font-weight: 600;
+  font-size: .92rem;
+  margin-bottom: .15rem;
+}
+
+.demo-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: .25rem;
+}
+.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: .92rem;
+  letter-spacing: .02em;
+  padding: .85rem 1.5rem;
+  background: var(--grad-cta);
+  color: #fff;
+  border-radius: 4px;
+  transition: all .3s ease;
+}
+.demo-btn:hover { background: var(--grad-cta-hover); transform: translateY(-2px); box-shadow: var(--shadow-btn); }
+.demo-btn .arr { transition: transform .3s ease; }
+.demo-btn:hover .arr { transform: translateX(3px); }
+.demo-btn--ghost {
+  background: transparent;
+  color: var(--text-2);
+  padding: .85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+}
+.demo-btn--ghost:hover {
+  background: transparent;
+  color: var(--cyan-deep);
+  border-color: var(--cyan);
+  transform: none;
+  box-shadow: none;
+}
+.demo-btn--disabled {
+  background: var(--bg-alt);
+  color: var(--text-3);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.pill {
+  font-family: var(--display);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: .35rem .8rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-2);
+}
+
+/* upcoming variant */
+.demo-card.upcoming {
+  opacity: .92;
+}
+.demo-card.upcoming .demo-phone-frame {
+  filter: grayscale(.15) brightness(.98);
+}
+.upcoming-mask {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  z-index: 4;
+  font-family: var(--display);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding: .4rem .8rem;
+  background: rgba(232,150,16,.1);
+  border: 1px solid rgba(232,150,16,.3);
+  border-radius: 999px;
+}
+
+/* ===== CTA banner ===== */
+.banner {
+  background: linear-gradient(135deg, #0a0e1a 0%, #1a2138 100%);
+  color: #fff;
+  padding: 4rem 3rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(600px 300px at 20% 0%, rgba(0,184,230,.18), transparent 60%),
+    radial-gradient(500px 300px at 100% 100%, rgba(232,150,16,.12), transparent 60%);
+  pointer-events: none;
+}
+.banner > * { position: relative; z-index: 1; }
+.banner p {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 38rem;
+  letter-spacing: -.01em;
+}
+
+/* ===== Footer ===== */
+.footer { background: #0a0e1a; color: #94a0b8; padding: 5rem 0 2.5rem; }
+.footer .container > * { color: inherit; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+.footer-brand { color: #fff; font-family: var(--display); font-weight: 700; font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: .65rem; }
+.footer-brand .brand-mark { color: #fff; }
+.footer p { font-size: .92rem; line-height: 1.75; color: #94a0b8; }
+.footer h4 { color: #fff; font-family: var(--display); font-size: .8rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.25rem; }
+.footer ul { list-style: none; }
+.footer ul li { margin-bottom: .65rem; }
+.footer ul a { color: #94a0b8; font-size: .92rem; transition: color .2s ease; }
+.footer ul a:hover { color: var(--cyan); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2.5rem; flex-wrap: wrap; gap: 1.5rem; font-size: .85rem; }
+
+/* ===== Responsive ===== */
+@media (max-width: 960px) {
+  .demo-card { grid-template-columns: 1fr; }
+  .demo-phone {
+    min-height: 420px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .demo-phone-frame { max-width: 200px; }
+  .modules { grid-template-columns: 1fr; }
+  nav.nav, .header-cta { display: none; }
+  .hamburger { display: flex; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+@media (max-width: 600px) {
+  .hero { padding: 9rem 0 3rem; }
+  .demos { padding: 3rem 0 5rem; }
+  .demo-body { padding: 2rem 1.75rem; }
+  .banner { padding: 2.5rem 1.75rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-stats { gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ HEADER (Site) ============================ -->
+<header class="site-header">
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo"
+        class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">Über mich</a>
+      <a href="leistungen.html">Leistungen</a>
+      <a href="demo.html" class="nav-active">Demo</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile Overlay Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <nav class="mobile-nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">Über mich</a>
+    <a href="leistungen.html">Leistungen</a>
+    <a href="demo.html" class="nav-active">Demo</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+</div>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="hero-meta">Live · Im Browser · Keine echten Daten</span>
+      <h1 class="h1">Live-<span class="grad-text">Demos</span><br>der Kundenprojekte</h1>
+      <p class="lede">
+        Statt Screenshots zu zeigen, lasse ich Sie direkt durch die echten Anwendungen klicken.
+        Marketing-Website, Kundenformular, Admin-Dashboard, Newsletter-Tool — alles im Browser, alles ohne Risiko.
+        Frei erfundene Demo-Daten, kein E-Mail-Versand. Klicken Sie sich durch, probieren Sie aus, bekommen Sie ein Gefühl dafür, was auch für Ihr Unternehmen möglich ist.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <strong>3</strong>
+          <span>Kundenprojekte</span>
+        </div>
+        <div class="hero-stat">
+          <strong>12+</strong>
+          <span>Module zum Ausprobieren</span>
+        </div>
+        <div class="hero-stat">
+          <strong>100 %</strong>
+          <span>Browser-Demo, keine Daten verlassen Ihr Gerät</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ DEMO CARDS ============================ -->
+<section class="demos">
+  <div class="container">
+    <div class="demo-list">
+
+      <!-- ============ AESTHÉRA ============ -->
+      <article class="demo-card">
+        <div class="demo-phone">
+          <div class="demo-phone-frame">
+            <div class="demo-phone-screen">
+              <img class="demo-phone-img" src="public/aesthera-mobile.png" alt="aesthéra Permanent Make-Up — Mobile-Ansicht" loading="lazy">
+            </div>
+          </div>
+          <span class="demo-phone-tag">Live · Interaktive Demo</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-tag">Kundenprojekt — Kosmetik Paderborn</div>
+          <div class="demo-title-row">
+            <h2 class="demo-title">aesthéra — Permanent Make-Up</h2>
+            <img class="demo-logo" src="public/aesthera-logo.png" alt="aesthéra Logo">
+          </div>
+          <p class="demo-desc">
+            <strong>Engpass:</strong> Anfragen kamen unstrukturiert per Telefon und WhatsApp, lokale Sichtbarkeit fehlte.
+            <strong>Lösung:</strong> Komplette Web-Anwendung mit digitalem Kundenformular, Admin-Dashboard und KI-gestütztem Newsletter-Tool.
+          </p>
+          <div class="modules">
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Marketing-Website</strong>Hero, Behandlungen, Vorher/Nachher-Slider, Reviews, FAQ</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Newsletter Double-Opt-In</strong>DSGVO-konform mit Bestätigungs-Mail-Flow</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Digitales Kundenformular</strong>Anamnese, Einwilligung, Termin-Wunsch in einem Flow</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Admin-Dashboard</strong>Kundenliste, Filter, Detailansicht mit DSGVO-Schutz</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>KI-Newsletter-Editor</strong>AI-gestützte Texte, Empfänger-Auswahl, Versand-Animation</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Local-SEO-Fundament</strong>Strukturierte Daten, Sitemap, Bewertungen für Google</span>
+            </div>
+          </div>
+          <div class="tech-pills">
+            <span class="pill">Next.js 16</span>
+            <span class="pill">Prisma</span>
+            <span class="pill">Resend</span>
+            <span class="pill">Tailwind</span>
+            <span class="pill">Vercel</span>
+          </div>
+          <div class="demo-actions">
+            <a href="aesthera-demo.html" class="demo-btn">Interaktive Demo öffnen <span class="arr">→</span></a>
+            <a href="https://permanent-makeup-paderborn.de" target="_blank" rel="noopener" class="demo-btn--ghost">Live-Website ansehen <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ ERHOLUNGS APARTMENTS ============ -->
+      <article class="demo-card">
+        <div class="demo-phone">
+          <div class="demo-phone-frame">
+            <div class="demo-phone-screen">
+              <img class="demo-phone-img" src="public/erholungs-mobile.png" alt="Erholungs Apartments — Mobile-Ansicht" loading="lazy">
+            </div>
+          </div>
+          <span class="demo-phone-tag">Live · Buchungsplattform</span>
+        </div>
+        <div class="demo-body">
+          <div class="demo-tag">Kundenprojekt — Ferienwohnung Bad Lippspringe</div>
+          <div class="demo-title-row">
+            <h2 class="demo-title">Erholungs Apartments</h2>
+            <img class="demo-logo" src="public/erholungs-logo.png" alt="Erholungs Apartments Logo" style="height:3rem;">
+          </div>
+          <p class="demo-desc">
+            <strong>Engpass:</strong> Buchungsanfragen liefen unstrukturiert über Telefon und E-Mail, kaum Sichtbarkeit für Gäste der Westfalen Therme.
+            <strong>Lösung:</strong> Web-Anwendung mit Verfügbarkeitsprüfung, integriertem Massage-Angebot und gezielter Positionierung im Therme-Umfeld.
+          </p>
+          <div class="modules">
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Marketing-Website</strong>Apartment-Galerie, Umgebung, Booking.com 9.0/10 Bewertungen</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Verfügbarkeitskalender</strong>Live-Buchungslogik mit Firestore-Backend</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Massage-Modul</strong>Integriertes Wellness-Angebot direkt im Apartment</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Local SEO Therme</strong>Sichtbarkeit für Therme-Gäste & Reha-Reisende</span>
+            </div>
+          </div>
+          <div class="tech-pills">
+            <span class="pill">Next.js</span>
+            <span class="pill">Firebase</span>
+            <span class="pill">Firestore</span>
+            <span class="pill">Tailwind</span>
+          </div>
+          <div class="demo-actions">
+            <a href="erholungs-demo.html" class="demo-btn">Demo öffnen <span class="arr">→</span></a>
+            <a href="https://erholungs-apartments.de" target="_blank" rel="noopener" class="demo-btn--ghost">Live-Website ansehen <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ HELFENDE HÄNDE ============ -->
+      <article class="demo-card">
+        <div class="demo-phone">
+          <div class="demo-phone-frame">
+            <div class="demo-phone-screen">
+              <img class="demo-phone-img" src="public/helfende-mobile.png" alt="Helfende Hände — Mobile-Ansicht" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-tag">Kundenprojekt — Alltagsbegleitung Bielefeld &amp; OWL</div>
+          <div class="demo-title-row">
+            <h2 class="demo-title">Helfende Hände</h2>
+            <img class="demo-logo" src="public/helfende-mark.jpg" alt="Helfende Hände Logo" style="height:2.8rem; border-radius:4px;">
+          </div>
+          <p class="demo-desc">
+            <strong>Engpass:</strong> Aufklärung zum Entlastungsbetrag fehlte, Alltagsbegleiter:innen brauchten ein internes Tool für Termine und Dokumentation.
+            <strong>Lösung:</strong> Fullstack-Plattform mit öffentlicher Aufklärungsseite und interner App für das Team.
+          </p>
+          <div class="modules">
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Aufklärungs-Website</strong>Entlastungsbetrag, Leistungen, Vertrauen aufbauen</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Interne App für Begleiter:innen</strong>Dashboard, Kalender, Klient:innen-Übersicht</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Authentifizierung</strong>Login, Rollen, sichere Datenhaltung in Supabase</span>
+            </div>
+            <div class="module">
+              <span class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></span>
+              <span><strong>Barrierefreiheit</strong>Große Schriften, klare Kontraste, intuitive Wege</span>
+            </div>
+          </div>
+          <div class="tech-pills">
+            <span class="pill">Next.js 15</span>
+            <span class="pill">Supabase</span>
+            <span class="pill">Tailwind v4</span>
+            <span class="pill">Resend</span>
+          </div>
+          <div class="demo-actions">
+            <a href="helfende-demo.html" class="demo-btn">Demo öffnen <span class="arr">→</span></a>
+            <a href="https://alltagshilfe-schlangen.de" target="_blank" rel="noopener" class="demo-btn--ghost">Live-Website ansehen <span class="arr">↗</span></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ============================ BANNER ============================ -->
+    <div class="banner" style="margin-top:5rem;">
+      <p>Sie möchten ein eigenes Kundenprojekt umsetzen lassen? Lassen Sie uns über Ihren Engpass sprechen.</p>
+      <a href="kontakt.html" class="btn">Kontaktieren Sie mich <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark"><span>DK</span></span>
+          Daniel Kroh
+        </div>
+        <p>
+          Software-Architekt &amp; Prozess-Optimierer aus Paderborn.
+          <br>Ich übersetze Engpässe in maßgeschneiderte digitale Lösungen.
+        </p>
+      </div>
+      <div>
+        <h4>Sitemap</h4>
+        <ul>
+          <li><a href="about.html">Über mich</a></li>
+          <li><a href="index.html#loesungen">Lösungen</a></li>
+          <li><a href="index.html#referenzen">Referenzen</a></li>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="agb.html">AGB</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Daniel Kroh — Software-Architekt &amp; Prozess-Optimierer</span>
+      <span>Paderborn · Bad&nbsp;Lippspringe · OWL</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="js/nav.js"></script>
+
+</body>
+</html>
