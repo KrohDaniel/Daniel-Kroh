@@ -1448,6 +1448,10 @@ a.footer-contact-row:hover {
   contain: layout paint style;
 }
 
+.showcase-section--alt {
+  background: var(--bg-alt);
+}
+
 .showcase-container {
   max-width: 1300px;
   margin: 0 auto;
