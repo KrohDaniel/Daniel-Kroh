@@ -2,3 +2,7 @@
 node_modules/
 .claude/
 .vercel
+
+# Briefpapier-Vorlagen (lokal, nicht versionieren)
+briefpapier-blanko*.html
+briefpapier-blanko*.pdf
