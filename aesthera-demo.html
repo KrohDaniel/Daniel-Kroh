@@ -90,7 +90,7 @@ img { max-width: 100%; display: block; }
 
 /* Top bar */
 .tour-topbar {
-  position: sticky; top: 0; z-index: 50;
+  position: relative; z-index: 50;
   background: rgba(14,19,32,.78);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -618,32 +618,34 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   pointer-events: none;
 }
-.ba-after-clip {
+/* Vorher-Bild als Overlay, per clip-path auf die linke Hälfte beschnitten
+   (volle Bildbreite → exaktes Alignment mit dem Nachher-Basisbild) */
+.ba-clip {
   position: absolute; inset: 0;
-  width: var(--ba-pos, 50%);
-  overflow: hidden;
-  border-right: 2px solid #fff;
-  box-shadow: 2px 0 12px rgba(0,0,0,.2);
+  clip-path: polygon(0 0, var(--ba-pos, 50%) 0, var(--ba-pos, 50%) 100%, 0 100%);
+}
+/* Durchgehende Trennlinie mit Griff */
+.ba-line {
+  position: absolute; top: 0; bottom: 0;
+  left: var(--ba-pos, 50%);
+  width: 2px; margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,.35);
+  pointer-events: none;
 }
 .ba-handle {
-  position: absolute; top: 50%;
-  left: var(--ba-pos, 50%);
-  transform: translate(-50%,-50%);
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   width: 40px; height: 40px;
   border-radius: 50%;
   background: #fff;
   border: 2px solid var(--accent);
-  display: grid; place-items: center;
+  display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
-  pointer-events: none;
 }
-.ba-handle::before {
-  content: '↔';
-  color: var(--accent);
-  font-size: 1rem; font-weight: 600;
-}
+.ba-handle svg { width: 15px; height: 15px; color: var(--accent); display: block; margin: 0 -2px; }
 .ba-label {
-  position: absolute; top: 1rem;
+  position: absolute; bottom: .75rem;
   padding: .35rem .8rem;
   background: rgba(0,0,0,.5);
   color: #fff;
@@ -1757,25 +1759,34 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="ba-grid">
           <div class="ba-slider" data-ba>
-            <img class="ba-img" src="public/swipe_3_vorher.jpeg" alt="Vorher" loading="lazy">
-            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_3_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <img class="ba-img" src="public/swipe_3_nachher.jpeg" alt="Nachher" loading="lazy" draggable="false">
+            <div class="ba-clip"><img class="ba-img" src="public/swipe_3_vorher.jpeg" alt="Vorher" loading="lazy" draggable="false"></div>
+            <div class="ba-line"><div class="ba-handle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div></div>
             <span class="ba-label before">Vorher</span>
             <span class="ba-label after">Nachher</span>
-            <div class="ba-handle"></div>
           </div>
           <div class="ba-slider" data-ba>
-            <img class="ba-img" src="public/swipe_1_vorher.jpeg" alt="Vorher" loading="lazy">
-            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_1_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <img class="ba-img" src="public/swipe_1_nachher.jpeg" alt="Nachher" loading="lazy" draggable="false">
+            <div class="ba-clip"><img class="ba-img" src="public/swipe_1_vorher.jpeg" alt="Vorher" loading="lazy" draggable="false"></div>
+            <div class="ba-line"><div class="ba-handle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div></div>
             <span class="ba-label before">Vorher</span>
             <span class="ba-label after">Nachher</span>
-            <div class="ba-handle"></div>
           </div>
           <div class="ba-slider" data-ba>
-            <img class="ba-img" src="public/swipe_2_vorher.jpeg" alt="Vorher" loading="lazy">
-            <div class="ba-after-clip"><img class="ba-img" src="public/swipe_2_nachher.jpeg" alt="Nachher" loading="lazy"></div>
+            <img class="ba-img" src="public/swipe_2_nachher.jpeg" alt="Nachher" loading="lazy" draggable="false">
+            <div class="ba-clip"><img class="ba-img" src="public/swipe_2_vorher.jpeg" alt="Vorher" loading="lazy" draggable="false"></div>
+            <div class="ba-line"><div class="ba-handle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div></div>
             <span class="ba-label before">Vorher</span>
             <span class="ba-label after">Nachher</span>
-            <div class="ba-handle"></div>
           </div>
         </div>
       </section>
@@ -2485,23 +2496,24 @@ function toggleFaq(i) {
   items.forEach((el, idx) => el.classList.toggle('open', idx === i && !el.classList.contains('open')));
 }
 
-// Before/After interaction
+// Before/After interaction — analog zur originalen React-Komponente:
+// Drag startet auf dem Slider, läuft über globale Listener weiter (auch
+// außerhalb des Elements) und stoppt erst bei mouseup/touchend.
 function setupBaSliders() {
   document.querySelectorAll('[data-ba]').forEach(el => {
+    let dragging = false;
     const setPos = (clientX) => {
       const rect = el.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width) * 100;
-      const clamped = Math.max(2, Math.min(98, x));
-      el.style.setProperty('--ba-pos', clamped + '%');
+      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+      const pct = Math.max(0, Math.min((x / rect.width) * 100, 100));
+      el.style.setProperty('--ba-pos', pct + '%');
     };
-    let active = false;
-    el.addEventListener('mousedown', e => { active = true; setPos(e.clientX); });
-    el.addEventListener('mousemove', e => { if (active) setPos(e.clientX); });
-    window.addEventListener('mouseup', () => active = false);
-    el.addEventListener('mousemove', e => { if (e.buttons === 0) return; setPos(e.clientX); });
-    el.addEventListener('touchstart', e => setPos(e.touches[0].clientX), {passive:true});
-    el.addEventListener('touchmove',  e => setPos(e.touches[0].clientX), {passive:true});
-    el.addEventListener('click', e => setPos(e.clientX));
+    el.addEventListener('mousedown', e => { e.preventDefault(); dragging = true; setPos(e.clientX); });
+    el.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+    window.addEventListener('mouseup', () => { dragging = false; });
+    window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchend', () => { dragging = false; });
   });
 }
 setupBaSliders();

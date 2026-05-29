@@ -1112,6 +1112,21 @@ a.footer-contact-row:hover {
   contain: layout paint style;
 }
 
+/* Cursor-reaktives Liftoff-Partikelfeld (Canvas-Hintergrund) */
+particle-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;          /* über den Blur-Glows, hinter .hero-container (z-index:1) */
+  display: block;
+  pointer-events: none; /* Klicks/Hover gehen an den Inhalt durch */
+}
+
+particle-field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .hero::before, .hero::after {
   content: '';
   position: absolute;
@@ -1947,4 +1962,118 @@ a.footer-contact-row:hover {
     transform: none !important;
     transition: none !important;
   }
+}
+
+/* =========================================================================
+   Code-Section mit "{ }"-Partikel-Reveal
+   ========================================================================= */
+.brace-section {
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 5vw;
+  min-height: 46rem;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+}
+
+.brace-section brace-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;   /* Klicks gehen an den Inhalt */
+}
+
+.brace-section brace-reveal canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brace-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Text mittig zwischen den Klammern */
+.brace-col {
+  max-width: 34rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.brace-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+  margin: 1.25rem 0 1.5rem;
+}
+
+.brace-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 2rem;
+}
+
+.brace-hint {
+  display: block;
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+@media (max-width: 760px) {
+  .brace-section { min-height: 34rem; padding: 5rem 5vw; }
+  .brace-col { max-width: 28rem; }
+}
+
+/* =========================================================================
+   Icon-Laufband (<icon-marquee>) — endlos scrollend mit Sinus-Welle
+   ========================================================================= */
+.icon-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  padding: 1.5rem 0 2.5rem;
+}
+
+icon-marquee {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 150px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.icon-marquee-track { position: absolute; inset: 0; }
+
+.icon-marquee-chip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+.icon-marquee-chip svg { width: 24px; height: 24px; color: var(--text-1); }
+
+@media (max-width: 760px) {
+  icon-marquee { height: 120px; }
+  .icon-band { padding: 1rem 0 1.75rem; }
 }

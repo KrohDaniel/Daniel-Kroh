@@ -134,6 +134,7 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
+    <particle-field></particle-field>
     <div class="hero-container">
       <div class="hero-grid">
         <div class="hero-text" data-static-anim="slide-left">
@@ -269,6 +270,11 @@
     </div>
   </section>
 
+  <!-- Icon-Laufband mit Sinus-Welle (unter Hero) -->
+  <section class="icon-band" aria-hidden="true">
+    <icon-marquee></icon-marquee>
+  </section>
+
   <!-- Showcase: Referenzen mit Live-Demos -->
   <section class="showcase-section showcase-section--alt" id="referenzen">
     <div class="showcase-container">
@@ -337,7 +343,7 @@
           <div class="ref-phone">
             <div class="ref-phone-frame">
               <div class="ref-phone-screen">
-                <img class="ref-phone-img" src="public/helfende-mobile.png" alt="Helfende Hände — Alltagsbegleitung OWL — Mobile-Ansicht" loading="lazy">
+                <img class="ref-phone-img" src="public/helfende-mobile.webp" alt="Helfende Hände — Alltagsbegleitung OWL — Mobile-Ansicht" loading="lazy">
               </div>
             </div>
             <span class="ref-phone-tag">Live · Fullstack-App</span>
@@ -369,7 +375,21 @@
     </div>
   </section>
 
-  <!-- Section 3: Referenzen & Trust -->
+  <!-- Code-Section: Partikel formen beim Hovern eine "{ }"-Klammer um den Text -->
+  <section class="brace-section" id="entwicklung">
+    <brace-reveal aria-hidden="true" shape="braces" trigger="section" ambient="1"></brace-reveal>
+    <div class="brace-inner">
+      <div class="brace-col" data-static-anim="fade-up">
+        <span class="section-label">Entwicklung</span>
+        <h2 class="brace-h2">Sauberer Code,<br><span class="grad-text">der mitwächst</span></h2>
+        <p class="brace-lead">Wartbare Architektur statt schneller Bastellösungen. Software, die sich erweitern lässt, ohne dass jede Änderung zum Risiko wird.</p>
+        <a href="leistungen.html" class="btn">Leistungen ansehen <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section "Architektur, die Ergebnisse liefert" (Trust) — ausgeblendet -->
+  <!--
   <section class="static-section" id="trust">
     <div class="static-grid static-grid--img-right">
       <div class="static-text" data-static-anim="slide-left">
@@ -457,6 +477,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- Über mich -->
   <section class="static-section static-section--alt" id="about">
@@ -795,6 +816,9 @@
     </div>
   </footer>
 
+  <script defer src="js/particle-field.js"></script>
+  <script defer src="js/brace-reveal.js"></script>
+  <script defer src="js/icon-marquee.js"></script>
   <script defer src="js/config.js"></script>
   <script defer src="js/nav.js"></script>
   <script defer src="js/reveal.js"></script>
