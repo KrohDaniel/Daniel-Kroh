@@ -69,6 +69,25 @@ img {
   height: auto;
 }
 
+/* ---- KEYBOARD-FOKUS (Barrierefreiheit, WCAG 2.4.7) ----
+   Sichtbarer Ring nur bei Tastatur-Navigation via :focus-visible.
+   Maus-Klicks bleiben unverändert (kein Ring). */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid var(--cyan-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Fallback für Browser ohne :focus-visible: Standard-Outline sichtbar lassen */
+a:focus,
+button:focus,
+summary:focus {
+  outline-color: var(--cyan-deep);
+}
+
 /* ---- HEADER ---- */
 .site-header {
   position: fixed;
@@ -304,10 +323,10 @@ img {
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 3rem;
-  max-width: 880px;
+  margin: 3rem auto 0;
+  max-width: 1100px;
 }
 
 .testimonial-card {
@@ -371,7 +390,8 @@ img {
 
 @media (max-width: 1024px) {
   .testimonials-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 760px;
   }
 }
 
