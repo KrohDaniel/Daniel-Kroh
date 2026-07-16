@@ -55,6 +55,10 @@
       this.kind = this.getAttribute('shape') || 'braces';
       // ohne "color"-Attribut: bunte Palette wie im Hero; sonst Einzelfarbe
       this.shapeColor = this.getAttribute('color') || null;
+      // eigene Farbpalette (Komma-Liste) überschreibt die Default-Palette
+      this.colorList = (this.getAttribute('colors') || '')
+        .split(',').map(s => s.trim()).filter(Boolean);
+      if (!this.colorList.length) this.colorList = null;
       this.ambientFactor = this.hasAttribute('ambient') ? parseFloat(this.getAttribute('ambient')) : 1;
       this.trigger = this.getAttribute('trigger') || 'left';
       this.fadeIn = this.getAttribute('fade') === 'in';
@@ -206,7 +210,7 @@
         tx: t.x, ty: t.y,
         r: rand(1.1, 2.2),
         phase: rand(0, TAU), freq: rand(0.3, 0.8),
-        color: this.shapeColor || pick(PALETTE),
+        color: this.shapeColor || pick(this.colorList || PALETTE),
       }));
 
       const n = this.ambientFactor > 0
@@ -217,7 +221,7 @@
         phase: rand(0, TAU), freq: rand(0.2, 0.6),
         amp: rand(3, 10),
         alpha: rand(0.18, 0.5),
-        color: this.shapeColor || pick(PALETTE),
+        color: this.shapeColor || pick(this.colorList || PALETTE),
       }));
     }
 

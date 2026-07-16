@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Visitenkarte (Druck) — Daniel Kroh</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cyan:#00b8e6; --cyan-deep:#00a3cc; --amber:#e89610; --gold:#d4a017;
+    --muted:#8a93a6; --soft:#c7cede;
+    --grad:linear-gradient(135deg,#00b8e6,#e89610);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  @page{ size:A4; margin:0; }
+  html,body{ background:#fff; }
+  body{
+    font-family:var(--font-body);
+    display:flex; flex-direction:column; align-items:center; gap:10mm;
+    padding:22mm 0;
+  }
+  .cap{ font-family:var(--font-display); font-size:9pt; letter-spacing:.22em; text-transform:uppercase; color:#9aa3b2; margin-bottom:-4mm; }
+
+  /* Karte: exakt 85×55 mm */
+  .face{
+    width:85mm; height:55mm;
+    position:relative; overflow:hidden;
+    border-radius:4mm;
+    background:linear-gradient(160deg,#10172a 0%,#0b1020 60%,#090d18 100%);
+    box-shadow:0 6mm 16mm rgba(10,14,26,.28);
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .face::after{ content:''; position:absolute; left:0; right:0; top:0; height:1mm; background:var(--grad); z-index:4; }
+
+  /* Vorderseite */
+  .face-front{ display:grid; place-items:center; }
+  .face-front brace-reveal{ position:absolute; inset:0; z-index:0; display:block; }
+  .front-content{ position:relative; z-index:2; text-align:center; padding:0 8mm; }
+  .front-label{ font-family:var(--font-display); font-weight:600; font-size:7pt; letter-spacing:.32em; text-transform:uppercase; color:var(--cyan); margin-bottom:2.5mm; }
+  .front-name{ font-family:var(--font-display); font-weight:700; font-size:26pt; line-height:1.02; letter-spacing:-.02em; color:#fff; }
+  .front-name .gr{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .front-role{ margin-top:2.5mm; font-size:8.5pt; color:var(--muted); }
+  .front-mark{
+    position:absolute; z-index:3; left:5mm; top:5mm; width:10mm; height:10mm; border-radius:2.5mm;
+    display:grid; place-items:center; font-family:var(--font-display); font-weight:700; font-size:9pt; letter-spacing:.06em;
+    color:var(--cyan); border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(135deg,rgba(0,184,230,.16),rgba(232,150,16,.10));
+  }
+
+  /* Rückseite */
+  .face-back{ padding:7mm 8mm; display:flex; flex-direction:column; justify-content:center; }
+  .back-bar{ display:flex; align-items:center; gap:1.6mm; margin-bottom:5mm; }
+  .back-bar .dot{ width:2.4mm; height:2.4mm; border-radius:50%; }
+  .back-bar .dot:nth-child(1){ background:#ff5f57; }
+  .back-bar .dot:nth-child(2){ background:#febc2e; }
+  .back-bar .dot:nth-child(3){ background:#28c840; }
+  .back-bar .file{ margin-left:2mm; font-family:var(--font-mono); font-size:7.5pt; color:var(--muted); }
+  pre.code{ font-family:var(--font-mono); font-size:9.5pt; line-height:1.7; color:var(--soft); white-space:pre; }
+  .code .kw{ color:var(--cyan); } .code .var{ color:#fff; } .code .punc{ color:var(--muted); }
+  .code .key{ color:var(--cyan-deep); } .code .str{ color:var(--amber); }
+  .code a.str{ color:var(--amber); text-decoration:none; }
+</style>
+</head>
+<body>
+
+  <div class="cap">Vorderseite</div>
+  <div class="face face-front">
+    <brace-reveal aria-hidden="true" shape="braces" trigger="section"
+      colors="#00b8e6,#00a3cc,#e89610,#d4a017,#00b15c" ambient="0.8" speed="0.9"></brace-reveal>
+    <div class="front-mark">DK</div>
+    <div class="front-content">
+      <div class="front-label">Software-Architektur</div>
+      <div class="front-name">Daniel <span class="gr">Kroh</span></div>
+      <div class="front-role">Software-Architekt · Prozess-Optimierung · OWL</div>
+    </div>
+  </div>
+
+  <div class="cap">Rückseite</div>
+  <div class="face face-back">
+    <div class="back-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="file">kontakt.ts</span></div>
+<pre class="code"><span class="kw">const</span> <span class="var">kontakt</span> <span class="punc">=</span> {
+  <span class="key">name</span><span class="punc">:</span>  <span class="str">"Daniel Kroh"</span><span class="punc">,</span>
+  <span class="key">rolle</span><span class="punc">:</span> <span class="str">"Software-Architekt"</span><span class="punc">,</span>
+  <span class="key">mail</span><span class="punc">:</span>  <a class="str" href="mailto:info@kroh-daniel.de">"info@kroh-daniel.de"</a><span class="punc">,</span>
+  <span class="key">tel</span><span class="punc">:</span>   <a class="str" href="tel:+4917641045997">"+49 176 41045997"</a><span class="punc">,</span>
+  <span class="key">web</span><span class="punc">:</span>   <a class="str" href="https://kroh-daniel.de">"kroh-daniel.de"</a><span class="punc">,</span>
+  <span class="key">ort</span><span class="punc">:</span>   <span class="str">"Bad Lippspringe · 33175"</span><span class="punc">,</span>
+}<span class="punc">;</span></pre>
+  </div>
+
+  <script src="js/brace-reveal.js"></script>
+  <script>
+    // Klammern für den Druck fest formen (kein Hover im PDF)
+    window.addEventListener('load', () => {
+      const br = document.querySelector('brace-reveal');
+      const force = () => { if (br) { br.reveal = 1; br.revealTarget = 1; } };
+      force(); setInterval(force, 60);
+    });
+  </script>
+</body>
+</html>
