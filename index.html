@@ -14,6 +14,12 @@
   <meta property="og:url" content="https://kroh-daniel.de/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Daniel Kroh">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daniel Kroh — Software-Architekt & Prozess-Optimierer">
+  <meta name="twitter:description" content="Maßgeschneiderte Software für mittelständische Unternehmen. Digitale Prozesse, Web-Anwendungen und KI-Lösungen aus OWL.">
+  <meta name="twitter:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -25,6 +31,7 @@
   <link rel="icon" type="image/x-icon" href="public/favicon/favicon.ico">
   <link rel="manifest" href="public/favicon/site.webmanifest">
   <link rel="canonical" href="https://kroh-daniel.de/">
+  <link rel="alternate" type="text/markdown" href="/index.md" title="Markdown-Version">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/cookie-banner.css">
   <!-- Umami Analytics — DSGVO-konform -->
@@ -32,74 +39,297 @@
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "ProfessionalService",
-        "@id": "https://kroh-daniel.de/#business",
-        "name": "Daniel Kroh — Software-Architektur & Prozess-Optimierung",
-        "url": "https://kroh-daniel.de",
-        "logo": "https://kroh-daniel.de/media/logo_transparent.png",
-        "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
-        "description": "Maßgeschneiderte Software für mittelständische Unternehmen in Paderborn, Bad Lippspringe und OWL. Prozessautomatisierung, Web-Anwendungen und KI-Integration aus einer Hand.",
-        "telephone": "+4917641045997",
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://kroh-daniel.de/#business",
+      "name": "Daniel Kroh — Software-Architektur & Prozess-Optimierung",
+      "alternateName": [
+        "Daniel Kroh — Digitale Lösungen",
+        "Daniel Kroh Digital"
+      ],
+      "url": "https://kroh-daniel.de/",
+      "logo": "https://kroh-daniel.de/media/logo_transparent.png",
+      "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+      "description": "Daniel Kroh entwickelt maßgeschneiderte Software für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe: Prozessautomatisierung, Web-Anwendungen und KI-Integration. Sitz in Bad Lippspringe bei Paderborn, Zusammenarbeit vor Ort in OWL und remote deutschlandweit.",
+      "foundingDate": "2026-03",
+      "telephone": "+49 176 41045997",
+      "email": "info@kroh-daniel.de",
+      "priceRange": "ab 500 €",
+      "currenciesAccepted": "EUR",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mersmannstraße 15",
+        "addressLocality": "Bad Lippspringe",
+        "postalCode": "33175",
+        "addressRegion": "Nordrhein-Westfalen",
+        "addressCountry": "DE"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.7833,
+        "longitude": 8.8167
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Ostwestfalen-Lippe"
+        },
+        {
+          "@type": "City",
+          "name": "Paderborn"
+        },
+        {
+          "@type": "City",
+          "name": "Bad Lippspringe"
+        },
+        {
+          "@type": "City",
+          "name": "Bielefeld"
+        },
+        {
+          "@type": "City",
+          "name": "Detmold"
+        },
+        {
+          "@type": "City",
+          "name": "Gütersloh"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ],
+      "knowsAbout": [
+        "Software-Architektur",
+        "Prozessautomatisierung",
+        "Workflow-Automatisierung",
+        "Web-Anwendungen",
+        "KI-Integration",
+        "Large Language Models",
+        "Wirtschaftsinformatik",
+        "Test-Automatisierung",
+        "Local SEO",
+        "Generative Engine Optimization",
+        "Next.js",
+        "Supabase"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+49 176 41045997",
         "email": "info@kroh-daniel.de",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Bad Lippspringe",
-          "addressLocality": "Bad Lippspringe",
-          "postalCode": "33175",
-          "addressRegion": "NRW",
-          "addressCountry": "DE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 51.7833,
-          "longitude": 8.8167
-        },
-        "areaServed": [
-          { "@type": "City", "name": "Paderborn" },
-          { "@type": "City", "name": "Bad Lippspringe" },
-          { "@type": "City", "name": "Bielefeld" },
-          { "@type": "City", "name": "Detmold" },
-          { "@type": "City", "name": "Gütersloh" }
+        "availableLanguage": [
+          "de",
+          "en"
         ],
-        "serviceType": ["Software-Architektur", "Prozessautomatisierung", "Web-Anwendungen", "KI-Integration"],
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        },
-        "sameAs": [
-          "https://www.linkedin.com/in/daniel-kroh-098047333/",
-          "https://www.instagram.com/daniel_kroh_/"
-        ],
-        "founder": { "@id": "https://kroh-daniel.de/#person" }
+        "areaServed": "DE"
       },
-      {
-        "@type": "Person",
-        "@id": "https://kroh-daniel.de/#person",
-        "name": "Daniel Kroh",
-        "jobTitle": "Software-Architekt & Prozess-Optimierer",
-        "url": "https://kroh-daniel.de",
-        "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
-        "sameAs": [
-          "https://www.linkedin.com/in/daniel-kroh-098047333/",
-          "https://www.instagram.com/daniel_kroh_/"
-        ],
-        "worksFor": { "@id": "https://kroh-daniel.de/#business" }
+      "hasOfferCatalog": {
+        "@id": "https://kroh-daniel.de/leistungen#katalog"
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://kroh-daniel.de/#website",
-        "name": "Daniel Kroh",
-        "url": "https://kroh-daniel.de",
-        "publisher": { "@id": "https://kroh-daniel.de/#person" }
+      "sameAs": [
+        "https://www.linkedin.com/in/daniel-kroh-098047333/",
+        "https://github.com/KrohDaniel",
+        "https://www.instagram.com/daniel_kroh_/"
+      ],
+      "founder": {
+        "@id": "https://kroh-daniel.de/#person"
       }
-    ]
-  }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://kroh-daniel.de/#person",
+      "name": "Daniel Kroh",
+      "givenName": "Daniel",
+      "familyName": "Kroh",
+      "jobTitle": "Software-Architekt & Prozess-Optimierer",
+      "description": "Wirtschaftsinformatiker (B.Sc., FH Münster) und Master-Student Informatik an der HSBI Bielefeld. Zuvor Werkstudent und Bachelorand im IT-Bereich der Atruvia AG (Test-Automatisierung für Banking-Anwendungen). Seit März 2026 selbstständig mit Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.",
+      "url": "https://kroh-daniel.de/about",
+      "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+      "email": "info@kroh-daniel.de",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Bad Lippspringe, Nordrhein-Westfalen"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "FH Münster",
+          "sameAs": "https://www.fh-muenster.de/"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Hochschule Bielefeld (HSBI)",
+          "sameAs": "https://www.hsbi.de/"
+        }
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "Bachelor of Science Wirtschaftsinformatik",
+        "recognizedBy": {
+          "@type": "CollegeOrUniversity",
+          "name": "FH Münster"
+        }
+      },
+      "knowsAbout": [
+        "Software-Architektur",
+        "Prozessautomatisierung",
+        "Workflow-Automatisierung",
+        "Web-Anwendungen",
+        "KI-Integration",
+        "Large Language Models",
+        "Wirtschaftsinformatik",
+        "Test-Automatisierung",
+        "Local SEO",
+        "Generative Engine Optimization",
+        "Next.js",
+        "Supabase"
+      ],
+      "knowsLanguage": [
+        "de",
+        "en"
+      ],
+      "worksFor": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/daniel-kroh-098047333/",
+        "https://github.com/KrohDaniel",
+        "https://www.instagram.com/daniel_kroh_/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kroh-daniel.de/#website",
+      "name": "Daniel Kroh",
+      "url": "https://kroh-daniel.de/",
+      "inLanguage": "de-DE",
+      "publisher": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "about": {
+        "@id": "https://kroh-daniel.de/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://kroh-daniel.de/#webpage",
+      "url": "https://kroh-daniel.de/",
+      "name": "Daniel Kroh — Software-Architekt & Prozess-Optimierer für den Mittelstand in OWL",
+      "description": "Maßgeschneiderte Software für mittelständische Unternehmen: Prozessautomatisierung, Web-Anwendungen und KI-Integration aus Bad Lippspringe für OWL.",
+      "inLanguage": "de-DE",
+      "isPartOf": {
+        "@id": "https://kroh-daniel.de/#website"
+      },
+      "dateModified": "2026-10-14",
+      "about": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "mainEntity": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "primaryImageOfPage": "https://kroh-daniel.de/public/portrait_opt.jpg",
+      "citation": [
+        {
+          "@type": "Report",
+          "name": "KfW-Digitalisierungsbericht Mittelstand 2025",
+          "publisher": {
+            "@type": "Organization",
+            "name": "KfW Research"
+          },
+          "url": "https://www.kfw.de/%C3%9Cber-die-KfW/Newsroom/Aktuelles/News-Details_891136.html"
+        },
+        {
+          "@type": "Report",
+          "name": "Bitkom Studienbericht Künstliche Intelligenz",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Bitkom e.V."
+          },
+          "url": "https://www.bitkom.org/sites/main/files/2026-02/bitkom-studienbericht-ki.pdf"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://kroh-daniel.de/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was kostet ein typisches Projekt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Keine Festpreis-Pakete. Kleinere Anpassungen und Web-Aufgaben starten ab 500 €, abhängig von Aufwand und Größe. Fullstack-Projekte mit Website plus Web-App beginnen ab 2 000 €. Jedes Angebot kommt nach dem Audit mit transparenter Aufwandsschätzung. Sie sehen vorher, was Sie bekommen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie lange dauert ein typisches Projekt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "4 bis 12 Wochen für die meisten Vorhaben. Kleine Anpassungen sind oft binnen Tagen live, größere Fullstack-Plattformen liegen am oberen Ende. Konkrete Timeline immer im Angebot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wie steht es um DSGVO und Datenschutz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lösungen werden DSGVO-konform entwickelt und abgesichert. Auf Wunsch wird der Datenschutz vertraglich über eine Geheimhaltungserklärung (NDA) zusätzlich gesichert. Hosting in der EU, Zugriffe protokolliert, Datenflüsse minimal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was, wenn ich keinen IT-Experten im Haus habe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kein Problem. Die Kommunikation läuft direkt mit Ihnen, ohne Fachchinesisch. Kurze Aufgaben und Änderungen werden über einen Stundensatz von 70 € abgerechnet. Bei sehr kleinen Anpassungen fallen keine Kosten an."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was unterscheidet Sie von Agenturen oder Freelancern?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Klassische Agenturen verteilen Projekte auf Teams mit vielen Abstimmungsschleifen. Hier ein Ansprechpartner, kein Stille-Post. Durch Agentic Coding und moderne Tools liefere ich erste Ergebnisse oft schon nach wenigen Tagen. Sie behalten Code und Daten, kein Vendor-Lock-in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Was ist mit Support nach dem Launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "14 Tage kostenloser Support nach Fertigstellung für Bugs und kleine Änderungen. Wer dauerhafte Betreuung möchte, kann einen Wartungsvertrag abschließen: feste Reaktionszeiten, planbare Kosten, weiterentwickelbar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Für welche Unternehmen und Regionen arbeiten Sie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe, vor allem in Paderborn, Bad Lippspringe, Bielefeld, Detmold und Gütersloh. Termine vor Ort in OWL sind möglich. Die Zusammenarbeit funktioniert genauso remote mit Unternehmen in ganz Deutschland."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 
@@ -111,10 +341,10 @@
       <a href="#" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo"
           class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
       <div class="nav-links">
-        <a href="about.html">Über mich</a>
-        <a href="leistungen.html">Leistungen</a>
-        <a href="demo.html">Demo</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/about">Über mich</a>
+        <a href="/leistungen">Leistungen</a>
+        <a href="/demo">Demo</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -125,10 +355,10 @@
   <!-- Mobile Overlay Nav -->
   <div class="mobile-nav" id="mobile-nav">
     <nav class="mobile-nav-links">
-      <a href="about.html">Über mich</a>
-      <a href="leistungen.html">Leistungen</a>
-      <a href="demo.html">Demo</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="/about">Über mich</a>
+      <a href="/leistungen">Leistungen</a>
+      <a href="/demo">Demo</a>
+      <a href="/kontakt">Kontakt</a>
     </nav>
   </div>
 
@@ -147,7 +377,7 @@
           </h1>
           <p class="hero-sub">Maßgeschneiderte Software für mittelständische Unternehmen: digitale Prozesse, Web-Anwendungen und KI-Lösungen aus Bad Lippspringe für OWL.</p>
           <div class="hero-actions">
-            <a href="kontakt.html" class="btn">Kontaktieren Sie mich <span class="arr">→</span></a>
+            <a href="/kontakt" class="btn">Kontaktieren Sie mich <span class="arr">→</span></a>
             <a href="#services" class="btn btn--outline">Lösungen ansehen</a>
           </div>
           <div class="availability">
@@ -306,7 +536,7 @@
               <span class="pill">Local SEO</span>
             </div>
             <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
-              <a href="aesthera-demo.html" class="ref-link">Demo öffnen <span>→</span></a>
+              <a href="/aesthera-demo" class="ref-link">Demo öffnen <span>→</span></a>
               <a href="https://permanent-makeup-paderborn.de" target="_blank" rel="noopener" class="ref-link ref-link--secondary">Live <span>↗</span></a>
             </div>
           </div>
@@ -332,7 +562,7 @@
               <span class="pill">Local SEO</span>
             </div>
             <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
-              <a href="erholungs-demo.html" class="ref-link">Demo öffnen <span>→</span></a>
+              <a href="/erholungs-demo" class="ref-link">Demo öffnen <span>→</span></a>
               <a href="https://erholungs-apartments.de" target="_blank" rel="noopener" class="ref-link ref-link--secondary">Live <span>↗</span></a>
             </div>
           </div>
@@ -358,7 +588,7 @@
               <span class="pill">Tailwind v4</span>
             </div>
             <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
-              <a href="helfende-demo.html" class="ref-link">Demo öffnen <span>→</span></a>
+              <a href="/helfende-demo" class="ref-link">Demo öffnen <span>→</span></a>
               <a href="https://alltagshilfe-schlangen.de" target="_blank" rel="noopener" class="ref-link ref-link--secondary">Live <span>↗</span></a>
             </div>
           </div>
@@ -369,7 +599,7 @@
       <!-- Referenz-Banner -->
       <div class="referenz-banner" data-static-anim="slide-left" style="margin-top: 4rem;">
         <p class="referenz-banner-text">Auch in Ihrem Unternehmen liegt ein Prozess-Engpass? Lassen Sie uns gemeinsam analysieren, wo sich die größte Effizienz heben lässt.</p>
-        <a href="kontakt.html" class="cta-button cta-button--small">Prozess-Audit anfragen</a>
+        <a href="/kontakt" class="cta-button cta-button--small">Prozess-Audit anfragen</a>
       </div>
 
     </div>
@@ -383,7 +613,7 @@
         <span class="section-label">Entwicklung</span>
         <h2 class="brace-h2">Sauberer Code,<br><span class="grad-text">der mitwächst</span></h2>
         <p class="brace-lead">Wartbare Architektur statt schneller Bastellösungen. Software, die sich erweitern lässt, ohne dass jede Änderung zum Risiko wird.</p>
-        <a href="leistungen.html" class="btn">Leistungen ansehen <span class="arr">→</span></a>
+        <a href="/leistungen" class="btn">Leistungen ansehen <span class="arr">→</span></a>
       </div>
     </div>
   </section>
@@ -412,7 +642,7 @@
           </div>
         </div>
         <p class="static-body static-body--small">Persönlich. Strategisch. Mit Verantwortung, vom ersten Audit bis zum laufenden Betrieb.</p>
-        <a href="kontakt.html" class="cta-button" id="contact">Prozess-Audit anfragen</a>
+        <a href="/kontakt" class="cta-button" id="contact">Prozess-Audit anfragen</a>
       </div>
       <div class="static-image" data-static-anim="slide-right">
         <div class="hero-art" role="img" aria-label="Software-Architektur Diagramm">
@@ -484,8 +714,8 @@
     <div class="static-grid static-grid--img-left">
       <div class="static-image" data-static-anim="slide-left">
         <div class="static-image-wrap">
-          <a href="about.html">
-            <img src="public/office_daniel_opt.webp" alt="Daniel Kroh am Arbeitsplatz — Webentwicklung & KI-Lösungen" width="1200" height="737" loading="lazy" />
+          <a href="/about">
+            <img src="public/office_daniel_opt.webp" alt="Daniel Kroh, Software-Architekt aus Bad Lippspringe, am Arbeitsplatz" width="1200" height="737" loading="lazy" />
           </a>
           <div class="static-image-glow static-image-glow--cyan"></div>
         </div>
@@ -496,7 +726,7 @@
         <p class="static-body">Ich bin Daniel, Wirtschaftsinformatiker aus Bad Lippspringe. Als Software-Architekt
           entwickle ich maßgeschneiderte digitale Lösungen, von Prozessautomatisierung über Web-Anwendungen bis zur
           KI-Integration. Mein Fokus: Engpässe erkennen, Architektur entwerfen, Unternehmen entlasten.</p>
-        <a href="about.html" class="static-link">Mehr erfahren &rarr;</a>
+        <a href="/about" class="static-link">Mehr erfahren &rarr;</a>
       </div>
     </div>
   </section>
@@ -614,7 +844,7 @@
             Architektur-Beratung & langfristige Begleitung
           </li>
         </ul>
-        <a href="leistungen.html" class="static-link">Alle Lösungen &rarr;</a>
+        <a href="/leistungen" class="static-link">Alle Lösungen &rarr;</a>
       </div>
     </div>
   </section>
@@ -677,6 +907,26 @@
   </section>
 
   <!-- FAQ -->
+  <section class="facts-section" id="auf-einen-blick">
+    <div class="faq-container">
+      <span class="section-label">Auf einen Blick</span>
+      <h2 class="faq-heading">Daniel Kroh <span class="heading-accent">in Kürze</span></h2>
+      <p class="facts-lead">Daniel Kroh ist Software-Architekt und Wirtschaftsinformatiker (B.Sc.) aus Bad Lippspringe bei Paderborn. Seit März 2026 entwickelt er maßgeschneiderte Software für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe: Prozessautomatisierung, Web-Anwendungen und KI-Integration. Jedes Projekt beginnt mit einem kostenfreien Prozess-Audit von 15 Minuten. Code und Daten gehören anschließend dem Auftraggeber.</p>
+
+      <dl class="facts-list">
+        <div class="facts-row"><dt>Leistungen</dt><dd>Prozessautomatisierung, Web-Anwendungen, KI-Integration, Architektur-Beratung</dd></div>
+        <div class="facts-row"><dt>Region</dt><dd>Paderborn, Bad Lippspringe, Bielefeld, Detmold, Gütersloh und ganz OWL, remote deutschlandweit</dd></div>
+        <div class="facts-row"><dt>Richtwerte</dt><dd>Anpassungen ab 500&nbsp;€, Fullstack-Projekte ab 2.000&nbsp;€, Stundensatz 70&nbsp;€</dd></div>
+        <div class="facts-row"><dt>Projektdauer</dt><dd>meist 4 bis 12 Wochen, kleine Anpassungen oft innerhalb weniger Tage</dd></div>
+        <div class="facts-row"><dt>Referenzen</dt><dd>Kosmetikstudio in Paderborn, Ferienwohnungen in Bad Lippspringe, Alltagsbegleitung in OWL (<a href="/demo">Live-Demos</a>)</dd></div>
+        <div class="facts-row"><dt>Ausbildung</dt><dd>B.Sc. Wirtschaftsinformatik (FH Münster), M.Sc. Informatik (HSBI Bielefeld, laufend), Praxis im IT-Bereich der Atruvia AG</dd></div>
+      </dl>
+
+      <p class="facts-context">Laut KfW-Digitalisierungsbericht haben zuletzt nur <strong>30&nbsp;% der mittelständischen Unternehmen</strong> Digitalisierungsprojekte durchgeführt (<a href="https://www.kfw.de/%C3%9Cber-die-KfW/Newsroom/Aktuelles/News-Details_891136.html" target="_blank" rel="noopener">KfW Research, April 2026</a>). Gleichzeitig setzen bereits <strong>36&nbsp;% der Unternehmen</strong> in Deutschland Künstliche Intelligenz ein, fast doppelt so viele wie ein Jahr zuvor (<a href="https://www.bitkom.org/sites/main/files/2026-02/bitkom-studienbericht-ki.pdf" target="_blank" rel="noopener">Bitkom, Befragung von 604 Unternehmen ab 20 Beschäftigten</a>). Der Bedarf ist also erkannt, an der Umsetzung hapert es oft. Genau dort setzt das Prozess-Audit an.</p>
+      <p class="facts-updated">Stand: <time datetime="2026-10">Oktober 2026</time></p>
+    </div>
+  </section>
+
   <section class="faq-section" id="faq">
     <div class="faq-container">
       <span class="section-label">Häufige Fragen</span>
@@ -734,7 +984,7 @@
 
         <details class="faq-item">
           <summary class="faq-question">
-            Wie unterscheidest du dich von Agenturen oder Freelancern?
+            Was unterscheidet Sie von Agenturen oder Freelancern?
             <span class="faq-chevron" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </span>
@@ -755,6 +1005,18 @@
             <p><strong>14 Tage kostenloser Support</strong> nach Fertigstellung für Bugs und kleine Änderungen. Wer dauerhafte Betreuung möchte, kann einen <strong>Wartungsvertrag</strong> abschließen: feste Reaktionszeiten, planbare Kosten, weiterentwickelbar.</p>
           </div>
         </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            Für welche Unternehmen und Regionen arbeiten Sie?
+            <span class="faq-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>Für <strong>kleine und mittelständische Unternehmen in Ostwestfalen-Lippe</strong>, vor allem in Paderborn, Bad Lippspringe, Bielefeld, Detmold und Gütersloh. Termine vor Ort in OWL sind möglich. Die Zusammenarbeit funktioniert genauso <strong>remote mit Unternehmen in ganz Deutschland</strong>.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -764,7 +1026,7 @@
     <div class="home-cta-inner">
       <h2 class="home-cta-heading">Wo liegt Ihr <span class="heading-accent">Engpass?</span></h2>
       <p class="home-cta-text">Im Prozess-Audit analysieren wir gemeinsam, wo manuelle Prozesse, veraltete Systeme oder fehlende Automatisierung Ihr Unternehmen ausbremsen. Strukturiert, in 15 Minuten.</p>
-      <a href="kontakt.html" class="cta-button">Prozess-Audit anfragen</a>
+      <a href="/kontakt" class="cta-button">Prozess-Audit anfragen</a>
     </div>
   </section>
 
@@ -772,7 +1034,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand-col">
-        <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
+        <a href="/" class="footer-logo">Daniel <span>Kroh</span></a>
         <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -791,21 +1053,21 @@
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Lösungen</span>
-        <a href="leistungen.html#leistungen">Prozessautomatisierung</a>
-        <a href="leistungen.html#leistungen">Web-Anwendungen</a>
-        <a href="leistungen.html#leistungen">KI-Integration</a>
-        <a href="leistungen.html#leistungen">Architektur-Beratung</a>
+        <a href="/leistungen#leistungen">Prozessautomatisierung</a>
+        <a href="/leistungen#leistungen">Web-Anwendungen</a>
+        <a href="/leistungen#leistungen">KI-Integration</a>
+        <a href="/leistungen#leistungen">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
-        <a href="about.html">Über Daniel Kroh</a>
-        <a href="kontakt.html">Kontakt & Prozess-Audit</a>
+        <a href="/about">Über Daniel Kroh</a>
+        <a href="/kontakt">Kontakt & Prozess-Audit</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="agb.html">AGB</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/agb">AGB</a>
       </div>
     </div>
     <div class="footer-bottom">

@@ -1,0 +1,292 @@
+# Daniel Kroh — vollständige Website-Inhalte (Markdown)
+
+> Alle Kernseiten von https://kroh-daniel.de in einer Datei, aufbereitet für KI-Assistenten und Suchsysteme. Kurzüberblick: https://kroh-daniel.de/llms.txt
+
+Stand: 14.10.2026
+
+---
+
+## Daniel Kroh — Software-Architekt & Prozess-Optimierer für den Mittelstand in OWL
+
+> Daniel Kroh entwickelt maßgeschneiderte Software für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe (OWL): Prozessautomatisierung, Web-Anwendungen und KI-Integration. Sitz in Bad Lippspringe bei Paderborn, Zusammenarbeit vor Ort in OWL und remote in ganz Deutschland.
+
+Quelle: https://kroh-daniel.de/ · Stand: 14.10.2026
+
+### Auf einen Blick
+
+- **Wer:** Daniel Kroh, Wirtschaftsinformatiker (B.Sc., FH Münster), Master-Student Informatik an der HSBI Bielefeld, seit März 2026 selbstständig.
+- **Was:** Software-Architektur, Prozessautomatisierung, Web-Anwendungen, KI-Integration und Architektur-Beratung.
+- **Für wen:** Kleine und mittelständische Unternehmen, deren Wachstum durch manuelle Prozesse, veraltete Systeme oder fehlende Automatisierung gebremst wird.
+- **Wo:** Bad Lippspringe, Paderborn, Bielefeld, Detmold, Gütersloh und ganz OWL. Remote deutschlandweit.
+- **Einstieg:** Kostenfreies Prozess-Audit (15 Minuten), danach ein Architektur-Konzept mit transparenter Aufwandsschätzung.
+- **Preise:** Keine Festpreis-Pakete. Kleinere Anpassungen ab 500 €, Fullstack-Projekte (Website plus Web-App) ab 2.000 €, Stundensatz 70 €.
+- **Kontakt:** info@kroh-daniel.de · +49 176 410 45 997
+
+### Ausgangslage im Mittelstand
+
+Laut KfW-Digitalisierungsbericht haben zuletzt nur 30 % der mittelständischen Unternehmen in Deutschland Digitalisierungsprojekte durchgeführt ([KfW Research, Meldung vom 23.04.2026](https://www.kfw.de/%C3%9Cber-die-KfW/Newsroom/Aktuelles/News-Details_891136.html)). Gleichzeitig setzen bereits 36 % der Unternehmen ab 20 Beschäftigten Künstliche Intelligenz ein, fast doppelt so viele wie im Vorjahr mit 20 % ([Bitkom, Befragung von 604 Unternehmen](https://www.bitkom.org/sites/main/files/2026-02/bitkom-studienbericht-ki.pdf)). Der Bedarf ist erkannt, an der Umsetzung hapert es oft. Hier setzt das Prozess-Audit von Daniel Kroh an.
+
+### Erfolgsgeschichten
+
+#### aesthéra — Permanent Make-Up, Paderborn
+
+Local-SEO-Website mit digitalem Kundenformular, Admin-Dashboard und KI-gestütztem Newsletter-Tool. Ergebnis: weniger Anrufe, vorqualifizierte Buchungen. Technik: Next.js, Prisma, Local SEO. Live: https://permanent-makeup-paderborn.de
+
+#### Erholungs Apartments, Bad Lippspringe
+
+Buchungsplattform mit Verfügbarkeitsprüfung und integriertem Massage-Angebot, gezielt positioniert im Umfeld der Westfalen Therme. Live: https://erholungs-apartments.de
+
+#### Helfende Hände — Alltagsbegleitung OWL
+
+Fullstack-Plattform mit öffentlicher Aufklärungsseite zum Entlastungsbetrag (§ 45b SGB XI) und interner, barrierefreier App für das Team. Technik: Next.js 15, Supabase Auth, Tailwind v4. Live: https://alltagshilfe-schlangen.de
+
+Interaktive Demos aller Projekte: https://kroh-daniel.de/demo
+
+### Lösungsbereiche
+
+1. **Prozessautomatisierung & Workflow-Optimierung**: manuelle Routinen, Excel-Listen und doppelte Datenpflege durch automatisierte Workflows ersetzen.
+2. **Web-Anwendungen & individuelle Plattformen**: maßgeschneiderte Portale und Websites mit eigener Geschäftslogik.
+3. **KI-Integration als Effizienzwerkzeug**: Large Language Models gezielt dort einsetzen, wo sie messbar Zeit sparen.
+4. **Architektur-Beratung & langfristige Begleitung**: Prozess-Audit, Architektur-Bewertung, Roadmap ohne Vendor-Lock-in.
+
+Details: https://kroh-daniel.de/leistungen
+
+### Kundenstimmen
+
+> „Ich habe eine sehr professionelle Website erhalten mit jeglichen Funktionen und Formularen, die meine Kunden nutzen können. Das vereinfacht mir den Arbeitsalltag natürlich immens. Bei Rückfragen hat Herr Kroh in kürzester Zeit geantwortet und Änderungswünsche bearbeitet.“
+> — Sara K., Inhaberin, Kosmetikstudio Paderborn
+
+> „Endlich jemand, der nicht in Fachchinesisch redet. Daniel hat unseren kompletten Buchungsprozess mit KI automatisiert. Wir sparen jetzt locker 10 Stunden pro Woche.“
+> — Andreas K., Inhaber, Ferienwohnung-Vermietung
+
+> „Wir haben die Zusammenarbeit mit Daniel Kroh als professionell und zuverlässig erlebt. Er ging bei der Erstellung unserer Homepage und bei weiteren Aufträgen auf unsere Wünsche und Vorstellungen ein und setzte diese schnell und kreativ um.“
+> — Nina & Olga, Alltagsbegleitung Helfende Hände
+
+### Häufige Fragen
+
+#### Was kostet ein typisches Projekt?
+
+Es gibt keine Festpreis-Pakete. Kleinere Anpassungen und Web-Aufgaben starten ab 500 €, abhängig von Aufwand und Größe. Fullstack-Projekte mit Website plus Web-App beginnen ab 2.000 €. Jedes Angebot kommt nach dem Audit mit transparenter Aufwandsschätzung.
+
+#### Wie lange dauert ein typisches Projekt?
+
+Die meisten Vorhaben dauern 4 bis 12 Wochen. Kleine Anpassungen sind oft binnen Tagen live, größere Fullstack-Plattformen liegen am oberen Ende. Die konkrete Timeline steht immer im Angebot.
+
+#### Wie steht es um DSGVO und Datenschutz?
+
+Lösungen werden DSGVO-konform entwickelt und abgesichert. Auf Wunsch wird der Datenschutz zusätzlich vertraglich über eine Geheimhaltungserklärung (NDA) gesichert. Hosting in der EU, Zugriffe protokolliert, Datenflüsse minimal.
+
+#### Was, wenn ich keinen IT-Experten im Haus habe?
+
+Kein Problem. Die Kommunikation läuft direkt und ohne Fachchinesisch. Kurze Aufgaben und Änderungen werden über einen Stundensatz von 70 € abgerechnet. Bei sehr kleinen Anpassungen fallen keine Kosten an.
+
+#### Was unterscheidet Daniel Kroh von Agenturen oder Freelancern?
+
+Klassische Agenturen verteilen Projekte auf Teams mit vielen Abstimmungsschleifen. Bei Daniel Kroh gibt es einen einzigen Ansprechpartner. Durch Agentic Coding und moderne Tools liegen erste Ergebnisse oft schon nach wenigen Tagen vor. Code und Daten bleiben beim Auftraggeber, es gibt keinen Vendor-Lock-in.
+
+#### Was ist mit Support nach dem Launch?
+
+Nach Fertigstellung gibt es 14 Tage kostenlosen Support für Bugs und kleine Änderungen. Für dauerhafte Betreuung ist ein Wartungsvertrag mit festen Reaktionszeiten und planbaren Kosten möglich.
+
+#### Für welche Unternehmen und Regionen arbeitet Daniel Kroh?
+
+Für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe, vor allem in Paderborn, Bad Lippspringe, Bielefeld, Detmold und Gütersloh. Termine vor Ort in OWL sind möglich, die Zusammenarbeit funktioniert genauso remote mit Unternehmen in ganz Deutschland.
+
+### Weiterführend
+
+- [Über Daniel Kroh](https://kroh-daniel.de/about) · [Markdown](https://kroh-daniel.de/about.md)
+- [Lösungen](https://kroh-daniel.de/leistungen) · [Markdown](https://kroh-daniel.de/leistungen.md)
+- [Live-Demos](https://kroh-daniel.de/demo) · [Markdown](https://kroh-daniel.de/demo.md)
+- [Kontakt](https://kroh-daniel.de/kontakt) · [Prozess-Audit buchen](https://kroh-daniel.de/termin)
+
+---
+
+## Über Daniel Kroh — Software-Architekt & Wirtschaftsinformatiker aus Bad Lippspringe
+
+> Daniel Kroh ist Wirtschaftsinformatiker (B.Sc., FH Münster) und studiert Informatik im Master an der HSBI Bielefeld. Seit März 2026 entwirft und entwickelt er als selbstständiger Software-Architekt maßgeschneiderte digitale Lösungen für mittelständische Unternehmen in Ostwestfalen-Lippe.
+
+Quelle: https://kroh-daniel.de/about · Stand: 14.10.2026
+
+### Philosophie: zuerst der Prozess, dann die Technik
+
+Viele Unternehmen wissen, dass sie digital besser aufgestellt sein sollten, aber nicht, wo sie anfangen sollen. Daniel Kroh setzt in einer festen Reihenfolge an: zuerst der Prozess, dann die Architektur, dann die Technik. Jede Lösung muss einen messbaren Nutzen haben: Sie spart Zeit, reduziert Fehler oder schafft Skalierbarkeit.
+
+### Arbeitsweise
+
+Von der Engpass-Analyse bis zum laufenden Betrieb begleitet Daniel Kroh den gesamten Prozess, strukturiert und mit Blick auf den unternehmerischen Nutzen. Auftraggeber haben einen einzigen persönlichen Ansprechpartner, keine Agentur-Strukturen.
+
+### Kompetenzen
+
+- **Software-Architektur:** maßgeschneiderte Web-Anwendungen und Plattformen, wartbar und skalierbar.
+- **Prozessautomatisierung & KI:** manuelle Routineaufgaben durch automatisierte Workflows ersetzen, KI als Werkzeug, nicht als Selbstzweck.
+- **Plattform-Entwicklung:** Individualsoftware, Cloud-Architektur, Bezahlsysteme, von der Idee bis zum produktiven System.
+- **Performance & Sichtbarkeit:** Core Web Vitals, strukturierte Daten (Schema.org), lokale Auffindbarkeit.
+- **Prozess-Audit & Strategie:** Engpass-Analyse, Anforderungsanalyse, Architektur-Beratung.
+- **Wirtschaftsinformatik:** Prozessanalyse, Anforderungsmanagement, Projektsteuerung.
+
+### Werdegang
+
+| Zeitraum | Station |
+|---|---|
+| seit 2026 | M.Sc. Informatik, HSBI Bielefeld: Vertiefung in Softwareentwicklung, Architektur und KI |
+| März 2026 | Gründung der Selbstständigkeit (Daniel Kroh Digital): Software-Architektur, Prozessautomatisierung und KI-Integration für KMU in OWL |
+| laufend | Kundenprojekte: Web-Anwendungen, Prozessautomatisierung und KI-Integration für lokale Unternehmen in OWL |
+| März – Nov. 2025 | Bachelorand / Werkstudent, Atruvia AG, Münster: Automatisierung von Software-Tests und Einführung neuer Prüfverfahren für digitale Banking-Anwendungen |
+| 2021 – 2025 | B.Sc. Wirtschaftsinformatik, FH Münster: Schwerpunkte Webentwicklung, Datenanalyse und Geschäftsprozessoptimierung |
+
+### Regionale Verankerung
+
+Daniel Kroh ist in Paderborn aufgewachsen und lebt in Bad Lippspringe. Er kennt die Strukturen des regionalen Mittelstands in Ostwestfalen-Lippe und verbindet das mit aktuellem IT-Wissen aus Studium und Praxis.
+
+### Profile
+
+- LinkedIn: https://www.linkedin.com/in/daniel-kroh-098047333/
+- GitHub: https://github.com/KrohDaniel
+- Instagram: https://www.instagram.com/daniel_kroh_/
+
+Kontakt: info@kroh-daniel.de · +49 176 410 45 997 · [Prozess-Audit buchen](https://kroh-daniel.de/termin)
+
+---
+
+## Lösungen von Daniel Kroh — Software-Architektur & Prozessautomatisierung in OWL
+
+> Daniel Kroh bietet vier Lösungsbereiche für mittelständische Unternehmen: Prozessautomatisierung, Web-Anwendungen, KI-Integration und Architektur-Beratung. Es gibt keine Standardpakete. Jedes Projekt beginnt mit einem kostenfreien 15-minütigen Prozess-Audit.
+
+Quelle: https://kroh-daniel.de/leistungen · Stand: 14.10.2026
+
+### 1. Prozessautomatisierung
+
+**Typischer Engpass:** Manuelle Routinearbeit, Excel-Listen, doppelte Datenpflege.
+**Lösung:** Workflows, die Anfragen, Angebote und Datenflüsse automatisch, fehlerfrei und nachvollziehbar verarbeiten.
+
+- Anfrage- und Angebotsprozesse automatisieren
+- Datenflüsse zwischen Systemen orchestrieren
+- Manuelle Routinen durch Workflows ersetzen
+- Dokumente und Reports automatisch generieren
+- Skalierbare Architektur statt Insellösung
+
+### 2. Web-Anwendungen
+
+**Typischer Engpass:** Standardsoftware passt nicht zu den eigenen Prozessen, oder die Außendarstellung wirkt austauschbar.
+**Lösung:** Maßgeschneiderte Plattformen und Websites, die exakt zum Geschäftsmodell passen.
+
+- Individuelle Plattformen und Portale
+- Performante Web-Anwendungen mit eigener Logik
+- Saubere Architektur und wartbarer Code
+- Lokale Sichtbarkeit und technisches SEO inklusive
+- Skalierbar mit dem Unternehmen
+
+### 3. KI-Integration
+
+**Typischer Engpass:** KI-Hype, aber kein klares Anwendungsszenario im Unternehmen.
+**Lösung:** KI gezielt dort einsetzen, wo sie messbar Zeit spart oder Qualität erhöht.
+
+- Anfragen klassifizieren und vorqualifizieren
+- Dokumente strukturiert auswerten
+- Wissensdatenbanken intelligent durchsuchen
+- Prozessdaten analysieren und Engpässe erkennen
+- Schnittstellen zu OpenAI, Anthropic und weiteren Anbietern
+
+### 4. Architektur-Beratung
+
+**Typischer Engpass:** Gewachsene IT-Landschaft, technische Schulden, unklare Roadmap.
+**Lösung:** Strukturierte Engpass-Analyse, klarer Architektur-Fahrplan und Begleitung in der Umsetzung, ohne Lock-in.
+
+- Strukturiertes Prozess-Audit
+- Architektur-Bewertung und Empfehlungen
+- Anforderungsanalyse und Roadmap
+- Vendor-neutrale Tool-Auswahl
+- Umsetzungsbegleitung nach Bedarf
+
+### Ablauf in vier Schritten
+
+1. **Prozess-Audit (15 Minuten, kostenfrei):** Strukturierte Engpass-Analyse. Wo liegt der größte Hebel, was ist umsetzbar und was nicht?
+2. **Architektur-Konzept:** Konkreter Lösungsvorschlag mit Aufwandsschätzung, Technologie-Empfehlung und Roadmap.
+3. **Umsetzung:** Entwicklung in iterativen Schritten mit wöchentlich sichtbarem Fortschritt.
+4. **Betrieb & Weiterentwicklung:** Optional laufende Betreuung, Monitoring und neue Features. Der Code gehört dem Auftraggeber.
+
+Jeder Schritt ist einzeln entscheidbar.
+
+### Kosten
+
+Maßgeschneiderte Software lässt sich nicht in Festpreis-Pakete pressen. Nach dem kostenfreien Prozess-Audit erhalten Auftraggeber ein Architektur-Konzept mit transparenter Aufwandsschätzung, bevor sie sich für eine Umsetzung entscheiden.
+
+| Vorhaben | Investition | Dauer |
+|---|---|---|
+| Prozess-Audit | kostenfrei | 15 Minuten |
+| Kleinere Anpassungen & Web-Aufgaben | ab 500 € | oft wenige Tage |
+| Fullstack-Projekt (Website + Web-App) | ab 2.000 € | 4 bis 12 Wochen |
+| Laufende Änderungen | 70 € pro Stunde | nach Bedarf |
+
+### Häufige Fragen
+
+#### Was passiert im Prozess-Audit konkret?
+
+15 strukturierte Minuten: Der Auftraggeber schildert den Engpass, Daniel Kroh stellt gezielte Rückfragen zu Prozessen, Systemen und Schnittstellen. Am Ende ist klar, ob und wie eine Software-Lösung sinnvoll ist oder ob ein anderer Weg ehrlicher wäre. Kostenfrei und ohne Verkaufsdruck.
+
+#### Warum gibt es keine Festpreise?
+
+Ein Festpreis erzwingt Standard-Lösungen, und Standard-Lösungen passen selten zu individuellen Prozessen. Stattdessen gibt es nach dem Audit ein konkretes Architektur-Konzept mit transparenter Aufwandsschätzung.
+
+#### Gehört der Code nach dem Projekt dem Auftraggeber?
+
+Ja, vollständig. Auftraggeber erhalten Quellcode, Dokumentation und die Hoheit über ihre Daten. Es gibt keinen Vendor-Lock-in und keine proprietären Plattformen. Ein Wechsel zu einem anderen Dienstleister ist technisch jederzeit möglich.
+
+#### Werden auch laufender Betrieb und Weiterentwicklung übernommen?
+
+Auf Wunsch ja: Hosting, Monitoring, neue Features und kontinuierliche Optimierung. Es gibt keine Mindestvertragslaufzeit.
+
+[Prozess-Audit buchen](https://kroh-daniel.de/termin) · info@kroh-daniel.de · +49 176 410 45 997
+
+---
+
+## Live-Demos der Kundenprojekte von Daniel Kroh
+
+> Drei reale Kundenprojekte aus Ostwestfalen-Lippe, jeweils mit interaktiver Browser-Demo (frei erfundene Demo-Daten, kein E-Mail-Versand) und Link zur Live-Website. Jedes Projekt ist nach Engpass, Lösung und Technik beschrieben.
+
+Quelle: https://kroh-daniel.de/demo · Stand: 14.10.2026
+
+### aesthéra — Permanent Make-Up, Paderborn
+
+- **Branche:** Kosmetik / Permanent Make-Up
+- **Engpass:** Anfragen kamen unstrukturiert per Telefon und WhatsApp, lokale Sichtbarkeit fehlte.
+- **Lösung:** Web-Anwendung mit Marketing-Website (Behandlungen, Vorher/Nachher-Slider, Bewertungen, FAQ), DSGVO-konformem Newsletter mit Double-Opt-In, digitalem Kundenformular (Anamnese, Einwilligung, Terminwunsch), Admin-Dashboard und KI-gestütztem Newsletter-Editor. Local-SEO-Fundament mit strukturierten Daten und Sitemap.
+- **Technik:** Next.js 16, Prisma, Resend, Tailwind, Vercel
+- **Live:** https://permanent-makeup-paderborn.de
+
+### Erholungs Apartments, Bad Lippspringe
+
+- **Branche:** Ferienwohnungen / Gesundheitstourismus
+- **Engpass:** Buchungsanfragen liefen unstrukturiert über Telefon und E-Mail, kaum Sichtbarkeit für Gäste der Westfalen Therme.
+- **Lösung:** Web-Anwendung mit Apartment-Galerie, Verfügbarkeitskalender mit Live-Buchungslogik, integriertem Massage-Modul und Local SEO für Therme-Gäste und Reha-Reisende.
+- **Technik:** Next.js, Firebase, Firestore, Tailwind
+- **Live:** https://erholungs-apartments.de
+
+### Helfende Hände — Alltagsbegleitung, Bielefeld & OWL
+
+- **Branche:** Alltagsbegleitung / Pflegeunterstützung
+- **Engpass:** Aufklärung zum Entlastungsbetrag fehlte, das Team brauchte ein internes Tool für Termine und Dokumentation.
+- **Lösung:** Fullstack-Plattform mit öffentlicher Aufklärungsseite zum Entlastungsbetrag (§ 45b SGB XI) und interner App (Dashboard, Kalender, Klientenübersicht) mit Login, Rollen und sicherer Datenhaltung. Barrierefrei gestaltet.
+- **Technik:** Next.js 15, Supabase, Tailwind v4, Resend
+- **Live:** https://alltagshilfe-schlangen.de
+
+Eigenes Projekt besprechen: [Kontakt](https://kroh-daniel.de/kontakt) · [Prozess-Audit buchen](https://kroh-daniel.de/termin)
+
+---
+
+## Kontakt — Daniel Kroh, Software-Architekt aus Bad Lippspringe
+
+> Daniel Kroh ist direkt per E-Mail, Telefon oder über das Kontaktformular erreichbar. Auf Anfragen folgt innerhalb von 24 Stunden eine Rückmeldung mit einem ersten Architektur-Vorschlag.
+
+Quelle: https://kroh-daniel.de/kontakt · Stand: 14.10.2026
+
+- **E-Mail:** info@kroh-daniel.de
+- **Telefon:** +49 176 410 45 997
+- **LinkedIn:** https://www.linkedin.com/in/daniel-kroh-098047333/
+- **Standort:** Bad Lippspringe, Kreis Paderborn, Nordrhein-Westfalen
+- **Einzugsgebiet:** Ostwestfalen-Lippe (Paderborn, Bielefeld, Detmold, Gütersloh) vor Ort, deutschlandweit remote
+- **Erreichbarkeit:** Montag bis Freitag, 9 bis 18 Uhr
+
+### Prozess-Audit buchen
+
+Ein 15-minütiges, kostenfreies Prozess-Audit lässt sich direkt online buchen: https://kroh-daniel.de/termin

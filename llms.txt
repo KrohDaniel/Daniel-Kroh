@@ -1,43 +1,46 @@
 # Daniel Kroh — Software-Architekt & Prozess-Optimierer
 
-> Daniel Kroh entwickelt maßgeschneiderte Software für mittelständische Unternehmen. Digitale Prozesse, Web-Anwendungen und KI-Lösungen — aus Bad Lippspringe für OWL.
+> Daniel Kroh entwickelt maßgeschneiderte Software für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe (OWL): Prozessautomatisierung, Web-Anwendungen und KI-Integration. Sitz in Bad Lippspringe bei Paderborn, Zusammenarbeit vor Ort in OWL und remote deutschlandweit.
 
-Daniel Kroh ist Wirtschaftsinformatiker (B.Sc.) und arbeitet aktuell am Master Informatik (HSBI Bielefeld). Spezialisiert auf Software-Architektur, Prozessautomatisierung, Web-Anwendungen und KI-Integration für kleine und mittelständische Unternehmen in Ostwestfalen-Lippe (OWL). Standort: Bad Lippspringe, Region Paderborn.
+Daniel Kroh ist Wirtschaftsinformatiker (B.Sc., FH Münster) und studiert Informatik im Master an der HSBI Bielefeld. Vor der Gründung im März 2026 war er Werkstudent und Bachelorand im IT-Bereich der Atruvia AG (Test-Automatisierung für Banking-Anwendungen). Er arbeitet als einzelner, persönlicher Ansprechpartner, ohne Agentur-Strukturen.
 
-Fokus auf maßgeschneiderte Lösungen statt Festpreis-Pakete. Jedes Projekt beginnt mit einem strukturierten Prozess-Audit (15 Min, kostenfrei). Anschließend erhalten Auftraggeber ein konkretes Architektur-Konzept mit transparenter Aufwandsschätzung. Code und Daten gehören dem Auftraggeber — kein Vendor-Lock-in.
+Jedes Projekt beginnt mit einem kostenfreien Prozess-Audit (15 Minuten). Danach erhalten Auftraggeber ein Architektur-Konzept mit transparenter Aufwandsschätzung. Es gibt keine Festpreis-Pakete. Orientierungswerte: kleinere Anpassungen ab 500 €, Fullstack-Projekte (Website plus Web-App) ab 2.000 €, Stundensatz 70 €, typische Projektdauer 4 bis 12 Wochen. Code und Daten gehören dem Auftraggeber, es gibt keinen Vendor-Lock-in.
+
+Vollständige Inhalte als Markdown: https://kroh-daniel.de/llms-full.txt
+
+## Seiten
+
+- [Startseite](https://kroh-daniel.de/): Überblick, Erfolgsgeschichten, Kundenstimmen, FAQ ([Markdown](https://kroh-daniel.de/index.md))
+- [Über mich](https://kroh-daniel.de/about): Werdegang, Ausbildung, Kompetenzen, Arbeitsweise ([Markdown](https://kroh-daniel.de/about.md))
+- [Lösungen](https://kroh-daniel.de/leistungen): Vier Lösungsbereiche, Ablauf, Kosten, FAQ ([Markdown](https://kroh-daniel.de/leistungen.md))
+- [Live-Demos](https://kroh-daniel.de/demo): Drei Kundenprojekte mit interaktiver Demo ([Markdown](https://kroh-daniel.de/demo.md))
+- [Kontakt](https://kroh-daniel.de/kontakt): E-Mail, Telefon, Kontaktformular ([Markdown](https://kroh-daniel.de/kontakt.md))
+- [Prozess-Audit buchen](https://kroh-daniel.de/termin): Online-Terminbuchung für das kostenfreie 15-Minuten-Audit
 
 ## Lösungsbereiche
 
-- [Prozessautomatisierung](https://kroh-daniel.de/leistungen.html): Workflows zur Ablösung manueller Routinen, Datenflüsse zwischen Systemen, automatische Dokumentenerstellung
-- [Web-Anwendungen](https://kroh-daniel.de/leistungen.html): Individuelle Plattformen, Portale und maßgeschneiderte Web-Lösungen mit eigener Geschäftslogik
-- [KI-Integration](https://kroh-daniel.de/leistungen.html): Anbindung von OpenAI, Anthropic und anderen LLMs für Klassifizierung, Dokumentenauswertung und Wissensdatenbanken
-- [Architektur-Beratung](https://kroh-daniel.de/leistungen.html): Strukturiertes Prozess-Audit, Architektur-Bewertung, Anforderungsanalyse, Roadmap
+- [Prozessautomatisierung](https://kroh-daniel.de/leistungen): Workflows statt manueller Routinen, Datenflüsse zwischen Systemen, automatische Dokumentenerstellung
+- [Web-Anwendungen](https://kroh-daniel.de/leistungen): Individuelle Plattformen, Portale und Websites mit eigener Geschäftslogik und technischem SEO
+- [KI-Integration](https://kroh-daniel.de/leistungen): Anbindung von OpenAI, Anthropic und anderen LLMs für Klassifizierung, Dokumentenauswertung und Wissensdatenbanken
+- [Architektur-Beratung](https://kroh-daniel.de/leistungen): Prozess-Audit, Architektur-Bewertung, Anforderungsanalyse, vendor-neutrale Roadmap
 
-## Wichtige Seiten
+## Referenzprojekte
 
-- [Startseite](https://kroh-daniel.de/): Übersicht über Lösungsbereiche und Erfolgsgeschichten
-- [Über mich](https://kroh-daniel.de/about.html): Werdegang, Skill-Set, Arbeitsweise
-- [Lösungen](https://kroh-daniel.de/leistungen.html): Detaillierte Beschreibung der vier Architektur-Lösungen, Arbeitsweise, FAQ
-- [Kontakt](https://kroh-daniel.de/kontakt.html): Kontaktformular mit Engpass-Auswahl
-- [Prozess-Audit](https://kroh-daniel.de/termin.html): Direkt einen Audit-Termin buchen
+- [aesthéra — Permanent Make-Up Paderborn](https://permanent-makeup-paderborn.de): Local-SEO-Website, digitales Kundenformular, Admin-Dashboard, KI-Newsletter (Next.js, Prisma)
+- [Erholungs Apartments Bad Lippspringe](https://erholungs-apartments.de): Buchungsplattform mit Verfügbarkeitskalender und Massage-Angebot (Next.js, Firebase)
+- [Helfende Hände — Alltagsbegleitung OWL](https://alltagshilfe-schlangen.de): Aufklärungsseite zum Entlastungsbetrag und interne Team-App (Next.js 15, Supabase)
 
 ## Kontakt
 
 - E-Mail: info@kroh-daniel.de
 - Telefon: +49 176 410 45 997
-- Standort: Bad Lippspringe, Nordrhein-Westfalen, Deutschland
-- Region: OWL (Ostwestfalen-Lippe), Paderborn, Bielefeld, Detmold, Gütersloh
+- Standort: Bad Lippspringe, Kreis Paderborn, Nordrhein-Westfalen, Deutschland
+- Region: Ostwestfalen-Lippe (Paderborn, Bielefeld, Detmold, Gütersloh), remote deutschlandweit
+- LinkedIn: https://www.linkedin.com/in/daniel-kroh-098047333/
+- GitHub: https://github.com/KrohDaniel
 
-## Differenzierung
+## Optional
 
-- Keine Festpreis-Pakete, keine Baukasten-Lösungen
-- Persönlicher Ansprechpartner — kein Account Manager, keine Agentur-Strukturen
-- Akademischer Hintergrund (Wirtschaftsinformatik B.Sc., Informatik M.Sc. in Arbeit) kombiniert mit Praxiserfahrung aus dem IT-Bereich von Atruvia AG (Banking-Sektor, BaFin-regulierte Umgebung)
-- Vendor-neutrale Tool-Auswahl, Code-Hoheit beim Auftraggeber
-- Lokale Verankerung in OWL, deutschlandweite Remote-Zusammenarbeit möglich
-
-## Rechtliches
-
-- [Impressum](https://kroh-daniel.de/impressum.html)
-- [Datenschutzerklärung](https://kroh-daniel.de/datenschutz.html)
-- [AGB](https://kroh-daniel.de/agb.html)
+- [Impressum](https://kroh-daniel.de/impressum)
+- [Datenschutzerklärung](https://kroh-daniel.de/datenschutz)
+- [AGB](https://kroh-daniel.de/agb)

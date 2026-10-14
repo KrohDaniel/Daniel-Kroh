@@ -65,7 +65,7 @@
         '<div class="cookie-banner-text">' +
           '<p>Diese Website verwendet Cookies. Essenzielle Cookies sind für die Funktion der Seite notwendig. ' +
           'Analyse-Cookies helfen uns, die Website zu verbessern. ' +
-          '<a href="datenschutz.html">Mehr erfahren</a></p>' +
+          '<a href="/datenschutz">Mehr erfahren</a></p>' +
         '</div>' +
         '<div class="cookie-banner-actions">' +
           '<button class="cookie-btn cookie-btn--essential" data-consent="essential">Nur Essenzielle</button>' +

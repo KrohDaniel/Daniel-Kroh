@@ -9,9 +9,15 @@
   <meta property="og:title" content="Lösungen — Daniel Kroh | Software-Architekt">
   <meta property="og:description" content="Maßgeschneiderte Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
-  <meta property="og:url" content="https://kroh-daniel.de/leistungen.html">
+  <meta property="og:url" content="https://kroh-daniel.de/leistungen">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Daniel Kroh">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lösungen — Daniel Kroh | Software-Architekt">
+  <meta name="twitter:description" content="Maßgeschneiderte Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.">
+  <meta name="twitter:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -20,7 +26,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
   <link rel="icon" type="image/x-icon" href="public/favicon/favicon.ico">
   <link rel="manifest" href="public/favicon/site.webmanifest">
-  <link rel="canonical" href="https://kroh-daniel.de/leistungen.html">
+  <link rel="canonical" href="https://kroh-daniel.de/leistungen">
+  <link rel="alternate" type="text/markdown" href="/leistungen.md" title="Markdown-Version">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/leistungen.css">
   <!-- Umami Analytics — DSGVO-konform -->
@@ -29,57 +36,217 @@
 
   <!-- Schema.org: Service + FAQ -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "@id": "https://kroh-daniel.de/leistungen.html#service",
-        "name": "Software-Architektur & Prozess-Optimierung",
-        "provider": { "@id": "https://kroh-daniel.de/#business" },
-        "areaServed": { "@type": "AdministrativeArea", "name": "Ostwestfalen-Lippe" },
-        "serviceType": ["Prozessautomatisierung", "Web-Anwendungen", "KI-Integration", "Architektur-Beratung"],
-        "description": "Maßgeschneiderte Software-Architektur, Prozessautomatisierung, Web-Anwendungen und KI-Integration für mittelständische Unternehmen in OWL."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://kroh-daniel.de/leistungen#prozessautomatisierung",
+      "name": "Prozessautomatisierung",
+      "description": "Workflows, die Anfragen, Angebote und Datenflüsse automatisch verarbeiten und manuelle Routinen wie Excel-Listen oder doppelte Datenpflege ablösen.",
+      "serviceType": "Prozessautomatisierung",
+      "provider": {
+        "@id": "https://kroh-daniel.de/#business"
       },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Was passiert im Prozess-Audit konkret?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "15 strukturierte Minuten: Sie schildern den Engpass, ich stelle gezielte Rückfragen zu Prozessen, Systemen und Schnittstellen. Am Ende wissen wir beide, ob und wie eine Software-Lösung sinnvoll ist, oder ob ein anderer Weg ehrlicher wäre. Kostenfrei und ohne Verkaufsdruck."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Warum gibt es keine Festpreise?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Weil maßgeschneiderte Software keine Stange Ware ist. Ein Festpreis erzwingt Standard-Lösungen, und Standard-Lösungen passen selten zu individuellen Prozessen. Stattdessen: konkretes Architektur-Konzept mit transparenter Aufwandsschätzung nach dem Audit."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Gehört der Code nach dem Projekt mir?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Ja, vollständig. Kein Vendor-Lock-in, keine proprietären Plattformen, die Sie an mich binden. Sie erhalten den Quellcode, die Dokumentation und die Hoheit über Ihre Daten."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Übernehmen Sie auch laufenden Betrieb und Weiterentwicklung?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Auf Wunsch ja. Hosting, Monitoring, neue Features, kontinuierliche Optimierung. Sie entscheiden, ob Sie das selbst übernehmen, an Dritte vergeben oder bei mir lassen. Es gibt keine Mindestvertragslaufzeit, die Sie zwingt."
-            }
-          }
-        ]
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Ostwestfalen-Lippe"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kroh-daniel.de/leistungen#web-anwendungen",
+      "name": "Web-Anwendungen",
+      "description": "Maßgeschneiderte Plattformen, Portale und Websites mit eigener Geschäftslogik, sauberer Architektur und technischem SEO.",
+      "serviceType": "Web-Anwendungen",
+      "provider": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Ostwestfalen-Lippe"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kroh-daniel.de/leistungen#ki-integration",
+      "name": "KI-Integration",
+      "description": "Einsatz von Large Language Models (OpenAI, Anthropic u. a.) zur Klassifizierung von Anfragen, Dokumentenauswertung und Wissensdatenbanken.",
+      "serviceType": "KI-Integration",
+      "provider": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Ostwestfalen-Lippe"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kroh-daniel.de/leistungen#architektur-beratung",
+      "name": "Architektur-Beratung",
+      "description": "Strukturiertes Prozess-Audit, Architektur-Bewertung, Anforderungsanalyse und vendor-neutrale Roadmap ohne Lock-in.",
+      "serviceType": "Architektur-Beratung",
+      "provider": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Ostwestfalen-Lippe"
+        },
+        {
+          "@type": "Country",
+          "name": "Deutschland"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kroh-daniel.de/leistungen#prozess-audit",
+      "name": "Prozess-Audit (15 Minuten)",
+      "description": "Kostenfreie, strukturierte Engpass-Analyse von 15 Minuten als Einstieg in jedes Projekt.",
+      "provider": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "url": "https://kroh-daniel.de/termin"
       }
-    ]
-  }
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://kroh-daniel.de/leistungen#katalog",
+      "name": "Lösungen von Daniel Kroh",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://kroh-daniel.de/leistungen#prozessautomatisierung"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://kroh-daniel.de/leistungen#web-anwendungen"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://kroh-daniel.de/leistungen#ki-integration"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://kroh-daniel.de/leistungen#architektur-beratung"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@id": "https://kroh-daniel.de/leistungen#prozess-audit"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://kroh-daniel.de/leistungen#webpage",
+      "url": "https://kroh-daniel.de/leistungen",
+      "name": "Lösungen — Software-Architektur & Prozessautomatisierung in OWL",
+      "description": "Prozessautomatisierung, Web-Anwendungen, KI-Integration und Architektur-Beratung für mittelständische Unternehmen in Paderborn und OWL.",
+      "inLanguage": "de-DE",
+      "isPartOf": {
+        "@id": "https://kroh-daniel.de/#website"
+      },
+      "dateModified": "2026-10-14",
+      "about": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "breadcrumb": {
+        "@id": "https://kroh-daniel.de/leistungen#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://kroh-daniel.de/leistungen#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://kroh-daniel.de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lösungen",
+          "item": "https://kroh-daniel.de/leistungen"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://kroh-daniel.de/leistungen#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Was passiert im Prozess-Audit konkret?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "15 strukturierte Minuten: Sie schildern den Engpass, ich stelle gezielte Rückfragen zu Prozessen, Systemen und Schnittstellen. Am Ende wissen wir beide, ob und wie eine Software-Lösung sinnvoll ist, oder ob ein anderer Weg ehrlicher wäre. Kostenfrei und ohne Verkaufsdruck."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Warum gibt es keine Festpreise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Weil maßgeschneiderte Software keine Stange Ware ist. Ein Festpreis erzwingt Standard-Lösungen, und Standard-Lösungen passen selten zu individuellen Prozessen. Stattdessen: konkretes Architektur-Konzept mit transparenter Aufwandsschätzung nach dem Audit. Sie sehen genau, wofür Sie zahlen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Gehört der Code nach dem Projekt mir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, vollständig. Kein Vendor-Lock-in, keine proprietären Plattformen, die Sie an mich binden. Sie erhalten den Quellcode, die Dokumentation und die Hoheit über Ihre Daten. Wenn Sie irgendwann mit jemand anderem weiterarbeiten wollen, ist das technisch jederzeit möglich."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Übernehmen Sie auch laufenden Betrieb und Weiterentwicklung?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Auf Wunsch ja. Hosting, Monitoring, neue Features, kontinuierliche Optimierung. Sie entscheiden, ob Sie das selbst übernehmen, an Dritte vergeben oder bei mir lassen. Es gibt keine Mindestvertragslaufzeit, die Sie zwingt."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -87,13 +254,13 @@
   <header class="site-header about-header">
     <div class="scroll-progress" id="scrollProgress"></div>
     <nav>
-      <a href="index.html" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo" class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
+      <a href="/" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo" class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">Über mich</a>
-        <a href="leistungen.html" class="nav-active">Leistungen</a>
-        <a href="demo.html">Demo</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/">Home</a>
+        <a href="/about">Über mich</a>
+        <a href="/leistungen" class="nav-active">Leistungen</a>
+        <a href="/demo">Demo</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -104,11 +271,11 @@
   <!-- Mobile Overlay Nav -->
   <div class="mobile-nav" id="mobile-nav">
     <nav class="mobile-nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">Über mich</a>
-      <a href="leistungen.html" class="nav-active">Leistungen</a>
-      <a href="demo.html">Demo</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="/">Home</a>
+      <a href="/about">Über mich</a>
+      <a href="/leistungen" class="nav-active">Leistungen</a>
+      <a href="/demo">Demo</a>
+      <a href="/kontakt">Kontakt</a>
     </nav>
   </div>
 
@@ -242,8 +409,20 @@
       <div class="lp-value-card">
         <p class="lp-value-body">Maßgeschneiderte Software lässt sich nicht in Festpreis-Pakete pressen. Jedes Unternehmen hat andere Prozesse, andere Systemlandschaft, andere Anforderungen, und ein ehrliches Angebot bildet das ab.</p>
         <p class="lp-value-body" style="margin-top: 1.5rem;"><strong>Deshalb:</strong> Jedes Projekt beginnt mit einem kostenfreien Prozess-Audit. Im Anschluss erhalten Sie ein konkretes Architektur-Konzept inklusive transparenter Aufwandsschätzung, bevor Sie sich für eine Umsetzung entscheiden.</p>
+        <table class="lp-price-table">
+          <caption>Richtwerte zur Orientierung</caption>
+          <thead>
+            <tr><th scope="col">Vorhaben</th><th scope="col">Investition</th><th scope="col">Dauer</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Prozess-Audit</td><td>kostenfrei</td><td>15 Minuten</td></tr>
+            <tr><td>Kleinere Anpassungen &amp; Web-Aufgaben</td><td>ab 500&nbsp;€</td><td>oft wenige Tage</td></tr>
+            <tr><td>Fullstack-Projekt (Website + Web-App)</td><td>ab 2.000&nbsp;€</td><td>4 bis 12 Wochen</td></tr>
+            <tr><td>Laufende Änderungen</td><td>70&nbsp;€ pro Stunde</td><td>nach Bedarf</td></tr>
+          </tbody>
+        </table>
         <p class="lp-value-body" style="margin-top: 1.5rem; color: var(--cyan); font-weight: 500;">Sie zahlen nicht für Pakete. Sie zahlen für Ergebnisse.</p>
-        <a href="kontakt.html" class="cta-button" style="margin-top: 2rem;">Prozess-Audit anfragen</a>
+        <a href="/kontakt" class="cta-button" style="margin-top: 2rem;">Prozess-Audit anfragen</a>
       </div>
     </div>
   </section>
@@ -317,7 +496,7 @@
         <span class="heading-accent">Engpass?</span>
       </h2>
       <p class="lp-cta-body">15 strukturierte Minuten, in denen wir Ihren größten Hebel identifizieren, kostenfrei und ohne Verkaufsdruck.</p>
-      <a href="termin.html" class="cta-button" style="margin-top: 1.5rem;">Prozess-Audit buchen</a>
+      <a href="/termin" class="cta-button" style="margin-top: 1.5rem;">Prozess-Audit buchen</a>
     </div>
   </section>
 
@@ -325,7 +504,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand-col">
-        <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
+        <a href="/" class="footer-logo">Daniel <span>Kroh</span></a>
         <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -338,21 +517,21 @@
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Lösungen</span>
-        <a href="leistungen.html">Prozessautomatisierung</a>
-        <a href="leistungen.html">Web-Anwendungen</a>
-        <a href="leistungen.html">KI-Integration</a>
-        <a href="leistungen.html">Architektur-Beratung</a>
+        <a href="/leistungen">Prozessautomatisierung</a>
+        <a href="/leistungen">Web-Anwendungen</a>
+        <a href="/leistungen">KI-Integration</a>
+        <a href="/leistungen">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
-        <a href="about.html">Über mich</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/about">Über mich</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="agb.html">AGB</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/agb">AGB</a>
       </div>
     </div>
     <div class="footer-bottom">

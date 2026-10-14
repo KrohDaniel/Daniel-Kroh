@@ -267,6 +267,53 @@
   font-weight: 600;
 }
 
+.lp-price-table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.lp-price-table caption {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding-bottom: 0.75rem;
+}
+
+.lp-price-table th,
+.lp-price-table td {
+  text-align: left;
+  padding: 0.85rem 0.75rem 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  vertical-align: top;
+}
+
+.lp-price-table th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-1);
+  border-bottom-color: var(--border-strong);
+}
+
+.lp-price-table td:nth-child(2) {
+  color: var(--text-1);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .lp-price-table { font-size: 0.85rem; }
+  .lp-price-table td:nth-child(2) { white-space: normal; }
+}
+
 /* ================================================
    PRICING GRID
    ================================================ */

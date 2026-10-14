@@ -11,9 +11,15 @@
   <meta property="og:title" content="Über mich — Daniel Kroh | Software-Architekt">
   <meta property="og:description" content="Wirtschaftsinformatiker und Software-Architekt aus Bad Lippspringe. Maßgeschneiderte digitale Lösungen für den Mittelstand in OWL.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
-  <meta property="og:url" content="https://kroh-daniel.de/about.html">
+  <meta property="og:url" content="https://kroh-daniel.de/about">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Daniel Kroh">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Über mich — Daniel Kroh | Software-Architekt">
+  <meta name="twitter:description" content="Wirtschaftsinformatiker und Software-Architekt aus Bad Lippspringe. Maßgeschneiderte digitale Lösungen für den Mittelstand in OWL.">
+  <meta name="twitter:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -24,7 +30,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
   <link rel="icon" type="image/x-icon" href="public/favicon/favicon.ico">
   <link rel="manifest" href="public/favicon/site.webmanifest">
-  <link rel="canonical" href="https://kroh-daniel.de/about.html">
+  <link rel="canonical" href="https://kroh-daniel.de/about">
+  <link rel="alternate" type="text/markdown" href="/about.md" title="Markdown-Version">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/about.css">
   <!-- Umami Analytics — DSGVO-konform -->
@@ -33,41 +40,113 @@
 
   <!-- Schema.org: Person (E-E-A-T) -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": "https://kroh-daniel.de/about.html#person",
-    "name": "Daniel Kroh",
-    "jobTitle": "Software-Architekt & Prozess-Optimierer",
-    "description": "Wirtschaftsinformatiker (B.Sc.) und Master-Student Informatik (HSBI Bielefeld). Spezialisiert auf Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.",
-    "url": "https://kroh-daniel.de/about.html",
-    "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bad Lippspringe",
-      "addressRegion": "NRW",
-      "addressCountry": "DE"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://kroh-daniel.de/#person",
+      "name": "Daniel Kroh",
+      "givenName": "Daniel",
+      "familyName": "Kroh",
+      "jobTitle": "Software-Architekt & Prozess-Optimierer",
+      "description": "Wirtschaftsinformatiker (B.Sc., FH Münster) und Master-Student Informatik an der HSBI Bielefeld. Zuvor Werkstudent und Bachelorand im IT-Bereich der Atruvia AG (Test-Automatisierung für Banking-Anwendungen). Seit März 2026 selbstständig mit Software-Architektur, Prozessautomatisierung und KI-Integration für den Mittelstand in OWL.",
+      "url": "https://kroh-daniel.de/about",
+      "image": "https://kroh-daniel.de/public/portrait_opt.jpg",
+      "email": "info@kroh-daniel.de",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Bad Lippspringe, Nordrhein-Westfalen"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "FH Münster",
+          "sameAs": "https://www.fh-muenster.de/"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Hochschule Bielefeld (HSBI)",
+          "sameAs": "https://www.hsbi.de/"
+        }
+      ],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "Bachelor of Science Wirtschaftsinformatik",
+        "recognizedBy": {
+          "@type": "CollegeOrUniversity",
+          "name": "FH Münster"
+        }
+      },
+      "knowsAbout": [
+        "Software-Architektur",
+        "Prozessautomatisierung",
+        "Workflow-Automatisierung",
+        "Web-Anwendungen",
+        "KI-Integration",
+        "Large Language Models",
+        "Wirtschaftsinformatik",
+        "Test-Automatisierung",
+        "Local SEO",
+        "Generative Engine Optimization",
+        "Next.js",
+        "Supabase"
+      ],
+      "knowsLanguage": [
+        "de",
+        "en"
+      ],
+      "worksFor": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/daniel-kroh-098047333/",
+        "https://github.com/KrohDaniel",
+        "https://www.instagram.com/daniel_kroh_/"
+      ]
     },
-    "alumniOf": [
-      { "@type": "CollegeOrUniversity", "name": "FH Münster" },
-      { "@type": "CollegeOrUniversity", "name": "HSBI Bielefeld" }
-    ],
-    "knowsAbout": [
-      "Software-Architektur",
-      "Prozessautomatisierung",
-      "Web-Anwendungen",
-      "KI-Integration",
-      "Wirtschaftsinformatik",
-      "Test-Architektur",
-      "BaFin-Compliance"
-    ],
-    "worksFor": { "@id": "https://kroh-daniel.de/#business" },
-    "sameAs": [
-      "https://www.linkedin.com/in/daniel-kroh-098047333/",
-      "https://www.instagram.com/daniel_kroh_/",
-      "https://github.com/KrohDaniel"
-    ]
-  }
+    {
+      "@type": "ProfilePage",
+      "@id": "https://kroh-daniel.de/about#webpage",
+      "url": "https://kroh-daniel.de/about",
+      "name": "Über Daniel Kroh — Software-Architekt aus Bad Lippspringe",
+      "description": "Werdegang, Ausbildung und Arbeitsweise von Daniel Kroh, Wirtschaftsinformatiker und Software-Architekt für den Mittelstand in OWL.",
+      "inLanguage": "de-DE",
+      "isPartOf": {
+        "@id": "https://kroh-daniel.de/#website"
+      },
+      "dateModified": "2026-10-14",
+      "mainEntity": {
+        "@id": "https://kroh-daniel.de/#person"
+      },
+      "about": {
+        "@id": "https://kroh-daniel.de/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://kroh-daniel.de/about#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://kroh-daniel.de/about#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://kroh-daniel.de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Über mich",
+          "item": "https://kroh-daniel.de/about"
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 
@@ -76,14 +155,14 @@
   <header class="site-header about-header">
     <div class="scroll-progress" id="scrollProgress"></div>
     <nav>
-      <a href="index.html" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo"
+      <a href="/" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo"
           class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="nav-active">Über mich</a>
-        <a href="leistungen.html">Leistungen</a>
-        <a href="demo.html">Demo</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/">Home</a>
+        <a href="/about" class="nav-active">Über mich</a>
+        <a href="/leistungen">Leistungen</a>
+        <a href="/demo">Demo</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -94,11 +173,11 @@
   <!-- Mobile Overlay Nav -->
   <div class="mobile-nav" id="mobile-nav">
     <nav class="mobile-nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html" class="nav-active">Über mich</a>
-      <a href="leistungen.html">Leistungen</a>
-      <a href="demo.html">Demo</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="/">Home</a>
+      <a href="/about" class="nav-active">Über mich</a>
+      <a href="/leistungen">Leistungen</a>
+      <a href="/demo">Demo</a>
+      <a href="/kontakt">Kontakt</a>
     </nav>
   </div>
 
@@ -119,7 +198,7 @@
       </div>
       <div class="about-hero-portrait">
         <div class="portrait-frame">
-          <img src="public/portrait_opt.webp" alt="Daniel Kroh — Wirtschaftsinformatiker und Webentwickler aus Bad Lippspringe" width="711" height="654" loading="lazy" />
+          <img src="public/portrait_opt.webp" alt="Daniel Kroh — Wirtschaftsinformatiker und Software-Architekt aus Bad Lippspringe" width="711" height="654" loading="lazy" />
           <div class="portrait-border"></div>
         </div>
       </div>
@@ -151,7 +230,7 @@
   <!-- Office Image Section -->
   <section class="about-section about-workspace" data-anim="slide-up">
     <div class="workspace-image-wrap">
-      <img src="public/ai_daniel_office.webp" alt="Daniel Kroh am Arbeitsplatz — Webentwicklung und KI-Automatisierung" width="1376" height="768" loading="lazy" class="workspace-image" />
+      <img src="public/ai_daniel_office.webp" alt="Daniel Kroh bei der Arbeit an Software-Architektur und KI-Integration" width="1376" height="768" loading="lazy" class="workspace-image" />
       <div class="workspace-overlay"></div>
       <div class="workspace-caption">
         <span class="section-label">003 / Arbeitsweise</span>
@@ -334,7 +413,7 @@
       <h2 class="about-heading about-cta-heading">Wo liegt Ihr<br><span class="heading-accent">Engpass?</span></h2>
       <p class="about-body about-cta-body">Sie spüren, dass Prozesse Zeit kosten oder Wachstum bremsen? Lassen Sie uns
         in einem strukturierten Prozess-Audit gemeinsam herausfinden, wo der größte Hebel liegt.</p>
-      <a href="kontakt.html" class="cta-button">Prozess-Audit anfragen</a>
+      <a href="/kontakt" class="cta-button">Prozess-Audit anfragen</a>
     </div>
   </section>
 
@@ -342,7 +421,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand-col">
-        <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
+        <a href="/" class="footer-logo">Daniel <span>Kroh</span></a>
         <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -361,21 +440,21 @@
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Lösungen</span>
-        <a href="leistungen.html">Prozessautomatisierung</a>
-        <a href="leistungen.html">Web-Anwendungen</a>
-        <a href="leistungen.html">KI-Integration</a>
-        <a href="leistungen.html">Architektur-Beratung</a>
+        <a href="/leistungen">Prozessautomatisierung</a>
+        <a href="/leistungen">Web-Anwendungen</a>
+        <a href="/leistungen">KI-Integration</a>
+        <a href="/leistungen">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
-        <a href="about.html">Über mich</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/about">Über mich</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="agb.html">AGB</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/agb">AGB</a>
       </div>
     </div>
     <div class="footer-bottom">

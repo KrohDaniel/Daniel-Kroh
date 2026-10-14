@@ -1,0 +1,8 @@
+# Interne Dokumente nicht öffentlich ausliefern
+README.md
+leitfaden-google-seo.md
+agent-config/
+.agents/
+.claude/
+GEO-AUDIT-REPORT.md
+GEO-VORLAGEN.md

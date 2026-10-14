@@ -9,9 +9,15 @@
   <meta property="og:title" content="Kontakt — Daniel Kroh | Software-Architekt">
   <meta property="og:description" content="Kontaktieren Sie Daniel Kroh für maßgeschneiderte Software, Prozessautomatisierung und KI-Integration.">
   <meta property="og:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
-  <meta property="og:url" content="https://kroh-daniel.de/kontakt.html">
+  <meta property="og:url" content="https://kroh-daniel.de/kontakt">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="author" content="Daniel Kroh">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kontakt — Daniel Kroh | Software-Architekt">
+  <meta name="twitter:description" content="Kontaktieren Sie Daniel Kroh für maßgeschneiderte Software, Prozessautomatisierung und KI-Integration.">
+  <meta name="twitter:image" content="https://kroh-daniel.de/public/portrait_opt.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -20,7 +26,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="public/favicon/favicon-16x16.png">
   <link rel="icon" type="image/x-icon" href="public/favicon/favicon.ico">
   <link rel="manifest" href="public/favicon/site.webmanifest">
-  <link rel="canonical" href="https://kroh-daniel.de/kontakt.html">
+  <link rel="canonical" href="https://kroh-daniel.de/kontakt">
+  <link rel="alternate" type="text/markdown" href="/kontakt.md" title="Markdown-Version">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/kontakt.css">
   <!-- Umami Analytics — DSGVO-konform -->
@@ -31,14 +38,47 @@
 
   <!-- Schema.org: ContactPage -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Kontakt — Daniel Kroh",
-    "url": "https://kroh-daniel.de/kontakt.html",
-    "description": "Kontaktformular und Direkt-Kontakt zu Daniel Kroh — Software-Architekt aus Bad Lippspringe.",
-    "mainEntity": { "@id": "https://kroh-daniel.de/#business" }
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://kroh-daniel.de/kontakt#webpage",
+      "url": "https://kroh-daniel.de/kontakt",
+      "name": "Kontakt — Daniel Kroh",
+      "description": "Kontaktformular und Direkt-Kontakt zu Daniel Kroh, Software-Architekt aus Bad Lippspringe.",
+      "inLanguage": "de-DE",
+      "isPartOf": {
+        "@id": "https://kroh-daniel.de/#website"
+      },
+      "dateModified": "2026-10-14",
+      "mainEntity": {
+        "@id": "https://kroh-daniel.de/#business"
+      },
+      "breadcrumb": {
+        "@id": "https://kroh-daniel.de/kontakt#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://kroh-daniel.de/kontakt#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Startseite",
+          "item": "https://kroh-daniel.de/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Kontakt",
+          "item": "https://kroh-daniel.de/kontakt"
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -46,13 +86,13 @@
   <header class="site-header about-header">
     <div class="scroll-progress" id="scrollProgress"></div>
     <nav>
-      <a href="index.html" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo" class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
+      <a href="/" class="nav-logo"><img src="media/logo_transparent.png" alt="Daniel Kroh Logo" class="nav-logo-img"><span class="nav-logo-text"><span>Daniel</span><span class="nav-logo-accent">Kroh</span></span></a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">Über mich</a>
-        <a href="leistungen.html">Leistungen</a>
-        <a href="demo.html">Demo</a>
-        <a href="kontakt.html" class="nav-active">Kontakt</a>
+        <a href="/">Home</a>
+        <a href="/about">Über mich</a>
+        <a href="/leistungen">Leistungen</a>
+        <a href="/demo">Demo</a>
+        <a href="/kontakt" class="nav-active">Kontakt</a>
       </div>
       <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -63,11 +103,11 @@
   <!-- Mobile Overlay Nav -->
   <div class="mobile-nav" id="mobile-nav">
     <nav class="mobile-nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">Über mich</a>
-      <a href="leistungen.html">Leistungen</a>
-        <a href="demo.html">Demo</a>
-      <a href="kontakt.html" class="nav-active">Kontakt</a>
+      <a href="/">Home</a>
+      <a href="/about">Über mich</a>
+      <a href="/leistungen">Leistungen</a>
+        <a href="/demo">Demo</a>
+      <a href="/kontakt" class="nav-active">Kontakt</a>
     </nav>
   </div>
 
@@ -79,7 +119,7 @@
         Wo liegt Ihr<br><span class="heading-accent">Engpass?</span>
       </h1>
       <p class="kontakt-hero-sub">Manuelle Prozesse, veraltete Systeme oder fehlende Automatisierung? Schildern Sie kurz Ihren Engpass. Ich melde mich innerhalb von 24 Stunden mit einem Architektur-Vorschlag.</p>
-      <a href="termin.html" class="cta-button">Prozess-Audit buchen</a>
+      <a href="/termin" class="cta-button">Prozess-Audit buchen</a>
     </div>
   </section>
 
@@ -204,7 +244,7 @@
     <div class="kontakt-cta-inner">
       <h2 class="kontakt-cta-heading">Lieber direkt <span class="heading-accent">analysieren?</span></h2>
       <p class="kontakt-cta-text">Buchen Sie ein 15-minütiges Prozess-Audit: strukturierte Engpass-Analyse, keine Verkaufsfloskeln.</p>
-      <a href="termin.html" class="cta-button">Prozess-Audit buchen</a>
+      <a href="/termin" class="cta-button">Prozess-Audit buchen</a>
     </div>
   </section>
 
@@ -212,7 +252,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand-col">
-        <a href="index.html" class="footer-logo">Daniel <span>Kroh</span></a>
+        <a href="/" class="footer-logo">Daniel <span>Kroh</span></a>
         <p class="footer-tagline">Maßgeschneiderte Software für mittelständische Unternehmen in OWL.</p>
         <a href="mailto:info@kroh-daniel.de" class="footer-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -225,21 +265,21 @@
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Lösungen</span>
-        <a href="leistungen.html">Prozessautomatisierung</a>
-        <a href="leistungen.html">Web-Anwendungen</a>
-        <a href="leistungen.html">KI-Integration</a>
-        <a href="leistungen.html">Architektur-Beratung</a>
+        <a href="/leistungen">Prozessautomatisierung</a>
+        <a href="/leistungen">Web-Anwendungen</a>
+        <a href="/leistungen">KI-Integration</a>
+        <a href="/leistungen">Architektur-Beratung</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Unternehmen</span>
-        <a href="about.html">Über mich</a>
-        <a href="kontakt.html">Kontakt</a>
+        <a href="/about">Über mich</a>
+        <a href="/kontakt">Kontakt</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-title">Rechtliches</span>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="agb.html">AGB</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+        <a href="/agb">AGB</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -280,7 +320,7 @@
       <p class="success-modal-text">Vielen Dank. Ich prüfe Ihren Engpass und melde mich innerhalb von <strong>24 Stunden</strong> mit einem Architektur-Vorschlag.</p>
       <p class="success-modal-subtext">Eine Bestätigungsmail ist auf dem Weg zu Ihnen.</p>
       <div class="success-modal-actions">
-        <a href="index.html" class="success-btn success-btn--primary">Zur Startseite</a>
+        <a href="/" class="success-btn success-btn--primary">Zur Startseite</a>
         <button class="success-btn success-btn--secondary" id="success-close-btn">Schließen</button>
       </div>
     </div>

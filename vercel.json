@@ -10,15 +10,113 @@
   },
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(llms|llms-full)\\.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/index.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://kroh-daniel.de/>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/about.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://kroh-daniel.de/about>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/leistungen.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://kroh-daniel.de/leistungen>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/demo.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://kroh-daniel.de/demo>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
+      "source": "/kontakt.md",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://kroh-daniel.de/kontakt>; rel=\"canonical\""
+        }
+      ]
+    },
+    {
       "source": "/frames/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/public/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ]
